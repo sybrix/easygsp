@@ -101,7 +101,6 @@
                 <javadoc sourcepath="${src}" destdir="deploy/${easyGSPDir}/javadocs"/>
         </target>
 
-        <target name="final" depends="jar">
                 <delete dir="deploy"/>
                 <mkdir dir="deploy"/>
                 <mkdir dir="deploy/${easyGSPDir}"/>
