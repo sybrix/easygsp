@@ -1,0 +1,6 @@
+0.1.1     10/28/2009
+- Fixed bug that prevented script name and bound(bind) key name from being the same
+- Corrected error rhandling to better ensure errors are written to screen
+- added Windows service bat/exe files
+
+
