@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>${request.title} hey</title>
+  </head>
+  <body>
+          ${session.creationTime}
+          ${session.myname}
+          ${session.time}
+       <form action="index.gspx" method="POST" enctype="multipart/form-data">
+		 xxxx <input type="file" name="file"/><br/>
+		<input type="submit"/>
+	</form>
+
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<html>
+        <head>
+                <title>Update Profile</title>
+        </head>
+        <body>
+
+                <%@ include file="menu.gsp" %>
+
+                <form action="profile.gspx" method="POST">
+                        <input type="hidden" name="profileId" value="$p.profileId"/>
+                        <table>
+                                <tr>
+                                        <td>Screen Name</td>
+                                        <td><input type="text" name="screenName" value="$p.screenName"/></td>
+                                </tr>
+                                <tr>
+                                        <td>Password</td>
+                                        <td><input type="password" name="password" value=""/></td>
+                                </tr>
+                                <tr>
+                                        <td>Email</td>
+                                        <td><input type="text" name="email" value="$p.email"/></td>
+                                </tr>
+                                <tr>
+                                        <td>Created</td>
+                                        <td>$p.created</td>
+                                </tr>
+                                <tr>
+                                        <td></td>
+                                        <td align="left">
+                                                <input type="submit" name="update" value="Save"/>
+                                                <input type="submit" name="delete" value="Delete"/>
+                                        </td>
+                                </tr>
+                        </table>
+                        
+                </form>
+
+        </body>
+</html>

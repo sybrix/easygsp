@@ -1,0 +1,42 @@
+[10/24/2009 11:23:09 AM EDT] - log... app started
+[10/24/2009 11:23:10 AM EDT] - this is a log message
+[10/24/2009 11:24:10 AM EDT] - log... app started
+[10/24/2009 11:24:11 AM EDT] - this is a log message
+[10/24/2009 11:24:13 AM EDT] - ok
+	at sun.reflect.NativeConstructorAccessorImpl(newInstance0:-2)
+	at sun.reflect.NativeConstructorAccessorImpl(newInstance:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl(newInstance:27)
+	at java.lang.reflect.Constructor(newInstance:513)
+	at org.codehaus.groovy.reflection.CachedConstructor(invoke:77)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce(callConstructor:107)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray(defaultCallConstructor:52)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite(callConstructor:192)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite(callConstructor:200)
+	at index(run:41)
+	at com.sybrix.easygsp.http.GSE3(run:459)
+	at com.sybrix.easygsp.http.RequestThread$1(call:331)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(use:93)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(access$200:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport(use:201)
+	at com.sybrix.easygsp.http.RequestThread(processScriptRequest:377)
+	at com.sybrix.easygsp.http.RequestThread(run:164)
+[10/24/2009 11:24:13 AM EDT] - failed
+ok
+	at sun.reflect.NativeConstructorAccessorImpl(newInstance0:-2)
+	at sun.reflect.NativeConstructorAccessorImpl(newInstance:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl(newInstance:27)
+	at java.lang.reflect.Constructor(newInstance:513)
+	at org.codehaus.groovy.reflection.CachedConstructor(invoke:77)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce(callConstructor:107)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray(defaultCallConstructor:52)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite(callConstructor:192)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite(callConstructor:200)
+	at index(run:41)
+	at com.sybrix.easygsp.http.GSE3(run:459)
+	at com.sybrix.easygsp.http.RequestThread$1(call:331)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(use:93)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(access$200:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport(use:201)
+	at com.sybrix.easygsp.http.RequestThread(processScriptRequest:377)
+	at com.sybrix.easygsp.http.RequestThread(run:164)
+[10/24/2009 11:24:13 AM EDT] - log message from index.groovy

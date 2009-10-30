@@ -1,0 +1,1448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project relativePaths="false" version="4">
+  <component name="ChangeListManager">
+    <list default="true" readonly="true" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/bgr_board.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/autosave" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/util/WebUtil.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/js/acronym.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/button_commentmet_replay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advlink/css/advlink.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/utils" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/preview/preview.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/media.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/index.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advhr" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/easygsp_small.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/searchreplace/searchreplace.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advlink/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advhr/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/template/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/img/realmedia.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/example/js/dialog.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/skins/o2k7/ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shLegacy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/row.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/cell.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/view.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/google_analytics.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/i18n/resources_zh_CN1.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-surprised.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/images" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/content.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/style/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/model" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/spellchecker" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/pspbrwse.jbf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/o2k7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/insertdatetime/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/model/Customer.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/example/langs/en.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/file.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/shThemeFadeToGrey.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/img/windowsmedia.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advimage/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/contextmenu/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/logs/app_10_21_2009.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/profiles.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/cite.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/header.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/lists/link_list.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/img/trans.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/framework.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullpage/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushPlain.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/header2.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/magnifier.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/menu.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/pagebreak/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/simple.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/model/FaceoffCategory.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushPython.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/logs/app_10_10_2009.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/index.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/media" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/admin/index.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/js/link.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullpage/js/fullpage.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/charmap.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/print/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/logs/app_10_19_2009.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/wrapper.conf" afterPath="$PROJECT_DIR$/conf/wrapper.conf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/img/shockwave.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/index.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullscreen/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/searchreplace/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/downloads.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/pagebreak/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushDelphi.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/shThemeRDark.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/js/jquery-1.3.2.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/content.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/childTemplate.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app2/index.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/o2k7/ui_black.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/media/sample.mov" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/bbcode" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advhr/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/easygsp.jar" afterPath="$PROJECT_DIR$/bin/easygsp.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advimage/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advimage/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/style-ie.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushPerl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/js/jqueryslidemenu" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/util.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/logs/app_10_26_2009.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/autoresize/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/js/color_picker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/search.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advimage/js/image.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advimage/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/parentTemplate.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/js/emotions.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/example/img/example.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/pagebreak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/easygsp.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/image.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-cool.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/js/anchor.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/page_white_copy.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/media/logo.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/shThemeMidnight.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/pagebreak/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/nonbreaking/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/img/colorpicker.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushScala.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advhr/css/advhr.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/media/sample.ram" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/cn-zh.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/model/FaceoffProfile.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/utils/editable_selects.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/o2k7/dialog.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-embarassed.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-money-mouth.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/shThemeDefault.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/WEB-INF/util" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-yell.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app3/index.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/template/js/template.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/css/content.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/src" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/default/ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/js/cell.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushDiff.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/errors/error500.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/save/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/testCombined.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/frameworks.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/tiny_mce_popup.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/skins/default/ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/folder1/folder.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/spellchecker/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advlink/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/default/img/menu_check.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/css/popup.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/profile.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/template/css/template.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/admin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/layer" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advimage" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/o2k7/img/button_bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/safari/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/directionality/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/server.properties" afterPath="$PROJECT_DIR$/conf/server.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advimage/img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/template/blank.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/corners.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/media/sample.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/css/media.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/safari/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullscreen/fullscreen.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullpage/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/util/DAOUtil.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/color_picker.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/index.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/Thumbs.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/default/img/items.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/web.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/media/logo_over.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/myclass.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/skins/default/content.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advlink/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/o2k7/img/button_bg_black.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/default/dialog.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThreadInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/categories.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/pspbrwse.jbf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/abbr.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/scoreItems.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/logs/app_10_24_2009.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/docs/index.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/save" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/langs/en.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/confirm.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/i18n/resources_en_US.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$" afterPath="$PROJECT_DIR$" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/license.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/safari" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/folder1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/tabfocus/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/templates" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/autosave/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/autoresize" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/preview/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/iespell" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/template/template.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/model/GameReview.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/shThemeEmacs.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/example/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/css/word.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advhr/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/left.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/util" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/o2k7/img/button_bg_silver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/autoresize/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushXml.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/templates/tables.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/paste/js/pastetext.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/o2k7/ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/searchreplace/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/skins" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/example/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/images/scgi_dev.policy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/searchreplace/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/js/embed.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/iespell/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/transparent.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-laughing.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/g.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/langs/en.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/save/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/img/quicktime.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/index.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/model/Profile.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-wink.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/blockquote_bg.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advimage/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/searchform.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/preview/jscripts/embed.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/i18n/resources_zh_CN.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/db.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/bgr_main_search.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushRuby.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullpage/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shCore.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/category.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/template" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushJScript.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/model/CustomerAddress.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/lists/template_list.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/view.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/bgr_ar_line.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushCSharp.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/style/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/pagebreak/img/trans.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-cry.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushPhp.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/default/img/tabs.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app2/WEB-INF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/spellchecker/img/wline.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/community/index.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/templates/layout1.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/js/table.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/js/carousel/stepcarousel.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/test.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/docs/index.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/Profile.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/admin/game.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/admin/newGame.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/media/sample.avi" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/transfer.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/acronym.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/directionality/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/searchreplace/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/preview/example.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/css/attributes.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/utils/mctabs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/help.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushSql.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/template/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/db.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/templates" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/button.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/logs/app_10_22_2009.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushCpp.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/noneditable" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/o2k7/content.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushGroovy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/template.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-tongue-out.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/bbcode/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/autosave/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/logs/app_10_21_2009.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-smile.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/example/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/errors/error404.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/paste" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/alert.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/model/State.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/editor_template.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/printer.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/page_white_code.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/example/dialog.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullscreen" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullpage/css/fullpage.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/scoreItem.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/header.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/bbcode/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/templates" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advhr/rule.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/folder1/index.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/default/content.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/logs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullpage/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advlink/js/advlink.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/menu.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/scriptFunction.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/js/row.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/framework.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/WEB-INF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/ins.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/pagebreak/css/content.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/pagebreak/img/pagebreak.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushBash.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/admin/index.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/compat2x/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/scoreItem.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/admin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/js/attributes.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/example" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advlink" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/noneditable/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/util/WebUtil.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/nonbreaking" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/word.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/tiny_mce.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/template.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release.txt" afterPath="$PROJECT_DIR$/release.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/homepage" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/logs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/model/GameGenre.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/sidebar.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullpage/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/default/img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/style/css/props.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/util/SimpleDaoUtil.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/servletAPI.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/skins.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/paste/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/js/carousel" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/model/GameTitle.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/paste/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/contextmenu/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/footer.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/pagebreak/img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/paste/js/pasteword.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/web.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/lists" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/bgr_body.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/attributes.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/community/index.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/src/shCore.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/paste/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advimage/image.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/example/img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/nonbreaking/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/view.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/css/row.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/desktop.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/model/FaceoffScoreItem.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/js/about.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/WEB-INF/util/WebUtil.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/searchreplace" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/link.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/tables.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/screenshot.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/compat2x/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/source_editor.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullscreen/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/style/props.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/tradestore.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/table.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/style/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullpage/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/easygsp.exe4j" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/entry_before.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/js/del.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/directionality" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/IMG_0089.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-foot-in-mouth.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/index.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/lists/image_list.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/template/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/logs/app_10_20_2009.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/template/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/src/shLegacy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/iespell/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advlink/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/WEB-INF/util/DBUtil.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app2/WEB-INF/web.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/rss.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/model/FaceoffFrameworkComment.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/style/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/model/GameSystem.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/button_go.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/o2k7/ui_silver.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/window.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushCss.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/model/Game.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/index.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/noneditable/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/searchreplace/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/full.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/style/js/props.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/print/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/right.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/editor_template_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/GSE3.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/GSE3.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/db.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advimage/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/clipboard.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/preview/jscripts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/util" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/insertdatetime/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/spellchecker/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/shCore.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/js/jqueryslidemenu/jqueryslidemenu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/wrapping.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/i18n" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/tutorial.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/js/jquery.min.1.2.6.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/example/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/img/icons.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advhr/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/util/DBUtil.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/errors" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/button_twitter.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/default/img/buttons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app2/WEB-INF/myclass.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/tiny_mce_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/css/content.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advimage/css/advimage.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-sealed.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/layer/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/visualchars/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/tabfocus" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/template/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushPowerShell.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/editor_template.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/horizontal.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/skins/o2k7/img/button_bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/tabfocus/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushAS3.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/bgr_page.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/myinclude.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/compat2x" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/spellchecker/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/preview/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/about.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/js/merge_cells.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/langs/en.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/img/icons.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/js/ins.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/anchor.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/comm_sub.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/paste/pastetext.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/skins/o2k7/img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/image.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/community" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/profile.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/img/flash.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/media/sample.dcr" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/css/cell.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/bgr_post_comment.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/db.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/editor_template_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/preview" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/download/index.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/bgr_main.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/show.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/default" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF/logs/app_10_09_2009.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/model/GameCategory.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/print" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-innocent.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/js/charmap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/js/media.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/frameworks.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/style/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/skins/o2k7" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullpage/fullpage.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/media/img/flv_player.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/js/cite.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/categories.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/framework.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/paste/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/paste/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/category.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/profiles.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/skins/default" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-undecided.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/install.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/spellchecker/img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/searchreplace/js/searchreplace.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/model/FaceoffFramework.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/searchreplace/css/searchreplace.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/o2k7/img" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/download" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/blockquote_bg2.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advhr/js/rule.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/search.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advlink/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/model" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/fullpage" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/web.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushJava.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/docs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/default/img/menu_arrow.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advimage/img/sample.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/css/table.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/page_archives_div_a.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/visualchars/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/buttons.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/lists/media_list.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/utils/form_utils.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/js/abbr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/spellchecker/css/content.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/js/element_common.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/skins/default/img/progress.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/style/langs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/safari/blank.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/styles/shThemeDjango.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-frown.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/index.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/emotions.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/style" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/layer/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/visualchars" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/vertical.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/model" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/bgr_html2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/js/image.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advlink/link.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/util/DAOUtil.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/download/index.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/simple/skins/o2k7/content.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/insertdatetime" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advhr/js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/themes/advanced/js/source_editor.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/paste/pasteword.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushVb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/emotions/img/smiley-kiss.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/scoreItems.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/inlinepopups/skins" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/searchreplace/editor_plugin_src.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/WEB-INF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/example/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advhr/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/footer2.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/templates/snippet1.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/homepage/index.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/utils/validate.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/translate.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/redirect.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/WEB-INF/util" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/template/langs/en_dlg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/bgr_html.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/scripts/shBrushJavaFX.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/admin/framework.gspx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/advlink/editor_plugin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/dotted_grey.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/table/merge_cells.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/tradestore/index.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/images/ico_cat.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/xhtmlxtras/del.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/jscripts/tiny_mce/plugins/contextmenu" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/faceoff/WEB-INF/sql/Query.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/app1/myinclude2.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/documentation/left.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/easygsp/examples/media/sample.rm" />
+    </list>
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="easygsp.iws" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+    <option name="REVERSE_PATCH" value="false" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DebuggerManager">
+    <line_breakpoints>
+      <breakpoint url="file://$PROJECT_DIR$/../../../groovy-1.7-beta-1/groovy-1.7-beta-1-src/src/main/org/codehaus/groovy/runtime/InvokerHelper.java" line="415" class="org.codehaus.groovy.runtime.InvokerHelper" package="org.codehaus.groovy.runtime">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="175" class="com.sybrix.easygsp.http.RequestThread" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="177" class="com.sybrix.easygsp.http.RequestThread" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="492" class="com.sybrix.easygsp.http.RequestThread" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="465" class="Class at RequestThread.java:465" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java" line="100" class="com.sybrix.easygsp.http.IncludeTemplateEngine" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestInfo.java" line="22" class="com.sybrix.easygsp.http.RequestInfo" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestInfo.java" line="24" class="com.sybrix.easygsp.http.RequestInfo" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestInfo.java" line="26" class="com.sybrix.easygsp.http.RequestInfo" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestInfo.java" line="28" class="com.sybrix.easygsp.http.RequestInfo" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
+    <breakpoint_any>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <breakpoint_rules />
+    <ui_properties>
+      <property name="line_breakpoints_groupByMethods" value="false" />
+      <property name="line_breakpoints_viewId" value="TABLE" />
+      <property name="exception_breakpoints_flattenPackages" value="true" />
+      <property name="method_breakpoints_flattenPackages" value="true" />
+      <property name="field_breakpoints_flattenPackages" value="true" />
+      <property name="exception_breakpoints_groupByMethods" value="false" />
+      <property name="line_breakpoints_groupByClasses" value="true" />
+      <property name="method_breakpoints_viewId" value="TABLE" />
+      <property name="field_breakpoints_groupByMethods" value="false" />
+      <property name="line_breakpoints_flattenPackages" value="true" />
+      <property name="field_breakpoints_groupByClasses" value="true" />
+      <property name="method_breakpoints_groupByClasses" value="true" />
+      <property name="exception_breakpoints_viewId" value="TABLE" />
+      <property name="field_breakpoints_viewId" value="TABLE" />
+      <property name="exception_breakpoints_groupByClasses" value="true" />
+      <property name="method_breakpoints_groupByMethods" value="false" />
+    </ui_properties>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="easygsp" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="downloads.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapps/easygsp/downloads.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="4" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestThread.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="599" column="0" selection-start="33194" selection-end="33194" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="120" column="66" selection-start="5192" selection-end="5192" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="readme.txt" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/readme.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TemplateServlet.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="418" column="0" selection-start="17308" selection-end="17308" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestInfo.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="0" selection-start="756" selection-end="756" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="ModuleEditorState">
+    <option name="LAST_EDITED_MODULE_NAME" />
+    <option name="LAST_EDITED_TAB_NAME" />
+  </component>
+  <component name="PackagesPane">
+    <subPane />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectPane">
+    <subPane>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="easygsp" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="easygsp" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="easygsp" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="easygsp" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="easygsp" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </subPane>
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="0.5" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <showStructure Scope="false" PackagesPane="false" ProjectPane="false" />
+      <autoscrollToSource ProjectPane="true" />
+      <autoscrollFromSource ProjectPane="true" />
+      <sortByType />
+    </navigator>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="RunManagerConfig.showSettingsBeforeRunnig" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.sybrix.easygsp.http" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.EasyGSP">
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false" runner="emma">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+      <JSDebuggerConfigurationSettings>
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false" runner="emma">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+    </configuration>
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy Script">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="C:\projects\easygsp" />
+      <setting name="debug" value="false" />
+    </configuration>
+    <configuration default="false" name="EasyGSP" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
+      <option name="MAIN_CLASS_NAME" value="com.sybrix.easygsp.server.EasyGServer" />
+      <option name="VM_PARAMETERS" value="-Djava.util.logging.config.file=c:\projects\easygsp\easygsp\conf\logging.properties -Djava.security.manager  -Djava.security.policy=conf/scgi_dev.policy -Deasygsp.home=C:\projects\easygsp\easygsp " />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="easygsp" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="49426" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method>
+        <option name="Make" value="true" />
+      </method>
+    </configuration>
+    <configuration default="false" name="Unnamed" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
+      <option name="MAIN_CLASS_NAME" value="com.sybrix.easygsp.server.Shutdown" />
+      <option name="VM_PARAMETERS" value="-Deasygsp.home=C:\projects\easygsp\easygsp" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="easygsp" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="51656" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <ConfigurationWrapper RunnerId="Debug" />
+      <method>
+        <option name="Make" value="true" />
+      </method>
+    </configuration>
+    <configuration default="false" name="RunScript" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
+      <option name="MAIN_CLASS_NAME" value="com.sybrix.easygsp.util.StartupScript" />
+      <option name="VM_PARAMETERS" value="-Deasygsp.home=c:\projects\easygsp\easygsp" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="easygsp" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="54139" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <ConfigurationWrapper RunnerId="Debug" />
+      <method>
+        <option name="Make" value="true" />
+      </method>
+    </configuration>
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="Application.EasyGSP" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Unnamed" />
+      <item index="2" class="java.lang.String" itemvalue="Application.RunScript" />
+    </list>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ScopeViewComponent">
+    <subPane subId="Problems" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="StructureViewFactory">
+    <option name="AUTOSCROLL_MODE" value="true" />
+    <option name="AUTOSCROLL_FROM_SOURCE" value="false" />
+    <option name="ACTIVE_ACTIONS" value="SHOW_INHERITED,ALPHA_COMPARATOR" />
+  </component>
+  <component name="SvnConfiguration">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="UPDATE_RUN_STATUS" value="false" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <configuration useDefault="true">C:\Users\dsmith\AppData\Roaming\Subversion</configuration>
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1696" height="1036" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.09107579" sideWeight="0.55788314" order="3" side_tool="false" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14975551" sideWeight="0.47960308" order="5" side_tool="false" x="1361" y="154" width="296" height="210" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4214689" sideWeight="0.5" order="1" side_tool="false" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28114665" sideWeight="0.99816626" order="3" side_tool="false" />
+      <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2491731" sideWeight="0.5" order="11" side_tool="false" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23263507" sideWeight="0.5" order="7" side_tool="false" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30987653" sideWeight="0.0" order="6" side_tool="false" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3294621" sideWeight="0.27453142" order="4" side_tool="false" x="1064" y="64" width="539" height="907" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32640588" sideWeight="0.47960308" order="1" side_tool="false" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" />
+      <window_info id="Web Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25488997" sideWeight="0.5545755" order="7" side_tool="false" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.5" order="2" side_tool="false" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" />
+      <window_info id="SVN Repositories" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.51267916" sideWeight="0.5" order="8" side_tool="false" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="false" />
+      <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" />
+    </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.1.2 - error handling" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <confirmMoveToFailedCommit value="1" />
+    <MESSAGE value="0.1.2 - error handling" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+    <buildFile url="file://$PROJECT_DIR$/build.xml">
+      <antCommandLine value="" />
+      <runInBackground value="true" />
+      <targetFilters>
+        <filter targetName="compile" isVisible="false" />
+        <filter targetName="copy.files" isVisible="false" />
+        <filter targetName="final" isVisible="false" />
+        <filter targetName="jar" isVisible="false" />
+        <filter targetName="javadoc" isVisible="false" />
+      </targetFilters>
+      <treeView value="true" />
+      <verbose value="true" />
+      <viewClosedWhenNoErrors value="false" />
+    </buildFile>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/conf/wrapper.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="883" selection-end="883" vertical-scroll-proportion="0.5325301">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapps/faceoff/framework.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="76" selection-start="881" selection-end="881" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapps/tradestore/admin/newGame.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="94" selection-start="2910" selection-end="2910" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="355" selection-end="355" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapps/faceoff/framework.gspx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="37" selection-start="856" selection-end="856" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/lighttpd.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapps/easygsp/downloads.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="4" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="599" column="0" selection-start="33194" selection-end="33194" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="66" selection-start="5192" selection-end="5192" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="418" column="0" selection-start="17308" selection-end="17308" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="756" selection-end="756" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <option name="states">
+      <map>
+        <entry key="Copyright.UI">
+          <value>
+            <UIState>
+              <option name="proportions">
+                <SplitterProportionsDataImpl />
+              </option>
+            </UIState>
+          </value>
+        </entry>
+        <entry key="Errors.UI">
+          <value>
+            <UIState>
+              <option name="proportions">
+                <SplitterProportionsDataImpl />
+              </option>
+            </UIState>
+          </value>
+        </entry>
+        <entry key="ProjectJDKs.UI">
+          <value>
+            <UIState>
+              <option name="proportions">
+                <SplitterProportionsDataImpl>
+                  <option name="proportions">
+                    <list>
+                      <option value="0.2" />
+                    </list>
+                  </option>
+                </SplitterProportionsDataImpl>
+              </option>
+              <option name="lastEditedConfigurable" value="1.6" />
+            </UIState>
+          </value>
+        </entry>
+        <entry key="ScopeChooserConfigurable.UI">
+          <value>
+            <UIState>
+              <option name="proportions">
+                <SplitterProportionsDataImpl>
+                  <option name="proportions">
+                    <list>
+                      <option value="0.2" />
+                    </list>
+                  </option>
+                </SplitterProportionsDataImpl>
+              </option>
+            </UIState>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="myStates">
+      <map>
+        <entry key="Copyright.UI">
+          <value>
+            <UIState>
+              <option name="proportions">
+                <SplitterProportionsDataImpl />
+              </option>
+            </UIState>
+          </value>
+        </entry>
+        <entry key="Errors.UI">
+          <value>
+            <UIState>
+              <option name="proportions">
+                <SplitterProportionsDataImpl />
+              </option>
+            </UIState>
+          </value>
+        </entry>
+        <entry key="ProjectJDKs.UI">
+          <value>
+            <UIState>
+              <option name="proportions">
+                <SplitterProportionsDataImpl>
+                  <option name="proportions">
+                    <list>
+                      <option value="0.2" />
+                    </list>
+                  </option>
+                </SplitterProportionsDataImpl>
+              </option>
+              <option name="lastEditedConfigurable" value="1.6" />
+            </UIState>
+          </value>
+        </entry>
+        <entry key="ScopeChooserConfigurable.UI">
+          <value>
+            <UIState>
+              <option name="proportions">
+                <SplitterProportionsDataImpl>
+                  <option name="proportions">
+                    <list>
+                      <option value="0.2" />
+                    </list>
+                  </option>
+                </SplitterProportionsDataImpl>
+              </option>
+            </UIState>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
+

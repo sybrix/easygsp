@@ -1,0 +1,76 @@
+
+<%
+
+        def saveOrInsert = 'save'
+        if (params.frameworkId == null) {
+                saveOrInsert  = 'insert'
+        }
+%>
+<html>
+        <head>
+                <title></title>
+        </head>
+        <body>
+                <form action="framework.gspx" method="POST">
+
+                        <%@ include file="menu.gsp" %>
+
+                        
+                        <% if (params.frameworkId != null) {%>
+                        <input type="hidden" name="frameworkId" value="$params.frameworkId"/>
+                        <% } %>
+                        <table>
+                                <tr>
+                                        <td>framework</td>
+                                        <td><input type="text" name="framework" value="$f.framework"/></td>
+                                </tr>
+
+                                <tr>
+                                        <td>version</td>
+                                        <td><input type="text" name="version" value="$f.version"/></td>
+                                </tr>
+                                <tr>
+                                        <td>url</td>
+                                        <td><input type="text" name="url" value="$f.url"/></td>
+                                </tr>
+                                <tr>
+                                        <td>Category</td>
+                                        <td>
+
+                                                <select name="categoryId">
+                                                <% categories.each {
+                                                        if (it.categoryId == f.categoryId){   %>
+                                                        <option value="$it.categoryId" selected="selected">$it.category</option>
+                                                <%       } else{ %>
+                                                        <option value="$it.categoryId">$it.category</option>
+                                                <%      }
+                                                } %>
+                                                </select>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>Description</td>
+                                        <td>
+                                                <textarea name="description" rows="5" cols="35">$f.description</textarea>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td></td>
+                                        <td>
+
+                                            Active <input type="checkbox" name="active" value="true"  <%= f.active == true?'checked="checked"':''%> />
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td></td>
+                                        <td align="left">
+                                                <input type="submit" name="$saveOrInsert" value="Save"/>
+                                                <input type="submit" name="delete" value="Delete"/>
+                                        </td>
+                                </tr>
+                        </table>
+
+                </form>
+
+        </body>
+</html>
