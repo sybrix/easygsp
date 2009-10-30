@@ -1,0 +1,56 @@
+# DEFAULT CACHE REGION
+
+jcs.default=
+jcs.default.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.default.cacheattributes.MaxObjects=1000
+jcs.default.cacheattributes.MemoryCacheName=org.apache.jcs.engine.memory.lru.LRUMemoryCache
+jcs.default.elementattributes.UseMemoryShrinker=false
+
+##########  LOOK - CHANGE ME ###############
+#jcs.auxiliary.DC.attributes.DiskPath=cache
+
+############################################
+
+jcs.auxiliary.DC=org.apache.jcs.auxiliary.disk.indexed.IndexedDiskCacheFactory
+jcs.auxiliary.DC.attributes=org.apache.jcs.auxiliary.disk.indexed.IndexedDiskCacheAttributes
+jcs.auxiliary.DC.attributes.MaxPurgatorySize=10000
+jcs.auxiliary.DC.attributes.MaxKeySize=-1
+jcs.auxiliary.DC.attributes.OptimizeAtRemoveCount=300000
+jcs.auxiliary.DC.attributes.OptimizeOnShutdown=true
+jcs.auxiliary.DC.attributes.MaxRecycleBinSize=7500
+
+################## OPTIONAL THREAD POOL CONFIGURATION ########
+# Disk Cache Event Queue Pool
+thread_pool.disk_cache_event_queue.useBoundary=false
+thread_pool.remote_cache_client.maximumPoolSize=15
+thread_pool.disk_cache_event_queue.minimumPoolSize=1
+thread_pool.disk_cache_event_queue.keepAliveTime=3500
+thread_pool.disk_cache_event_queue.startUpSize=1
+
+
+##
+# Appplication Cache
+##
+jcs.region.appCache=DC
+jcs.region.appCache.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.region.appCache.cacheattributes.MaxObjects=10
+jcs.region.appCache.cacheattributes.MemoryCacheName=org.apache.jcs.engine.memory.lru.LRUMemoryCache
+jcs.region.appCache.elementattributes.MaxLifeSeconds=60
+jcs.region.appCache.elementattributes.isEternal=true
+jcs.region.appCache.elementattributes.UseMemoryShrinker=false
+
+##
+# Session Cache
+##
+jcs.region.session=DC
+jcs.region.session.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.region.session.cacheattributes.MaxObjects=20000
+jcs.region.session.cacheattributes.MemoryCacheName=org.apache.jcs.engine.memory.lru.LRUMemoryCache
+jcs.region.session.elementattributes.MaxLifeSeconds=60
+jcs.region.session.elementattributes.isEternal=true
+jcs.region.session.elementattributes.UseMemoryShrinker=false
+
+
+
+
+

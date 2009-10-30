@@ -1,0 +1,51 @@
+<html>
+        <head>
+                <title>Framework Faceoff</title>
+                <style>
+                          .frameworkDiv{
+                                width:500px;
+                                margin:5px auto;
+                                border:1px solid red
+                          }
+                </style>
+
+        </head>
+        <body>
+
+
+                              <div class="frameworkDiv">
+                                        <div>$framework.framework <span>$framework.version</span> <span>score: $framework.score</span></div>
+                                        <div>Url: $framework.url</div>
+                                        <div>$framework.description </div>
+                               </div>
+
+                                <table align="center" border="1">
+                                <% ccomments.each { %>
+                                        <tr>
+                                                <td>$it.screenName</td>
+                                                <td>$it.comment</td>
+                                                <td>$it.created</td>
+                                        </tr>
+                                <% } %>
+                               </table>
+
+                               <form action="framework.gspx?frameworkId=$params.frameworkId" method="POST">
+                                       <input type="hidden" name="frameworkId" value="$framework.frameworkId"/>
+                                       <table align="center" border="1">
+                                               <tr>
+                                                       <td>Name:</td>
+                                                       <td> <input type="text" name="screenName" value="<%=  params.screenName?:''%>"/></td>
+                                               </tr>
+                                                <tr>
+                                                       <td>Comment:</td>
+                                                       <td><textarea name="comment" rows="5" cols="35"><%=  params.comment?:''%></textarea></td>
+                                               </tr>
+                                               <tr>
+                                                       <td></td>
+                                                       <td><input type="submit" name="saveComment" value="Save"></td>
+                                               </tr>
+                                       </table>
+
+                               </form>
+        </body>
+</html>

@@ -1,0 +1,28 @@
+<html>
+        <head>
+                <title>Update Category</title>
+        </head>
+        <body>
+
+                <%@ include file="menu.gsp" %>
+
+                <form action="category.gspx" method="POST">
+                        <input type="hidden" name="categoryId" value="$params.categoryId"/>
+                        <table>
+                                <tr>
+                                        <td>Category</td>
+                                        <td><input type="text" name="category" value="$c.category"/></td>
+                                </tr>
+                                <tr>
+                                        <td></td>
+                                        <td align="left">
+                                                <input type="submit" name="update" value="Save"/>
+                                                <input type="submit" name="delete" value="Delete"/>
+                                        </td>
+                                </tr>
+                        </table>
+
+                </form>
+
+        </body>
+</html>
