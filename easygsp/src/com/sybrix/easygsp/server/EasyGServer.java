@@ -92,17 +92,19 @@ public class EasyGServer {
 //                        log.info("log info");
 //                        log.severe("log severe");
 
-                        if (!propertiesFile.getString("logging.custom.configure","").equalsIgnoreCase("true")){
-                                autoConfigureLogger();
-                        }
 
-                        log.severe("\nJRE_HOME: " + System.getProperty("java.home") +
+
+                        log.info("\nJRE_HOME: " + System.getProperty("java.home") +
                                 "\nJAVA_VERSION: " + System.getProperty("java.version") +
                                 "\nGROOVY_VERSION: " + groovyVersion +
                                 "\nWORKING_DIR: " + APP_DIR +
                                 "\nGroovy Script Server Started. Listening on port " + propertiesFile.getString("server.port") +
                                 "\n");
 
+                        if (!propertiesFile.getString("logging.custom.configure","").equalsIgnoreCase("true")){
+                                autoConfigureLogger();
+                        }
+                        
                         ThreadMonitor.start();
                         sessionMonitor = new SessionMonitor(applications);
                         sessionMonitor.start();
@@ -186,6 +188,7 @@ public class EasyGServer {
                         log.log(Level.SEVERE, "EasyGSP Server startup failed.", e);
                 }
         }
+
 
         protected ServerSocket getServerSocket() {
                 stopServer();

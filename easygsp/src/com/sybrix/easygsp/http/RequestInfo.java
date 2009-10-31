@@ -14,8 +14,9 @@ public class RequestInfo {
         private boolean scriptProcessed;
         private String uniqueScriptName;
         private String realScriptName;
-
+        private TemplateInfo templateInfo;
         public RequestInfo() {
+                templateInfo = new TemplateInfo();
         }
 
         public String getCurrentFile() {
@@ -71,5 +72,13 @@ public class RequestInfo {
 
         public void setRealScriptName(String realScriptName) {
                 this.realScriptName = realScriptName;
+        }
+
+        public TemplateInfo getTemplateInfo() {
+                return templateInfo;
+        }
+
+        public void setTemplateInfo(TemplateInfo templateInfo) {
+                this.templateInfo = templateInfo;
         }
 }
