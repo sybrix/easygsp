@@ -138,7 +138,7 @@
                         </fileset>
                 </copy>
                 <copy todir="deploy/${easyGSPDir}/webapps/easygsp">
-                        <fileset dir="webapps/homepage">
+                        <fileset dir="webapps/easygsp">
                                 <include name="**/*"/>
                         </fileset>
                 </copy>
