@@ -2,4 +2,5 @@ Install/Configure
   * [InstallEasyGSP Installing EasyGSP]
   * [configure Configure EasyGSP]
 Tutorials/How To's
-  * [FAQs Frequently Asked Questions]
+  * [fileupload File Uploads]
+[FAQs Frequently Asked Questions]
