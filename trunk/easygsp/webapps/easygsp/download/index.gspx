@@ -1,6 +1,0 @@
-<%@ include file="../header2.html" %>
-     <br/> <br/><br/><br/><br/><br/><br/>
-hello
-
-
-<%@ include file="../footer2.gsp" %>
