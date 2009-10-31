@@ -2,10 +2,10 @@
 
 = Processing File Uploads =
 
-EasyGSP uses Apache's Commons File Upload library to process file uploads. When the page is posted, call request.parseFileUploads(), it returns a List of FileItems.  
+EasyGSP uses [http://commons.apache.org/fileupload/ Apache's Commons File Upload] library to process file uploads. When the page is posted, call `request.parseFileUploads()`, it returns a List of FileItems.  
 
 Method signature:
-List<org.apache.commons.fileupload.FileItem> parseFileUploads()
+List`<org.apache.commons.fileupload.FileItem>` parseFileUploads()
 
 This methods returns an empty list or a List of FileItems, never null.
 
