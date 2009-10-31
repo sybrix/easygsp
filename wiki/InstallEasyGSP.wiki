@@ -22,14 +22,14 @@ There are a ton of tutorials on how to install all of the required for EasyGSP. 
     # Install to c:\LightTPD
 
   * *Install MySQL* (optional)
-    # Goto www.mysql.com
+    # Goto http://www.mysql.com
     # Download latest GA release
     # Install
 
   * *Installing EasyGSP*
     # Download EasyGSP @ http://code.google.com/p/easygsp/downloads/list
     # Unzip 
-    # Rename dir easygs-`[VERSION`] to easygsp
+    # Rename dir easygsp-`[VERSION`] to easygsp
     # Copy to c:\easygsp
 
-Create EASY_HOME and JAVA_HOME environment variables to that point to the installation directories.
+Create EASY_HOME and JAVA_HOME environment variables that point to the installation directories.
