@@ -29,6 +29,7 @@ public class CustomLogFormatter extends Formatter {
 
         private final static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm.ss");
         private final static String NEW_LINE = System.getProperty("line.separator");
+
         public CustomLogFormatter() {
                 super();
         }
@@ -49,24 +50,30 @@ public class CustomLogFormatter extends Formatter {
                 sb.append(record.getLevel().getName());
                 sb.append("]");
 
-                sb.append(" ").append(record.getSourceClassName()).append(".").append(record.getSourceMethodName());
+                if (record.getThrown() == null) {
+                        sb.append(" ").append(record.getSourceClassName()).append(".").append(record.getSourceMethodName());
+                        sb.append("() - ");
+                        // Get the formatted message (includes localization
+                        // and substitution of paramters) and add it to the buffer
+                        sb.append(formatMessage(record)).append(NEW_LINE);
 
-                sb.append("() - ");
+                                sb.append(record.getThrown().toString()).append(NEW_LINE);
+                                StackTraceElement[] stackTrace = record.getThrown().getStackTrace();
+                                for (StackTraceElement stackTraceElement : stackTrace) {
+                                        sb.append("\tat ").append(stackTraceElement.getClassName())
+                                                .append("(").append(stackTraceElement.getMethodName())
+                                                .append(":").append(stackTraceElement.getLineNumber()).append(")").append(NEW_LINE);
 
+                                }
 
-                // Get the formatted message (includes localization
-                // and substitution of paramters) and add it to the buffer
-                sb.append(formatMessage(record)).append(NEW_LINE);
-                if (record.getThrown() != null) {
-                        sb.append(record.getThrown().toString()).append(NEW_LINE);
-                        StackTraceElement[] stackTrace = record.getThrown().getStackTrace();
-                        for (StackTraceElement stackTraceElement : stackTrace) {
-                                sb.append("\tat ").append(stackTraceElement.getClassName())
-                                        .append("(").append(stackTraceElement.getMethodName())
-                                        .append(":").append(stackTraceElement.getLineNumber()).append(")").append(NEW_LINE);
+                        sb.append(NEW_LINE);
 
-                        }
+                } else {
+                        sb.append(" - ");
+                        sb.append(formatMessage(record));
                 }
+
+
                 return sb.toString();
         }
 }

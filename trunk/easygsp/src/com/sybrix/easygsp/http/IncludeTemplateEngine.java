@@ -22,6 +22,7 @@ import groovy.lang.*;
 import java.io.*;
 import java.util.Map;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.codehaus.groovy.control.CompilationFailedException;
 import org.codehaus.groovy.runtime.InvokerHelper;
@@ -38,6 +39,7 @@ import com.sybrix.easygsp.http.StaticControllerMethods;
  * @author Paul King
  */
 public class IncludeTemplateEngine extends TemplateEngine {
+        private static final Logger log = Logger.getLogger(IncludeTemplateEngine.class.getName());
         private boolean verbose;
         private static int counter = 1;
         //private GroovyShell groovyShell;
@@ -275,30 +277,32 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                 if (path.charAt(0) == '/') {      //root request
                                         
                                         if (File.separator.equals("/")) {
-                                                f = new File(ThreadAppIdentifier.get().getAppPath() + path.trim());
+                                                f = new File(RequestThreadInfo.get().getApplication().getAppPath() + path.trim());
                                         } else {
-                                                f = new File(ThreadAppIdentifier.get().getAppPath() + path.trim().replaceAll("/", "\\\\"));
+                                                f = new File(RequestThreadInfo.get().getApplication().getAppPath() + path.trim().replaceAll("/", "\\\\"));
                                         }
-                                        templateRoot = ThreadAppIdentifier.get().getAppPath();
+                                        templateRoot = RequestThreadInfo.get().getApplication().getAppPath();
                                 } else {
                                         if (File.separator.equals("/")) {
-                                                f = new File(TemplateTL.get().getTemplateRoot() + File.separator + path.trim());
+                                                f = new File(RequestThreadInfo.get().getTemplateInfo().getTemplateRoot() + File.separator + path.trim());
                                         } else {
-                                                f = new File(TemplateTL.get().getTemplateRoot() + File.separator + path.trim().replaceAll("/", "\\\\"));
+                                                f = new File(RequestThreadInfo.get().getTemplateInfo().getTemplateRoot() + File.separator + path.trim().replaceAll("/", "\\\\"));
                                         }
 
-                                        templateRoot = TemplateTL.get().getTemplateRoot();
+                                        templateRoot = RequestThreadInfo.get().getTemplateInfo().getTemplateRoot();
                                 }
 
-                                List entry = TemplateTL.get().getCache();
+                                List entry = RequestThreadInfo.get().getTemplateInfo().getCache();
                                 entry.add(f.getAbsolutePath());
+
+                                log.fine("including file : " + f.getAbsolutePath() + ",  into parent file: " + f.getParentFile().getCanonicalPath()) ;
 
                                 SimpleTemplate template = new SimpleTemplate();
                                 String script = null;
 
-                                TemplateTL.get().setTemplateRoot(f.getParentFile().getCanonicalPath());
+                                RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(f.getParentFile().getCanonicalPath());
                                 script = template.parse(new FileReader(f), false);
-                                TemplateTL.get().setTemplateRoot(templateRoot);
+                                RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(templateRoot);
 
                                 sw.write(script);
                                 sw.write("out.print(\"");

@@ -52,7 +52,7 @@ import groovy.lang.Binding;
 /**
  * HttpRequest <br/>
  * Description :
- */
+ */          
 public class RequestImpl implements HttpServletRequest {
         private static final Logger log = Logger.getLogger(RequestImpl.class.getName());
 
@@ -578,25 +578,6 @@ public class RequestImpl implements HttpServletRequest {
                         upload.setSizeMax(maxFileSize);
 
                         // Parse the request
-                        return upload.parseRequest(this);
-                } else {
-                        return new ArrayList();
-                }
-        }
-
-        public List<FileItem> parseFileUploads() throws FileUploadException {
-                if (ServletFileUpload.isMultipartContent(this)) {
-                        DiskFileItemFactory factory = new DiskFileItemFactory(uploadThresholdSize,
-                                new File(tempUploadDirectory));
-
-
-                        // Create a new file upload handler
-                        ServletFileUpload upload = new ServletFileUpload(factory);
-
-                        // Set overall request size constraint
-                        upload.setSizeMax(maxUploadSize);
-
-                        // Parse the request
                         List<FileItem> l = upload.parseRequest(this);
                         for(FileItem f: l){
                                 if (f.isFormField()) {
@@ -610,6 +591,11 @@ public class RequestImpl implements HttpServletRequest {
                 } else {
                         return new ArrayList();
                 }
+        }
+
+        public List<FileItem> parseFileUploads() throws FileUploadException {
+
+                return parseFileUploads(uploadThresholdSize, maxUploadSize);
         }
 
         //        public int size() {

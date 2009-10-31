@@ -331,7 +331,7 @@ public class GSE2 implements ResourceConnector {
                                 try {
 
                                         in = groovyScriptConn.getInputStream();
-                                        Application app = ThreadAppIdentifier.get();
+                                        Application app = RequestThreadInfo.get().getApplication();
                                         currentCacheEntry.scriptClass = groovyLoader.parseClass(new GroovyCodeSource(in, scriptName, app.getAppPath()));
                                         //currentCacheEntry.scriptClass = groovyLoader.parseClass(in, scriptName);
 
@@ -387,7 +387,7 @@ public class GSE2 implements ResourceConnector {
                                 InputStream in = null;
 
                                 try {
-                                        Application app = ThreadAppIdentifier.get();
+                                        Application app = RequestThreadInfo.get().getApplication();
                                         File f = new File(app.getAppPath() + File.separator + scriptName);
                                         String line = "";
                                         BufferedReader br = null;

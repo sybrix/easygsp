@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletConfig;
@@ -102,6 +103,8 @@ import org.codehaus.groovy.control.CompilationFailedException;
  * @version 2.0
  */
 public class TemplateServlet extends AbstractHttpServlet {
+        private static final Logger log = Logger.getLogger(TemplateServlet.class.getName());
+        
         private static Pattern INCLUDE_REGEX = Pattern.compile("<%@\\s*include\\s*file\\s*=\\s*\"[\\w|\\\\|\\//||.]+\"\\s*%>");
 
         /**
@@ -226,6 +229,8 @@ public class TemplateServlet extends AbstractHttpServlet {
          */
         protected Template getTemplate(File file, String requestedUrl, Binding binding) throws ServletException {
 
+
+
                 String key = file.getAbsolutePath();
                 Template template = null;
 
@@ -248,7 +253,7 @@ public class TemplateServlet extends AbstractHttpServlet {
                         children = entry.getChildren();
                 }
 
-                TemplateTL.get().setCache(children);
+                RequestThreadInfo.get().getTemplateInfo().setCache(children);
 
 
                 if (entry != null) {
@@ -293,7 +298,7 @@ public class TemplateServlet extends AbstractHttpServlet {
                 // Template not cached or the source file changed - compile new template!
                 //
                 if (template == null) {
-                        TemplateTL.get().setSourceNewer(true);
+                        RequestThreadInfo.get().getTemplateInfo().setSourceNewer(true);
 
                         if (verbose) {
                                 log("Creating new template from file " + file + "...");
@@ -301,6 +306,8 @@ public class TemplateServlet extends AbstractHttpServlet {
 
                         Reader reader = null;
                         try {
+                                log.fine ("templateservlet reading file : " + file.getAbsolutePath());
+
                                 RequestThreadInfo.get().setCurrentFile(file.getAbsolutePath());
                                 reader = new FileReader(file);
                                 children.clear();
@@ -430,9 +437,9 @@ public class TemplateServlet extends AbstractHttpServlet {
 
                 File file = null;
                 if (File.separator.equals("\"")) {
-                        file = new File(ThreadAppIdentifier.get().getAppPath()+ File.separator + templatePath.replaceAll("/", "\\\\"));
+                        file = new File(RequestThreadInfo.get().getApplication().getAppPath()+ File.separator + templatePath.replaceAll("/", "\\\\"));
                 } else {
-                        file = new File(ThreadAppIdentifier.get().getAppPath() + File.separator + templatePath);
+                        file = new File(RequestThreadInfo.get().getApplication().getAppPath() + File.separator + templatePath);
                 }
 
                 RequestThreadInfo.get().setCurrentFile(file.getAbsolutePath());

@@ -103,12 +103,12 @@ public class RequestThread extends Thread {
                         application = applications.get(appName);
 
                         // set the appId as soon as possible, even at the cost of having to repeat this line
-                        ThreadAppIdentifier.set(application);
+                        RequestThreadInfo.get().setApplication(application);
 
                         // if null, no app. Start app and then set it
                         if (application == null) {
                                 application = EasyGServer.loadApplicationFromFileSystem(applications, appName, headers.get(RequestHeaders.DOCUMENT_ROOT));
-                                ThreadAppIdentifier.set(application);
+                                RequestThreadInfo.get().setApplication(application);
                         }
 
                         if (!application.isStarted()) {
@@ -120,7 +120,7 @@ public class RequestThread extends Thread {
                                 log.log(FINE, "restarting application: " + application.getAppPath());
                                 application.killApp();
                                 application = EasyGServer.loadApplicationFromFileSystem(applications, appName, headers.get(RequestHeaders.DOCUMENT_ROOT));
-                                ThreadAppIdentifier.set(application);
+                                RequestThreadInfo.get().setApplication(application);
                                 application.startApplication();
                         }
 
@@ -161,7 +161,7 @@ public class RequestThread extends Thread {
                                 root = new File(application.getAppPath() + File.separator + scriptPath);
                         }
 
-                        TemplateTL.get().setTemplateRoot(root.getParent());
+                        RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(root.getParent());
                         RequestThreadInfo.get().setCurrentFile(root.getAbsolutePath());
 
                         //process the request
@@ -558,7 +558,7 @@ public class RequestThread extends Thread {
                 RequestImpl request = (RequestImpl) binding.getVariable("request");
                 StackTraceElement stackTraceElement = findErrorInStackTrace(binding, e);
 
-                TemplateTL.get().setTemplateRoot(null);
+                RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(null);
                 try {
                         //String content = getErrorFileContent(errorCode);
 
@@ -608,7 +608,7 @@ public class RequestThread extends Thread {
         }
 
         private static void sendError(int errorCode, ResponseImpl response, Throwable e, StackTraceElement stackTraceElement, CustomServletBinding binding) {
-                TemplateTL.get().setTemplateRoot(null);
+                RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(null);
                 try {
 
                         String content = getErrorFileContent(errorCode);
@@ -650,7 +650,7 @@ public class RequestThread extends Thread {
         }
 
         public void sendError(String message) {
-                TemplateTL.get().setTemplateRoot(null);
+                RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(null);
                 try {
                         String content = getErrorFileContent(500);
                         response.setStatus(500, "");

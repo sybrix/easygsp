@@ -101,7 +101,7 @@ public class AppClassLoader extends URLClassLoader {
         }
 
         protected synchronized Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-                Application path = ThreadAppIdentifier.get();
+                Application path = RequestThreadInfo.get().getApplication();
                 if (path != null) {
                         if (name.equals("java.lang.Thread") && allowThreads == false) {
                                 throw new ClassNotFoundException(name);

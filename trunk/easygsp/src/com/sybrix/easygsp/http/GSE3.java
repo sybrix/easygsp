@@ -399,7 +399,7 @@ public class GSE3 implements ResourceConnector {
                 Class clazz = null;
                 if (entry != null) clazz = entry.scriptClass;
 
-                if (TemplateTL.get().isSourceNewer()) {
+                if (RequestThreadInfo.get().getTemplateInfo().isSourceNewer()) {
                         try {
                                 //clazz = groovyLoader.parseClass(gcs);
                                 clazz = groovyLoader.parseClass(new GroovyCodeSource(scriptInputStream, scriptName, "/groovy/script"));
@@ -473,7 +473,7 @@ public class GSE3 implements ResourceConnector {
         }
 
         public Script createScript(InputStream script, String requestedUrl, String scriptName, Binding binding) throws ResourceException, ScriptException {
-                return InvokerHelper.createScript(loadScriptByName(script, requestedUrl, scriptName, ThreadAppIdentifier.get().getAppPath()), binding);
+                return InvokerHelper.createScript(loadScriptByName(script, requestedUrl, scriptName, RequestThreadInfo.get().getApplication().getAppPath()), binding);
         }
 
         protected boolean isSourceNewer(URLConnection conn, ScriptCacheEntry entry) throws ResourceException {
