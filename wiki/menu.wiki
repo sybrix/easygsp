@@ -1,3 +1,5 @@
-[InstallEasyGSP Installing EasyGSP]
-[configure Configure EasyGSP]
-[FAQs Frequently Asked Questions]
+Install/Configure
+  * [InstallEasyGSP Installing EasyGSP]
+  * [configure Configure EasyGSP]
+Tutorials/How To's
+  * [FAQs Frequently Asked Questions]
