@@ -4,9 +4,9 @@
 Easy GSP requires Java 1.6 or greater, an HTTP server (preferably LightTPD) and optionally MySQL if you want to try MySQL based virtual hosting with LightTPD.
 
 
-*Linux*
+==Linux==
 
-There are a ton of tutorials on how to install all of the required for EasyGSP.  Simply google installation instructions for installing the following for your distro:
+There are a ton of tutorials on how to install all of the required software for EasyGSP.  Simply google installation instructions for installing the following for your distro:
   * Install Sun's latest JDK
   * Install MySQL server/client (optional, only required for mysql virtual hosting)
   * Install LightTPD  (If you decide to build from source make sure you build with: --with-mysql ,--with-openssl)
@@ -22,7 +22,7 @@ Locate the lighttpdd.conf file, rename it, and download a config that will work 
 
 restart LightTPD
 
-== Installing EasyGSP ==
+* Installing EasyGSP *
   * cd /usr/local
   * wget http://easygsp.googlecode.com/files/easygsp-[VERSION].tar.gz
   * tar -xvf easygsp-[version].tar.gz
@@ -39,7 +39,7 @@ $EASY_HOME/conf/cache.ccf   (update property: *jcs.auxiliary.DC.attributes.DiskP
 
 ----
 
-*Windows*
+==Windows==
   * *Install Java*
     # Download the latest jdk from http://java.sun.com
     # Install
