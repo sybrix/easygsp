@@ -31,7 +31,7 @@ fileupload.gsp
                         } else {
                                 cout item.fieldName
                         }
-                        System.out.println("file upload" + item);
+                        cout("file upload" + item);
                 }
 
 
