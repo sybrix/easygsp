@@ -1,0 +1,9 @@
+#summary Frequently Asked Questions
+
+= Frequently Asked Questions =
+
+*How do I add jars to my application ?*
+
+You can add additional jars to your application by placing jars in the `$EASYGSP_HOME/lib` folder.  However, these jars will be available to ALL applications.  *You can not add jars at the application level*. 
+
+Certain libraries simply use too many system resources, and would make a shared environment like EasyGSP unstable.  Libraries that are known to be memory and thread hogs should be avoided in EasyGSP. 
