@@ -27,7 +27,7 @@ This methods returns an empty list or a List of `FileItems`, never null.
                                 File uploadedFile = new File(application.appPath + File.separator + item.name);
                                 //uploadedFile.mkdirs();
                                 item.write(uploadedFile);
-                                uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath + ' ' + params.var
+                                uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath 
                         } else {
                                 cout item.fieldName
                         }
@@ -46,7 +46,7 @@ This methods returns an empty list or a List of `FileItems`, never null.
                 ${uploadLocation}
                 <form action="fileupload.gsp" method="POST" enctype="multipart/form-data">
                         File: <input type="file" name="file"/><br/>
-                         <input type="hidden" name="var" value="xxx"/>
+
                         <input type="submit"/>
                 </form>
 
