@@ -1,4 +1,0 @@
-<%@ include file="../header2.html" %>
-
-community
-<%@ include file="../footer2.gsp" %>
