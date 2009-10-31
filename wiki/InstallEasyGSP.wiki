@@ -11,6 +11,34 @@ There are a ton of tutorials on how to install all of the required for EasyGSP. 
   * Install MySQL server/client (optional, only required for mysql virtual hosting)
   * Install LightTPD  (If you decide to build from source make sure you build with: --with-mysql ,--with-openssl)
 
+
+*Configuring LightTPD*
+
+Locate the lighttpdd.conf file, rename it, and download a config that will work with EasyGSP.  It's usually at /etc/lighttpd/lighttpd.conf
+ 
+  * $ cd /etc/lighttpd
+  * $ mv lighttpd.conf lighttpd.conf.old
+  * $ wget http://easygsp.googlecode.com/files/lighttpd.conf
+
+restart LightTPD
+
+== Installing EasyGSP ==
+  * cd /usr/local
+  * wget http://easygsp.googlecode.com/files/easygsp-[VERSION].tar.gz
+  * tar -xvf easygsp-[version].tar.gz
+  * ln -s easygsp-[version] easygsp
+  * cd /usr/local/easygsp/bin
+  * chmod +x start.sh
+  * cdmod +x stop.sh
+
+If you installed easygsp or java to a path different than what is listed above, open the following files and reference the correct paths:
+
+$EASY_HOME/bin/stop.sh
+$EASY_HOME/bin/start.sh
+$EASY_HOME/conf/cache.ccf   (update property: *jcs.auxiliary.DC.attributes.DiskPath*)
+
+----
+
 *Windows*
   * *Install Java*
     # Download the latest jdk from http://java.sun.com
