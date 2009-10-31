@@ -1,0 +1,9 @@
+#summary EasyGSP and the Servlet API
+
+= EasyGSP and the Servlet API =
+
+*EasyGSP* partially implements the servlet API. Partially because not all of the servlet API interfaces are needed and EasyGSP is not a servlet container. The servlet API interfaces implemented are: Request, Response, Context and Session. But not all of the methods in these interfaces are implemented. This is because: 1) the project is a work in progress and 2) Not all of the the methods in these interfaces make sense in an application like EasyGSP. 
+
+For the interfaces mentioned, when a method that is not implemented is invoked a NotImplementedException is thrown. 
+
+The execution model for EasyGSP doesn't allow for code to be loaded for execution across multiple requests. For this reason, parts of the servlet api like filters, listeners and servlets are not implemented. EasyGSP's execution model requires that once a request is completed, no code is left executing for that request. This make is difficult to efficiently implement something like a filter or listener.
