@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project relativePaths="false" version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" name="Default" comment="removed combined all thread local classes to one, removed FastCGI classes">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="DELETED" beforePath="C:\projects\easygsp\easygsp\bin\easygsp.jar" afterPath="" />
+    <list default="true" readonly="true" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/easygsp.iws" afterPath="$PROJECT_DIR$/easygsp.iws" />
     </list>
     <ignored path="easygsp.iws" />
@@ -649,7 +647,7 @@
     <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed combined all thread local classes to one, removed FastCGI classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.1.3" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -663,6 +661,7 @@
     <confirmMoveToFailedCommit value="1" />
     <MESSAGE value="0.1.2 - error handling" />
     <MESSAGE value="removed combined all thread local classes to one, removed FastCGI classes" />
+    <MESSAGE value="0.1.3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
