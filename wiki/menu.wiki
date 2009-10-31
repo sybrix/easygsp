@@ -1,1 +1,2 @@
 [InstallEasyGSP Installing EasyGSP]
+[configure Configure EasyGSP]
