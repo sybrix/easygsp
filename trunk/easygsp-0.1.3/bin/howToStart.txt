@@ -1,0 +1,42 @@
+For Windows
+To start from the command line,
+
+> cd %EASYGSP_HOME%\bin
+> EasyGSP.bat
+
+
+To Install as Service
+> cd %EASYGSP_HOME%\bin
+> InstallEasyGSP-NT.bat
+
+
+To Remove as Service
+> cd %EASYGSP_HOME%\bin
+> UninstallEasyGSP-NT.bat
+
+
+To Stop
+> cd %EASYGSP_HOME%\bin
+> stop.bat
+
+------------------------------------------------------------------------------------------------------------------------
+
+Linux
+To Start
+> cd $EASYGSP_HOME/bin
+>./start.sh
+
+
+To Stop
+> cd $EASYGSP_HOME/bin
+>./stop.sh
+
+
+To Install as Service
+$EASYGSP_HOME/bin/easygsp is a startup script that may be to start EasyGSP as a service
+open and modify as needed
+
+
+
+
+
