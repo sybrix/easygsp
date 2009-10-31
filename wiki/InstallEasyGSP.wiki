@@ -29,7 +29,7 @@ There are a ton of tutorials on how to install all of the required for EasyGSP. 
   * *Installing EasyGSP*
     # Download EasyGSP @ http://code.google.com/p/easygsp/downloads/list
     # Unzip 
-    # Rename dir easygs-[VERSION] to easygsp
+    # Rename dir easygs-`[VERSION`] to easygsp
     # Copy to c:\easygsp
 
 Create EASY_HOME and JAVA_HOME environment variables to that point to the installation directories.
