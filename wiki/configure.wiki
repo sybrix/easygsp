@@ -5,20 +5,20 @@
 EasyGSP's configuration file is located @ $EASYGSP_HOME/conf/server.properties
 
 
-  * *groovy.webapp.dir*=Directory where HTTP server serves documents
-  * *server.port*=SCGI listening port number
-  * *shutdown.port*=Port number for listening for shutdown command
-  * *session.timeout*=number of minutes before session timesout due to inactivity
-  * *thread.timeout*=number of seconds before an HTTP request is killed
-  * *logging.file.count*=
-  * *logging.max.file.size*=maximum size in bytes for a log file
-  * *logging.level*=Logging level in text, FINE, FINER, FINEST, SEVERE, WARN, INFO
-  * *groovy.extension*=the extension that identifies groovy scripts (.groovy)
-  * *template.extension*=the extension that identifies Groovy templates, (.gsp preferred)
-  * *alt.groovy.extension*=alternate extension that identifies Groovy templates (should match template.extension until this feature is fully implemented)
-  * *allow.threads*=true to allow developers to create threads, false to prevent threads
-  * *allow.swing*=true to allow developers to access swing classes, false to prevent
-  * *allow.awt*=true to allow developers to access awt classes, false to prevent
-  * *database.driver.#*=sequential list of database drivers
-  * *default.charset*=default character set
-  * *output.buffer.size*=response buffer size in bytes
+  * *groovy.webapp.dir* = Directory where HTTP server serves documents
+  * *server.port* = SCGI listening port number
+  * *shutdown.port* = Port number for listening for shutdown command
+  * *session.timeout* = number of minutes before session timesout due to inactivity
+  * *thread.timeout* = number of seconds before an HTTP request is killed
+  * *logging.file.count* =
+  * *logging.max.file.size* = maximum size in bytes for a log file
+  * *logging.level* = Logging level in text, FINE, FINER, FINEST, SEVERE, WARN, INFO
+  * *groovy.extension* = the extension that identifies groovy scripts (.groovy)
+  * *template.extension* = the extension that identifies Groovy templates, (.gsp preferred)
+  * *alt.groovy.extension* = alternate extension that identifies Groovy templates (should match template.extension until this feature is fully implemented)
+  * *allow.threads* = true to allow developers to create threads, false to prevent threads
+  * *allow.swing* = true to allow developers to access swing classes, false to prevent
+  * *allow.awt* = true to allow developers to access awt classes, false to prevent
+  * *database.driver.#* = sequential list of database drivers
+  * *default.charset* = default character set
+  * *output.buffer.size* = response buffer size in bytes
