@@ -4,7 +4,7 @@
         <property environment="env"/>
 
         <property name="jdk" value="${env.JAVA_HOME}"/>
-        <property name="buildNumber" value="0.1.2"/>
+        <property name="buildNumber" value="0.1.3"/>
         <property name="easyGSPDir" value="easygsp-${buildNumber}"/>
         <property name="lib" value="lib"/>
         <property name="src" value="src"/>
