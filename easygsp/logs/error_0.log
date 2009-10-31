@@ -1,0 +1,19 @@
+10/31/09 09:20.08 [SEVERE] com.sybrix.easygsp.server.EasyGServer.<init>() - 
+JRE_HOME: C:\jdk1.6.0_16\jre
+JAVA_VERSION: 1.6.0_16
+GROOVY_VERSION: 1.7-beta-1
+WORKING_DIR: C:\projects\easygsp\easygsp
+Groovy Script Server Started. Listening on port 4444
+
+10/31/09 09:20.08 [INFO] com.sybrix.easygsp.server.ThreadMonitor.start() - Thread monitor started  (timeout: 300)
+10/31/09 09:20.08 [INFO] com.sybrix.easygsp.http.SessionMonitor.run() - SessionMonitor started.
+10/31/09 09:20.08 [FINE] com.sybrix.easygsp.http.LoggerThread.run() - Logger thread started
+10/31/09 09:20.08 [FINE] com.sybrix.easygsp.server.EasyGServer.loadDatabaseDrivers() - loading database driver:org.firebirdsql.jdbc.FBDriver
+10/31/09 09:20.08 [FINE] com.sybrix.easygsp.server.EasyGServer.loadDatabaseDrivers() - loading database driver:com.mysql.jdbc.Driver
+10/31/09 09:22.08 [FINE] com.sybrix.easygsp.server.ThreadMonitor.add() - adding thread id:20 from running map
+10/31/09 09:22.08 [FINE] com.sybrix.easygsp.server.EasyGServer.loadApplicationFromFileSystem() - loading application: c:\projects\easygsp\easygsp\webapps\easygsp
+10/31/09 09:22.08 [FINE] com.sybrix.easygsp.http.RequestThread.run() - starting application: c:\projects\easygsp\easygsp\webapps\easygsp
+10/31/09 09:22.08 [FINE] com.sybrix.easygsp.http.Application.startApplication() - invoking onApplicationStart for easygsp
+10/31/09 09:22.08 [FINE] com.sybrix.easygsp.http.Application.startApplication() - onApplicationStart successful for easygsp
+10/31/09 09:22.10 [FINE] com.sybrix.easygsp.http.RequestImpl.forward() - fowarding to file: download/index.gspx
+10/31/09 09:22.10 [FINE] com.sybrix.easygsp.http.RequestThread.run() - took 2936 ms
