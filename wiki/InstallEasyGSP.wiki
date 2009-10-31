@@ -14,23 +14,23 @@ There are a ton of tutorials on how to install all of the required for EasyGSP. 
 
 *Windows*
   * *Install Java*
-    #Download the latest jdk from http://java.sun.com
-    #Install
+    # Download the latest jdk from http://java.sun.com
+    # Install
 
   * *Install LightTPD*
-    #Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
-    #Download the latest and greatest w/OpenSSL support
-    #Install to c:\LightTPD
+    # Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
+    # Download the latest and greatest w/OpenSSL support
+    # Install to c:\LightTPD
 
   * *Install MySQL* (optional)
-    #Goto www.mysql.com
-    #Download latest GA release
-    #Install
+    # Goto www.mysql.com
+    # Download latest GA release
+    # Install
 
   * *Installing EasyGSP*
-    #Download EasyGSP @ http://code.google.com/p/easygsp/downloads/list
-    #Unzip 
-    #Rename dir easygs-[VERSION] to easygsp
-    #Copy to c:\easygsp
+    # Download EasyGSP @ http://code.google.com/p/easygsp/downloads/list
+    # Unzip 
+    # Rename dir easygs-[VERSION] to easygsp
+    # Copy to c:\easygsp
 
 Create EASY_HOME and JAVA_HOME environment variables to that point to the installation directories.
