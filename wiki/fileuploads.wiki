@@ -23,7 +23,7 @@ fileupload.gsp
 
         def uploadLocation=''
 
-                for (FileItem item: request.parseFileUploads()) {
+                request.parseFileUploads().each {item->
                         if (!item.isFormField()) {
                                 File uploadedFile = new File(application.appPath + File.separator + item.name);
                                 //uploadedFile.mkdirs();
