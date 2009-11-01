@@ -3,6 +3,6 @@ Install/Configure
   * [configure Configure EasyGSP]
 
 Tutorials/How To's
-  * [fileuploads File Uploads]
+  * [fileuploads Files Uploads]
 
 [FAQs Frequently Asked Questions]
