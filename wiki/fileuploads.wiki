@@ -10,7 +10,7 @@ List`<org.apache.commons.fileupload.FileItem>` parseFileUploads()
 
 This methods returns an empty list or a List of `FileItems`, never null.
 
-`**` *Note* - when attemping to write a fileItem of size 0, an AccessDenied exception may be thrown.  It's best to check that size is greater than zero before writing.
+`**` *Note* - when attemping to write a fileItem of size 0, an filenotfoundexception exception may be thrown.  It's best to check that size is greater than zero before writing.
 
 fileupload.gsp
 {{{
