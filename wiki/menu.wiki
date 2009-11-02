@@ -3,7 +3,7 @@ Install/Configure
   * [configure Configure EasyGSP]
 
 Getting Started
-  * [firstproject Creating your first project]
+  * [firstproject Creating an Application]
   * [helloworld1 Hello World - Script Style]
   * [helloworld2 Hello World - MVC Style]
   * [processingforms Processing Form Requests]
