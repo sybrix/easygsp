@@ -1,4 +1,4 @@
-#summary Processing form request.
+#summary Processing Form requests.
 
 = Processing form request =
 
