@@ -31,5 +31,4 @@ When helloworld.groovy is done processing it will automatically forward to hello
 </html>
 }}}
 
-This page would be accessed as "helloworld.gspx" in the browsser.
-
+This page would be accessed as "helloworld.gspx" in the browser.
