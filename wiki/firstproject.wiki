@@ -1,0 +1,10 @@
+#summary Creating your first application
+
+= Creating an Application=
+
+
+To create an application in EasyGSP, simply create a folder in the %EASYGSP_HOME%/webapps directory.  A folder in this directory represents an application.
+
+%EASYGSP_HOME%
+    + my_application
+        + helloworld.gsp
