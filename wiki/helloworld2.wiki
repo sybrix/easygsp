@@ -2,7 +2,9 @@
 
 = Hello World =
 
-This hello world example demonstrates a controller script that forward to a view template to render the HTML.  The controller and view are in separate files.
+This hello world example demonstrates a controller script that forward to a view template to render the HTML.  The controller and view are in separate files.  
+
+When helloworld.groovy is done processing it will automatically forward to helloworld.gspx.  If the [forward "forward()"] method is not explicitly called, the controller script will automatically forward to a template with the same name (with the .gspx extension).
 
 *helloworld.groovy*
 
