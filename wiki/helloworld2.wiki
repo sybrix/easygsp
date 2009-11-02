@@ -1,6 +1,6 @@
 #summary Hello World - MVC Style.
 
-= Hello World =
+= Hello World - MVC Style =
 
 This hello world example demonstrates a controller script that forwards to a view template to render the HTML.  The controller and view are in separate files.  
 
