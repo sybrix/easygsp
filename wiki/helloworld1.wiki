@@ -2,7 +2,7 @@
 
 = Hello World =
 
-This hello world example demonstrates how a script template looks when all the template and code are in the same script.
+This hello world example demonstrates a script template with the code and template HTML in a single file.
 
 *helloworld.gsp*
 
