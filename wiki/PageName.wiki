@@ -1,6 +1,6 @@
-#summary Processing Form requests.
+#summary Processing Form Requests.
 
-= Processing Form Request =
+= Processing Form Requests =
 
 Add your content here.
 
