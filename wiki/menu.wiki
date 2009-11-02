@@ -3,8 +3,8 @@ Install/Configure
   * [configure Configure EasyGSP]
 
 Getting Started
-  * [helloworld1 Hello World Script Style]
-  * [helloworld2 Hello World MVC Style]
+  * [helloworld1 Hello World - Script Style]
+  * [helloworld2 Hello World - MVC Style]
 
 Tutorials/How To's
   * [fileuploads File Uploads]
