@@ -1,13 +1,29 @@
-#summary One-sentence summary of this page.
+#summary Hello World - MVC Style.
 
-= Introduction =
+= Hello World =
 
-Add your content here.
+This hello world example demonstrates a script template with the code and template HTML in a single file.
 
+*helloworld.groovy*
 
-= Details =
+{{{
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+	import java.text.SimpleDateFormat
+
+	def message = 'Hello World'
+	def sdf = new SimpleDateFormat('MMMM dd, yyyy')
+	
+	def today = sdf.format(new Date())
+}}}
+
+*helloworld.gspx*
+{{{
+<html>
+	<head>
+		<title>Hello World Example</title>
+	</head>
+	<body>
+		$message, today is $today
+	</body>
+</html>
+}}}
