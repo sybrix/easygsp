@@ -2,7 +2,7 @@
 
 = Hello World =
 
-This hello world example demonstrates a script template with the code and template HTML in a single file.
+This hello world example demonstrates a controller script that forward to a view template to render the HTML.  The controller and view are in separate files.
 
 *helloworld.groovy*
 
@@ -15,6 +15,7 @@ This hello world example demonstrates a script template with the code and templa
 	
 	def today = sdf.format(new Date())
 }}}
+
 
 *helloworld.gspx*
 {{{
