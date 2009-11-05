@@ -28,10 +28,6 @@ restart LightTPD
   * tar -xvf easygsp-`[version`].tar.gz
   * rm easygsp-`[version`].tar.gz
   * ln -s easygsp-`[version`] easygsp
-  * cd easygsp
-  * mv webapps webapps_
-  * cp -r webapps_/`*` webapps
-  * rm -rf webapps_
   * cd /usr/local/easygsp/bin
   * chmod +x start.sh
   * cdmod +x stop.sh
