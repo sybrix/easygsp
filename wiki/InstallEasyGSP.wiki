@@ -24,7 +24,7 @@ restart LightTPD
 
 * Installing EasyGSP *
   * cd /usr/local
-  * Download the latest version of EasyGSP from http://easygsp.googlecode.com/files
+  * Download the latest version of EasyGSP from http://code.google.com/p/easygsp/downloads/list
   * tar -xvf easygsp-`[version`].tar.gz
   * rm easygsp-`[version`].tar.gz
   * ln -s easygsp-`[version`] easygsp
