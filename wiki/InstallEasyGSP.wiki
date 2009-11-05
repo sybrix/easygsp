@@ -56,7 +56,7 @@ If you installed easygsp or java to a path different than what is listed above, 
 
   * *Configuring LightTPD*
      # Locate the lighttpdd.conf file @ C:\LightTPD\conf, rename it to lighttpd.conf_original
-     # Download this LightTPD config http://easygsp.googlecode.com/files/lighttpd-windows.conf and save it to C:\LightTPD\conf
+     # Download this LightTPD config http://easygsp.googlecode.com/files/lighttpd-windows.conf and save it to C:\LightTPD\conf\lighttpd.conf
      # Restart LightTPD
 
   * *Install MySQL* (optional)
