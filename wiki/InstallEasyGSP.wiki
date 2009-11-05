@@ -62,8 +62,8 @@ If you installed easygsp or java to a path different than what is listed above, 
 
   * *Installing EasyGSP*
     # Download EasyGSP @ http://code.google.com/p/easygsp/downloads/list
-    # Unzip 
-    # Rename dir easygsp-`[VERSION`] to easygsp
-    # Copy to c:\easygsp
+    # Unzip to c:\
+    # Rename dir c:\easygsp-`[VERSION`] to c:\easygsp
+
 
 Create EASYGSP_HOME and JAVA_HOME environment variables that point to the installation directories.
