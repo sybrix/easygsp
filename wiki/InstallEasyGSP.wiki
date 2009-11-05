@@ -38,9 +38,9 @@ restart LightTPD
 
 If you installed easygsp or java to a path different than what is listed above, open the following files and reference the correct paths:
 
-  * $EASY_HOME/bin/stop.sh
-  * $EASY_HOME/bin/start.sh
-  * $EASY_HOME/conf/cache.ccf   (update property: *`jcs.auxiliary.DC.attributes.DiskPath`*)
+  * $EASYGSP_HOME/bin/stop.sh
+  * $EASYGSP_HOME/bin/start.sh
+  * $EASYGSP_HOME/conf/cache.ccf   (update property: *`jcs.auxiliary.DC.attributes.DiskPath`*)
 
 ----
 
@@ -65,4 +65,4 @@ If you installed easygsp or java to a path different than what is listed above, 
     # Rename dir easygsp-`[VERSION`] to easygsp
     # Copy to c:\easygsp
 
-Create EASY_HOME and JAVA_HOME environment variables that point to the installation directories.
+Create EASYGSP_HOME and JAVA_HOME environment variables that point to the installation directories.
