@@ -6,13 +6,14 @@ Form parameters are accessed using the implicit "params" object.  This object is
 
 The syntax is : `params.[NameOfFormObject]`
 
- The "params" object is the same as calling request.getParameter(). The following are equivalent:
+The "params" object is the same as calling request.getParameter(). The following are equivalent:
 {{{
 <% 
   params.lastName == request.getParameter("lastName")
 %>
 }}}
 
+QueryString parameters are also accessed using the "params" object
 Not that you would use the servlet API equivalent, but it's there just in case.
 
 
