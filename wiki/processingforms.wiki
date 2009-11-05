@@ -4,7 +4,7 @@
 
 Form parameters are accessed using the implicit "params" object.  This object is available in all scripts and controllers. 
 
-The syntax is : params.`[NameOfFormObject]`
+The syntax is : params.`[`NameOfFormObject`]`
 
  The "params" object is the same as calling request.getParameter(). The following are equivalent:
 {{{
