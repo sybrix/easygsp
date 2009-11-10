@@ -7,6 +7,10 @@ Getting Started
   * [helloworld1 Hello World - Script Style]
   * [helloworld2 Hello World - MVC Style]
   * [processingforms Processing Form Requests]
+  * [implicit_objects Implicit Objects]
+
+Reference
+  * [lifecycle EasyGSP Page LifeCycle]
 
 Tutorials/How To's
   * [fileuploads File Uploads]
