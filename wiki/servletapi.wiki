@@ -2,13 +2,15 @@
 
 = EasyGSP and the Servlet API =
 
-*EasyGSP* partially implements the servlet API.  The primary reason the servlet API is used is : familiarity.  Everyone already knows it, and API is pretty good.  It's only partially implemented because not all of the servlet API interfaces are needed and EasyGSP is not(and does not intend to be) a servlet container. 
+*EasyGSP* partially implements the servlet API.  The primary reason the servlet API is used is : familiarity.  Everyone already knows it, and API is pretty good.  It's only partially implemented because not all of the servlet API interfaces are needed and EasyGSP is not(and does not intend to be) a servlet container.   
+
 
 The servlet API interfaces implemented are: 
   * Request
   * Response
   * Context (referred to as Application in EasyGSP)
   * Session  
+
 
 But not all of the methods in these interfaces are implemented. This is because: 1) the project is a work in progress and 2) Not all of the the methods in these interfaces make sense in an application like EasyGSP. 
 
