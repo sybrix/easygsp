@@ -1,8 +1,7 @@
 #summary EasyGSP Page Request Life Cycle
 
-= Introduction =
+= Request Life Cycle =
 
-Add your content here.
 
 
 http://easygsp.googlecode.com/files/lifecycle.gif
