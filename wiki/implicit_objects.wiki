@@ -1,13 +1,19 @@
 #summary Implicit Objects
 
-= Introduction =
+= EasyGSP Implicit Objects =
 
-Add your content here.
+Every gsp script and controller has implicit objects(and methods) available to them.  
+
+				
+
+|| *Object* || *Description* ||
+|| request || ||
+|| response || ||
+|| application || ||
+|| context || same as application||
+|| session || ||
+|| headers || ||
+|| params || ||
 
 
-= Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
