@@ -17,6 +17,11 @@ Reference
   * [templates Groovy Templates]
 
 Tutorials/How To's
+  * [howto_db Connect to Database]
   * [fileuploads File Uploads]
+  * [howto_custom_error Custom error page]
+  * [howto_cookie Read/Write a cookie]
+  * [howto_prop_file Use a Properties File]
+
 
 [FAQs Frequently Asked Questions]
