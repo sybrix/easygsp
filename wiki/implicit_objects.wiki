@@ -7,13 +7,11 @@ Every gsp script and controller has implicit objects(and methods) available to t
 				
 
 || *Object* || *Description* ||
-|| request || ||
-|| response || ||
-|| application || ||
+|| request || HttpServletRequest object||
+|| response || the HttpServletResponse object ||
+|| application || the ServletContext object ||
 || context || same as application||
-|| session || ||
-|| headers || ||
-|| params || ||
-
-
+|| session || convenience object `request.getSession(*false*)` - can be null! ||
+|| headers || Map that contains all request headers ||
+|| params || Map that contains all querystring and form parameters||
 
