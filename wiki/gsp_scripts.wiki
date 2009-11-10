@@ -2,12 +2,18 @@
 
 = Groovy Scripts =
 
-Add your content here.
+EasyGSP groovy scripts come in 2 flavors: GSP and GSPX. GSP and GSPX refer the file extension given to EasyGSP scripts.
+The GSP extensions indicates a script where the logic and html are in the same script.  The GSPX extension refers to a page developed in the MVC method.
 
+When developing MVC style pages in EasyGSP, the model, view and controller should must be in separate files.
 
-= Details =
+There are also a few rules to follow when doing MVC development:
+  * The controller is a normal Groovy script that must end with the .groovy extension
+  * The view is SimpleTemplateEngine style template that must end with the .gspx extension
+  * The controller and view must have the same file name(minus the extension), in order for the controller to automatically forward to the view.  If the controller and view don't share the same file name, you must explicitly forward to the view using the forward() method.
+  * View classes should be in a folder in the WEB-INF directory where the folder name matches the package name
+  
+  Here's the structure for each piece of the MVC model.
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+  
+  
