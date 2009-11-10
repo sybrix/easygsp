@@ -23,5 +23,6 @@ Tutorials/How To's
   * [howto_cookie Read/Write a cookie]
   * [howto_prop_file Use a Properties File]
   * [howto_jars Add Jar files]
+  * [howto_logging Logging]
 
 [FAQs Frequently Asked Questions]
