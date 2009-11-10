@@ -7,13 +7,15 @@ Getting Started
   * [helloworld1 Hello World - Script Style]
   * [helloworld2 Hello World - MVC Style]
   * [processingforms Processing Form Requests]
-  * [implicit_objects Implicit Objects]
+
 
 Reference
   * [lifecycle EasyGSP Page LifeCycle]
   * [servletapi Servlet API]
   * [gsp_scripts Groovy Scripts]
   * [mvc_scripts MVC Development]
+  * [implicit_objects Implicit Objects]
+  * [implicit_methods Implicit Methods]
   * [templates Groovy Templates]
 
 Tutorials/How To's
