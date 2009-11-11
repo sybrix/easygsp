@@ -123,7 +123,7 @@ public class CustomServletBinding extends Binding {
         }
 
         protected Map populateParameters(HttpServletRequest request) {
-                Map params = new NoNullMap();
+                Map params = new HashMap();
                 for (Enumeration names = request.getParameterNames(); names.hasMoreElements();) {
                         String name = (String) names.nextElement();
                         if (!binding.getVariables().containsKey(name)) {

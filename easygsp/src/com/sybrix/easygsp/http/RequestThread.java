@@ -135,11 +135,15 @@ public class RequestThread extends Thread {
 
                         binding = new CustomServletBinding(request, response, application, headers);
                         request.setServletBinding(binding);
-                        //if (GSServer.propertiesFile.getString("logging.level").contains("FINE")) {
-//                        for (Object o : headers.keySet()) {
-//                                log.log(FINE, o + " = " + headers.get(o));
-//                                System.out.println(o + " = " + headers.get(o));
-//                        }
+                        
+                        if (EasyGServer.propertiesFile.getString("logging.level").equals("FINEST")) {
+                                StringBuffer s = new StringBuffer();
+                                s.append("SCGI headers\r\n");
+                                for (Object o : headers.keySet()) {
+                                        s.append("\t").append(o).append(" = ").append(headers.get(o)).append("\r\n");
+                                }
+                                log.log(FINEST, s.toString());
+                        }
 
                         //determineBundle(headers);
                         //loadBundle(application, binding);
