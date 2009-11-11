@@ -1,18 +1,21 @@
 package com.sybrix.easygsp.http;
 
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * LogMessage <br/>
  *
  * @author David Lee
  */
-public class LogMessage   {
-
+public class LogMessage {
+                                        
         private String message;
         private Throwable exception;
         private Date timestamp;
         private Application application;
+        private String formattedMessage;
+        private SimpleDateFormat currentTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a z");
 
         public LogMessage(Throwable exception, Application application) {
                 this.exception = exception;
@@ -63,5 +66,44 @@ public class LogMessage   {
 
         public void setTimestamp(Date timestamp) {
                 this.timestamp = timestamp;
+        }
+
+        public String getFormattedMessage() {
+                return formattedMessage;
+        }
+
+        public void setFormattedMessage(String formattedMessage) {
+                this.formattedMessage = formattedMessage;
+        }
+
+        public String toString() {
+                if (formattedMessage == null) {
+                        formattedMessage = formatMessage();
+                }
+
+                return formattedMessage;
+        }
+
+        protected String formatMessage() {
+                StringBuffer s = new StringBuffer();
+                s.append("[").append(currentTimeFormat.format(getTimestamp())).append("] - ");
+
+                if (getMessage() != null) {
+                        if (getMessage().trim().length() > 0) {
+                                s.append(getMessage());
+                                s.append("\r\n");
+                        }
+                }
+
+                if (getException() != null) {
+                        s.append(getException().getMessage()).append("\r\n");
+                        for (StackTraceElement stackTraceElement : getException().getStackTrace()) {
+                                s.append("\tat ").append(stackTraceElement.getClassName())
+                                        .append("(").append(stackTraceElement.getMethodName())
+                                        .append(":").append(stackTraceElement.getLineNumber()).append(")\r\n");
+                        }
+                }
+
+                return s.toString();
         }
 }

@@ -19,6 +19,9 @@ import groovy.util.ScriptException;
 import groovy.util.ResourceException;
 
 import groovy.lang.GroovyObject;
+import groovy.lang.Closure;
+import groovy.lang.MissingPropertyException;
+import groovy.lang.MissingMethodException;
 
 
 import javax.servlet.ServletContext;
@@ -40,12 +43,15 @@ import java.net.URL;
 import java.net.MalformedURLException;
 import java.io.InputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import com.sybrix.easygsp.exception.NotImplementedException;
 import com.sybrix.easygsp.util.MD5;
 import com.sybrix.easygsp.http.TemplateServlet;
 import com.sybrix.easygsp.server.EasyGServer;
 import com.sybrix.easygsp.http.StaticControllerMethods;
+import org.codehaus.groovy.runtime.GroovyCategorySupport;
 
 /**
  * Application <br/>
@@ -310,23 +316,39 @@ public class Application implements ServletContext {
                 errorFiles.clear();
                 File f = new File(appPath + File.separator + "WEB-INF" + File.separator + "errors");
 
-                        File[] files = f.listFiles();
-                        if (files == null)
-                                return;
-                
-                        for (File file : files) {
-                                errorFiles.add(file.getName());
-                        }
+                File[] files = f.listFiles();
+                if (files == null)
+                        return;
+
+                for (File file : files) {
+                        errorFiles.add(file.getName());
+                }
 
         }
 
-        protected void invokeWebMethod(String method, Object... param) throws ClassNotFoundException,
+        protected void invokeWebMethod(final String method, final Object... param) throws ClassNotFoundException,
                 InstantiationException, IllegalAccessException, ScriptException, ResourceException {
 
-                Class clazz = groovyScriptEngine.loadScriptByName("web.groovy");
 
-                GroovyObject o = (GroovyObject) clazz.newInstance();
-                o.invokeMethod(method, param);
+                Closure closure = new Closure(groovyScriptEngine) {
+
+                        public Object call() {
+                                try {
+                                        Class clazz = groovyScriptEngine.loadScriptByName("web.groovy");
+
+                                        GroovyObject o = (GroovyObject) clazz.newInstance();
+                                        o.invokeMethod(method, param);
+
+                                } catch (Throwable e) {
+                                        log.log(Level.SEVERE, e.getMessage(), e);
+                                }
+
+                                return null;
+                        }
+
+                };
+                GroovyCategorySupport.use(CustomServletCategory.class, closure);
+
 
                 //                Class cls = groovyClassLoader.loadClass("web");
                 //                GroovyObject go = (GroovyObject)cls.newInstance();
@@ -348,9 +370,9 @@ public class Application implements ServletContext {
         // should this hidden >
         public void stopApplication() {
                 try {
-                        if (hasWebGroovy){
+                        if (hasWebGroovy) {
                                 invokeWebMethod("onApplicationStop", this);
-                         }
+                        }
                         started = false;
                 } catch (Exception e) {
                         log.log(Level.FINE, "onApplicationEnd failed.", e);

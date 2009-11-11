@@ -10,3 +10,11 @@
 
 
 
+0.2  11/11/2009
+- Changed implicit cout() method to console()
+- Fix bug in log() method
+- added implicit methods to event calls in web.groovy
+
+
+
+license
