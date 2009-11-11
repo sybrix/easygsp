@@ -22,8 +22,8 @@ EasyGSP's configuration file is located @ $EASYGSP_HOME/conf/server.properties
 ||*database.driver.X* || sequential list of database drivers ||
 ||*default.charset* || default character set ||
 ||*output.buffer.size* || response buffer size in bytes ||
-||*file.upload.temp.directory*|| ||
-||*file.upload.threshold* || 2621440 #2.5mb ||
-||*file.upload.max.filesize* || ||
+||*file.upload.temp.directory*|| Temp directory to stored uploaded contents when the threshold has been exceeded ||
+||*file.upload.threshold* || Amount of in memory space bytes that used for uploaded before using the disk to store uploads ||
+||*file.upload.max.filesize* || Maximum file upload size in bytes. -1 for unlimited.  Your HTTP server must have uploads enabled in order for easygsp to process uploads ||
 ||*logger.checkInterval.seconds* || ||
 ||*log.to.console* || true # should be false for production||
