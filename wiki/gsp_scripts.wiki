@@ -1,14 +1,56 @@
 #summary Groovy Scripts
 
-= Groovy Scripts =
+= EasyGSP Templates and Controllers =
 
 EasyGSP groovy scripts come in 2 flavors: GSP and GSPX. GSP and GSPX refer the file extension given to EasyGSP scripts.
-The GSP extensions indicates a script where the logic and html are in the same script.  The GSPX extension refers to a page developed in the MVC method.
+The GSP extensions indicates a template where the logic and html are in the same script.  The GSPX extension refers to a page developed in the MVC method.
 
-=== GSP Scripts ===
-GSP scripts will usually contain application logic and the HTML to be rendered to the client.  They are the equivalent of a PHP or ASP or groovy script. Basically 
+=== GSP Templates ===
+GSP templates will usually contain application logic and the HTML to be rendered to the client.  They are the equivalent of a PHP or ASP script. Groovy's documentation for [http://groovy.codehaus.org/Groovlets Groovlets] and [http://groovy.codehaus.org/Groovy+Templates TemplateServlet]  is valid documentation for how EasyGSP's script's and templates work.  Behind the scenes EasyGSP is based very much on these 2 servlets.  But  EasyGSP templates allow any valid Groovy code in a template, including import statements.
+
+This is a valid EasyGSP template.
+
+{{{
+<%
+
+        import groovy.sql.Sql
+        import org.apache.commons.fileupload.FileItem
+
+        def uploadLocation=''
+
+                for (FileItem item: request.parseFileUploads()) {
+                        if (!item.isFormField() && item.size > 0) {
+                                File uploadedFile = new File(application.appPath + File.separator + item.name);
+                                //uploadedFile.mkdirs();
+                                item.write(uploadedFile);
+                                uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath + ' ' + params.var
+                        } else {
+                                cout item.fieldName
+                        }
+                        System.out.println("file upload" + item);
+                }
 
 
+%>
+
+
+<html>
+        <head>
+                <title>File Upload Example</title>
+        </head>
+        <body>
+                ${uploadLocation}
+                <form action="fileupload.gsp" method="POST" enctype="multipart/form-data">
+                        File: <input type="file" name="file"/><br/>
+                         <input type="hidden" name="var" value="xxx"/>
+                        <input type="submit"/>
+                </form>
+
+        </body>
+</html>
+
+
+}}}
 
 
 
