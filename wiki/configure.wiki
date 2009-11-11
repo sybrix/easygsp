@@ -19,7 +19,7 @@ EasyGSP's configuration file is located @ $EASYGSP_HOME/conf/server.properties
 ||*allow.threads* || true to allow developers to create threads, false to prevent threads ||
 ||*allow.swing* || true to allow developers to access swing classes, false to prevent ||
 ||*allow.awt* || true to allow developers to access awt classes, false to prevent ||
-||*database.driver.#* || sequential list of database drivers ||
+||*database.driver.X* || sequential list of database drivers ||
 ||*default.charset* || default character set ||
 ||*output.buffer.size* || response buffer size in bytes ||
 ||*file.upload.temp.directory*|| ||
