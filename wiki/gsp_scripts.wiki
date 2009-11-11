@@ -16,6 +16,7 @@ There are also a few rules to follow when doing MVC development:
   Here's the structure for each piece of the MVC model, where the name of the application is "example".
 
 | + $EASYGSP_HOME
+
 | + ---- /webapps
 | + -------------/example
 | + ---------------*helloworld.gspx*
