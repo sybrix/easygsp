@@ -30,7 +30,7 @@ public class EasyGSPLogger {
         private List<LogMessage> incomingMessages = Collections.synchronizedList(new ArrayList<LogMessage>());
         private List<LogMessage> messageQueue = new ArrayList<LogMessage>();
         private SimpleDateFormat fileNameSDF = new SimpleDateFormat("MM_dd_yyyy");
-        private SimpleDateFormat currentTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a z");
+        
 
         public void log(LogMessage message) {
                 incomingMessages.add(message);
@@ -66,6 +66,7 @@ public class EasyGSPLogger {
                 return incomingMessages.size() + messageQueue.size();
         }
 
+
         private void writeToFile(LogMessage message) {
                 File logFile = null;
                 FileWriter fileWriter = null;
@@ -75,26 +76,8 @@ public class EasyGSPLogger {
                         logFile.getParentFile().mkdirs();
 
                         fileWriter = new FileWriter(logFile, true);
-                        StringBuffer s = new StringBuffer();
-                        s.append("[").append(currentTimeFormat.format(message.getTimestamp())).append("] - ");
 
-                        if (message.getMessage() != null) {
-                                if (message.getMessage().trim().length() > 0) {
-                                        s.append(message.getMessage());
-                                        s.append("\r\n");
-                                }
-                        }
-
-                        if (message.getException() != null) {
-                                s.append(message. getException().getMessage()).append("\r\n");
-                                for (StackTraceElement stackTraceElement : message.getException().getStackTrace()) {
-                                        s.append("\tat ").append(stackTraceElement.getClassName())
-                                        .append("(").append(stackTraceElement.getMethodName())
-                                        .append(":").append(stackTraceElement.getLineNumber()).append(")\r\n");
-                                }
-                        }
-
-                        fileWriter.write(s.toString());
+                        fileWriter.write(message.toString());
 
                 } catch (IOException e) {
                         log.log(Level.SEVERE, "Logger.writeToFile() failed. message:" + e.getMessage() + ", application: " + message.getApplication().getAppPath(), e);

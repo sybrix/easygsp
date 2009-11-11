@@ -36,7 +36,6 @@ import java.io.Reader;
  * General purpose properties file reader class.
  */
 public class PropertiesFile {
-        private static final Logger log = Logger.getLogger(PropertiesFile.class.getName());
         private Properties prop;
         private String fileName;
 
@@ -74,7 +73,7 @@ public class PropertiesFile {
                 try {
                         prop.load(inputStream);
                 } catch (Exception e) {
-                        log.log(Level.FINE, "Properties file load for inputstream failed", e);
+                        throw new RuntimeException("Properties file load for inputstream failed", e);
                 } finally {
                         try {
                                 inputStream.close();
@@ -92,9 +91,9 @@ public class PropertiesFile {
                 try {
                         if (fileName.startsWith("classPath:")) {
                                 URL url = getClass().getClassLoader().getResource(fileName.substring(10));
-                                FileInputStream  fis = new FileInputStream(url.getFile());
+                                FileInputStream fis = new FileInputStream(url.getFile());
                                 prop.load(fis);
-                                 fis.close();
+                                fis.close();
                         } else {
 
                                 Reader fis = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "ISO-8859-1"));
@@ -103,7 +102,7 @@ public class PropertiesFile {
                         }
 
                 } catch (Throwable e) {
-                        log.log(Level.FINE, "Properties file load failed, fileName:" + fileName, e);
+                        throw new RuntimeException("Properties file load failed, fileName:" + fileName, e);
                 } finally {
 //                        try {
 //
@@ -116,13 +115,18 @@ public class PropertiesFile {
          * @param key -  properties file key
          * @return Returns string value mapped to this key in the properties file.
          */
-        public String getString(String key) {
+        public String getString(String key, Object... obj) {
 
                 try {
                         return prop.get(key).toString();
-                }catch (NullPointerException e){
-                        throw new PropertyNotFoundException("property: " + key, e);
+
+                } catch (Exception e) {
+                        if (obj.length > 0) {
+                                return obj[0].toString();
+                        }
                 }
+
+                return null;
         }
 
         /**
@@ -132,7 +136,7 @@ public class PropertiesFile {
         public Object get(String key) {
                 try {
                         return prop.get(key);
-                }catch (NullPointerException e){
+                } catch (NullPointerException e) {
                         throw new PropertyNotFoundException("property: " + key, e);
                 }
         }
@@ -140,7 +144,7 @@ public class PropertiesFile {
         public String getString(String key, String defaultValue) {
                 try {
                         return prop.get(key).toString();
-                }catch (NullPointerException e){
+                } catch (NullPointerException e) {
                         return defaultValue;
                 }
         }
@@ -152,51 +156,33 @@ public class PropertiesFile {
          * @param key -  properties file key
          * @return Returns the Integer value mapped to this key in the properties file.
          */
-        public Integer getInt(String key) {
+        public Integer getInt(String key, Object... obj) {
                 try {
-                        return Integer.parseInt(getString(key));
-                }catch (NullPointerException e){
-                        log.log(Level.FINE, "PropertiesFile.getInt() failed for key: " + key, e);
-                        throw new PropertyNotFoundException("property: " + key + " not found in properties file");
-                }catch (PropertyNotFoundException e){
+                        return Integer.parseInt(getString(key, obj));
+                } catch (NumberFormatException e) {
                         throw e;
                 } catch (Exception e) {
-                        log.log(Level.FINE, "PropertiesFile.getInt() failed for key: " + key, e);
-
+                        throw new PropertyNotFoundException("property: " + key + " not found in properties file");
                 }
-
-                return null;
         }
 
-         public Long getLong(String key) {
+        public Long getLong(String key, Object... obj) {
                 try {
-                        return Long.parseLong(getString(key));
-                }catch (NullPointerException e){
-                        log.log(Level.FINE, "PropertiesFile.getLong() failed for key: " + key, e);
-                        throw new PropertyNotFoundException("property: " + key + " not found in properties file");
-                }catch (PropertyNotFoundException e){
+                        return Long.parseLong(getString(key, obj));
+                } catch (NumberFormatException e) {
                         throw e;
                 } catch (Exception e) {
-                        log.log(Level.FINE, "PropertiesFile.getInt() failed for key: " + key, e);
-
+                        throw new PropertyNotFoundException("property: " + key + " not found in properties file");
                 }
-
-                return null;
         }
 
-        public boolean getBoolean(String key) {
+        public boolean getBoolean(String key, Boolean... obj) {
                 try {
-                        return getString(key).equalsIgnoreCase("true");
-                }catch (NullPointerException e){
-                        log.log(Level.FINE, "PropertiesFile.getInt() failed for key: " + key, e);
-                        throw new PropertyNotFoundException("property: " + key + " not found in properties file");
-                }catch (PropertyNotFoundException e){
-                        throw e;
-                } catch (Exception e) {
-                        log.log(Level.FINE, "PropertiesFile.getBoolean() failed for key: " + key, e);
-                }
 
-                return false;
+                        return getString(key, obj.toString()).equalsIgnoreCase("true");
+                } catch (Exception e) {
+                        throw new RuntimeException(e);
+                }
         }
 
         public Set getKeySet() {

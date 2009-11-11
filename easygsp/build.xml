@@ -4,7 +4,7 @@
         <property environment="env"/>
 
         <property name="jdk" value="${env.JAVA_HOME}"/>
-        <property name="buildNumber" value="0.1.3"/>
+        <property name="buildNumber" value="0.2"/>
         <property name="easyGSPDir" value="easygsp-${buildNumber}"/>
         <property name="lib" value="lib"/>
         <property name="src" value="src"/>
@@ -104,10 +104,11 @@
         <target name="package" depends="jar">
                 <delete dir="deploy"/>
                 <mkdir dir="deploy"/>
-                <mkdir dir="deploy/${easyGSPDir}"/>                        
+                <mkdir dir="deploy/${easyGSPDir}"/>
                 <mkdir dir="deploy/${easyGSPDir}/bin"/>
                 <mkdir dir="deploy/${easyGSPDir}/lib"/>
                 <mkdir dir="deploy/${easyGSPDir}/conf"/>
+                <mkdir dir="deploy/${easyGSPDir}/temp"/>
                 <mkdir dir="deploy/${easyGSPDir}/conf/errors"/>
                 <mkdir dir="deploy/${easyGSPDir}/cache"/>
                 <mkdir dir="deploy/${easyGSPDir}/webapps"/>
@@ -117,8 +118,8 @@
                 <copy todir="deploy/${easyGSPDir}/bin">
                         <fileset dir="bin">
                                 <include name="**/*.*"/>
-                                <exclude  name="**/easygsp.exe"/>
-                                <exclude  name="**/easygsp.l4j.ini"/>
+                                <exclude name="**/easygsp.exe"/>
+                                <exclude name="**/easygsp.l4j.ini"/>
                         </fileset>
                 </copy>
                 <copy todir="deploy/${easyGSPDir}/conf/errors">
@@ -150,14 +151,32 @@
                 </copy>
 
                 <copy tofile="deploy/${easyGSPDir}/bin/easygsp.jar" file="${build}/easygsp.jar"/>
-                <copy tofile="deploy/easygsp-${buildNumber}/release.txt" file="release.txt"/>
+                <copy tofile="deploy/${easyGSPDir}/release.txt" file="release.txt"/>
+                <copy tofile="deploy/${easyGSPDir}/license.txt" file="license.txt"/>
+                <replace
+                        file="deploy/${easyGSPDir}/conf/server.properties">
+                        <replacefilter
+                                token="C:/projects/easygsp/easygsp/webapps"
+                                value="C:/easygsp/webapps"/>
+                </replace>
 
-                <zip destfile="deploy/easygsp-${buildNumber}.zip" basedir="deploy" />
-                <tar destfile="deploy/easygsp-${buildNumber}.tar" basedir="deploy">
-                        <exclude  name="**/*.zip"/>
-                 </tar>
+                <zip destfile="deploy/easygsp-${buildNumber}.zip" basedir="deploy"/>
 
-                <gzip src="deploy/easygsp-${buildNumber}.tar" destfile="deploy/easygsp-${buildNumber}.tar.gz"/>
+                <replace
+                        file="deploy/${easyGSPDir}/conf/server.properties">
+                        <replacefilter
+                                token="C:/easygsp/webapps"
+                                value="/usr/local/easygsp/webapps"/>
+                        <replacefilter
+                                token="C:/easygsp/temp"
+                                value="/usr/local/easygsp/temp"/>
+                </replace>
+
+                <tar destfile="deploy/${easyGSPDir}.tar" basedir="deploy">
+                        <exclude name="**/*.zip"/>
+                </tar>
+
+                <gzip src="deploy/${easyGSPDir}.tar" destfile="deploy/${easyGSPDir}.tar.gz"/>
 
         </target>
 
