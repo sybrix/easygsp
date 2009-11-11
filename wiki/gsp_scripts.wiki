@@ -44,7 +44,7 @@ There are also a few rules to follow when doing MVC development:
 		<title>Hello World Example</title>
 	</head>
 	<body>
-		$message, today is $today
+		$message $user.firstname $user.lastName, today is $today
 	</body>
 </html>
 }}}
@@ -61,6 +61,11 @@ There are also a few rules to follow when doing MVC development:
 	def sdf = new SimpleDateFormat('MMMM dd, yyyy')
 	
 	def today = sdf.format(new Date())
+        def user = new User(lastName: 'Lee', firstName: 'David')
+        
+        bind 'message', message
+        bind 'today', today
+        bind 'user', user
 }}}
 
 
