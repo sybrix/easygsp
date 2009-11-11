@@ -23,8 +23,7 @@ EasyGSP's configuration file is located @ $EASYGSP_HOME/conf/server.properties
 ||*default.charset* || default character set ||
 ||*output.buffer.size* || response buffer size in bytes ||
 ||*file.upload.temp.directory*|| ||
-
-||*file.upload.threshold|| 2621440 #2.5mb ||
-||file.upload.max.filesize|| ||
-||logger.checkInterval.seconds|| ||
-||log.to.console|| true # should be false for production||
+||*file.upload.threshold* || 2621440 #2.5mb ||
+||*file.upload.max.filesize* || ||
+||*logger.checkInterval.seconds* || ||
+||*log.to.console* || true # should be false for production||
