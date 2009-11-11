@@ -19,8 +19,8 @@ There are also a few rules to follow when doing MVC development:
        helloworld.gspx
        helloworld.groovy
           /WEB-INF
-          /model
-             User.groovy
+             /model
+                User.groovy
 }}}
 
 
