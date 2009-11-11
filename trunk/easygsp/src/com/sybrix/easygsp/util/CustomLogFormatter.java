@@ -50,7 +50,7 @@ public class CustomLogFormatter extends Formatter {
                 sb.append(record.getLevel().getName());
                 sb.append("]");
 
-                if (record.getThrown() == null) {
+                if (record.getThrown() != null) {
                         sb.append(" ").append(record.getSourceClassName()).append(".").append(record.getSourceMethodName());
                         sb.append("() - ");
                         // Get the formatted message (includes localization
@@ -67,10 +67,12 @@ public class CustomLogFormatter extends Formatter {
                                 }
 
                         sb.append(NEW_LINE);
+                        sb.append(NEW_LINE);
 
                 } else {
                         sb.append(" - ");
                         sb.append(formatMessage(record));
+                        sb.append(NEW_LINE);
                 }
 
 

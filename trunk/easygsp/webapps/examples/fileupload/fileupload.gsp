@@ -3,11 +3,10 @@
         import groovy.sql.Sql
         import org.apache.commons.fileupload.FileItem
 
-
         def uploadLocation=''
 
                 for (FileItem item: request.parseFileUploads()) {
-                        if (!item.isFormField()) {
+                        if (!item.isFormField() && item.size > 0) {
                                 File uploadedFile = new File(application.appPath + File.separator + item.name);
                                 //uploadedFile.mkdirs();
                                 item.write(uploadedFile);

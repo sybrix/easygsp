@@ -92,8 +92,6 @@ public class EasyGServer {
 //                        log.info("log info");
 //                        log.severe("log severe");
 
-
-
                         log.info("\nJRE_HOME: " + System.getProperty("java.home") +
                                 "\nJAVA_VERSION: " + System.getProperty("java.version") +
                                 "\nGROOVY_VERSION: " + groovyVersion +

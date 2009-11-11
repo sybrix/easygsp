@@ -1,5 +1,7 @@
 package com.sybrix.easygsp.http
 
+import com.sybrix.easygsp.server.EasyGServer
+
 
 public class StaticControllerMethods {
         public static addMethods(Class clazz) {
@@ -14,28 +16,44 @@ public class StaticControllerMethods {
 
         private static def addLogMethod(java.lang.Class clazz) {
                 clazz.metaClass.'static'.log = {String logMessage ->
-                        Application app = ThreadAppIdentifier.get();
-                        EasyGSPLogger.getInstance().log(new LogMessage(logMessage, app))
-                }
-        }
+                        Application app = RequestThreadInfo.get().getApplication()
+                        LogMessage lm = new LogMessage(logMessage, app)
+                        if (app.getAttribute("logToConsole") == true && EasyGServer.propertiesFile.getBoolean("log.to.console", false)){
+                                System.out.println lm.toString()
+                        }
 
-        private static def addLogThrowableMethod(java.lang.Class clazz) {
-                clazz.metaClass.'static'.log = {Throwable t ->
-                        Application app = ThreadAppIdentifier.get();
-                        EasyGSPLogger.getInstance().log(new LogMessage(t, app))
+                        EasyGSPLogger.getInstance().log(lm)
                 }
         }
 
         private static def addLogThrowableAndMessageMethod(java.lang.Class clazz) {
                 clazz.metaClass.'static'.log = {String logMessage, Throwable t ->
-                        Application app = ThreadAppIdentifier.get();
-                        EasyGSPLogger.getInstance().log(new LogMessage(logMessage, t, app))
+                        Application app = RequestThreadInfo.get().getApplication()
+                        LogMessage lm = new LogMessage(logMessage, t, app)
+                        if (app.getAttribute("logToConsole") == true && EasyGServer.propertiesFile.getBoolean("log.to.console", false)){
+                                System.out.println lm.toString()
+                        }
+
+                        EasyGSPLogger.getInstance().log(lm)
                 }
         }
 
 
+        private static def addLogThrowableMethod(java.lang.Class clazz) {
+                clazz.metaClass.'static'.log = {Throwable t ->
+                        Application app = RequestThreadInfo.get().getApplication()
+                        LogMessage logMessage = new LogMessage(t, app)
+                        if (app.getAttribute("logToConsole") == true && EasyGServer.propertiesFile.getBoolean("log.to.console", false)){
+                                System.out.println logMessage.toString()
+                        }
+                        EasyGSPLogger.getInstance().log(logMessage)
+                }
+        }
+
+
+
         private static def addConsoleWriteMethod(java.lang.Class clazz) {
-                clazz.metaClass.'static'.cout = {Object s ->
+                clazz.metaClass.'static'.console = {Object s ->
                         System.out.println(s.toString())
                 }
         }
