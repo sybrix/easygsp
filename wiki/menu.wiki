@@ -1,6 +1,6 @@
 Install/Configure
   * [InstallEasyGSP Installing EasyGSP]
-  * [configure Configure EasyGSP]
+  * [configure Configuration Properties]
 
 Getting Started
   * [firstproject Creating an Application]
