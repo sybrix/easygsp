@@ -18,6 +18,20 @@ There are also a few rules to follow when doing MVC development:
 
 $EASYGSP_HOME/example/WEB-INF/model/*User.groovy*
 
+*User.groovy*
+
+{{{
+
+	package model
+
+	class User {
+		String lastName
+		String firstName           
+	}
+}}}
+
+
+
 *helloworld.groovy*
 
 {{{
