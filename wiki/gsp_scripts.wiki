@@ -13,7 +13,6 @@ This is a valid EasyGSP template.
 {{{
 <%
 
-        import groovy.sql.Sql
         import org.apache.commons.fileupload.FileItem
 
         def uploadLocation=''
@@ -51,6 +50,10 @@ This is a valid EasyGSP template.
 
 
 }}}
+
+
+But if you want to seperate your logic and view code EasyGSP supports this too.
+
 
 
 
