@@ -1,6 +1,6 @@
 #summary Groovy Scripts
 
-= Groovy Scripts =
+== Groovy Scripts ==
 
 EasyGSP groovy scripts come in 2 flavors: GSP and GSPX. GSP and GSPX refer the file extension given to EasyGSP scripts.
 The GSP extensions indicates a script where the logic and html are in the same script.  The GSPX extension refers to a page developed in the MVC method.
