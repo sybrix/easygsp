@@ -19,7 +19,7 @@ Locate the lighttpdd.conf file, rename it, and download a config that will work 
  
   * $ cd /etc/lighttpd
   * $ mv lighttpd.conf lighttpd.conf.old
-  * $ wget http://easygsp.googlecode.com/files/lighttpd.conf
+  * $ wget http://easygsp.googlecode.com/files/lighttpd.conf  (Use as a starter or reference, or you could merge this file with your existing config file)
 
 restart LightTPD
 
@@ -53,7 +53,7 @@ If you installed easygsp or java to a path different than what is listed above, 
 
   * *Configuring LightTPD*
      # Locate the lighttpdd-inc.conf file @ C:\LightTPD\conf, rename it to lighttpd.conf_original
-     # Download this LightTPD config http://easygsp.googlecode.com/files/lighttpd-inc.conf and save it to C:\LightTPD\conf\lighttpd-inc.conf
+     # Download this LightTPD config http://easygsp.googlecode.com/files/lighttpd-inc.conf and save it to C:\LightTPD\conf\lighttpd-inc.conf (Use as a starter or reference, or you could merge this file with your existing config file)
      # Restart LightTPD
 
   * *Installing EasyGSP*
