@@ -24,10 +24,9 @@ There are also a few rules to follow when doing MVC development:
 }}}
 
 
-*User.groovy*
+*User.groovy* (Model)
 
 {{{
-
 	package model
 
 	class User {
@@ -37,8 +36,22 @@ There are also a few rules to follow when doing MVC development:
 }}}
 
 
+*helloworld.gspx*  (View)
 
-*helloworld.groovy*
+{{{
+<html>
+	<head>
+		<title>Hello World Example</title>
+	</head>
+	<body>
+		$message, today is $today
+	</body>
+</html>
+}}}
+
+
+
+*helloworld.groovy*  (Controller)
 
 {{{
 
@@ -51,17 +64,6 @@ There are also a few rules to follow when doing MVC development:
 }}}
 
 
-*helloworld.gspx*
-{{{
-<html>
-	<head>
-		<title>Hello World Example</title>
-	</head>
-	<body>
-		$message, today is $today
-	</body>
-</html>
-}}}
 
   
   
