@@ -70,5 +70,5 @@ There are also a few rules to follow when doing MVC development:
 
 
 
-[implicit_methods What does the bind method do ?]
+[implicit_methods bind() method explanation ]
   
