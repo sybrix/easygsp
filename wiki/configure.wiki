@@ -4,7 +4,7 @@
 
 EasyGSP's configuration file is located @ $EASYGSP_HOME/conf/server.properties
 
-|| Property || Description ||
+|| *Property* || *Description* ||
 ||*groovy.webapp.dir* || Directory where HTTP server serves documents||
 
 
