@@ -1,4 +1,4 @@
-#summary EasyGSP Page Request Life Cycle
+#summary Page Request Life Cycle
 
 = Request Life Cycle =
   http://easygsp.googlecode.com/files/lifecycle.gif
