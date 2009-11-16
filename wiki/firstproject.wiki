@@ -11,7 +11,7 @@ Each application can have a web.groovy file. Like servlet based applications, Ea
 This file can have the following methods
 
 ||Method||Description||
-||onApplicationStart||Invoked when the application is initially started and on the first request after the file has been altered.  
-||onApplicationEnd || Invoked when the server is shutdown. 
-||onSessionStart || Invoked immediately after a session is created
-||onSessionEnd|| Invoked when a session expires, is invalidated or when an application is restarted.
+||onApplicationStart||Invoked when the application is initially started and on the first request after the file has been altered.  ||
+||onApplicationEnd || Invoked when the server is shutdown. ||
+||onSessionStart || Invoked immediately after a session is created||
+||onSessionEnd|| Invoked when a session expires, is invalidated or when an application is restarted.||
