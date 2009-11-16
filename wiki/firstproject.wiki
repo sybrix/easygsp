@@ -1,6 +1,17 @@
-#summary Creating your first application
+#summary Creating an Application
 
 = Creating an Application=
 
 
-To create an application in EasyGSP, simply create a folder in the %EASYGSP_HOME%/webapps directory.  A folder in this directory represents an application.
+To create an application in EasyGSP, simply create a folder in the %EASYGSP_HOME%/webapps directory.  A folder in this directory represents an application. 
+
+*web.groovy*
+Each application can have a web.groovy file. Like servlet based applications, EasyGSP applications can have a WEB-INF directory.  Within this directory the web.groovy file resides.
+
+This file can have the following methods
+
+||Method||Description||
+||onApplicationStart||Invoked when the application is initially started and on the first request after the file has been altered.  
+||onApplicationEnd || Invoked when the server is shutdown. 
+||onSessionStart || Invoked immediately after a session is created
+||onSessionEnd|| Invoked when a session expires, is invalidated or when an application is restarted.
