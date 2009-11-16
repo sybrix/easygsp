@@ -5,9 +5,23 @@
 
 To create an application in EasyGSP, simply create a folder in the %EASYGSP_HOME%/webapps directory.  A folder in this directory represents an application. 
 
+
+ + /$EASYGSP_HOME
+ +--- /MyApp
+ -----------/index.gsp
+
+
 *web.groovy*
 
-Each application can have a web.groovy file. Like servlet based applications, EasyGSP applications can have a WEB-INF directory.  Within this directory the web.groovy file resides.
+Each application can have a web.groovy file. Like servlet based applications, EasyGSP applications can have a WEB-INF directory.  Within this directory the web.groovy file resides.  If you don't create a web.groovy file, one will be created then the application starts.  Whenever this file is modified, the application will restart.
+
+
+ + /$EASYGSP_HOME
+ +--- /MyApp
+ ----------- /index.gsp
+ +------ /WEB-INF
+ ----------- web.groovy
+
 
 This file can have the following methods
 
@@ -19,6 +33,7 @@ This file can have the following methods
 
   * *onApplicationStart* and *onApplicationEnd* accept an app parameter which is a reference to the application (or ServletContext).
   * *onSessionStart* and *onSessionEnd* accept a reference to the session object in use.
+
 
 Example:
 {{{
