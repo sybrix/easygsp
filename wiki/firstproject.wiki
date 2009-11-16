@@ -17,8 +17,8 @@ This file can have the following methods
 ||onSessionStart || Invoked immediately after a session is created||
 ||onSessionEnd|| Invoked when a session expires, is invalidated or when an application is restarted.||
 
-*onApplicationStart* and *onApplicationEnd* accept an app parameter which is a reference to the application (or ServletContext).
-*onSessionStart* and *onSessionEnd* accept a reference to the session object in use.
+  **onApplicationStart* and *onApplicationEnd* accept an app parameter which is a reference to the application (or ServletContext).
+  **onSessionStart* and *onSessionEnd* accept a reference to the session object in use.
 
 {{{
 class web {
