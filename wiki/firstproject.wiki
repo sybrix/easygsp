@@ -20,6 +20,7 @@ This file can have the following methods
   * *onApplicationStart* and *onApplicationEnd* accept an app parameter which is a reference to the application (or ServletContext).
   * *onSessionStart* and *onSessionEnd* accept a reference to the session object in use.
 
+Example:
 {{{
 class web {
         def onApplicationStart(app){
