@@ -35,7 +35,7 @@ This file can have the following methods
   * *onSessionStart* and *onSessionEnd* accept a reference to the session object in use.
 
 
-Example:
+Example - web.groovy:
 {{{
 class web {
         def onApplicationStart(app){
