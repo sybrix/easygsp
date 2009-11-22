@@ -49,7 +49,7 @@ If you installed easygsp or java to a path different than what is listed above, 
     # Download the latest and greatest w/OpenSSL support
     # Install to c:\LightTPD
   * *Install Apache*
-    # The Apache HTTP server is available for Windows from [apache.org http://www.apache.org]
+    # The Apache HTTP server is available for Windows from [http://httpd.apache.org   apache.org]
     # Or you could download an all in one solution like [http://www.apachefriends.org/en/index.html Apache Friends] windows install.
 
      
