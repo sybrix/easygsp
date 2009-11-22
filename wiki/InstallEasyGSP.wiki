@@ -23,6 +23,19 @@ Locate the lighttpdd.conf file, rename it, and download a config that will work 
 
 restart LightTPD
 
+
+*Configuring Apache*
+{{{
+         LoadModule scgi_module modules/mod_scgi.so
+         SCGIMount / 127.0.0.1:4444
+ 
+         <locationmatch [^(\.gsp|\.gspx)]$>
+	     SCGIHandler Off
+         </locationmatch>
+
+}}}
+
+
 * Installing EasyGSP *
   * cd /usr/local
   * Download the latest version of EasyGSP from http://code.google.com/p/easygsp/downloads/list
