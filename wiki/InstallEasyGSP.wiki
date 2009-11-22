@@ -57,4 +57,67 @@ If you installed easygsp or java to a path different than what is listed above, 
     # Rename dir c:\easygsp-`[VERSION`] to c:\easygsp
 
 
+
+==Configuring LightTPD==
+
+Locate the lighttpdd.conf file, rename it, and download a config that will work with EasyGSP.  It's usually at /etc/lighttpd/lighttpd.conf
+
+Basically, you enable mod_scgi, setup up the scgi_server and extensions, prevent the groovy, gsp and gpsx pages from being served by Lighttpd and add the EasyGSP pages to the wwelcome/index pages list
+
+{{{
+     
+    server.modules              = (
+                                "mod_scgi",
+                                "... all of the other mods"
+                                ) 
+ 
+      url.access-deny             	= ( "~", ".inc", "WEB-INF")
+      static-file.exclude-extensions 	= (  ".gsp", ".gspx", ".groovy")
+      index-file.names            	= ( "index.gsp", "index.gspx", "index.html", "index.htm", "default.htm", "index`")
+      scgi.server  = (
+                ".gspx" =>
+			( "localhost" =>
+				(
+					"host" => "127.0.0.1",
+					"port" =>  4444
+				)
+			),
+		".gsp" =>
+			( "localhost" =>
+				(
+					"host" => "127.0.0.1",
+					"port" =>  4444
+				)
+			)			
+			
+		)											
+
+}}}
+ 
+or you could download this lighttpd conf that already does all of this
+  * $ cd /etc/lighttpd
+  * $ mv lighttpd.conf lighttpd.conf.old
+  * $ wget http://easygsp.googlecode.com/files/lighttpd.conf  (Use as a starter or reference, or you could merge this file with your existing config file)
+
+restart LightTPD
+
+
+
+
+==Configuring Apache==
+
+Add the following to the httpd.conf.  Remaining Apache configuration details are forthcoming as this configuration is not as complete as the LightTPD example.
+
+{{{
+         LoadModule scgi_module modules/mod_scgi.so
+         SCGIMount / 127.0.0.1:4444
+ 
+         <locationmatch [^(\.gsp|\.gspx)]$>
+	     SCGIHandler Off
+         </locationmatch>
+
+}}}
+
+
+
 Create EASYGSP_HOME and JAVA_HOME environment variables that point to the installation directories.
