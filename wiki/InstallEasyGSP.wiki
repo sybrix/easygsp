@@ -25,6 +25,8 @@ restart LightTPD
 
 
 *Configuring Apache*
+Add the following the httpd.conf
+
 {{{
          LoadModule scgi_module modules/mod_scgi.so
          SCGIMount / 127.0.0.1:4444
