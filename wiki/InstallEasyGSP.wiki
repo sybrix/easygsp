@@ -47,9 +47,9 @@ If you installed easygsp or java to a path different than what is listed above, 
     # The Apache HTTP server is available for Windows from [apache.org http://www.apache.org]
     # Or you could download an all in one solution like [http://www.apachefriends.org/en/index.html Apache Friends] windows install.
 
-    
-* Configure HTTP Server* 
-  * See Configure LightTPD and Apache sections below.
+     
+  * *Configure HTTP Server*
+    # See Configure LightTPD and Apache sections below.
 
 
 
