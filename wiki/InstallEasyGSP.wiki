@@ -16,7 +16,7 @@ There are a ton of tutorials on how to install all of the required software for 
 
 
 
-*Configuring LightTPD*
+==Configuring LightTPD==
 
 Locate the lighttpdd.conf file, rename it, and download a config that will work with EasyGSP.  It's usually at /etc/lighttpd/lighttpd.conf
 
@@ -62,7 +62,7 @@ restart LightTPD
 
 
 
-*Configuring Apache*
+==Configuring Apache==
 
 Add the following to the httpd.conf.  Remaining Apache configuration details are forthcoming as this configuration is not as complete as the LightTPD example.
 
