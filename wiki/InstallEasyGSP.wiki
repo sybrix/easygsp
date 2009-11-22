@@ -38,10 +38,14 @@ If you installed easygsp or java to a path different than what is listed above, 
     # Download the latest jdk from http://java.sun.com
     # Install
 
-  * *Install LightTPD*
+  * *Install LightTPD (or Apache)*
     # Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
     # Download the latest and greatest w/OpenSSL support
     # Install to c:\LightTPD
+
+    # The Apache HTTP server is available for Windows from apache.org or you could download a all in one solution like [http://www.apachefriends.org/en/index.html Apache Friends]
+
+    
 
   * *Configuring LightTPD*
      # Locate the lighttpdd-inc.conf file @ C:\LightTPD\conf, rename it to lighttpd.conf_original
