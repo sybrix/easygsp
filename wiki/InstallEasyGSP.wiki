@@ -119,3 +119,5 @@ Add the following to the httpd.conf.  Remaining Apache configuration details are
 
 
 Create EASYGSP_HOME and JAVA_HOME environment variables that point to the installation directories.
+
+restart Apache
