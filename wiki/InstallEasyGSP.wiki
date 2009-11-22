@@ -64,7 +64,7 @@ restart LightTPD
 
 *Configuring Apache*
 
-Add the following the httpd.conf
+Add the following to the httpd.conf
 
 {{{
          LoadModule scgi_module modules/mod_scgi.so
