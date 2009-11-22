@@ -30,7 +30,8 @@ Basically, you enable mod_scgi, setup up the scgi_server and extension, prevent 
       url.access-deny             	= ( "~", ".inc", "WEB-INF")
       static-file.exclude-extensions 	= (  ".gsp", ".gspx", ".groovy")
       index-file.names            	= ( "index.gsp", "index.gspx", "index.html", "index.htm", "default.htm", "index`")
-      scgi.server  = (".gspx" =>
+      scgi.server  = (
+                ".gspx" =>
 			( "localhost" =>
 				(
 					"host" => "127.0.0.1",
