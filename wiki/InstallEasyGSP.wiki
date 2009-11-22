@@ -10,6 +10,8 @@ There are a ton of tutorials on how to install all of the required software for 
   * Install LightTPD  (If you decide to build from source make sure you build with: --with-mysql ,--with-openssl) or Apache HTTP Server
 
 
+* Configure HTTP Server* 
+  * See Configure LightTPD and Apache sections below.
 
 * Installing EasyGSP *
   * cd /usr/local
@@ -34,8 +36,7 @@ If you installed easygsp or java to a path different than what is listed above, 
   * start EasyGSP > ./start.sh
 
 
-* Configure HTTP Server* 
-  * See Configure LightTPD and Apache sections below.
+
 
 ----
 
@@ -127,7 +128,7 @@ Add the following to the httpd.conf.  Remaining Apache configuration details are
 
 }}}
 
-
+mod_scgi can be downloaded [http://bigonez.googlepages.com/ here] for windows users 
 
 Create EASYGSP_HOME and JAVA_HOME environment variables that point to the installation directories.
 
