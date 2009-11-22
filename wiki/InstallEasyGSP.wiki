@@ -69,7 +69,7 @@ If you installed easygsp or java to a path different than what is listed above, 
 
 Locate the lighttpdd.conf file, rename it, and download a config that will work with EasyGSP.  It's usually at /etc/lighttpd/lighttpd.conf or  lighttpdd-inc.conf file @ C:\LightTPD\conf or windows.
 
-Basically, you enable mod_scgi, setup up the scgi_server and extensions, prevent the groovy, gsp and gpsx pages from being served by Lighttpd and add the EasyGSP pages to the wwelcome/index pages list
+Basically, you enable mod_scgi, setup up the scgi_server and extensions, prevent the groovy, gsp and gpsx pages from being served by Lighttpd and add the EasyGSP pages to the welcome/index pages list
 
 {{{
      
