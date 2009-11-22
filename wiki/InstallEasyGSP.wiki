@@ -20,16 +20,18 @@ There are a ton of tutorials on how to install all of the required software for 
   * cd /usr/local/easygsp/bin
   * chmod +x start.sh
   * cdmod +x stop.sh
-* Start EasyGSP *
 
-  * start EasyGSP > ./start.sh
 
   
 If you installed easygsp or java to a path different than what is listed above, open the following files and reference the correct paths:
 
   * $EASYGSP_HOME/bin/stop.sh
   * $EASYGSP_HOME/bin/start.sh
-  * $EASYGSP_HOME/conf/cache.ccf   (update property: *`jcs.auxiliary.DC.attributes.DiskPath`*)
+  * $EASYGSP_HOME/conf/cache.ccf   (update property:         *`jcs.auxiliary.DC.attributes.DiskPath`*)
+
+* Start EasyGSP *
+
+  * start EasyGSP > ./start.sh
 
 
 * Configure HTTP Server* 
