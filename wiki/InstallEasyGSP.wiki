@@ -13,10 +13,43 @@ There are a ton of tutorials on how to install all of the required software for 
   * Install LightTPD  (If you decide to build from source make sure you build with: --with-mysql ,--with-openssl) or Apache
 
 
+
+
 *Configuring LightTPD*
 
 Locate the lighttpdd.conf file, rename it, and download a config that will work with EasyGSP.  It's usually at /etc/lighttpd/lighttpd.conf
+
+Basically, you enable mod_scgi, setup up the scgi_server and extension, prevent the groovy and gsp pages from being served by Lighttpd and set .gsp page as the new 
+{{{
+     
+    server.modules              = (
+                                "mod_scgi",
+                                "... all of the other mods"
+                                ) 
  
+      url.access-deny             	= ( "~", ".inc", "WEB-INF")
+      static-file.exclude-extensions 	= (  ".gsp", ".gspx", ".groovy")
+      index-file.names            	= ( "index.gsp", "index.gspx", "index.html", "index.htm", "default.htm", "index`")
+      scgi.server  = (".gspx" =>
+			( "localhost" =>
+				(
+					"host" => "127.0.0.1",
+					"port" =>  4444
+				)
+			),
+		".gsp" =>
+			( "localhost" =>
+				(
+					"host" => "127.0.0.1",
+					"port" =>  4444
+				)
+			)			
+			
+		)											
+
+}}}
+ 
+or you could download this lighttpd conf that already does all of this
   * $ cd /etc/lighttpd
   * $ mv lighttpd.conf lighttpd.conf.old
   * $ wget http://easygsp.googlecode.com/files/lighttpd.conf  (Use as a starter or reference, or you could merge this file with your existing config file)
@@ -24,7 +57,10 @@ Locate the lighttpdd.conf file, rename it, and download a config that will work 
 restart LightTPD
 
 
+
+
 *Configuring Apache*
+
 Add the following the httpd.conf
 
 {{{
