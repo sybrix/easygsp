@@ -42,8 +42,9 @@ If you installed easygsp or java to a path different than what is listed above, 
     # Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
     # Download the latest and greatest w/OpenSSL support
     # Install to c:\LightTPD
-
-    # The Apache HTTP server is available for Windows from apache.org or you could download a all in one solution like [http://www.apachefriends.org/en/index.html Apache Friends]
+  * *Install Apache
+    # The Apache HTTP server is available for Windows from [apache.org http://www.apache.org]
+    # Or you could download an all in one solution like [http://www.apachefriends.org/en/index.html Apache Friends] windows install.
 
     
 
