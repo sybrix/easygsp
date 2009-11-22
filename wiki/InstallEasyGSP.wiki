@@ -15,11 +15,13 @@ There are a ton of tutorials on how to install all of the required software for 
 
 
 
+
 *Configuring LightTPD*
 
 Locate the lighttpdd.conf file, rename it, and download a config that will work with EasyGSP.  It's usually at /etc/lighttpd/lighttpd.conf
 
-Basically, you enable mod_scgi, setup up the scgi_server and extension, prevent the groovy and gsp pages from being served by Lighttpd and set .gsp page as the new 
+Basically, you enable mod_scgi, setup up the scgi_server and extensions, prevent the groovy, gsp and gpsx pages from being served by Lighttpd and add the EasyGSP pages to the wwelcome/index pages list
+
 {{{
      
     server.modules              = (
