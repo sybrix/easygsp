@@ -100,7 +100,7 @@ or you could download this lighttpd conf that already does all of this
 restart LightTPD
 
 
-
+----
 
 ==Configuring Apache==
 
