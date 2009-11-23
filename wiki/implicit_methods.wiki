@@ -17,3 +17,4 @@ The following are only access to the templates and controllers
 || forward(String uri) || Forwards processing to the specified uri ||
 || bind(String key, Object value) || Bind stores name value pairs in a scope similar to JSP's page scope.  Bind is normally used in a controller, to store variables that will be used be a template. When you store a value in request scope, to access it, you must write <%= request.key %>, if you store it using bind you could have simple said <%= key %>||
 ||toInt(String val) || Returns an Integer object for a string. ||
+||toLong(String val) || Returns an Long object for a string. ||
