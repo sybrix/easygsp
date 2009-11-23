@@ -13,11 +13,10 @@ Getting Started
 Reference
   * [lifecycle EasyGSP Page LifeCycle]
   * [servletapi Servlet API]
-  * [gsp_scripts GSP Scripts]
+  * [gsp_scripts Templates/Controllers]
   * [mvc_scripts MVC Development]
   * [implicit_objects Implicit Objects]
   * [implicit_methods Implicit Methods]
-  * [templates Groovy Templates]
 
 Tutorials/How To's
   * [howto_db Connect to Database]
