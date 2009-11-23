@@ -13,6 +13,7 @@ The following are accessible to every class, template and controller.
 || log(String logMessage, Throwable t) || Writes message and exception to log file. Log file located @ WEB-INF/logs ||
 || String encode(String s)|| Encodes string as  URL encoded string.  Returns a string. ||
 || String decode(String s)|| Decodes a URL encoded string.  Returns a string. ||
+|| String htmlEncode(String s) || HTML encodes a string. Return a string. || 
 
 
 The following are only access to the templates and controllers
