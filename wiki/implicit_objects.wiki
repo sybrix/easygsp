@@ -2,7 +2,7 @@
 
 = EasyGSP Implicit Objects =
 
-Every gsp script and controller has implicit objects(and methods) available to them.  
+Every gsp template and controller can access the following implicit objects 
 
 				
 
