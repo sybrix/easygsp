@@ -8,7 +8,9 @@
 The following are accessible to every class, template and controller.
 || *Object* || *Description* ||
 || console(object) || Writes the object.toString() to the console window. Useful when developing ||
-
+|| log(String s)|| Write message to application's log file.  Log file located @ WEB-INF/logs ||
+|| log(Throwable t)|| Writes exception to application's log file.  Log file located @ WEB-INF/logs ||
+|| log(String logMessage, Throwable t) || Writes message and exception to log file. Log file located @ WEB-INF/logs ||
 
 
 The following are only access to the templates and controllers
