@@ -62,6 +62,7 @@ If you installed easygsp or java to a path different than what is listed above, 
      
   * *Configure HTTP Server*
     # See Configure LightTPD and Apache sections below.
+    # It's recommended to modify the HTTP server's htdoc/documentroot to point to %EASYGSP_HOME/webapps
 
 
 
