@@ -12,7 +12,7 @@ The servlet API interfaces implemented are:
   * Session  
 
 
-Each of these is available in all controllers and templates as implicit objects.
+Each of these is available in all controllers and templates as [implicit_objects implicit objects].
 
 But not all of the methods in these interfaces are implemented. This is because: 1) the project is a work in progress and 2) Not all of the the methods in these interfaces make sense in an application like EasyGSP. 
 
