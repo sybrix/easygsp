@@ -24,9 +24,9 @@ This is a valid EasyGSP template.
                                 item.write(uploadedFile);
                                 uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath + ' ' + params.var
                         } else {
-                                cout item.fieldName
+                                console item.fieldName
                         }
-                        System.out.println("file upload" + item);
+                        console ("file upload" + item);
                 }
 
 
