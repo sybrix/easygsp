@@ -15,4 +15,4 @@ The following are only access to the templates and controllers
 || *Object* || *Description* ||
 || redirect(url) || Sends redirect command to browser.||
 || forward(uri) || Forwards processing to the specified uri ||
-|| bind (key,value) || Bind stored name value pairs in a scope similar to JSP's page scope.  Bind is normally used in a controller, to store variables that will be used be a template. When you store a value in request scope, to access it, you must write <%= request.key %>, if you store it using bind you could have simple said <%= key %>||
+|| bind (key,value) || Bind stores name value pairs in a scope similar to JSP's page scope.  Bind is normally used in a controller, to store variables that will be used be a template. When you store a value in request scope, to access it, you must write <%= request.key %>, if you store it using bind you could have simple said <%= key %>||
