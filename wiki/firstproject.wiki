@@ -7,7 +7,8 @@ To create an application in EasyGSP, simply create a folder in the %EASYGSP_HOME
 
 {{{
  + /$EASYGSP_HOME
- + --- /MyApp
+ + ----/webapps
+ + --------/MyApp
  | -----------/index.gsp
 }}}
 
@@ -17,10 +18,11 @@ Each application can have a web.groovy file. Like servlet based applications, Ea
 
 {{{
  + /$EASYGSP_HOME
- + --- /MyApp
- | ----------- /index.gsp
- + ------ /WEB-INF
- | ----------- web.groovy
+ + ----/webapps
+ + ------ /MyApp
+ | --------- /index.gsp
+ + --------- /WEB-INF
+ | ------------- web.groovy
 }}}
 
 This file can have the following methods
