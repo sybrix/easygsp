@@ -25,7 +25,7 @@ There are a ton of tutorials on how to install all of the required software for 
   * cdmod +x stop.sh
 
 EasyGSP will service request from the DocumentRoot/htdocs of your HTTP server.
-Create a link to your DocumentRoot/htdocs 
+Create a link to your DocumentRoot/htdocs directory
 
   ln -s /var/www /usr/local/easygsp/webapps
 
