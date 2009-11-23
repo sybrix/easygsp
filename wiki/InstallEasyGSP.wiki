@@ -27,7 +27,7 @@ There are a ton of tutorials on how to install all of the required software for 
 EasyGSP will service request from the DocumentRoot/htdocs of your HTTP server.
 Create a link to your DocumentRoot/htdocs 
 
-ln -s /var/www /usr/local/easygsp/webapps
+  ln -s /var/www /usr/local/easygsp/webapps
 
 
   
