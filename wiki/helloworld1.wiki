@@ -5,7 +5,7 @@
 This hello world example demonstrates a script template with the code and template HTML in a single file.
 
 {{{
-   $ cd /$EASYGSP_HOME/webapps
+  $ cd /$EASYGSP_HOME/webapps
   $ mkdir hello
 }}}
 
