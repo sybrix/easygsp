@@ -15,13 +15,13 @@ Fedora users can install service using chkconfig
   $  chkconfig --level 23 easygsp on
 }}}
 
-*Start service*
+Start service
 {{{
   $  service easygsp start
 }}}
 
 
-EasyGSP can be start using the start script
+EasyGSP can be started using the start script
 {{{
 $ cd $EASYGSP_HOME/bin
 $ ./start.sh
@@ -41,23 +41,27 @@ $ ./stop.sh
 = Windows= 
 
 To Install as Service
-$EASYGSP_HOME/bin/easygsp is a startup script that may be to start EasyGSP as a service
-open and modify as needed
-For Windows
-To start from the command line,
-> cd %EASYGSP_HOME%\bin
-> EasyGSP.bat
+{{{
+   c:\ cd %EASYGSP_HOME%\bin
+   c:\ InstallEasyGSP-NT.bat
+}}}
 
+To Remove Service
+{{{
+   c:\ cd %EASYGSP_HOME%\bin    
+   c:\ UninstallEasyGSP-NT.bat
+}}}
+
+To start from the command line
+{{{
+  c:\ cd %EASYGSP_HOME%\bin
+  c:\ EasyGSP.bat
+}}}
 
 To Stop
-> cd %EASYGSP_HOME%\bin
-> stop.bat
-
-To Install as Service
-> cd %EASYGSP_HOME%\bin
-> InstallEasyGSP-NT.bat
+{{{
+   c:\ cd %EASYGSP_HOME%\bin
+   c:\ stop.bat
+}}}
 
 
-To Remove as Service
-> cd %EASYGSP_HOME%\bin
-> UninstallEasyGSP-NT.bat
