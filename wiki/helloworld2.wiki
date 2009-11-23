@@ -6,6 +6,13 @@ This hello world example demonstrates a controller script that forwards to a vie
 
 When helloworld.groovy is done processing it will automatically forward to helloworld.gspx.  If the [forward "forward()"] method is not explicitly called, the controller script will automatically forward to a template with the same name (with the .gspx extension).  In order for the auto forward to work, the controller and template must be in the same directory.  
 
+{{{
+  $ cd /$EASYGSP_HOME/webapps
+  $ mkdir hello
+}}}
+
+Create the following files in hello directory
+
 *helloworld.groovy*
 
 {{{
@@ -31,4 +38,5 @@ When helloworld.groovy is done processing it will automatically forward to hello
 </html>
 }}}
 
-This page would be accessed as "helloworld.gspx" in the browser.
+Open your browser to 
+  http://localhost:8080/hello/helloworld.gspx
