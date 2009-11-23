@@ -1,4 +1,4 @@
-#summary Groovy Scripts
+#summary Templates, Controllers and Classes
 
 =  Templates, Controllers and Classes =
 Ultimately every groovy script and template are converted to classes, but it's worth pointing how their differences for EasyGSP development.
