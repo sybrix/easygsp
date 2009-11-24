@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project relativePaths="false" version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" name="Default" comment="0.2 .1  11/23/2009&#10;- fix the problem related to differences in Apache vs LightTPD scgi headers&#10;- Removed the need for easygsp to have to have a property that indicated where the docroot for the http server is&#10;">
+    <list default="true" readonly="true" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="C:\projects\easygsp\easygsp\vhost\www.frameworkfaceoff.com\WEB-INF\logs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestHeaders.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestHeaders.java" />
       <change type="NEW" beforePath="" afterPath="C:\projects\easygsp\easygsp\vhost\www.frameworkfaceoff.com\images" />
