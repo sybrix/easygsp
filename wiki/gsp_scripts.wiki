@@ -10,7 +10,7 @@ Ultimately every groovy script and template is converted to class, but it's wort
   Templates render HTML.  They are the V in MVC or they could be used in the same way as you would a php script.  
 
 *Classes*
-In addition to controllers and templates, you can define classes to encapsulate functionality.  The ideal place to create classes are in the WEB-INF directory.  It's also a good idea to use package names for a user defined classes.
+   In addition to controllers and templates, you can define classes to encapsulate functionality.  The ideal place to create classes are in the WEB-INF directory.  It's also a good idea to use package names for a user defined classes.
 
 
 
