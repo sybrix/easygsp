@@ -96,10 +96,14 @@ public class EasyGServer {
                                 "\nJAVA_VERSION: " + System.getProperty("java.version") +
                                 "\nGROOVY_VERSION: " + groovyVersion +
                                 "\nWORKING_DIR: " + APP_DIR +
-                                "\nGroovy Script Server Started. Listening on port " + propertiesFile.getString("server.port") +
+                                "\nGroovy Script Server Started. Listening on port " + propertiesFile.getString("server.port", 4444) +
                                 "\n");
 
-                        if (!propertiesFile.getString("logging.custom.configure","").equalsIgnoreCase("true")){
+                        if (EasyGServer.propertiesFile.getBoolean("virtual.hosting", false) == true && EasyGServer.propertiesFile.getString("default.host","").equals("")){
+                                throw new RuntimeException("When virtual.hosting == true, a default.host value is required.");
+                        }
+                                
+                        if (!propertiesFile.getBoolean("logging.custom.configure",false)){
                                 autoConfigureLogger();
                         }
                         
@@ -115,7 +119,7 @@ public class EasyGServer {
                         //loadApplicationsFromFileSystem();
 
                         executorService = Executors.newCachedThreadPool();
-                        serverSocket = new ServerSocket(Integer.parseInt(propertiesFile.getString("server.port")));
+                        serverSocket = new ServerSocket(propertiesFile.getInt("server.port","4444"));
 
                         Thread shutdown = new Thread(new Shutdown(this));
                         shutdown.start();
@@ -201,12 +205,12 @@ public class EasyGServer {
                         h = new FileHandler(logDir, propertiesFile.getInt("logging.max.file.size"), propertiesFile.getInt("logging.file.count"), false);
                         h.setFormatter(new CustomLogFormatter());
                         Logger.getLogger("").addHandler(h);
-                        Logger.getLogger("com.sybrix").setLevel(Level.parse(propertiesFile.getString("logging.level").toString()));
+                        Logger.getLogger("com.sybrix").setLevel(Level.parse(propertiesFile.getString("logging.level", "SEVERE").toString()));
 
                         Handler[] handlers = Logger.getLogger("").getHandlers();
                         for (Handler handler : handlers) {
                                 //handler.setFormatter(new CustomFormatter());
-                                handler.setLevel(Level.parse(propertiesFile.getString("logging.level").toUpperCase()));
+                                handler.setLevel(Level.parse(propertiesFile.getString("logging.level","SEVERE").toUpperCase()));
                         }
                 } catch (IOException e) {
                         throw new RuntimeException("IOException in autoConfigureLogger(), logDir=" + logDir, e);
@@ -260,26 +264,25 @@ public class EasyGServer {
 //                }
 //        }
 
-        public static Application loadApplicationFromFileSystem(Map<String, Application> applications, String folderName, String docRoot) throws ApplicationNotFoundException {
+        public static Application loadApplicationFromFileSystem(Map<String, Application> applications, String appName, String appPath) throws ApplicationNotFoundException {
                 File file = null;
-                boolean isVirtualHosted = false;
-                if (propertiesFile.getString("groovy.webapp.dir").equals(docRoot) || (EasyGServer.isWindows && propertiesFile.getString("groovy.webapp.dir").equalsIgnoreCase(docRoot))) {
-                        File files = new File(propertiesFile.getString("groovy.webapp.dir"));
-                        file = new File(files.getAbsolutePath() + File.separator + folderName);
-                } else {
-                        file = new File(docRoot);
-                        isVirtualHosted = true;
-                }
+
+//                if (propertiesFile.getString("groovy.webapp.dir").equals(docRoot) || (EasyGServer.isWindows && propertiesFile.getString("groovy.webapp.dir").equalsIgnoreCase(docRoot))) {
+                        //File files = new File(appPath);
+                        file = new File(appPath);
+//                } else {
+//                        file = new File(docRoot);
+//                }
 
                 if (!file.exists()) {
-                        throw new ApplicationNotFoundException(" application: " + folderName + " not found");
+                        throw new ApplicationNotFoundException(" application: " + appName + " not found");
                 }
 
                 log.fine("loading application: " + file.getAbsoluteFile());
-                applications.put(file.getName(), new Application(file, isVirtualHosted));
+                applications.put(appName, new Application(file));
 
 
-                return applications.get(file.getName());
+                return applications.get(appName);
         }
 
         public static void main(String arg[]) {

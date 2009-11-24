@@ -44,7 +44,7 @@ public class Shutdown implements Runnable {
 
                 PropertiesFile propertiesFile = new PropertiesFile(APP_DIR + File.separator + "conf" + File.separator + "server.properties");
                 try {
-                        Socket s = new Socket("localhost", propertiesFile.getInt("shutdown.port"));
+                        Socket s = new Socket("localhost", propertiesFile.getInt("shutdown.port", 4446));
                         s.getOutputStream().write("1".getBytes());
                         s.getOutputStream().flush();
                         s.close();
@@ -57,7 +57,7 @@ public class Shutdown implements Runnable {
         }
 
         public void run() {
-                int port = EasyGServer.propertiesFile.getInt("shutdown.port");
+                int port = EasyGServer.propertiesFile.getInt("shutdown.port", 4446);
                 try {
                         ServerSocket ss = new ServerSocket(port);
 
@@ -65,7 +65,7 @@ public class Shutdown implements Runnable {
                         server.stopServer();
 
                         //
-                        Socket stopSocket = new Socket("localhost", EasyGServer.propertiesFile.getInt("server.port"));
+                        Socket stopSocket = new Socket("localhost", EasyGServer.propertiesFile.getInt("server.port", 4444));
                         stopSocket.close();
 
                 } catch (Exception e) {

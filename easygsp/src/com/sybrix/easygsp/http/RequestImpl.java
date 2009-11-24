@@ -79,12 +79,12 @@ public class RequestImpl implements HttpServletRequest {
         private static int uploadThresholdSize;
 
         static {
-                templateExtension = EasyGServer.propertiesFile.getString("template.extension");
-                altGroovyExtension = EasyGServer.propertiesFile.getString("alt.groovy.extension");
-                viewExtension = EasyGServer.propertiesFile.getString("view.extension");
-                tempUploadDirectory = EasyGServer.propertiesFile.getString("file.upload.temp.directory");
-                maxUploadSize = EasyGServer.propertiesFile.getLong("file.upload.max.filesize");
-                uploadThresholdSize = EasyGServer.propertiesFile.getInt("file.upload.threshold");
+                templateExtension = EasyGServer.propertiesFile.getString("template.extension", ".gsp");
+                altGroovyExtension = EasyGServer.propertiesFile.getString("alt.groovy.extension",".gspx");
+                viewExtension = EasyGServer.propertiesFile.getString("view.extension",".gspx");
+                tempUploadDirectory = EasyGServer.propertiesFile.getString("file.upload.temp.directory", System.getProperty("java.io.tmpdir"));
+                maxUploadSize = EasyGServer.propertiesFile.getLong("file.upload.max.filesize", -1);
+                uploadThresholdSize = EasyGServer.propertiesFile.getInt("file.upload.threshold",2621440);
         }
 
         public RequestImpl(InputStream ios, Map<String, String> headers, Application application, ResponseImpl response) {
@@ -211,7 +211,7 @@ public class RequestImpl implements HttpServletRequest {
                         return session;
 
                 if (session == null && createSession) {
-                        session = new SessionImpl(application, EasyGServer.propertiesFile.getInt("session.timeout"));
+                        session = new SessionImpl(application, EasyGServer.propertiesFile.getInt("session.timeout",15));
                         servletBinding.setVariable("session", session);
 
                         application.getSessions().put(session.getId(), session);
@@ -219,11 +219,6 @@ public class RequestImpl implements HttpServletRequest {
 
                         //cookie.setDomain(headers.get("SERVER_NAME"));
                         cookie.setPath("/");
-//                        if (application.isVirtualHost()){
-//                                cookie.setPath("/");
-//                        } else {
-//                                cookie.setPath("/" + application.getAppName());
-//                        }
 
                         response.addCookie(cookie);
 
@@ -558,7 +553,7 @@ public class RequestImpl implements HttpServletRequest {
         }
 
         protected static String constructForwardPath(String s, Binding binding) {
-                String path = (String) binding.getVariable("scriptPath");
+                String path = RequestThreadInfo.get().getParsedRequest().getRequestURI();
                 int i = 0;
                 if (s.charAt(0) != '/' && (i = path.lastIndexOf('/')) > 0) {
                         s = path.substring(0, i) + "/" + s;

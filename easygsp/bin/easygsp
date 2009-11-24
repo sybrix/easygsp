@@ -1,12 +1,12 @@
 #!/bin/sh
 #
-# EasyGSP     Startup script for the groovy script server
+# EasyGSP     Startup script for EasyGSP
 #
 # chkconfig: - 85 15
-# description: Finally, the jvm in the LAMP stack
+# description: EasyGSP SCGI Server
 #
 # processname: java
-# config: /usr/local/share/easygsp/conf/server.properties
+# config: /usr/local/easygsp/conf/server.properties
 
 
 # Source function library
@@ -14,8 +14,8 @@
 
 
 prog="gss"
-gss="/usr/local/share/easygsp/start.sh"
-gssstop="/usr/local/share/easygsp/stop.sh"
+gss="/usr/local/easygsp/start.sh"
+gssstop="/usr/local/easygsp/stop.sh"
 RETVAL=0
 
 start() {
