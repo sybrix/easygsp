@@ -1,9 +1,12 @@
 For Windows
 To start from the command line,
-
 > cd %EASYGSP_HOME%\bin
 > EasyGSP.bat
 
+
+To Stop
+> cd %EASYGSP_HOME%\bin
+> stop.bat
 
 To Install as Service
 > cd %EASYGSP_HOME%\bin
@@ -15,9 +18,7 @@ To Remove as Service
 > UninstallEasyGSP-NT.bat
 
 
-To Stop
-> cd %EASYGSP_HOME%\bin
-> stop.bat
+
 
 ------------------------------------------------------------------------------------------------------------------------
 

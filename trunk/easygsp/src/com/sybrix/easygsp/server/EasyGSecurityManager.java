@@ -29,8 +29,8 @@ public class EasyGSecurityManager extends SecurityManager {
         private static boolean allowSwing;
 
         static {
-                allowAWT = EasyGServer.propertiesFile.getBoolean("allow.awt");
-                allowSwing = EasyGServer.propertiesFile.getBoolean("allow.swing");
+                allowAWT = EasyGServer.propertiesFile.getBoolean("allow.awt", false);
+                allowSwing = EasyGServer.propertiesFile.getBoolean("allow.swing", false);
         }
         
         public void checkDelete(String file) {

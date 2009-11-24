@@ -17,7 +17,7 @@ public class SessionMonitor extends Thread {
 
         public void run() {
                 log.info("SessionMonitor started.") ;
-                long timeOut = EasyGServer.propertiesFile.getInt("session.timeout") * 1000 * 60;
+                long timeOut = EasyGServer.propertiesFile.getInt("session.timeout", 15) * 1000 * 60;
 
                 while (!stopped) {
                         try {

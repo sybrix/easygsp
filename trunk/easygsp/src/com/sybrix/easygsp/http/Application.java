@@ -41,10 +41,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.net.URL;
 import java.net.MalformedURLException;
-import java.io.InputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 import com.sybrix.easygsp.exception.NotImplementedException;
 import com.sybrix.easygsp.util.MD5;
@@ -76,20 +73,23 @@ public class Application implements ServletContext {
         private long webGroovyLastModified;
         private ConcurrentHashMap resourceBundles;
         private List<String> errorFiles;
-        private boolean is_virtual;
 
-        public Application(File dir, boolean isVirtual) {
+        public Application(File dir) {
                 //this.appId = MD5.hash(dir);
-                this.is_virtual = isVirtual;
                 this.appFile = dir;
                 this.appId = MD5.hash(dir.getAbsolutePath());
                 this.appPath = dir.getAbsolutePath();
                 attributeNames = new ArrayList();
                 groovyFilePath = appPath + System.getProperty("file.separator") + "WEB-INF" + System.getProperty("file.separator") + "web.groovy";
                 File _groovyFile = new File(groovyFilePath);
+
                 hasWebGroovy = _groovyFile.exists();
-                if (hasWebGroovy)
+                if (hasWebGroovy)  {
                         webGroovyLastModified = _groovyFile.lastModified();
+                } else {
+                        createWebGroovyFile(_groovyFile);
+                        hasWebGroovy = true;
+                }
 
                 sessions = new ConcurrentHashMap();
                 resourceBundles = new ConcurrentHashMap();
@@ -248,9 +248,46 @@ public class Application implements ServletContext {
                                 webGroovyLastModified = f.lastModified();
                                 return true;
                         }
+                } else {
+                        createWebGroovyFile(f);
+                        return true;
                 }
 
                 return false;
+        }
+
+        protected void createWebGroovyFile(File f) {
+                try {
+                        log.fine("creating web.groovy @ " + f.getAbsolutePath());
+
+                        log.fine("making dir " + f.getParentFile().getAbsolutePath());
+                        f.getParentFile().mkdir();
+
+                        String webGroovy =
+                        "class web {\n"  +
+                        "\t        def onApplicationStart(app){\n"  +
+                        "\t        }\n\n"  +
+
+                        "\t        def onApplicationEnd(app){\n"  +
+                        "\t        }\n\n"  +
+
+                        "\t        def onSessionStart(session){\n"  +
+                        "\t        }\n\n"  +
+
+                        "\t        def onSessionEnd(session){\n"  +
+                        "\t       }\n" +
+                        "}";
+
+                        FileWriter fw = new FileWriter(f);
+                        fw.write(webGroovy);
+                        fw.close();
+
+
+                        webGroovyLastModified = f.lastModified();
+                } catch (IOException e) {
+                        log.log(Level.SEVERE, "Unable to create web.groovy @ " + f.getAbsolutePath(),e);
+                }
+
         }
 
         public void setAttribute(String key, Object value) {
@@ -278,7 +315,7 @@ public class Application implements ServletContext {
 
                         loadErrorFiles();
                         AppClassLoader parentClassLoader = new AppClassLoader(new URL[]{}, this.getClass().getClassLoader());
-                        parentClassLoader.setAllowThreads(EasyGServer.propertiesFile.getBoolean("allow.threads"));
+                        parentClassLoader.setAllowThreads(EasyGServer.propertiesFile.getBoolean("allow.threads", false));
 
                         //                                                Class gse = parentClassLoader.loadClass("groovy.util.GroovyScriptEngine");
                         //                                                Constructor con = gse.getConstructor(String[].class, ClassLoader.class);
@@ -389,14 +426,6 @@ public class Application implements ServletContext {
 
         public void setTemplateServlet(TemplateServlet templateServlet) {
                 this.templateServlet = templateServlet;
-        }
-
-        public boolean isVirtualHost() {
-                return is_virtual;
-        }
-
-        protected void setVirtualHosted(boolean is_virtual) {
-                this.is_virtual = is_virtual;
         }
 
         class AttributeMap implements Map {

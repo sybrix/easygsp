@@ -35,12 +35,10 @@ public class RequestHeaders {
         public static final String COOKIE = "COOKIE";
         public static final String SERVER_SOFTWARE = "SERVER-SOFTWARE";
         public static final String SCRIPT_NAME = "SCRIPT-NAME";
-        public static final String  DOCUMENT_ROOT = "DOCUMENT-ROOT";
-        public static final String  PATH_INFO = "PATH-INFO";
-        public static final String  ACCEPT_CHARSET = "ACCEPT-CHARSET";
-        public static final String  ACCEPT_LANGUAGE = "ACCEPT-LANGUAGE";
-
-
-
-
+        public static final String DOCUMENT_ROOT = "DOCUMENT-ROOT";
+        public static final String PATH_INFO = "PATH-INFO";
+        public static final String ACCEPT_CHARSET = "ACCEPT-CHARSET";
+        public static final String ACCEPT_LANGUAGE = "ACCEPT-LANGUAGE";
+        public static final String SCRIPT_FILENAME = "SCRIPT-FILENAME";
+        public static final String HOST = "HOST";
 }

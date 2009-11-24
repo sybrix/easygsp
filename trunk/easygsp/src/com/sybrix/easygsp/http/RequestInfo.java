@@ -15,6 +15,8 @@ public class RequestInfo {
         private String uniqueScriptName;
         private String realScriptName;
         private TemplateInfo templateInfo;
+        private ParsedRequest parsedRequest;
+
         public RequestInfo() {
                 templateInfo = new TemplateInfo();
         }
@@ -80,5 +82,13 @@ public class RequestInfo {
 
         public void setTemplateInfo(TemplateInfo templateInfo) {
                 this.templateInfo = templateInfo;
+        }
+
+        public ParsedRequest getParsedRequest() {
+                return parsedRequest;
+        }
+
+        public void setParsedRequest(ParsedRequest parsedRequest) {
+                this.parsedRequest = parsedRequest;
         }
 }

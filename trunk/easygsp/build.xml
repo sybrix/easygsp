@@ -4,7 +4,7 @@
         <property environment="env"/>
 
         <property name="jdk" value="${env.JAVA_HOME}"/>
-        <property name="buildNumber" value="0.2"/>
+        <property name="buildNumber" value="0.2.1"/>
         <property name="easyGSPDir" value="easygsp-${buildNumber}"/>
         <property name="lib" value="lib"/>
         <property name="src" value="src"/>
@@ -117,7 +117,7 @@
 
                 <copy todir="deploy/${easyGSPDir}/bin">
                         <fileset dir="bin">
-                                <include name="**/*.*"/>
+                                <include name="**/*"/>
                                 <exclude name="**/easygsp.exe"/>
                                 <exclude name="**/easygsp.l4j.ini"/>
                         </fileset>
@@ -161,6 +161,10 @@
                 </replace>
 
                 <zip destfile="deploy/easygsp-${buildNumber}.zip" basedir="deploy"/>
+
+                <move todir="deploy/${easyGSPDir}/apps">
+                        <fileset dir="deploy/${easyGSPDir}/webapps"/>
+                </move>
 
                 <replace
                         file="deploy/${easyGSPDir}/conf/server.properties">

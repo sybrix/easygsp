@@ -66,10 +66,10 @@ public class RequestThread extends Thread {
         private ResponseImpl response = null;
 
         private static String viewExtension;
-        private static String defaultExtension;
+        protected static String defaultExtension;
 
         static {
-                threadTimeoutInSeconds = EasyGServer.propertiesFile.getInt("thread.timeout");
+                threadTimeoutInSeconds = EasyGServer.propertiesFile.getInt("thread.timeout", 30);
                 groovyExtension = EasyGServer.propertiesFile.getString("groovy.extension");
                 altExtension = EasyGServer.propertiesFile.getString("alt.groovy.extension");
                 templateExtension = EasyGServer.propertiesFile.getString("template.extension");
@@ -99,18 +99,20 @@ public class RequestThread extends Thread {
                         // do this now because, we may need to send an error
                         response = new ResponseImpl(socket.getOutputStream());
 
-                        String appName = parseAppFolderName();
-                        application = applications.get(appName);
+                        ParsedRequest parsedRequest = parseAppFolderName();
+                        application = applications.get(parsedRequest.getAppName());
 
                         // set the appId as soon as possible, even at the cost of having to repeat this line
                         RequestThreadInfo.get().setApplication(application);
 
                         // if null, no app. Start app and then set it
                         if (application == null) {
-                                application = EasyGServer.loadApplicationFromFileSystem(applications, appName, headers.get(RequestHeaders.DOCUMENT_ROOT));
+                                application = EasyGServer.loadApplicationFromFileSystem(applications, parsedRequest.getAppName(), parsedRequest.getAppPath());
                                 RequestThreadInfo.get().setApplication(application);
                         }
 
+                        RequestThreadInfo.get().setParsedRequest(parsedRequest);
+                        
                         if (!application.isStarted()) {
                                 log.log(FINE, "starting application: " + application.getAppPath());
                                 application.startApplication();
@@ -119,7 +121,7 @@ public class RequestThread extends Thread {
                         } else if (application.groovyFileUpdated()) {
                                 log.log(FINE, "restarting application: " + application.getAppPath());
                                 application.killApp();
-                                application = EasyGServer.loadApplicationFromFileSystem(applications, appName, headers.get(RequestHeaders.DOCUMENT_ROOT));
+                                application = EasyGServer.loadApplicationFromFileSystem(applications, parsedRequest.getAppName(), parsedRequest.getAppPath());
                                 RequestThreadInfo.get().setApplication(application);
                                 application.startApplication();
                         }
@@ -127,6 +129,7 @@ public class RequestThread extends Thread {
                         RequestImpl request = new RequestImpl(inputStream, headers, application, response);
                         response.setHttpServletRequest(request);
 
+                        // when false, request will auto forward to view
                         request.setAttribute("_explicitForward", false);
 
                         SessionImpl session = (SessionImpl) request.getSession(false);
@@ -135,8 +138,8 @@ public class RequestThread extends Thread {
 
                         binding = new CustomServletBinding(request, response, application, headers);
                         request.setServletBinding(binding);
-                        
-                        if (EasyGServer.propertiesFile.getString("logging.level").equals("FINEST")) {
+
+                        if (EasyGServer.propertiesFile.getString("logging.level", "SEVERE").equals("FINEST")) {
                                 StringBuffer s = new StringBuffer();
                                 s.append("SCGI headers\r\n");
                                 for (Object o : headers.keySet()) {
@@ -149,31 +152,31 @@ public class RequestThread extends Thread {
                         //loadBundle(application, binding);
 
                         // build the script path
-                        String scriptPath = null;
-                        if (application.isVirtualHost())
-                                scriptPath = headers.get(RequestHeaders.SCRIPT_NAME).substring(1);
-                        else
-                                scriptPath = headers.get(RequestHeaders.SCRIPT_NAME).substring(application.getAppName().length() + 2);
-
-                        request.getServletBinding().setVariable("scriptPath", scriptPath);
+                        String scriptPath = parsedRequest.getRequestFilePath();
+//                        if (application.isVirtualHost())
+//                                scriptPath = headers.get(RequestHeaders.SCRIPT_NAME).substring(1);
+//                        else
+//                                scriptPath = headers.get(RequestHeaders.SCRIPT_NAME).substring(application.getAppName().length() + 2);
+//
+//                        request.getServletBinding().setVariable("scriptPath", scriptPath);
 
 
                         // template stuff
-                        if (File.separator.equals("\\")) {
-                                root = new File(application.getAppPath() + File.separator + scriptPath.replaceAll("/", "\\\\"));
-                        } else {
-                                root = new File(application.getAppPath() + File.separator + scriptPath);
-                        }
+                        //if (File.separator.equals("\\")) {
+                                root = new File(scriptPath);
+//                        } else {
+//                                root = new File(application.getAppPath() + File.separator + scriptPath);
+//                        }
 
                         RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(root.getParent());
                         RequestThreadInfo.get().setCurrentFile(root.getAbsolutePath());
 
                         //process the request
-                        if (scriptPath.endsWith(templateExtension)) {
+                        if (parsedRequest.getRequestURI().endsWith(templateExtension)) {
                                 RequestThreadInfo.get().setTemplateRequest(true);
-                                processTemplateRequest(scriptPath, application.getGroovyScriptEngine(), binding);
+                                processTemplateRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         } else {
-                                processScriptRequest(scriptPath, application.getGroovyScriptEngine(), binding);
+                                processScriptRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         }
 
                 } catch (ApplicationNotFoundException e) {
@@ -280,30 +283,24 @@ public class RequestThread extends Thread {
                 }
         }
 
-        private String parseAppFolderName() {
-                String webAppDir = EasyGServer.propertiesFile.getString("groovy.webapp.dir");
+        private ParsedRequest parseAppFolderName() {
+
                 if (headers.get(RequestHeaders.SERVER_SOFTWARE).contains("Apache")) {
-                        headers.put(RequestHeaders.SCRIPT_NAME, headers.get(RequestHeaders.SCRIPT_NAME) + headers.get(RequestHeaders.PATH_INFO));
-                }
-
-                String scriptName = headers.get(RequestHeaders.SCRIPT_NAME);
-                if (!scriptName.endsWith(altExtension) && !scriptName.endsWith(groovyExtension) && !scriptName.endsWith(templateExtension)) {
-                        if (headers.get(RequestHeaders.SCRIPT_NAME).endsWith("/")) {
-                                headers.put(RequestHeaders.SCRIPT_NAME, headers.get(RequestHeaders.SCRIPT_NAME) + "index" + defaultExtension);
-                        } else {
-                                headers.put(RequestHeaders.SCRIPT_NAME, headers.get(RequestHeaders.SCRIPT_NAME) + "/index" + defaultExtension);
-                        }
-                }
-
-                if ((EasyGServer.isWindows && headers.get(RequestHeaders.DOCUMENT_ROOT).equalsIgnoreCase(webAppDir)) || headers.get(RequestHeaders.DOCUMENT_ROOT).equals(webAppDir)) {
-                        scriptName = headers.get(RequestHeaders.SCRIPT_NAME);
-                        return scriptName.substring(1, scriptName.indexOf('/', 1));
+                        return Parsers.ApacheParser.parseRequestFromHeader(headers);
                 } else {
-                        scriptName = headers.get(RequestHeaders.DOCUMENT_ROOT);
-                        int index = scriptName.lastIndexOf('/', scriptName.length() - 2);
-
-                        return scriptName.substring(index + 1, scriptName.length() - 1);
+                        return Parsers.LightyParser.parseRequestFromHeader(headers);
                 }
+
+
+                //if ((EasyGServer.isWindows && headers.get(RequestHeaders.DOCUMENT_ROOT).equalsIgnoreCase(webAppDir)) || headers.get(RequestHeaders.DOCUMENT_ROOT).equals(webAppDir)) {
+                //scriptName = headers.get(RequestHeaders.SCRIPT_NAME);
+//                        return scriptName.substring(1, scriptName.indexOf('/', 1));
+//                } else {
+//                        scriptName = headers.get(RequestHeaders.DOCUMENT_ROOT);
+//                        int index = scriptName.lastIndexOf('/', scriptName.length() - 2);
+//
+//                        return scriptName.substring(index + 1, scriptName.length() - 1);
+//                }
         }
 
         private InputStream initializeInputStream(Socket socket) throws IOException {
@@ -326,7 +323,7 @@ public class RequestThread extends Thread {
                 this.requestStartTime = requestStartTime;
         }
 
-        public static void processScriptRequest(final String scriptPath, final GSE3 gse, final CustomServletBinding binding) {
+        public static void processScriptRequest(final String requestURI, final GSE3 gse, final CustomServletBinding binding) {
                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 
                 Application application = (Application) binding.getVariable("application");
@@ -339,12 +336,12 @@ public class RequestThread extends Thread {
                                                 RequestImpl request = (RequestImpl) binding.getVariable("request");
                                                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 
-                                                ((GSE3) getDelegate()).run(scriptPath.replace(altExtension, groovyExtension), binding);
+                                                ((GSE3) getDelegate()).run(requestURI.replace(altExtension, groovyExtension), binding);
 
                                                 Boolean alreadyForwarded = (Boolean) request.getAttribute("_explicitForward");
 
                                                 if ((response.getBufferContentSize() == null) && alreadyForwarded == false) {
-                                                        request.forwardToView(scriptPath.replace(altExtension, viewExtension));
+                                                        request.forwardToView(requestURI.replace(altExtension, viewExtension));
 //                                                      int i = scriptPath.lastIndexOf('/');
 //                                                        if (i == -1)
 //                                                                //replace .groovy w/ .gsp
@@ -357,32 +354,32 @@ public class RequestThread extends Thread {
 
                                         } catch (MissingPropertyException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
-                                                sendError(500, scriptPath, gse, binding, e);
+                                                sendError(500, requestURI, gse, binding, e);
                                         } catch (MissingMethodException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
-                                                sendError(500, scriptPath, gse, binding, e);
+                                                sendError(500, requestURI, gse, binding, e);
 
                                         } catch (ResourceException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
-                                                sendError(500, scriptPath, gse, binding, e);
+                                                sendError(500, requestURI, gse, binding, e);
 
                                         } catch (ScriptException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
                                                 if (e.getCause() instanceof FileNotFoundException) {
-                                                        sendError(404, scriptPath, gse, binding, e);
+                                                        sendError(404, requestURI, gse, binding, e);
                                                 } else {
-                                                        sendError(500, scriptPath, gse, binding, e);
+                                                        sendError(500, requestURI, gse, binding, e);
                                                 }
                                         } catch (IOException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
-                                                sendError(500, scriptPath, gse, binding, e);
+                                                sendError(500, requestURI, gse, binding, e);
 
                                         } catch (ServletException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
-                                                sendError(500, scriptPath, gse, binding, e);
+                                                sendError(500, requestURI, gse, binding, e);
                                         } catch (Throwable e) {
                                                 log.log(Level.SEVERE, e.getMessage(), e);
-                                                sendError(500, scriptPath, gse, binding, e);
+                                                sendError(500, requestURI, gse, binding, e);
                                         }
 
                                         return null;
@@ -396,16 +393,16 @@ public class RequestThread extends Thread {
                                 response.setStatus(200);
                 } catch (MultipleCompilationErrorsException e) {
                         log.log(Level.SEVERE, e.getMessage(), e);
-                        sendError(500, scriptPath, gse, binding, e);
+                        sendError(500, requestURI, gse, binding, e);
                 } catch (SecurityException e) {
                         log.log(Level.SEVERE, e.getMessage(), e);
-                        sendError(500, scriptPath, gse, binding, e);
+                        sendError(500, requestURI, gse, binding, e);
                 } catch (TemplateNotFoundException e) {
                         log.log(Level.INFO, e.getMessage(), e);
-                        sendError(500, scriptPath, gse, binding, e);
+                        sendError(500, requestURI, gse, binding, e);
                 } catch (Throwable e) {
                         log.log(Level.SEVERE, e.getMessage(), e);
-                        sendError(500, scriptPath, gse, binding, e);
+                        sendError(500, requestURI, gse, binding, e);
                 }
         }
 
