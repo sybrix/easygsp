@@ -27,4 +27,4 @@ EasyGSP's configuration file is located @ $EASYGSP_HOME/conf/server.properties
 ||*logger.checkInterval.seconds* || || Interval for checking the log queue for message to write to the file system||
 ||*log.to.console* || false || should be false for production||
 ||virtual.hosting || false || Set to true when virtual hosting is enabled on the HTTP server.  EasyGSP uses info in the scgi headers to determine the location of the file requested.  ||
-|| default.host || || ||
+|| default.host || || The default domain name.  Only the default domain can host multiple applications.  A default host is to be used when virtual hosting is enabled and not every EasyGSP application requires its own domain name.  If you're hosting easygsp applications, not every one will require a domain name of their own and their application would be access via the default domain.||
