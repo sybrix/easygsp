@@ -75,7 +75,7 @@ But if you want to seperate your logic and view code EasyGSP supports this too.
 
 
 
-=== Controllers ===
+== Controllers ==
 When developing MVC style pages in EasyGSP, the model, view and controller should be in separate files.
 
 There are also a few rules to follow when doing MVC development:
