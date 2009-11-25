@@ -24,6 +24,9 @@ Create the following files in hello directory
 	def sdf = new SimpleDateFormat('MMMM dd, yyyy')
 	
 	def today = sdf.format(new Date())
+
+        bind 'message', message
+        bind 'today', today
 }}}
 
 
