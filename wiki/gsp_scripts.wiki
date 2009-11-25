@@ -89,9 +89,9 @@ Here's the structure for each piece of the MVC model, where the name of the appl
    /example
        helloworld.gspx
        helloworld.groovy
-          /WEB-INF
-             /model
-                User.groovy
+       /WEB-INF
+           /model
+              User.groovy
 }}}
 
 
