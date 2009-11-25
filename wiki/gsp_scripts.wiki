@@ -23,7 +23,7 @@ When developing a web page in EasyGSP you must decide if you're to develop the p
 EasyGSP groovy scripts come in 2 flavors: GSP and GSPX. GSP and GSPX refer the file extension given to EasyGSP scripts.
 The GSP extensions indicates a template where the logic and html are in the same script.  The GSPX extension refers to a page developed in the MVC method.
 
-=== Templates ===
+== Templates ==
 GSP templates will usually contain application logic and the HTML to be rendered to the client.  They are the equivalent of a PHP or ASP script. Groovy's documentation for [http://groovy.codehaus.org/Groovlets Groovlets] and [http://groovy.codehaus.org/Groovy+Templates TemplateServlet]  is valid documentation for how EasyGSP's script's and templates work.  Behind the scenes EasyGSP is based very much on these 2 servlets.  But  EasyGSP templates allow any valid groovy code, including import statements.
 
 This is a valid EasyGSP template.
@@ -75,7 +75,7 @@ But if you want to seperate your logic and view code EasyGSP supports this too.
 
 
 
-= Controllers =
+== Controllers ==
 When developing MVC style pages in EasyGSP, the model, view and controller should be in separate files.
 
 There are also a few rules to follow when doing MVC development:
