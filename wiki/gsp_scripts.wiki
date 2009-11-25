@@ -75,7 +75,7 @@ But if you want to seperate your logic and view code EasyGSP supports this too.
 
 
 
-== Controllers ==
+= Controllers =
 When developing MVC style pages in EasyGSP, the model, view and controller should be in separate files.
 
 There are also a few rules to follow when doing MVC development:
@@ -84,7 +84,7 @@ There are also a few rules to follow when doing MVC development:
   * The controller and view must have the same file name(minus the extension), in order for the controller to automatically forward to the view.  If the controller and view don't share the same file name, you must explicitly forward to the view using the forward() method.
   * View classes should be in a folder in the WEB-INF directory where the folder name matches the package name
   
-  Here's the structure for each piece of the MVC model, where the name of the application is "example".
+Here's the structure for each piece of the MVC model, where the name of the application is "example".
 {{{
    /example
        helloworld.gspx
