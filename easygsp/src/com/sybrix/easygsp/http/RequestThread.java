@@ -112,7 +112,7 @@ public class RequestThread extends Thread {
                         }
 
                         RequestThreadInfo.get().setParsedRequest(parsedRequest);
-                        
+
                         if (!application.isStarted()) {
                                 log.log(FINE, "starting application: " + application.getAppPath());
                                 application.startApplication();
@@ -163,7 +163,7 @@ public class RequestThread extends Thread {
 
                         // template stuff
                         //if (File.separator.equals("\\")) {
-                                root = new File(scriptPath);
+                        root = new File(scriptPath);
 //                        } else {
 //                                root = new File(application.getAppPath() + File.separator + scriptPath);
 //                        }
@@ -561,31 +561,42 @@ public class RequestThread extends Thread {
 
                 RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(null);
                 try {
-                        //String content = getErrorFileContent(errorCode);
+                        RequestThreadInfo.get().setErrorOccurred(true);
+                        response.setStatus(errorCode, e.getMessage());
+                        StringWriter sw = new StringWriter();
+                        PrintWriter pw = new PrintWriter(sw);
+                        e.printStackTrace(pw);
 
-                        if (application.hasCustomErrorFile("error" + errorCode + groovyExtension)) {
-                                response.setStatus(errorCode, e.getMessage());
-                                StringWriter sw = new StringWriter();
-                                PrintWriter pw = new PrintWriter(sw);
-                                e.printStackTrace(pw);
+                        String errorMessage = sw.toString().replaceAll("\n", "<br/>");
+                        binding.setVariable("errorScript", scriptPath);
+                        binding.setVariable("errorMessage", errorMessage);
+                        binding.setVariable("error", e);
+                        binding.setVariable("stackTraceElement", stackTraceElement);
 
-                                String errorMessage = sw.toString().replaceAll("\n", "<br/>");
-                                request.setAttribute("script", scriptPath);
-                                request.setAttribute("errorMessage", errorMessage);
-                                request.setAttribute("error", e);
-                                request.setAttribute("stackTraceElement", stackTraceElement);
+                        if (stackTraceElement != null) {
+                                String path = stackTraceElement.getFileName();
+                                if (RequestThreadInfo.get().getParsedRequest().getRequestFilePath().endsWith(templateExtension)){
+                                        path = scriptPath;
+                                }
 
-                                response.setStatus(errorCode);
-
-                                gse.run("errors/error" + errorCode + groovyExtension, binding);
+                                String lineNumberMessage = "Error occurred in " + path  + " @ lineNumber: " + (stackTraceElement.getLineNumber() - 2);
+                                binding.setVariable("lineNumber", stackTraceElement.getLineNumber());
+                                binding.setVariable("lineNumberMessage", lineNumberMessage);
                         } else {
-                                sendError(errorCode, response, e, stackTraceElement, binding);
+                                binding.setVariable("lineNumber", -1);
+                        }
+
+                        if (application.hasCustomErrorFile("error" + errorCode + templateExtension)) {
+                                RequestThread.processTemplateRequest(RequestThreadInfo.get().getApplication().getAppPath() +  File.separator + "WEB-INF" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension, gse, binding);
+                        } else {
+                                RequestThread.processTemplateRequest(EasyGServer.APP_DIR + File.separator + "conf" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension, gse, binding);
+                                //sendError(errorCode, response, e, stackTraceElement, binding);
                         }
                         response.flushBuffer();
 
-                } catch (Exception e1) {
+                } catch (Throwable e1) {
                         log.log(Level.FINE, e1.getMessage(), e1);
-                        sendError(errorCode, response, e, stackTraceElement, binding);
+                        //sendError(errorCode, response, e, stackTraceElement, binding);
                 }
         }
 

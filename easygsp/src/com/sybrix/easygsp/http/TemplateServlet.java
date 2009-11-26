@@ -104,7 +104,7 @@ import org.codehaus.groovy.control.CompilationFailedException;
  */
 public class TemplateServlet extends AbstractHttpServlet {
         private static final Logger log = Logger.getLogger(TemplateServlet.class.getName());
-        
+
         private static Pattern INCLUDE_REGEX = Pattern.compile("<%@\\s*include\\s*file\\s*=\\s*\"[\\w|\\\\|\\//||.]+\"\\s*%>");
 
         /**
@@ -121,7 +121,7 @@ public class TemplateServlet extends AbstractHttpServlet {
                 long length;
                 Template template;
                 List children;
-                                                                               
+
                 public TemplateCacheEntry(File file, Template template) {
                         this(file, template, false);// don't get time millis for sake of speed
                 }
@@ -230,7 +230,6 @@ public class TemplateServlet extends AbstractHttpServlet {
         protected Template getTemplate(File file, String requestedUrl, Binding binding) throws ServletException {
 
 
-
                 String key = file.getAbsolutePath();
                 Template template = null;
 
@@ -306,7 +305,7 @@ public class TemplateServlet extends AbstractHttpServlet {
 
                         Reader reader = null;
                         try {
-                                log.fine ("templateservlet reading file : " + file.getAbsolutePath());
+                                log.fine("templateservlet reading file : " + file.getAbsolutePath());
 
                                 RequestThreadInfo.get().setCurrentFile(file.getAbsolutePath());
                                 reader = new FileReader(file);
@@ -341,7 +340,7 @@ public class TemplateServlet extends AbstractHttpServlet {
                         }
                 }
 
-                RequestThreadInfo.get().setUniqueScriptName(((IncludeTemplateEngine.SimpleTemplate)template).getTemplateName());
+                RequestThreadInfo.get().setUniqueScriptName(((IncludeTemplateEngine.SimpleTemplate) template).getTemplateName());
 
                 //
                 // Last sanity check.
@@ -424,7 +423,7 @@ public class TemplateServlet extends AbstractHttpServlet {
          */
         public void service(String templatePath, HttpServletRequest request, HttpServletResponse response, CustomServletBinding binding) throws ServletException, IOException {
                 RequestThreadInfo.get().setScriptProcessed(true);
-                
+
                 if (verbose) {
                         log("Creating/getting cached template...");
                 }
@@ -436,26 +435,30 @@ public class TemplateServlet extends AbstractHttpServlet {
                 //Application application = (Application) binding.getVariable("application");
 
                 File file = null;
-                if (File.separator.equals("\"")) {
-                        file = new File(RequestThreadInfo.get().getApplication().getAppPath()+ File.separator + templatePath.replaceAll("/", "\\\\"));
+                if (RequestThreadInfo.get().errorOccurred()) {
+                        file = new File(templatePath);
                 } else {
-                        file = new File(RequestThreadInfo.get().getApplication().getAppPath() + File.separator + templatePath);
+                        if (File.separator.equals("\"")) {
+                                file = new File(RequestThreadInfo.get().getApplication().getAppPath() + File.separator + templatePath.replaceAll("/", "\\\\"));
+                        } else {
+                                file = new File(RequestThreadInfo.get().getApplication().getAppPath() + File.separator + templatePath);
+                        }
                 }
 
                 RequestThreadInfo.get().setCurrentFile(file.getAbsolutePath());
-                
+
                 //Reader rd = ThreadFileReader.get();
                 String name = file.getName();
                 //if (rd == null) {
-                        if (!file.exists()) {
-                                //response.sendError(HttpServletResponse.SC_NOT_FOUND);
-                                throw new TemplateNotFoundException(file.toString());
-                                //return;// throw new IOException(file.getAbsolutePath());
-                        }
-                        if (!file.canRead()) {
-                                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Can not read \"" + name + "\"!");
-                                return;// throw new IOException(file.getAbsolutePath());
-                        }
+                if (!file.exists()) {
+                        //response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                        throw new TemplateNotFoundException(file.toString());
+                        //return;// throw new IOException(file.getAbsolutePath());
+                }
+                if (!file.canRead()) {
+                        response.sendError(HttpServletResponse.SC_FORBIDDEN, "Can not read \"" + name + "\"!");
+                        return;// throw new IOException(file.getAbsolutePath());
+                }
                 //}
                 //
                 // Get the requested template.

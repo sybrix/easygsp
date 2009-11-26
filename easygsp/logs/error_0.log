@@ -1,5 +1,26 @@
-11/22/09 12:17.28 [INFO] - Thread monitor started  (timeout: 300)
-11/22/09 12:17.28 [INFO] - SessionMonitor started.
-11/22/09 12:17.28 [FINE] - Logger thread started
-11/22/09 12:17.28 [FINE] - loading database driver:org.firebirdsql.jdbc.FBDriver
-11/22/09 12:17.28 [FINE] - loading database driver:com.mysql.jdbc.Driver
+11/26/09 00:48.47 [FINE] - templateservlet reading file : c:\projects\easygsp\easygsp\webapps\app1\errorTest.gsp
+11/26/09 00:48.47 [FINE] - logging 1 message(s) in log queue
+11/26/09 00:48.48 [SEVERE] com.sybrix.easygsp.http.RequestThread$2.call() - / by zero
+java.lang.ArithmeticException: / by zero
+	at java.math.BigDecimal(divideAndRound:1407)
+	at java.math.BigDecimal(divide:1381)
+	at org.codehaus.groovy.runtime.typehandling.BigDecimalMath(divideImpl:61)
+	at org.codehaus.groovy.runtime.typehandling.IntegerMath(divideImpl:46)
+	at org.codehaus.groovy.runtime.dgmimpl.NumberNumberDiv$NumberNumber(invoke:321)
+	at org.codehaus.groovy.runtime.callsite.PojoMetaMethodSite(call:52)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray(defaultCall:40)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite(call:117)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite(call:125)
+	at SimpleTemplateScript1(run:2)
+	at com.sybrix.easygsp.http.IncludeTemplateEngine$SimpleTemplate$1(writeTo:149)
+	at com.sybrix.easygsp.http.TemplateServlet(service:501)
+	at com.sybrix.easygsp.http.RequestThread$2(call:422)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(use:93)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(access$200:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport(use:201)
+	at com.sybrix.easygsp.http.RequestThread(processTemplateRequest:478)
+	at com.sybrix.easygsp.http.RequestThread(run:177)
+
+
+11/26/09 00:48.59 [FINE] - templateservlet reading file : C:\projects\easygsp\easygsp\conf\errors\error500.gsp
+11/26/09 00:48.59 [FINE] - took 16589 ms
