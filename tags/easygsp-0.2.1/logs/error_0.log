@@ -1,0 +1,5 @@
+11/22/09 12:17.28 [INFO] - Thread monitor started  (timeout: 300)
+11/22/09 12:17.28 [INFO] - SessionMonitor started.
+11/22/09 12:17.28 [FINE] - Logger thread started
+11/22/09 12:17.28 [FINE] - loading database driver:org.firebirdsql.jdbc.FBDriver
+11/22/09 12:17.28 [FINE] - loading database driver:com.mysql.jdbc.Driver
