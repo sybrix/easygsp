@@ -16,6 +16,7 @@ public class RequestInfo {
         private String realScriptName;
         private TemplateInfo templateInfo;
         private ParsedRequest parsedRequest;
+        private boolean errorOccurred = false;
 
         public RequestInfo() {
                 templateInfo = new TemplateInfo();
@@ -90,5 +91,13 @@ public class RequestInfo {
 
         public void setParsedRequest(ParsedRequest parsedRequest) {
                 this.parsedRequest = parsedRequest;
+        }
+
+        public boolean errorOccurred() {
+                return errorOccurred;
+        }
+
+        public void setErrorOccurred(boolean errorOccurred) {
+                this.errorOccurred = errorOccurred;
         }
 }

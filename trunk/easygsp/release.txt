@@ -17,4 +17,12 @@
 
 
 
-license
+0.2.1  11/23/2009
+- fix the problem related to differences in Apache vs LightTPD scgi headers
+- Removed the need for easygsp to have to have a property that indicated where the docroot for the http server is
+
+0.2.2  11/26/2009
+- changed defaults in properties file
+- modified to allow errorPages to GSPs instead of static and groovy files
+
+ 

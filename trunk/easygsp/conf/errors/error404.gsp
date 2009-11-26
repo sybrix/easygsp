@@ -5,6 +5,6 @@
         <body>
                 404 - Page not found
 
-                <br/><br/><font size="1" face="arial">Groovy Script Server 1.0</font>
+                <br/><br/><font size="1" face="arial">EasyGSP Server</font>
         </body>
 </html>
