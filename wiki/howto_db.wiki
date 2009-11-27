@@ -1,0 +1,8 @@
+#summary Connecting to database
+
+= Groovy and SQL =
+
+[http://groovy.codehaus.org/Database+features Groovy has excellent database support] and it's all available in EasyGSP.  
+
+
+
