@@ -6,18 +6,18 @@ There is a start up script @ $EASYGSP_HOME/bin/easygsp. Open and modify paths as
 
 Copy to service directory
 {{{
-  $  cp $EASYGSP_HOME/bin/easygsp /etc/init.d/easygsp
+$  cp $EASYGSP_HOME/bin/easygsp /etc/init.d/easygsp
 }}}
 
 Fedora users can install service using chkconfig
 {{{
-  $  chkconfig --add easygsp
-  $  chkconfig --level 23 easygsp on
+$  chkconfig --add easygsp
+$  chkconfig --level 23 easygsp on
 }}}
 
 Start service
 {{{
-  $  service easygsp start
+$  service easygsp start
 }}}
 
 
@@ -63,5 +63,3 @@ To Stop
    c:\ cd %EASYGSP_HOME%\bin
    c:\ stop.bat
 }}}
-
-
