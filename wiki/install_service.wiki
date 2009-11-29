@@ -9,7 +9,7 @@ Copy to service directory
 $  cp $EASYGSP_HOME/bin/easygsp /etc/init.d/easygsp
 }}}
 
-Fedora users can install service using chkconfig
+*Fedora* users can install service using chkconfig
 {{{
 $  chkconfig --add easygsp
 $  chkconfig --level 23 easygsp on
