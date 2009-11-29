@@ -21,7 +21,7 @@ $  service easygsp start
 }}}
 
 
-EasyGSP can be started using the start script
+If you don't require EasyGSP as a service, it can be started using the start script
 {{{
 $ cd $EASYGSP_HOME/bin
 $ ./start.sh
