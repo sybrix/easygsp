@@ -5,6 +5,7 @@
 
 To create an application in EasyGSP, simply create a folder in the %EASYGSP_HOME%/webapps directory.  A folder in this directory represents an application. 
 
+*Application Directory Layout*
 {{{
  +-- $EASYGSP_HOME
        |
