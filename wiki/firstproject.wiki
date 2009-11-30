@@ -23,11 +23,15 @@ Like servlet based applications, EasyGSP applications can have a WEB-INF directo
 
 {{{
  +-- $EASYGSP_HOME
+       |
        +-- webapps
-            +- MyApp
-            |-- index.gsp
-            +-- WEB-INF
-                 |-- web.groovy
+            |
+            +-- MyApp
+                 | 
+                 |-- index.gsp
+                 +-- WEB-INF
+                      |
+                      |-- web.groovy
 }}}
 
 This file can have the following methods
