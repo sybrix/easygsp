@@ -35,6 +35,7 @@ EasyGSP will service request from the DocumentRoot/htdocs of your HTTP server.
 Create a link called "webapps" to your DocumentRoot/htdocs directory. 
 
 * Move the Examples *
+
 Copy the examples directory to your DocumentRoot directory
 
   *  $ mv /usr/local/easygsp/examples /var/www
