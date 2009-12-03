@@ -2,9 +2,10 @@
 
 = Groovy and SQL =
 
-[http://groovy.codehaus.org/Database+features Groovy has excellent database support] and it's all available in EasyGSP.  
+[http://groovy.codehaus.org/Database+features Groovy has excellent database support.] Any valid Groovy database code should work in EasyGSP.   
 
 
+*db.gsp*
 {{{
 <%
         import groovy.sql.Sql
