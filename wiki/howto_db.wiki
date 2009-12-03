@@ -80,6 +80,8 @@ The View:  *dbMVC.gspx*
 
 
 
+
+DDL and data for table referenced above
 {{{
 CREATE TABLE `profile` (
   `profile_id` int(11) NOT NULL AUTO_INCREMENT,
