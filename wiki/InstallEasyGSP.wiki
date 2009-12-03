@@ -50,7 +50,7 @@ Copy the examples directory to your DocumentRoot directory
 
 
 If all is well, you should see something like this:
-
+http://easygsp.googlecode.com/files/startup-linux.png
 
 
 
