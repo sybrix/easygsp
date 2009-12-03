@@ -1,0 +1,19 @@
+#summary Custom Error Page.
+
+= Custom Error Pag =
+
+Each application can have it's own custom error pages.  A custom error page must be located in the WEB-INF/errors directory.  The naming convention is "error" + ErrorCode + ".gsp.  So a custom 404 error code page would be named:  error404.gsp .
+
+
+{{{
+   +-- AppFolder
+        |
+        +-- WEB-INF
+             |
+             +-- errors
+                  |
+                  |--error500.gsp
+                  |--error404.gsp          
+}}
+
+If no custom pages are found, the servers error pages are used. They are located at $EASYGSP_HOME/conf/errors.
