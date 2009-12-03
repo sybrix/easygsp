@@ -53,7 +53,7 @@ If all is well, you should see something like this:
 http://easygsp.googlecode.com/files/startup-linux.png
 
 
-Goto   
+Open browser, goto   
   http://localhost:8085/examples
 
 
