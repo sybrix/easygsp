@@ -43,7 +43,10 @@ If you installed easygsp or java to a path different than what is listed above, 
 
 * Start EasyGSP *
 
-  * start EasyGSP > ./start.sh
+  * $ cd /usr/local/easygsp/bin
+  * $ ./start.sh
+
+
 
 
 
