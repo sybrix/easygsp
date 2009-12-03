@@ -93,19 +93,19 @@ Open browser, goto
 
 ==Configuring LightTPD==
 
-Download one of the minimal config files or manually change your existing config file.
+Download one of the minimal config files or manually change your existing config file with
+the downloaded one.
+
+Current file locations:
+     Linux  - /etc/lighttpd/lighttpd.conf
+     Windows - c:/LightTPD/lighttpd-inc.conf 
+
+Download config file from:
   Linux
     # http://easygsp.googlecode.com/files/lighttpd.conf
   Windows(WLMP)
     # http://easygsp.googlecode.com/files/lighttpd-inc.conf
 
-Once you've downloaded the file, rename current lighttpd.conf and move the download file to the config file location.
-  
-   The config file location for linux is usually:
-     /etc/lighttpd/lighttpd.conf
-   For windows:
-    It's 
-    c:/LightTPD/lighttpd-inc.conf
 
 Or manually change config file:
 
