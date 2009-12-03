@@ -1,26 +1,199 @@
-11/26/09 00:48.47 [FINE] - templateservlet reading file : c:\projects\easygsp\easygsp\webapps\app1\errorTest.gsp
-11/26/09 00:48.47 [FINE] - logging 1 message(s) in log queue
-11/26/09 00:48.48 [SEVERE] com.sybrix.easygsp.http.RequestThread$2.call() - / by zero
-java.lang.ArithmeticException: / by zero
-	at java.math.BigDecimal(divideAndRound:1407)
-	at java.math.BigDecimal(divide:1381)
-	at org.codehaus.groovy.runtime.typehandling.BigDecimalMath(divideImpl:61)
-	at org.codehaus.groovy.runtime.typehandling.IntegerMath(divideImpl:46)
-	at org.codehaus.groovy.runtime.dgmimpl.NumberNumberDiv$NumberNumber(invoke:321)
+12/02/09 18:36.09 [INFO] - Thread monitor started  (timeout: 30)
+12/02/09 18:36.09 [INFO] - SessionMonitor started.
+12/02/09 18:36.09 [FINE] - Logger thread started
+12/02/09 18:36.09 [FINE] - loading database driver:org.firebirdsql.jdbc.FBDriver
+12/02/09 18:36.09 [FINE] - loading database driver:com.mysql.jdbc.Driver
+12/02/09 18:59.05 [FINE] - adding thread id:20 from running map
+12/02/09 18:59.05 [FINE] - parsed AppName: examples
+12/02/09 18:59.05 [FINE] - parsed AppDir: c:/projects/easygsp/easygsp/webapps/examples
+12/02/09 18:59.05 [FINE] - parsed RequestURIPath: c:/projects/easygsp/easygsp/webapps/examples/db/db.gsp
+12/02/09 18:59.05 [FINE] - parsed RequestURI: db/db.gsp
+12/02/09 18:59.05 [FINE] - loading application: c:\projects\easygsp\easygsp\webapps\examples
+12/02/09 18:59.05 [FINE] - starting application: c:\projects\easygsp\easygsp\webapps\examples
+12/02/09 18:59.05 [FINE] - invoking onApplicationStart for examples
+12/02/09 18:59.07 [FINE] - onApplicationStart successful for examples
+12/02/09 18:59.08 [FINEST] - SCGI headers
+	ACCEPT-ENCODING = deflate, gzip, x-gzip, identity, *;q=0
+	USER-AGENT = Opera/9.80 (Windows NT 6.0; U; en) Presto/2.2.15 Version/10.01
+	TE = deflate, gzip, chunked, identity, trailers
+	SCRIPT-NAME = /examples/db/db.gsp
+	DOCUMENT-ROOT = c:/projects/easygsp/easygsp/webapps
+	ACCEPT-LANGUAGE = en-US,en;q=0.9
+	COOKIE = __utmz=111872281.1255313992.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utma=111872281.448789227.1255313992.1256995331.1256998899.14; JSESSIONID=abccLWILHMq4U-3fir5us; bumblezee=BW8WkFDoVuJ33SHGru0VO4HgTmT2V4cUTxAI04TY8rEn41Q%2FrDFscAEUpDWQB76iFZQS%2FvaGvL0A%0D%0AGzQwGo%2BkhhtnfOddjQ8MXdeEh%2BqRaakU3YFbVWVIbN8thMPAmvFZTNIQgDLqJ4wWeDDCcgLkNv8G%0D%0Abl7U4ZJ2Q47PUMqw194%3D; GSESSIONID=9MHONBLEXMHJ78MWR
+	HOST = localhost:8085
+	ACCEPT-CHARSET = iso-8859-1, utf-8, utf-16, *;q=0.1
+	COOKIE- = $Version=1
+	SERVER-SOFTWARE = LightTPD/1.4.23 (Win32)
+	REQUEST-METHOD = GET
+	ACCEPT = text/html, application/xml;q=0.9, application/xhtml+xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=0.1
+	SERVER-NAME = localhost
+	REMOTE-ADDR = 127.0.0.1
+	REDIRECT-STATUS = 200
+	CONNECTION = Keep-Alive, TE
+	SERVER-PROTOCOL = HTTP/1.1
+	PATH-INFO = 
+	QUERY-STRING = 
+	SERVER-PORT = 8085
+	CONTENT-LENGTH = 0
+	REMOTE-PORT = 50620
+	SCGI = 1
+	REQUEST-URI = /examples/db/db.gsp
+	SCRIPT-FILENAME = c:/projects/easygsp/easygsp/webapps/examples/db/db.gsp
+	GATEWAY-INTERFACE = CGI/1.1
+	SERVER-ADDR = 127.0.0.1
+
+12/02/09 18:59.20 [FINE] - templateservlet reading file : c:\projects\easygsp\easygsp\webapps\examples\db\db.gsp
+12/02/09 18:59.21 [SEVERE] com.sybrix.easygsp.http.RequestThread$2.call() - Unknown column 'id' in 'field list'
+com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'id' in 'field list'
+	at sun.reflect.NativeConstructorAccessorImpl(newInstance0:-2)
+	at sun.reflect.NativeConstructorAccessorImpl(newInstance:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl(newInstance:27)
+	at java.lang.reflect.Constructor(newInstance:513)
+	at com.mysql.jdbc.Util(handleNewInstance:406)
+	at com.mysql.jdbc.Util(getInstance:381)
+	at com.mysql.jdbc.SQLError(createSQLException:1030)
+	at com.mysql.jdbc.SQLError(createSQLException:956)
+	at com.mysql.jdbc.MysqlIO(checkErrorPacket:3515)
+	at com.mysql.jdbc.MysqlIO(checkErrorPacket:3447)
+	at com.mysql.jdbc.MysqlIO(sendCommand:1951)
+	at com.mysql.jdbc.MysqlIO(sqlQueryDirect:2101)
+	at com.mysql.jdbc.ConnectionImpl(execSQL:2548)
+	at com.mysql.jdbc.ConnectionImpl(execSQL:2477)
+	at com.mysql.jdbc.StatementImpl(executeQuery:1422)
+	at groovy.sql.Sql(eachRow:595)
+	at groovy.sql.Sql(eachRow:577)
+	at sun.reflect.NativeMethodAccessorImpl(invoke0:-2)
+	at sun.reflect.NativeMethodAccessorImpl(invoke:39)
+	at sun.reflect.DelegatingMethodAccessorImpl(invoke:25)
+	at java.lang.reflect.Method(invoke:597)
+	at org.codehaus.groovy.runtime.callsite.PojoMetaMethodSite$PojoCachedMethodSiteNoUnwrapNoCoerce(invoke:229)
 	at org.codehaus.groovy.runtime.callsite.PojoMetaMethodSite(call:52)
 	at org.codehaus.groovy.runtime.callsite.CallSiteArray(defaultCall:40)
 	at org.codehaus.groovy.runtime.callsite.AbstractCallSite(call:117)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite(call:125)
-	at SimpleTemplateScript1(run:2)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite(call:129)
+	at SimpleTemplateScript1(run:22)
 	at com.sybrix.easygsp.http.IncludeTemplateEngine$SimpleTemplate$1(writeTo:149)
-	at com.sybrix.easygsp.http.TemplateServlet(service:501)
-	at com.sybrix.easygsp.http.RequestThread$2(call:422)
+	at com.sybrix.easygsp.http.TemplateServlet(service:503)
+	at com.sybrix.easygsp.http.RequestThread$2(call:432)
 	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(use:93)
 	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(access$200:61)
 	at org.codehaus.groovy.runtime.GroovyCategorySupport(use:201)
-	at com.sybrix.easygsp.http.RequestThread(processTemplateRequest:478)
-	at com.sybrix.easygsp.http.RequestThread(run:177)
+	at com.sybrix.easygsp.http.RequestThread(processTemplateRequest:491)
+	at com.sybrix.easygsp.http.RequestThread(run:182)
 
 
-11/26/09 00:48.59 [FINE] - templateservlet reading file : C:\projects\easygsp\easygsp\conf\errors\error500.gsp
-11/26/09 00:48.59 [FINE] - took 16589 ms
+12/02/09 18:59.21 [FINE] - templateservlet reading file : c:\projects\easygsp\easygsp\webapps\examples\WEB-INF\errors\error500.gsp
+12/02/09 18:59.21 [FINE] - took 16392 ms
+12/02/09 19:01.13 [FINE] - adding thread id:22 from running map
+12/02/09 19:01.13 [FINE] - parsed AppName: examples
+12/02/09 19:01.13 [FINE] - parsed AppDir: c:/projects/easygsp/easygsp/webapps/examples
+12/02/09 19:01.13 [FINE] - parsed RequestURIPath: c:/projects/easygsp/easygsp/webapps/examples/db/db.gsp
+12/02/09 19:01.13 [FINE] - parsed RequestURI: db/db.gsp
+12/02/09 19:01.13 [FINEST] - SCGI headers
+	ACCEPT-ENCODING = deflate, gzip, x-gzip, identity, *;q=0
+	USER-AGENT = Opera/9.80 (Windows NT 6.0; U; en) Presto/2.2.15 Version/10.01
+	TE = deflate, gzip, chunked, identity, trailers
+	SCRIPT-NAME = /examples/db/db.gsp
+	DOCUMENT-ROOT = c:/projects/easygsp/easygsp/webapps
+	CACHE-CONTROL = no-cache
+	ACCEPT-LANGUAGE = en-US,en;q=0.9
+	COOKIE = __utmz=111872281.1255313992.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utma=111872281.448789227.1255313992.1256995331.1256998899.14; JSESSIONID=abccLWILHMq4U-3fir5us; bumblezee=BW8WkFDoVuJ33SHGru0VO4HgTmT2V4cUTxAI04TY8rEn41Q%2FrDFscAEUpDWQB76iFZQS%2FvaGvL0A%0D%0AGzQwGo%2BkhhtnfOddjQ8MXdeEh%2BqRaakU3YFbVWVIbN8thMPAmvFZTNIQgDLqJ4wWeDDCcgLkNv8G%0D%0Abl7U4ZJ2Q47PUMqw194%3D; GSESSIONID=9MHONBLEXMHJ78MWR
+	HOST = localhost:8085
+	ACCEPT-CHARSET = iso-8859-1, utf-8, utf-16, *;q=0.1
+	COOKIE- = $Version=1
+	SERVER-SOFTWARE = LightTPD/1.4.23 (Win32)
+	REQUEST-METHOD = GET
+	ACCEPT = text/html, application/xml;q=0.9, application/xhtml+xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=0.1
+	SERVER-NAME = localhost
+	REMOTE-ADDR = 127.0.0.1
+	REDIRECT-STATUS = 200
+	CONNECTION = Keep-Alive, TE
+	SERVER-PROTOCOL = HTTP/1.1
+	PATH-INFO = 
+	QUERY-STRING = 
+	SERVER-PORT = 8085
+	CONTENT-LENGTH = 0
+	REMOTE-PORT = 50626
+	SCGI = 1
+	REQUEST-URI = /examples/db/db.gsp
+	SCRIPT-FILENAME = c:/projects/easygsp/easygsp/webapps/examples/db/db.gsp
+	GATEWAY-INTERFACE = CGI/1.1
+	SERVER-ADDR = 127.0.0.1
+
+12/02/09 19:01.13 [FINE] - templateservlet reading file : c:\projects\easygsp\easygsp\webapps\examples\db\db.gsp
+12/02/09 19:01.13 [FINE] - took 355 ms
+12/02/09 19:01.37 [FINE] - adding thread id:23 from running map
+12/02/09 19:01.37 [FINE] - parsed AppName: examples
+12/02/09 19:01.37 [FINE] - parsed AppDir: c:/projects/easygsp/easygsp/webapps/examples
+12/02/09 19:01.37 [FINE] - parsed RequestURIPath: c:/projects/easygsp/easygsp/webapps/examples/db/db.gsp
+12/02/09 19:01.37 [FINE] - parsed RequestURI: db/db.gsp
+12/02/09 19:01.37 [FINEST] - SCGI headers
+	ACCEPT-ENCODING = deflate, gzip, x-gzip, identity, *;q=0
+	USER-AGENT = Opera/9.80 (Windows NT 6.0; U; en) Presto/2.2.15 Version/10.01
+	TE = deflate, gzip, chunked, identity, trailers
+	SCRIPT-NAME = /examples/db/db.gsp
+	DOCUMENT-ROOT = c:/projects/easygsp/easygsp/webapps
+	CACHE-CONTROL = no-cache
+	ACCEPT-LANGUAGE = en-US,en;q=0.9
+	COOKIE = __utmz=111872281.1255313992.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utma=111872281.448789227.1255313992.1256995331.1256998899.14; JSESSIONID=abccLWILHMq4U-3fir5us; bumblezee=BW8WkFDoVuJ33SHGru0VO4HgTmT2V4cUTxAI04TY8rEn41Q%2FrDFscAEUpDWQB76iFZQS%2FvaGvL0A%0D%0AGzQwGo%2BkhhtnfOddjQ8MXdeEh%2BqRaakU3YFbVWVIbN8thMPAmvFZTNIQgDLqJ4wWeDDCcgLkNv8G%0D%0Abl7U4ZJ2Q47PUMqw194%3D; GSESSIONID=9MHONBLEXMHJ78MWR
+	HOST = localhost:8085
+	ACCEPT-CHARSET = iso-8859-1, utf-8, utf-16, *;q=0.1
+	COOKIE- = $Version=1
+	SERVER-SOFTWARE = LightTPD/1.4.23 (Win32)
+	REQUEST-METHOD = GET
+	ACCEPT = text/html, application/xml;q=0.9, application/xhtml+xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=0.1
+	SERVER-NAME = localhost
+	REMOTE-ADDR = 127.0.0.1
+	REDIRECT-STATUS = 200
+	CONNECTION = Keep-Alive, TE
+	SERVER-PROTOCOL = HTTP/1.1
+	PATH-INFO = 
+	QUERY-STRING = 
+	SERVER-PORT = 8085
+	CONTENT-LENGTH = 0
+	REMOTE-PORT = 50629
+	SCGI = 1
+	REQUEST-URI = /examples/db/db.gsp
+	SCRIPT-FILENAME = c:/projects/easygsp/easygsp/webapps/examples/db/db.gsp
+	GATEWAY-INTERFACE = CGI/1.1
+	SERVER-ADDR = 127.0.0.1
+
+12/02/09 19:01.37 [FINE] - templateservlet reading file : c:\projects\easygsp\easygsp\webapps\examples\db\db.gsp
+12/02/09 19:01.37 [FINE] - took 220 ms
+12/02/09 19:29.34 [FINE] - adding thread id:24 from running map
+12/02/09 19:29.34 [FINE] - parsed AppName: examples
+12/02/09 19:29.34 [FINE] - parsed AppDir: c:/projects/easygsp/easygsp/webapps/examples
+12/02/09 19:29.34 [FINE] - parsed RequestURIPath: c:/projects/easygsp/easygsp/webapps/examples/db/dbmvc.gspx
+12/02/09 19:29.34 [FINE] - parsed RequestURI: db/dbMVC.gspx
+12/02/09 19:29.34 [FINEST] - SCGI headers
+	ACCEPT-ENCODING = deflate, gzip, x-gzip, identity, *;q=0
+	USER-AGENT = Opera/9.80 (Windows NT 6.0; U; en) Presto/2.2.15 Version/10.01
+	TE = deflate, gzip, chunked, identity, trailers
+	SCRIPT-NAME = /examples/db/dbMVC.gspx
+	DOCUMENT-ROOT = c:/projects/easygsp/easygsp/webapps
+	ACCEPT-LANGUAGE = en-US,en;q=0.9
+	COOKIE = __utmz=111872281.1255313992.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utma=111872281.448789227.1255313992.1256995331.1256998899.14; JSESSIONID=abccLWILHMq4U-3fir5us; bumblezee=BW8WkFDoVuJ33SHGru0VO4HgTmT2V4cUTxAI04TY8rEn41Q%2FrDFscAEUpDWQB76iFZQS%2FvaGvL0A%0D%0AGzQwGo%2BkhhtnfOddjQ8MXdeEh%2BqRaakU3YFbVWVIbN8thMPAmvFZTNIQgDLqJ4wWeDDCcgLkNv8G%0D%0Abl7U4ZJ2Q47PUMqw194%3D; GSESSIONID=9MHONBLEXMHJ78MWR
+	HOST = localhost:8085
+	ACCEPT-CHARSET = iso-8859-1, utf-8, utf-16, *;q=0.1
+	COOKIE- = $Version=1
+	SERVER-SOFTWARE = LightTPD/1.4.23 (Win32)
+	REQUEST-METHOD = GET
+	ACCEPT = text/html, application/xml;q=0.9, application/xhtml+xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=0.1
+	SERVER-NAME = localhost
+	REMOTE-ADDR = 127.0.0.1
+	REDIRECT-STATUS = 200
+	CONNECTION = Keep-Alive, TE
+	SERVER-PROTOCOL = HTTP/1.1
+	PATH-INFO = 
+	QUERY-STRING = 
+	SERVER-PORT = 8085
+	CONTENT-LENGTH = 0
+	REMOTE-PORT = 50635
+	SCGI = 1
+	REQUEST-URI = /examples/db/dbMVC.gspx
+	SCRIPT-FILENAME = c:/projects/easygsp/easygsp/webapps/examples/db/dbmvc.gspx
+	GATEWAY-INTERFACE = CGI/1.1
+	SERVER-ADDR = 127.0.0.1
+
+12/02/09 19:29.34 [FINE] - templateservlet reading file : c:\projects\easygsp\easygsp\webapps\examples\db\dbMVC.gspx
+12/02/09 19:29.35 [FINE] - took 574 ms

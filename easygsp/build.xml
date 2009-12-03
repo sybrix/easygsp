@@ -101,19 +101,19 @@
                 <javadoc sourcepath="${src}" destdir="deploy/${easyGSPDir}/javadocs"/>
         </target>
 
-        <target name="package" depends="jar">
+        <target name="package" depends="jar,javadoc">
                 <delete dir="deploy"/>
                 <mkdir dir="deploy"/>
                 <mkdir dir="deploy/${easyGSPDir}"/>
                 <mkdir dir="deploy/${easyGSPDir}/bin"/>
+                <mkdir dir="deploy/${easyGSPDir}/logs"/>
                 <mkdir dir="deploy/${easyGSPDir}/lib"/>
                 <mkdir dir="deploy/${easyGSPDir}/conf"/>
                 <mkdir dir="deploy/${easyGSPDir}/temp"/>
                 <mkdir dir="deploy/${easyGSPDir}/conf/errors"/>
                 <mkdir dir="deploy/${easyGSPDir}/cache"/>
                 <mkdir dir="deploy/${easyGSPDir}/webapps"/>
-                <mkdir dir="deploy/${easyGSPDir}/webapps/examples"/>
-                <mkdir dir="deploy/${easyGSPDir}/webapps/easygsp"/>
+                <mkdir dir="deploy/${easyGSPDir}/examples"/>
 
                 <copy todir="deploy/${easyGSPDir}/bin">
                         <fileset dir="bin">
@@ -133,16 +133,12 @@
                                 <exclude name="junit-3.8.2.jar"/>
                         </fileset>
                 </copy>
-                <copy todir="deploy/${easyGSPDir}/webapps/examples">
+                <copy todir="deploy/${easyGSPDir}/examples">
                         <fileset dir="webapps/examples">
                                 <include name="**/*"/>
                         </fileset>
                 </copy>
-                <copy todir="deploy/${easyGSPDir}/webapps/easygsp">
-                        <fileset dir="webapps/easygsp">
-                                <include name="**/*"/>
-                        </fileset>
-                </copy>
+
                 <copy todir="deploy/${easyGSPDir}/conf">
                         <fileset dir="conf">
                                 <include name="**/*"/>

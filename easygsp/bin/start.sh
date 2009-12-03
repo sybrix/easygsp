@@ -1,7 +1,7 @@
 #!/bin/sh
 
-JAVA_HOME=/usr/java/jdk1.6.0_14
-EASYGSP_HOME=/usr/local/share/easygsp
+JAVA_HOME=/opt/jdk1.6.0_17
+EASYGSP_HOME=/usr/local/easygsp
 
 export JAVA_HOME 
 export EASYGSP_HOME

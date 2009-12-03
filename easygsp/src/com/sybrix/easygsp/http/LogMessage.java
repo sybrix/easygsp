@@ -13,34 +13,34 @@ public class LogMessage {
         private String message;
         private Throwable exception;
         private Date timestamp;
-        private Application application;
+        private ServletContextImpl application;
         private String formattedMessage;
         private SimpleDateFormat currentTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a z");
 
-        public LogMessage(Throwable exception, Application application) {
+        public LogMessage(Throwable exception, ServletContextImpl application) {
                 this.exception = exception;
                 this.timestamp = new Date(System.currentTimeMillis());
                 this.application = application;
         }
 
-        public LogMessage(String message, Application application) {
+        public LogMessage(String message, ServletContextImpl application) {
                 this.message = message;
                 this.timestamp = new Date(System.currentTimeMillis());
                 this.application = application;
         }
 
-        public LogMessage(String message, Throwable exception, Application application) {
+        public LogMessage(String message, Throwable exception, ServletContextImpl application) {
                 this.message = message;
                 this.exception = exception;
                 this.timestamp = new Date(System.currentTimeMillis());
                 this.application = application;
         }
 
-        public Application getApplication() {
+        public ServletContextImpl getApplication() {
                 return application;
         }
 
-        public void setApplication(Application application) {
+        public void setApplication(ServletContextImpl application) {
                 this.application = application;
         }
 

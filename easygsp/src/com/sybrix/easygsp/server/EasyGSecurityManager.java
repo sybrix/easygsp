@@ -15,7 +15,7 @@
  */
 package com.sybrix.easygsp.server;
 
-import com.sybrix.easygsp.http.Application;
+import com.sybrix.easygsp.http.ServletContextImpl;
 import com.sybrix.easygsp.http.RequestThreadInfo;
 
 import java.io.FileDescriptor;
@@ -49,7 +49,7 @@ public class EasyGSecurityManager extends SecurityManager {
                 if (file.contains("AppId"))
                         return;
 
-                Application path = RequestThreadInfo.get().getApplication();
+                ServletContextImpl path = RequestThreadInfo.get().getApplication();
                 if (path == null) {
                         super.checkRead(file);
                 } else {
@@ -80,7 +80,7 @@ public class EasyGSecurityManager extends SecurityManager {
         }
 
         public void checkExit(int status) {
-                Application path = RequestThreadInfo.get().getApplication();
+                ServletContextImpl path = RequestThreadInfo.get().getApplication();
                 if (path != null) {
                         throw new SecurityException("System.exit() access denied.");
                 } else {
@@ -97,7 +97,7 @@ public class EasyGSecurityManager extends SecurityManager {
         }
 
         public void checkPackageAccess(String pkg) {
-                Application path = RequestThreadInfo.get().getApplication();
+                ServletContextImpl path = RequestThreadInfo.get().getApplication();
                 if (path != null) {
                         if ((pkg.equals("javax.swing") && !allowSwing) || (pkg.equals("java.awt") && allowAWT)) {
                                 throw new SecurityException("Access denied for package: " + pkg);

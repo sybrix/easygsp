@@ -12,11 +12,15 @@ public class StaticControllerMethods {
                 addUrlDencode(clazz)
                 addUrlEncode(clazz)
                 addHtmlEncode(clazz)
+                // prop file
+                // email
+                // cookie
+                // dbconnection
         }
 
         private static def addLogMethod(java.lang.Class clazz) {
                 clazz.metaClass.'static'.log = {String logMessage ->
-                        Application app = RequestThreadInfo.get().getApplication()
+                        ServletContextImpl app = RequestThreadInfo.get().getApplication()
                         LogMessage lm = new LogMessage(logMessage, app)
                         if (app.getAttribute("logToConsole") == true && EasyGServer.propertiesFile.getBoolean("log.to.console", false)){
                                 System.out.println lm.toString()
@@ -28,7 +32,7 @@ public class StaticControllerMethods {
 
         private static def addLogThrowableAndMessageMethod(java.lang.Class clazz) {
                 clazz.metaClass.'static'.log = {String logMessage, Throwable t ->
-                        Application app = RequestThreadInfo.get().getApplication()
+                        ServletContextImpl app = RequestThreadInfo.get().getApplication()
                         LogMessage lm = new LogMessage(logMessage, t, app)
                         if (app.getAttribute("logToConsole") == true && EasyGServer.propertiesFile.getBoolean("log.to.console", false)){
                                 System.out.println lm.toString()
@@ -41,7 +45,7 @@ public class StaticControllerMethods {
 
         private static def addLogThrowableMethod(java.lang.Class clazz) {
                 clazz.metaClass.'static'.log = {Throwable t ->
-                        Application app = RequestThreadInfo.get().getApplication()
+                        ServletContextImpl app = RequestThreadInfo.get().getApplication()
                         LogMessage logMessage = new LogMessage(t, app)
                         if (app.getAttribute("logToConsole") == true && EasyGServer.propertiesFile.getBoolean("log.to.console", false)){
                                 System.out.println logMessage.toString()

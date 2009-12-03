@@ -48,7 +48,7 @@ public class RequestThread extends Thread {
         protected static String groovyExtension;
         protected static String templateExtension;
 
-        private Map<String, Application> applications;
+        private Map<String, ServletContextImpl> applications;
         private Map<String, String> headers;
         private Socket socket;
         private long requestStartTime;
@@ -67,6 +67,9 @@ public class RequestThread extends Thread {
 
         private static String viewExtension;
         protected static String defaultExtension;
+        private CustomServletBinding binding;
+        private String scriptPath;
+        private ServletContextImpl application;
 
         static {
                 threadTimeoutInSeconds = EasyGServer.propertiesFile.getInt("thread.timeout", 30);
@@ -85,9 +88,9 @@ public class RequestThread extends Thread {
         }
 
         public void run() {
-                Application application = null;
+
                 long startTime = System.currentTimeMillis();
-                CustomServletBinding binding = null;
+
 
                 try {
                         // bufferize the io stream
@@ -138,6 +141,7 @@ public class RequestThread extends Thread {
 
                         binding = new CustomServletBinding(request, response, application, headers);
                         request.setServletBinding(binding);
+                        RequestThreadInfo.get().setBinding(binding);
 
                         if (EasyGServer.propertiesFile.getString("logging.level", "SEVERE").equals("FINEST")) {
                                 StringBuffer s = new StringBuffer();
@@ -152,7 +156,7 @@ public class RequestThread extends Thread {
                         //loadBundle(application, binding);
 
                         // build the script path
-                        String scriptPath = parsedRequest.getRequestFilePath();
+                        scriptPath = parsedRequest.getRequestFilePath();
 //                        if (application.isVirtualHost())
 //                                scriptPath = headers.get(RequestHeaders.SCRIPT_NAME).substring(1);
 //                        else
@@ -170,6 +174,7 @@ public class RequestThread extends Thread {
 
                         RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(root.getParent());
                         RequestThreadInfo.get().setCurrentFile(root.getAbsolutePath());
+                        binding.setVariable("currentFile",root.getAbsolutePath());
 
                         //process the request
                         if (parsedRequest.getRequestURI().endsWith(templateExtension)) {
@@ -180,7 +185,7 @@ public class RequestThread extends Thread {
                         }
 
                 } catch (ApplicationNotFoundException e) {
-                        sendError(404, response, e, null, binding);
+                        sendError(404, scriptPath, application.getGroovyScriptEngine(), binding, e);
                 } catch (IOException e) {
                         log.log(SEVERE, "SCGIParsing failed", e);
                 } catch (SecurityException e) {
@@ -228,7 +233,7 @@ public class RequestThread extends Thread {
                 Collections.sort(charsets);
         }
 
-        private void loadBundle(Application application, CustomServletBinding binding) {
+        private void loadBundle(ServletContextImpl application, CustomServletBinding binding) {
                 Language language = null;
                 for (Language selectedLanguage : languages) {
                         if (application.getResourceBundles().containsKey(selectedLanguage.getLanguage())) {
@@ -326,7 +331,7 @@ public class RequestThread extends Thread {
         public static void processScriptRequest(final String requestURI, final GSE3 gse, final CustomServletBinding binding) {
                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 
-                Application application = (Application) binding.getVariable("application");
+                ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
 
                 try {
                         Closure closure = new Closure(gse) {
@@ -377,6 +382,11 @@ public class RequestThread extends Thread {
                                         } catch (ServletException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
                                                 sendError(500, requestURI, gse, binding, e);
+                                        }catch(ThreadDeath e){
+                                                // do nothing
+                                                log.fine("Thread killed the hard way. script: " + requestURI);
+                                                sendError(500, requestURI, gse, binding, new Exception("Thread exceeded max allowed time limit.",e));
+
                                         } catch (Throwable e) {
                                                 log.log(Level.SEVERE, e.getMessage(), e);
                                                 sendError(500, requestURI, gse, binding, e);
@@ -417,7 +427,7 @@ public class RequestThread extends Thread {
                                         try {
                                                 RequestImpl request = (RequestImpl) binding.getVariable("request");
                                                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
-                                                Application application = (Application) binding.getVariable("application");
+                                                ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
 
                                                 application.getTemplateServlet().service(scriptPath, request, response, binding);
 //
@@ -466,6 +476,9 @@ public class RequestThread extends Thread {
                                         } catch (ServletException e) {
                                                 log.log(Level.SEVERE, e.getMessage(), e);
                                                 sendError(500, scriptPath, gse, binding, e);
+                                        }catch(ThreadDeath e){
+                                                log.fine("Thread killed the hard way. script: " + scriptPath);
+                                                sendError(500, scriptPath, gse, binding, new Exception("Thread exceeded max allowed time limit.",e));
                                         } catch (Throwable e) {
                                                 log.log(Level.SEVERE, e.getMessage(), e);
                                                 sendError(500, scriptPath, gse, binding, e);
@@ -553,14 +566,16 @@ public class RequestThread extends Thread {
 //                }
 //        }
 
-        private static void sendError(int errorCode, String scriptPath, GSE3 gse, CustomServletBinding binding, Throwable e) {
-                ResponseImpl response = (ResponseImpl) binding.getVariable("response");
-                Application application = (Application) binding.getVariable("application");
-                RequestImpl request = (RequestImpl) binding.getVariable("request");
-                StackTraceElement stackTraceElement = findErrorInStackTrace(binding, e);
-
-                RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(null);
+        protected static void sendError(int errorCode, String scriptPath, GSE3 gse, CustomServletBinding binding, Throwable e) {
                 try {
+
+                        ResponseImpl response = (ResponseImpl) binding.getVariable("response");
+                        ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
+                        RequestImpl request = (RequestImpl) binding.getVariable("request");
+                        StackTraceElement stackTraceElement = findErrorInStackTrace(binding, e);
+
+                        RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(null);
+
                         RequestThreadInfo.get().setErrorOccurred(true);
                         response.setStatus(errorCode, e.getMessage());
                         StringWriter sw = new StringWriter();
@@ -575,19 +590,20 @@ public class RequestThread extends Thread {
 
                         if (stackTraceElement != null) {
                                 String path = stackTraceElement.getFileName();
-                                if (RequestThreadInfo.get().getParsedRequest().getRequestFilePath().endsWith(templateExtension)){
+                                if (RequestThreadInfo.get().getParsedRequest().getRequestFilePath().endsWith(templateExtension)) {
                                         path = scriptPath;
                                 }
 
-                                String lineNumberMessage = "Error occurred in " + path  + " @ lineNumber: " + (stackTraceElement.getLineNumber() - 2);
+                                String lineNumberMessage = "Error occurred in " + path + " @ lineNumber: " + (stackTraceElement.getLineNumber() - 2);
                                 binding.setVariable("lineNumber", stackTraceElement.getLineNumber());
                                 binding.setVariable("lineNumberMessage", lineNumberMessage);
                         } else {
                                 binding.setVariable("lineNumber", -1);
+                                binding.setVariable("lineNumberMessage", "");
                         }
 
                         if (application.hasCustomErrorFile("error" + errorCode + templateExtension)) {
-                                RequestThread.processTemplateRequest(RequestThreadInfo.get().getApplication().getAppPath() +  File.separator + "WEB-INF" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension, gse, binding);
+                                RequestThread.processTemplateRequest(RequestThreadInfo.get().getApplication().getAppPath() + File.separator + "WEB-INF" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension, gse, binding);
                         } else {
                                 RequestThread.processTemplateRequest(EasyGServer.APP_DIR + File.separator + "conf" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension, gse, binding);
                                 //sendError(errorCode, response, e, stackTraceElement, binding);
@@ -600,10 +616,22 @@ public class RequestThread extends Thread {
                 }
         }
 
+//         public void sendError(String message) {
+//                RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(null);
+//                try {
+//                        String content = "<html><head><title>EasyGSP Error</title></head><body>"  + message + "</body></html>";
+//                        response.setStatus(500, "");
+//                        response.getWriter().print(message);
+//
+//                } catch (Exception e1) {
+//                        log.log(SEVERE, e1.getMessage(), e1);
+//                }
+//        }
+
         private static StackTraceElement findErrorInStackTrace(CustomServletBinding binding, Throwable e) {
                 File f = null;
 
-                f = new File(RequestThreadInfo.get().getCurrentFile());
+                f = new File((String)binding.getVariable("currentFile"));
 
                 if (f != null) {
                         if (e.getStackTrace() != null) {
@@ -616,62 +644,22 @@ public class RequestThread extends Thread {
                                 }
                         }
                 }
+
+
                 return null;
         }
 
-        private static void sendError(int errorCode, ResponseImpl response, Throwable e, StackTraceElement stackTraceElement, CustomServletBinding binding) {
-                RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(null);
-                try {
-
-                        String content = getErrorFileContent(errorCode);
-                        response.setStatus(errorCode, e.getMessage());
-
-                        String uniqueScriptName = RequestThreadInfo.get().getUniqueScriptName();
-                        String realScriptName = RequestThreadInfo.get().getRealScriptName();
-
-                        StringWriter sw = null;
-                        if (errorCode >= 500) {
-
-                                sw = new StringWriter();
-                                PrintWriter pw = new PrintWriter(sw);
-
-                                if (stackTraceElement != null)
-                                        pw.write("Error occurred in " + stackTraceElement.getFileName() + " @ lineNumber: " + (stackTraceElement.getLineNumber() - 2) + "\n\n");
-
-                                e.printStackTrace(pw);
-                                response.getWriter().flush();
-
-                                if (uniqueScriptName != null && realScriptName != null) {
-                                        if (response.getBufferContentSize() == 0)
-                                                content = content.replace("??", sw.toString().replaceAll("\n", "<br/>").replaceAll(uniqueScriptName, realScriptName));
-                                        else
-                                                content = "<div>" + sw.toString().replaceAll("\n", "<br/>").replaceAll(uniqueScriptName, realScriptName) + "</div>";
-                                } else {
-                                        if (response.getBufferContentSize() == 0)
-                                                content = content.replace("??", sw.toString().replaceAll("\n", "<br/>"));
-                                        else
-                                                content = "<div>" + sw.toString().replaceAll("\n", "<br/>") + "</div>";
-                                }
-                        }
-
-                        response.getWriter().println(content);
-
-                } catch (Exception e1) {
-                        log.log(Level.SEVERE, "Error occurred sending static error file", e1);
-                }
-        }
-
-        public void sendError(String message) {
-                RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(null);
-                try {
-                        String content = getErrorFileContent(500);
-                        response.setStatus(500, "");
-                        response.getWriter().print(message);
-
-                } catch (Exception e1) {
-                        log.log(SEVERE, e1.getMessage(), e1);
-                }
-        }
+//        public void sendError(String message) {
+//                RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(null);
+//                try {
+//                        String content = getErrorFileContent(500);
+//                        response.setStatus(500, "");
+//                        response.getWriter().print(message);
+//
+//                } catch (Exception e1) {
+//                        log.log(SEVERE, e1.getMessage(), e1);
+//                }
+//        }
 
         private static String getErrorFileContent(int errorCode) {
                 StringWriter sw = null;
@@ -776,5 +764,17 @@ public class RequestThread extends Thread {
         //                }
         //        }
 
+
+        public CustomServletBinding getBinding() {
+                return binding;
+        }
+
+        public String getScriptPath() {
+                return scriptPath;
+        }
+
+        public ServletContextImpl getApplication() {
+                return application;
+        }
 
 }

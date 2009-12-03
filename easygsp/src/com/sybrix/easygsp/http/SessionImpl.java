@@ -48,13 +48,13 @@ public class SessionImpl implements HttpSession {
         private String sessionId;
         private long creationTime;
         private long lastAccessedTime;
-        private Application application;
+        private ServletContextImpl application;
         private int maxInactiveInterval;
 
         private List<String> attributeNames;
         private SessionMap sessionMap;
 
-        public SessionImpl(Application application, int maxInactiveInterval) {
+        public SessionImpl(ServletContextImpl application, int maxInactiveInterval) {
                 sessionId = createSessionId();
                 creationTime = System.currentTimeMillis();
                 lastAccessedTime = System.currentTimeMillis();

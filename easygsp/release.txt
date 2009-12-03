@@ -24,5 +24,6 @@
 0.2.2  11/26/2009
 - changed defaults in properties file
 - modified to allow errorPages to GSPs instead of static and groovy files
+- fixed ThreadDeath errors to use normal error handling
 
  
