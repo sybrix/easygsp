@@ -66,25 +66,25 @@ Open browser, goto
     # Download the latest jdk from http://java.sun.com
     # Install
 
-  * *Install LightTPD (or Apache)*
+  * *Install LightTPD(Preferred)*
     # Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
     # Download the latest and greatest w/OpenSSL support
     # Install to c:\LightTPD
-  * *Install Apache*
+
+  * or Install Apache
     # The Apache HTTP server is available for Windows from [http://httpd.apache.org   apache.org]
     # Or you could download an all in one solution like [http://www.apachefriends.org/en/index.html Apache Friends] windows install.
 
      
   * *Configure HTTP Server*
     # See Configure LightTPD and Apache sections below.
-    # It's recommended to modify the HTTP server's htdoc/documentroot to point to %EASYGSP_HOME/webapps
-
-
+    
 
   * *Installing EasyGSP*
     # Download EasyGSP @ http://code.google.com/p/easygsp/downloads/list
     # Unzip to c:\
     # Rename dir c:\easygsp-`[VERSION`] to c:\easygsp
+    
 
   * *Start EasyGSP*
     # c:\easygsp\EasyGSP.bat
