@@ -49,6 +49,7 @@ Copy the examples directory to your DocumentRoot directory
   * $ ./start.sh
 
 
+If all is well, you should see something like this:
 
 
 
