@@ -5,4 +5,71 @@
 [http://groovy.codehaus.org/Database+features Groovy has excellent database support] and it's all available in EasyGSP.  
 
 
+{{{
+<%
+        import groovy.sql.Sql
 
+        def sql = Sql.newInstance("jdbc:mysql://localhost:3306/myDB","root", "root", "com.mysql.jdbc.Driver")
+%>
+
+<html>
+        <head>
+                <title>Database Example</title>
+        </head>
+        <body>
+                <table align="center" border="1">
+                        <tr>
+                                <td>Id</td>
+                                <td>LastName</td>
+                                <td>FirstName</td>
+                        </tr>
+                        <% sql.eachRow("select profile_id profileId, last_name lastName, first_name firstName from profile") {profile->  %>
+                                <tr>
+                                        <td>${profile.profileId}</td>
+                                        <td>${profile.lastName}</td>
+                                        <td>${profile.firstName}</td>
+                                </tr>
+                        <% } %>
+                </table>
+        </body>
+</html>
+}}}
+
+For the MVC purist....
+*dbMVC.groovy*
+{{{
+        import groovy.sql.Sql
+
+        def sql = Sql.newInstance("jdbc:mysql://localhost:3306/myDB","root", "root", "com.mysql.jdbc.Driver")
+        def limit = 10
+
+        def data = sql.rows("select profile_id profileId, last_name lastName, first_name firstName from profile where profile_id < ${limit}")
+
+        bind 'profiles', data
+}}}
+
+*dbMVC.gspx*
+{{{
+
+<html>
+        <head>
+                <title>Database Example</title>
+        </head>
+        <body>
+                <table align="center" border="1">
+                        <tr>
+                                <td>Id</td>
+                                <td>LastName</td>
+                                <td>FirstName</td>
+                        </tr>
+                        <% profiles.each{profile->  %>
+                                <tr>
+                                        <td>${profile.profileId}</td>
+                                        <td>${profile.lastName}</td>
+                                        <td>${profile.firstName}</td>
+                                </tr>
+                        <% } %>
+                </table>
+        </body>
+</html>
+}}}
