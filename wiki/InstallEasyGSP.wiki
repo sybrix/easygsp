@@ -42,8 +42,6 @@ Copy the examples directory to your DocumentRoot directory
 
   replace /var/www with your docroot if this is not the correct location
   
-If you installed easygsp or java to a path different than what is listed above, open the following files and reference the correct paths:
-
 
 * Start EasyGSP *
 
