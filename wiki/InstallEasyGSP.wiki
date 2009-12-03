@@ -29,7 +29,6 @@ Open the startup and stop scripts and correct the JAVA_HOME and EASYGSP_HOME pat
 
   * vi stop.sh
   * vi start.sh
-  * vi ../conf/cache.ccf   (update property:         *`jcs.auxiliary.DC.attributes.DiskPath`*)
 
 
 EasyGSP will service request from the DocumentRoot/htdocs of your HTTP server.
