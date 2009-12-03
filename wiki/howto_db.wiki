@@ -4,7 +4,7 @@
 
 [http://groovy.codehaus.org/Database+features Groovy has excellent database support.] Any valid Groovy database code should work in EasyGSP.   
 
-
+Below is an example of a template that connects to a database, executes a query and prints the data out to a table.
 *db.gsp*
 {{{
 <%
@@ -38,6 +38,7 @@
 
 
 For the MVC purist....
+Same as above except the data access is in the controller and only the rendering of data and html is in the view/template.
 
 The controller : *dbMVC.groovy*
 {{{
