@@ -14,6 +14,6 @@ Each application can have it's own custom error pages.  A custom error page must
                   |
                   |--error500.gsp
                   |--error404.gsp          
-}}
+}}}
 
 If no custom pages are found, the servers error pages are used. They are located at $EASYGSP_HOME/conf/errors.
