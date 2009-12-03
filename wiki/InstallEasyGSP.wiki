@@ -94,6 +94,14 @@ Open browser, goto
 
 Locate the lighttpd.conf file, rename it, and download a config that will work with EasyGSP.  It's usually at /etc/lighttpd/lighttpd.conf or  lighttpd-inc.conf file @ C:\LightTPD\conf or windows.
 
+
+Download this lighttpd.conf  or make the changes detailed below
+  * $ cd /etc/lighttpd
+  * $ mv lighttpd.conf lighttpd.conf.old
+  * $ wget http://easygsp.googlecode.com/files/lighttpd.conf  (Use as a starter or reference, or you could merge this file with your existing config file)
+
+Or do this:
+
 Basically, you enable mod_scgi, setup up the scgi_server and extensions, prevent the groovy, gsp and gpsx pages from being served by Lighttpd and add the EasyGSP pages to the welcome/index pages list
 
 {{{
@@ -126,10 +134,6 @@ Basically, you enable mod_scgi, setup up the scgi_server and extensions, prevent
 
 }}}
  
-or you could download this lighttpd conf that already does all of this
-  * $ cd /etc/lighttpd
-  * $ mv lighttpd.conf lighttpd.conf.old
-  * $ wget http://easygsp.googlecode.com/files/lighttpd.conf  (Use as a starter or reference, or you could merge this file with your existing config file)
 
 restart LightTPD
 
