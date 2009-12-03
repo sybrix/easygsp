@@ -107,7 +107,7 @@ Download config file from:
     # http://easygsp.googlecode.com/files/lighttpd-inc.conf
 
 
-Or manually change config file:
+*Or manually change config file:*
 
 Basically, you enable mod_scgi, setup up the scgi_server and extensions, prevent the groovy, gsp and gpsx pages from being served by Lighttpd and add the EasyGSP pages to the welcome/index pages list
 
