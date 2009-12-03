@@ -1,6 +1,6 @@
 #summary Custom Error Page.
 
-= Custom Error Pag =
+= Custom Error Page =
 
 Each application can have it's own custom error pages.  A custom error page must be located in the WEB-INF/errors directory.  The naming convention is "error" + ErrorCode + ".gsp.  So a custom 404 error code page would be named:  error404.gsp .
 
