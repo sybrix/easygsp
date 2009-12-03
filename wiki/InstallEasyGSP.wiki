@@ -65,6 +65,7 @@ Open browser, goto
   * *Install Java*
     # Download the latest jdk from http://java.sun.com
     # Install
+    # Create JAVA_HOME environment variable
 
   * *Install LightTPD(Preferred)*
     # Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
@@ -84,7 +85,7 @@ Open browser, goto
     # Download EasyGSP @ http://code.google.com/p/easygsp/downloads/list
     # Unzip to c:\
     # Rename dir c:\easygsp-`[VERSION`] to c:\easygsp
-    
+    # Create EASYGSP_HOME environment variable that points to c:\easygsp
 
   * *Start EasyGSP*
     # c:\easygsp\EasyGSP.bat
