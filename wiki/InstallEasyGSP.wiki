@@ -97,8 +97,8 @@ Download one of the minimal config files or manually change your existing config
 the downloaded one.
 
 Current file locations:
-     Linux  - /etc/lighttpd/lighttpd.conf
-     Windows - c:/LightTPD/lighttpd-inc.conf 
+     # Linux  - /etc/lighttpd/lighttpd.conf
+     # Windows - c:/LightTPD/lighttpd-inc.conf 
 
 Download config file from:
   Linux
