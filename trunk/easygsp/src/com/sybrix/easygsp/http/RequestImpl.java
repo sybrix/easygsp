@@ -50,8 +50,7 @@ import groovy.lang.Binding;
 
 
 /**
- * HttpRequest <br/>
- * Description :
+ * Custom implementation of HttpServletRequest <br/>
  */          
 public class RequestImpl implements HttpServletRequest {
         private static final Logger log = Logger.getLogger(RequestImpl.class.getName());
@@ -66,7 +65,7 @@ public class RequestImpl implements HttpServletRequest {
         private InputStream ios;
         private ServletInputStreamImpl myServletInputStream;
         private Map<String, Cookie> cookies;
-        private Application application;
+        private ServletContextImpl application;
         private CustomServletBinding servletBinding;
         private boolean cookiesParsed;
         private SessionImpl session;
@@ -87,7 +86,7 @@ public class RequestImpl implements HttpServletRequest {
                 uploadThresholdSize = EasyGServer.propertiesFile.getInt("file.upload.threshold",2621440);
         }
 
-        public RequestImpl(InputStream ios, Map<String, String> headers, Application application, ResponseImpl response) {
+        public RequestImpl(InputStream ios, Map<String, String> headers, ServletContextImpl application, ResponseImpl response) {
 
                 this.ios = ios;
                 this.headers = headers;

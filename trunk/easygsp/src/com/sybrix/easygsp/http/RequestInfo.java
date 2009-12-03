@@ -1,7 +1,5 @@
 package com.sybrix.easygsp.http;
 
-import java.io.File;
-
 /**
  * ErrorStatus <br/>
  *
@@ -9,7 +7,7 @@ import java.io.File;
  */
 public class RequestInfo {
         private String currentFile;
-        private Application application;
+        private ServletContextImpl application;
         private boolean templateRequest;
         private boolean scriptProcessed;
         private String uniqueScriptName;
@@ -17,6 +15,7 @@ public class RequestInfo {
         private TemplateInfo templateInfo;
         private ParsedRequest parsedRequest;
         private boolean errorOccurred = false;
+        private CustomServletBinding binding;
 
         public RequestInfo() {
                 templateInfo = new TemplateInfo();
@@ -37,11 +36,11 @@ public class RequestInfo {
                 this.currentFile = currentFile;
         }
 
-        public Application getApplication() {
+        public ServletContextImpl getApplication() {
                 return application;
         }
 
-        public void setApplication(Application application) {
+        public void setApplication(ServletContextImpl application) {
                 this.application = application;
         }
 
@@ -99,5 +98,13 @@ public class RequestInfo {
 
         public void setErrorOccurred(boolean errorOccurred) {
                 this.errorOccurred = errorOccurred;
+        }
+
+        public CustomServletBinding getBinding() {
+                return binding;
+        }
+
+        public void setBinding(CustomServletBinding binding) {
+                this.binding = binding;
         }
 }

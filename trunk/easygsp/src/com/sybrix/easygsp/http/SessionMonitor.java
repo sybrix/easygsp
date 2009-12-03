@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 public class SessionMonitor extends Thread {
         private static Logger log = Logger.getLogger(SessionMonitor.class.getName());
 
-        private Map<String, Application> applications;
+        private Map<String, ServletContextImpl> applications;
         private volatile boolean stopped = false;
 
         public SessionMonitor(Map applications) {
@@ -26,7 +26,7 @@ public class SessionMonitor extends Thread {
 
                         }
         
-                        for (Application app : applications.values()) {
+                        for (ServletContextImpl app : applications.values()) {
                                 for (SessionImpl session : app.getSessions().values()) {
                                         long diff = System.currentTimeMillis() - session.getLastAccessedTime();
                                         if (diff >= timeOut) {

@@ -308,6 +308,7 @@ public class TemplateServlet extends AbstractHttpServlet {
                                 log.fine("templateservlet reading file : " + file.getAbsolutePath());
 
                                 RequestThreadInfo.get().setCurrentFile(file.getAbsolutePath());
+                                binding.setVariable("currentFile", file.getAbsolutePath());
                                 reader = new FileReader(file);
                                 children.clear();
                                 template = ((IncludeTemplateEngine) includeTemplateEngine).createTemplate(reader, requestedUrl, file.getPath(), binding);
@@ -446,6 +447,7 @@ public class TemplateServlet extends AbstractHttpServlet {
                 }
 
                 RequestThreadInfo.get().setCurrentFile(file.getAbsolutePath());
+                binding.setVariable("currentFile", file.getAbsolutePath());
 
                 //Reader rd = ThreadFileReader.get();
                 String name = file.getName();

@@ -20,8 +20,6 @@ import groovy.util.ResourceException;
 
 import groovy.lang.GroovyObject;
 import groovy.lang.Closure;
-import groovy.lang.MissingPropertyException;
-import groovy.lang.MissingMethodException;
 
 
 import javax.servlet.ServletContext;
@@ -47,15 +45,14 @@ import com.sybrix.easygsp.exception.NotImplementedException;
 import com.sybrix.easygsp.util.MD5;
 import com.sybrix.easygsp.http.TemplateServlet;
 import com.sybrix.easygsp.server.EasyGServer;
-import com.sybrix.easygsp.http.StaticControllerMethods;
 import org.codehaus.groovy.runtime.GroovyCategorySupport;
 
 /**
- * Application <br/>
- * Description :
+ * Application (aka ServletContext) <br/>
+ * Description : EasyGSP ServletContext implementation.
  */
-public class Application implements ServletContext {
-        private static final Logger log = Logger.getLogger(Application.class.getName());
+public class ServletContextImpl implements ServletContext {
+        private static final Logger log = Logger.getLogger(ServletContextImpl.class.getName());
 
         private String appPath;
         private GSE3 groovyScriptEngine;
@@ -74,7 +71,7 @@ public class Application implements ServletContext {
         private ConcurrentHashMap resourceBundles;
         private List<String> errorFiles;
 
-        public Application(File dir) {
+        public ServletContextImpl(File dir) {
                 //this.appId = MD5.hash(dir);
                 this.appFile = dir;
                 this.appId = MD5.hash(dir.getAbsolutePath());

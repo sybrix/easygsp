@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.sybrix.easygsp.server;
+package com.sybrix.easygsp.http;
 
 import com.sybrix.easygsp.http.RequestThread;
+import com.sybrix.easygsp.server.EasyGServer;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -117,17 +118,19 @@ public class ThreadMonitor {
                                 Iterator iter = stopList.iterator();
                                 while (iter.hasNext()) {
                                         RequestThread requestThread = (RequestThread) iter.next();
-
+                                        
                                         if (currentTime > requestThread.getStopTime()) {
                                                 log.fine("trying to stop a thread ....");
                                                 if (requestThread.isAlive()) {
                                                         try {
-                                                                requestThread.sendError("Thread exceeded maximum timeout.");
-                                                                requestThread.sleep(500);
+                                                                //requestThread.sendError(500, requestThread.getScriptPath(),requestThread.getApplication().getGroovyScriptEngine(),requestThread.getBinding(), new Exception("Thread exceeded maximum timeout."));
+//                                                                requestThread.sendError("Thread exceeded maximum timeout.");
+//                                                                requestThread.sleep(500);
                                                                 requestThread.stop();
                                                         } catch (Throwable e) {
                                                                 // do nothing there.  An exception will be throw in the run of RequestThread
                                                                 // catch it and log it there
+
                                                         }
                                                 }
 

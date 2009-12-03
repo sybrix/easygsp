@@ -16,8 +16,6 @@
 
 package com.sybrix.easygsp.server;
 
-import com.sybrix.easygsp.http.RequestThread;
-
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -33,9 +31,7 @@ import java.util.logging.FileHandler;
 import java.io.File;
 import java.io.IOException;
 
-import com.sybrix.easygsp.http.Application;
-import com.sybrix.easygsp.http.SessionMonitor;
-import com.sybrix.easygsp.http.LoggerThread;
+import com.sybrix.easygsp.http.*;
 import com.sybrix.easygsp.util.PropertiesFile;
 import com.sybrix.easygsp.util.CustomLogFormatter;
 import com.sybrix.easygsp.exception.ApplicationNotFoundException;
@@ -51,7 +47,7 @@ public class EasyGServer {
         private ExecutorService executorService;
         private boolean isRunning;
 
-        private ConcurrentHashMap<String, Application> applications = new ConcurrentHashMap();
+        private ConcurrentHashMap<String, ServletContextImpl> applications = new ConcurrentHashMap();
         public static PropertiesFile propertiesFile;
         public static boolean isWindows;
 
@@ -168,7 +164,7 @@ public class EasyGServer {
                         loggerThread.stopLogging();
                         ThreadMonitor.stopMonitoring();
 
-                        for (Application app : applications.values()) {
+                        for (ServletContextImpl app : applications.values()) {
                                 app.stopApplication();
                         }
 
@@ -264,7 +260,7 @@ public class EasyGServer {
 //                }
 //        }
 
-        public static Application loadApplicationFromFileSystem(Map<String, Application> applications, String appName, String appPath) throws ApplicationNotFoundException {
+        public static ServletContextImpl loadApplicationFromFileSystem(Map<String, ServletContextImpl> applications, String appName, String appPath) throws ApplicationNotFoundException {
                 File file = null;
 
 //                if (propertiesFile.getString("groovy.webapp.dir").equals(docRoot) || (EasyGServer.isWindows && propertiesFile.getString("groovy.webapp.dir").equalsIgnoreCase(docRoot))) {
@@ -279,7 +275,7 @@ public class EasyGServer {
                 }
 
                 log.fine("loading application: " + file.getAbsoluteFile());
-                applications.put(appName, new Application(file));
+                applications.put(appName, new ServletContextImpl(file));
 
 
                 return applications.get(appName);

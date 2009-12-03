@@ -176,6 +176,16 @@ public class PropertiesFile {
                 }
         }
 
+        public Double getDouble(String key, Object... obj) {
+                try {
+                        return Double.parseDouble(getString(key, obj));
+                } catch (NumberFormatException e) {
+                        throw e;
+                } catch (Exception e) {
+                        throw new PropertyNotFoundException("property: " + key + " not found in properties file");
+                }
+        }
+
         public boolean getBoolean(String key, Boolean... obj) {
                 try {
 
