@@ -35,8 +35,10 @@
 </html>
 }}}
 
+
 For the MVC purist....
-*dbMVC.groovy*
+
+The controller : *dbMVC.groovy*
 {{{
         import groovy.sql.Sql
 
@@ -48,7 +50,8 @@ For the MVC purist....
         bind 'profiles', data
 }}}
 
-*dbMVC.gspx*
+
+The View:  *dbMVC.gspx*
 {{{
 
 <html>
