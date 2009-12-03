@@ -31,8 +31,8 @@ Open the startup and stop scripts and correct the JAVA_HOME and EASYGSP_HOME pat
   * vi start.sh
 
 
-EasyGSP will service request from the DocumentRoot/htdocs of your HTTP server.
-Create a link called "webapps" to your DocumentRoot/htdocs directory. 
+EasyGSP will service request from the DocumentRoot/HtDocs directory of your HTTP server.
+
 
 * Move the Examples *
 
