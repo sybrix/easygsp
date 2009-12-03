@@ -20,7 +20,7 @@ There are a ton of tutorials on how to install all of the required software for 
   * tar -xvf easygsp-`[version`].tar.gz
   * rm easygsp-`[version`].tar.gz
   * ln -s easygsp-`[version`] easygsp
-  * cd /usr/local/easygsp/bin
+  * cd easygsp/bin
   * chmod +x start.sh
   * cdmod +x stop.sh
 
