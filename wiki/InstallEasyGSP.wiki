@@ -24,6 +24,14 @@ There are a ton of tutorials on how to install all of the required software for 
   * chmod +x start.sh
   * cdmod +x stop.sh
 
+
+Open the startup and stop scripts and correct the JAVA_HOME and EASYGSP_HOME paths
+
+  * vi stop.sh
+  * vi start.sh
+  * vi ../conf/cache.ccf   (update property:         *`jcs.auxiliary.DC.attributes.DiskPath`*)
+
+
 EasyGSP will service request from the DocumentRoot/htdocs of your HTTP server.
 Create a link called "webapps" to your DocumentRoot/htdocs directory. 
 
@@ -33,9 +41,6 @@ Create a link called "webapps" to your DocumentRoot/htdocs directory.
   
 If you installed easygsp or java to a path different than what is listed above, open the following files and reference the correct paths:
 
-  * $EASYGSP_HOME/bin/stop.sh
-  * $EASYGSP_HOME/bin/start.sh
-  * $EASYGSP_HOME/conf/cache.ccf   (update property:         *`jcs.auxiliary.DC.attributes.DiskPath`*)
 
 * Start EasyGSP *
 
