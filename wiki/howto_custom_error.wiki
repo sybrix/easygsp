@@ -18,4 +18,4 @@ Each application can have it's own custom error pages.  A custom error page must
 
 If no custom pages are found, the default error pages are used. They are located at $EASYGSP_HOME/conf/errors.
 
-Currently EasyGSP can only issue 404 and 500 error codes, but this will change as EasyGSP matures.
+Currently EasyGSP can only issue 404 and 500 error codes, but this should change as EasyGSP matures.
