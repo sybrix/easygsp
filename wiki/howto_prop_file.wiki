@@ -32,5 +32,8 @@ You can still use the traditional way
 {{{
   Properties prop = new Properties()
   prop.load(new FileInputStream(application.appPath + File.separator + "WEB-INF" +   File.separator + "db.properties"))
-
 }}}
+
+class.getResourceAsStream() and class.getResource() are not recommended for locating sources on file system.
+
+Every controller and template has access the application (or ServletContext) object.  This object has a method named appPath() that will return the root directory for the application.  Use application.appPath to build paths to application resources.
