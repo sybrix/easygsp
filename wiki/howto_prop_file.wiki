@@ -37,3 +37,16 @@ You can still use the traditional way
 class.getResourceAsStream() and class.getResource() are not recommended for locating sources on file system.
 
 Every controller and template has access the application (or ServletContext) object.  This object has a method named appPath() that will return the root directory for the application.  Use application.appPath to build paths to application resources.
+
+PropertiesFile extended methods
+|| Method || Description ||
+|| Integer getInt(String key) ||  ||
+|| Integer getInt(String key, Integer defaultValue) ||  ||
+|| String getString(String key) ||  ||
+|| String getString(String key, String defaultValue) ||  ||
+|| Long getLong(String key) ||  ||
+|| Long getLong(String key, Long defaultValue) ||  ||
+|| Double getDouble(String key) ||  ||
+|| Double getDouble(String key, Double defaultValue) ||  ||
+|| Boolean getBoolean(String key) ||  ||
+|| Boolean getBoolean(String key, Boolean defaultValue) ||  ||
