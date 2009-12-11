@@ -28,7 +28,7 @@ If the properties file is not in the root of WEB-INF, then a full path is must b
    String url = propFile.get('server.url')
 }}}
 
-You can still use the tradional way if loading a properties file:
+You can still use the traditional way
 {{{
   Properties prop = new Properties()
   prop.load(new FileInputStream(application.appPath + File.separator + "WEB-INF" +   File.separator + "db.properties"))
