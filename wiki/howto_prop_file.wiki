@@ -1,0 +1,17 @@
+#summary Reading a Properties File
+
+= Reading from a Properties =
+
+The easiest way to load a properties file is to use the method: 
+
+   PropertiesFile loadPropertiesFile(fileName)
+
+PropertiesFile extends java.util.Properties  and adds some methods for converting properties values to commonly used types.
+
+
+When your properties file are in the root of your app's WEB-INF folder.  You only need to specify the name of the file to load the file.
+{{{
+   def propFile = loadPropertiesFile('db.properties')
+   Integer port = propFile.getInt('server.port')
+   String url = propFile.get('server.url')
+}}}
