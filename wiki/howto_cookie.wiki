@@ -5,5 +5,4 @@
 In addition to the servlet API methods for reading and writing cookies, there are 2 additional methods.
 
 || Method || Description ||
-|| Cookie getCookie(String cookieName) || Returns the first cookie that matches the specified name for the current path. If you have multiple cookies with the same name 
-use request.getCookies() to locate the cookie.  ||
+|| Cookie getCookie(String cookieName) || Returns the first cookie that matches the specified name for the current path||
