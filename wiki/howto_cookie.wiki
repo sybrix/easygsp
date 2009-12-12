@@ -7,5 +7,3 @@ In addition to the servlet API methods for reading and writing cookies, there ar
 || Method || Description ||
 || Cookie getCookie(String cookieName) || Returns the first cookie that matches the specified name for the current path. If you have multiple cookies with the same name, 
 use request.getCookies() to locate the cookie.  ||
-
-|| Cookie getCookie(String cookieName, [String value], [Integer maxAge], [String path]) || Creates/updates a cookie with the specified attributes and returns an instance of the cookie.  "value", "maxAge", "path" are optional." The created cookie is added to the response (no need to do it again). ||
