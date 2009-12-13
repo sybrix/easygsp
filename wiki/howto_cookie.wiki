@@ -26,7 +26,6 @@ In use:
    def cookie = getCookie('myUsernameCookie')
    
   if (cookie == null){
-    def maxAge = 60 * 24 * 30; // 60 minutes X 24 hours X 30 days
-    cookie = setCookie('myUsernameCookie', username, maxAge) // expires in 30 days
+    cookie = setCookie('myUsernameCookie', username, 30) // expires in 30 days
   }
 }}}
