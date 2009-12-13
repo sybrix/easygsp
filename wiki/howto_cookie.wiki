@@ -16,4 +16,6 @@ Creates/Sets a cookie with the values for the specified attributes.
 ==== Parameters ====
 || String cookieName || Required. The name of the cookie||
 || String value || Value to be stored with the cookie name. ||
-|| Integer maxAge || ||
+|| Integer maxAge || Maximum age of the cookie in seconds.||
+|| String path ||  Specifies a path for the cookie to which the client should return the cookie.||
+|| Boolean secure ||  Indicates to the browser whether the cookie should only be sent using a secure protocol, such as HTTPS or SSL.||
