@@ -14,8 +14,8 @@ Returns the first cookie that matches the specified name for the current path. I
 ==== public Cookie *setCookie*(String cookieName, `[`String value, `[`Integer maxAge, `[`String path, `[`String domain, `[` Boolean secure`]]]]]`) ====
 Creates/Sets a cookie with the values for the specified attributes.
 ==== Parameters ====
-|| String cookieName || Required. The name of the cookie||
-|| String value || Value to be stored with the cookie name. ||
-|| Integer maxAge || Maximum age of the cookie in seconds.||
-|| String path ||  Specifies a path for the cookie to which the client should return the cookie.||
-|| Boolean secure ||  Indicates to the browser whether the cookie should only be sent using a secure protocol, such as HTTPS or SSL.||
+|| cookieName || Required. The name of the cookie||
+|| value || Value to be stored with the cookie name. ||
+|| maxAge || Maximum age of the cookie in seconds.||
+|| path ||  Specifies a path for the cookie to which the client should return the cookie.||
+|| secure ||  Indicates to the browser whether the cookie should only be sent using a secure protocol, such as HTTPS or SSL.||
