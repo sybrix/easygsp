@@ -19,7 +19,7 @@ Creates/Sets a cookie with the values for the specified attributes.
 || cookieName || Required. The name of the cookie||
 || value || Value to be stored with the cookie name. ||
 || maxAge || Maximum age of the cookie in  ~~seconds~~ days. (servlet API, accepts seconds,  days is more common)  ||
-|| path ||  Specifies a path for the cookie to which the client should return the cookie. Note: if you're app does not have it's own domain name, your root path will be your folder name.  That's to say, you should not set your path to '/' if your app does not have its own domain name.  When no path is specified, the path will be your folder name (ie path = '/myAppFolderName/'). ||
+|| path ||  Specifies a path for the cookie to which the client should return the cookie. Note: if you're app does not have it's own domain name, your root path will be your folder name.  That's to say, you should not set your path to '/' if your app does not have its own domain name.  When no path is specified, the path will start with your folder name (ie path = '/myAppFolderName/'). ||
 || secure ||  Indicates to the browser whether the cookie should only be sent using a secure protocol, such as HTTPS or SSL.||
 
 
@@ -48,7 +48,7 @@ In this example a path is required, but the maxAge is not.  A null must be sent 
 }}}
 
 
-The cookie willl be created for whatever path this code is called from.  If you want the cookie to be available for the entire site, either create the cookie in the root path/directory of your web application or specify a path of "/".
+The cookie will be created for whatever path this code is called from.  If you want the cookie to be available for the entire site, either create the cookie in the root path/directory of your web application or specify a path of "/".
 
 Cookie support via Servlet API works:
 {{{ 
