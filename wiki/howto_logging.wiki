@@ -18,4 +18,9 @@ and System.out.println will still work, take your pick.
 If you use simply, println(), this will write to the response.outputstream, not to the console window.
 
 ==== void log() =====
-The log methods write to a log file on the file system.  When an applications, if a WEB-INF folder does not exist one is created. When a log statement is invoked, if a logs directory does not exist under the WEB-INF folder, one is created.
+The log methods write to a log file on the file system.  When an applications, if a WEB-INF folder does not exist one is created. When a log statement is invoked, if a logs directory does not exist under the WEB-INF folder, one is created. 
+
+Log messages are not immediately written to file. They are written at an interval specified in the conf/server.properties file. [configure See the Configuration Properties(logger.checkInterval.seconds) page]
+
+If you want your the log messages to also be written to the console window. 
+Set the [configure "log.to.console"] property to true.  This maybe useful for development, but not necessary for a hosted server. 
