@@ -13,6 +13,8 @@ Returns the first cookie that matches the specified name for the current path. I
 
 ==== public Cookie *setCookie*(String cookieName, `[`String value, `[`Integer maxAge, `[`String path, `[`String domain, `[` Boolean secure`]]]]]`) ====
 Creates/Sets a cookie with the values for the specified attributes.
+
+
 ==== Parameters ====
 || cookieName || Required. The name of the cookie||
 || value || Value to be stored with the cookie name. ||
@@ -29,3 +31,21 @@ In use:
     cookie = setCookie('myUsernameCookie', username, 30) // expires in 30 days
   }
 }}}
+
+Optional arguments(sort if): 
+
+The parameters list is really an array (Object...args). You can only skip an argument if you don't need any that come after it.  If you don't want to specify an argument, you can enter null.
+
+In this example a path is required, but the maxAge is not.  A null must be sent for maxAge, and anything after path can be excluded. 
+{{{
+   def cookie = getCookie('myUsernameCookie')
+   
+  if (cookie == null){
+   def path = '/'
+   def maxAge = null
+    cookie = setCookie('myUsernameCookie', username, maxAge, path) // expires this session
+  }
+}}}
+
+
+The cookie willl be created for whatever path this code is called from.  If you want the cookie to be available for the entire site, either create the cookie in the root path/directory of your web application or specify a path of "/".
