@@ -14,4 +14,6 @@ If you start EasyGSP in a terminal window, and you want to write something out t
 
 console() == System.out.println()
 
-But System.out.println will still work.
+and System.out.println will still work, take your pick.
+If you use simply, println(), this will write to the response.outputstream, not to the console window.
+
