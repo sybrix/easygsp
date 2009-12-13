@@ -18,4 +18,4 @@ and System.out.println will still work, take your pick.
 If you use simply, println(), this will write to the response.outputstream, not to the console window.
 
 ==== log() =====
-The log methods write to a log file on the file system.  When an applications, if a WEB-INF folder does not exist one is created. When a log statement is invoked, if a logs directory does not exist under the WEB-INF folder one is created.
+The log methods write to a log file on the file system.  When an applications, if a WEB-INF folder does not exist one is created. When a log statement is invoked, if a logs directory does not exist under the WEB-INF folder, one is created.
