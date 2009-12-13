@@ -12,4 +12,8 @@ Returns the first cookie that matches the specified name for the current path. I
 
 
 ==== public Cookie *setCookie*(String cookieName, `[`String value, `[`Integer maxAge, `[`String path, `[`String domain, `[` Boolean secure`]]]]]`) ====
-Returns the first cookie that matches the specified name for the current path. If you have multiple cookies with the same name use to servlet api method `request.getCookies()` to locate the cookie.
+Creates/Sets a cookie with the values for the specified attributes. 
+
+|| String cookieName || Required. The name of the cookie||
+|| String value || Value to be stored with the cookie name. ||
+|| Integer maxAge || ||
