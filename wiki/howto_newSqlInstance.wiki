@@ -1,0 +1,5 @@
+#summary Implicit method newSqlInstance()
+
+EasyGSP adds a method to all classes, controllers and templates for obtaining a groovy.sql.Sql object.
+
+==== public groovy.sql.Sql newSqlInstance(String dataSource) ====
