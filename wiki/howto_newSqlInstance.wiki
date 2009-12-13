@@ -20,11 +20,19 @@ web.groovy
 
 class web {
 	def onApplicationStart(app){                
+       // if this was read, yes, I would loop thru the properties
                 def propFile = loadPropertiesFile('db.properties')
                 app['database.url'] = propFile.get('database.url')
                 app['database.password'] = propFile.get('database.password')          
                 app['database.username'] = propFile.get('database.username')
                 app['database.driver'] = propFile.get('database.driver')
+
+                // setup easygspDB datasource
+                app['easygspDB.database.url'] = propFile.get('easygspDB.database.url')
+                app['easygspDB.database.password'] = propFile.get('easygspDB.database.password')          
+                app['easygspDB.database.username'] = propFile.get('easygspDB.database.username')
+                app['easygspDB.database.driver'] = propFile.get('easygspDB.database.driver')
+
                  
         }
 }}}
@@ -37,10 +45,11 @@ database.url=jdbc:mysql://localhost:3306/mysql
 database.password=superSecretPassword
 database.username=root
 
-# name prefix will server as "datasource" name
+# name prefix(easygspDB) will serve as "datasource" name
 easygspDB.database.database.driver=com.mysql.jdbc.Driver
 easygspDB.database.url=jdbc:mysql://localhost:3306/easygspDB
 easygspDB.database.password=superSecretPassword
 easygspDB.database.username=root
+
 
 }}}
