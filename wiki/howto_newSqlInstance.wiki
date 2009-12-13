@@ -3,3 +3,6 @@
 EasyGSP adds a method to all classes, controllers and templates for obtaining a groovy.sql.Sql object.
 
 ==== public groovy.sql.Sql newSqlInstance(String dataSource) ====
+
+In order to use this method, the database attributes must be set application attributes.
+The best place to do this, in your the onApplicationStart(app) event of the WEB-INF/web.groovy file.
