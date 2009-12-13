@@ -32,7 +32,7 @@ In use:
   }
 }}}
 
-Optional arguments(sort if): 
+Optional arguments(sort of): 
 
 The parameters list is really an array (Object...args). You can only skip an argument if you don't need any that come after it.  If you don't want to specify an argument, you can enter null.
 
