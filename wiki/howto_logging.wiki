@@ -23,4 +23,4 @@ The log methods write to a log file on the file system.  When an applications, i
 Log messages are not immediately written to file. They are written at an interval specified in the conf/server.properties file. [configure See the Configuration Properties(logger.checkInterval.seconds) page]
 
 If you want your the log messages to also be written to the console window. 
-Set the [configure "log.to.console"] property to true.  This maybe useful for development, but not necessary for a hosted server. 
+Set the [configure "log.to.console"] property to true.  This maybe useful for development, but not unnecessary for a hosted server. 
