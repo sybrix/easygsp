@@ -80,7 +80,7 @@ When developing MVC style pages in EasyGSP, the model, view and controller shoul
 
 There are also a few rules to follow when doing MVC development:
   * The controller is a normal Groovy script that must end with the .groovy extension
-  * The view is SimpleTemplateEngine style template that must end with the .gspx extension
+  * The view is a SimpleTemplateEngine style template that must end with the .gspx extension
   * The controller and view must have the same file name(minus the extension), in order for the controller to automatically forward to the view.  If the controller and view don't share the same file name, you must explicitly forward to the view using the forward() method.
   * View classes should be in a folder in the WEB-INF directory where the folder name matches the package name
   
