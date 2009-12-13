@@ -11,5 +11,5 @@ The methods are available in all controllers and templates.
 Returns the first cookie that matches the specified name for the current path. If you have multiple cookies with the same name use to servlet api method `request.getCookies()` to locate the cookie. ||
 
 
-=== public Cookie *setCookie*(String cookieName, `[`String value, `[`Integer maxAge, `[`String path, `[`String domain, `[` Boolean secure`]]]]]`) ===
+=== public Cookie *setCookie*(String cookieName, [String value, `[`Integer maxAge, `[`String path, `[`String domain, `[` Boolean secure`]]]]]`) ===
 Returns the first cookie that matches the specified name for the current path. If you have multiple cookies with the same name use to servlet api method `request.getCookies()` to locate the cookie.
