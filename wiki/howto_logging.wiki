@@ -4,7 +4,9 @@
 
 Every class, controller and template can call the follow methods:
 || *Object* || *Description* ||
-|| console(object) || Writes object.toString() to the console/terminal window. Useful when developing ||
-|| log(String s)|| Writes message to application's log file.  Log file located @ WEB-INF/logs. Messages are written to the log file at a specified interval, not immediately. ||
-|| log(Throwable t)|| Writes exception to application's log file.  Log file located @ WEB-INF/logs ||
-|| log(String logMessage, Throwable t) || Writes message and exception to log file. Log file located @ WEB-INF/logs ||
+|| void console(Object object) || Writes object.toString() to the console/terminal window. Useful when developing ||
+|| void log(String s)|| Writes message to application's log file.  Log file located @ WEB-INF/logs. Messages are written to the log file at a specified interval, not immediately. ||
+|| void log(Throwable t)|| Writes exception to application's log file.  Log file located @ WEB-INF/logs ||
+|| void log(String logMessage, Throwable t) || Writes message and exception to log file. Log file located @ WEB-INF/logs ||
+
+==== void console(Object message) =====
