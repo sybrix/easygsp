@@ -7,7 +7,7 @@ Ultimately every groovy controller and template is converted to a class, but it'
   A controller is any valid groovy script. What EasyGSP calls a controller is called a "script" in Groovy. Controllers don't have to be created with the "class" keyword, they don't have to inherit anything nor do they have to have any methods.  These are not EasyGSP features, but rather groovy features. Once a controller is processed it will be forwarded to a template. A controller cannot be a blank file, the controller has to have some code. 
 
 *Templates*
-  Templates render HTML.  They are the V in MVC or they could be used in the same way as you would a php script.  
+  Templates render HTML.  They are the V in MVC or they could be used in the same way as you would a php script.  Templates in EasyGSP work almost exactly the same as normal Groovy templates.
 
 *Classes*
    In addition to controllers and templates, you can define classes to encapsulate functionality.  The ideal place to create classes are in the WEB-INF directory.  It's also a good idea to use package names for all user defined classes.
