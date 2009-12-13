@@ -17,6 +17,9 @@ The following are accessible to every class, template and controller.
 || Integer toInt(String val) || Returns an Integer object for a string. ||
 || Long toLong(String val) || Returns a Long object for a string. ||
 || Double toDbl(String val) || Return a Double object for a string. ||
+|| Sql newSqlInstance([String dataSourceName]) || Returns groovy.sql.Sql object.  Database parameters must be supplied as application attributes ||
+|| Properties loadPropertiesFile(String fileName) || Returns a properties file ||
+
 
 The following are only access to the templates and controllers
 || *Object* || *Description* ||
