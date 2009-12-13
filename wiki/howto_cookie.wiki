@@ -50,4 +50,25 @@ In this example a path is required, but the maxAge is not.  A null must be sent 
 
 The cookie willl be created for whatever path this code is called from.  If you want the cookie to be available for the entire site, either create the cookie in the root path/directory of your web application or specify a path of "/".
 
+Cookie support via Servlet API works:
+{{{ 
+     import javax.servlet.http.Cookie
+ 
+     def cookies = request.getCookies()
+     def cookie 
+     for(i in 0..cookies.size() -1){
+        if (cookies[i].name == 'myCookieName'){
+            cookie = cookies[i]
+            break
+        }
+     }
+
+    if (cookie == null){
+       cookie = new Cookie(name:'myCookieName', value: 'cookieExample', path: '/')
+    }
+    response.addCookie(cookie)
+    
+}}}
+
 [http://www.javamex.com/tutorials/servlets/cookies_api.shtml Click here for a more in depth tutorial on Java cookie support ]
+
