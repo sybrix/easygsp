@@ -21,7 +21,7 @@ web.groovy
 
 class web {
 	def onApplicationStart(app){                
-       // if this was read, yes, I would loop thru the properties
+       // if this was real, yes, I would loop thru the properties
                 def propFile = loadPropertiesFile('db.properties')
                 app['database.url'] = propFile.get('database.url')
                 app['database.password'] = propFile.get('database.password')          
