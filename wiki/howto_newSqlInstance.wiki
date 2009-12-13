@@ -51,6 +51,24 @@ easygspDB.database.database.driver=com.mysql.jdbc.Driver
 easygspDB.database.url=jdbc:mysql://localhost:3306/easygspDB
 easygspDB.database.password=superSecretPassword
 easygspDB.database.username=root
+}}}
+
+=== And now newSqlInstance() ===
+index.gsp
+{{{
+    def db = newSqlInstance()
+
+    d.rows("SELECT host FROM user").each {
+        console it.host
+   }
+}}}
 
 
+To connect to the other database in the properties file, specify the datasource name:
+{{{
+    def db = newSqlInstance('easygspDB')
+
+    d.rows("SELECT user FROM user").each {
+        console it.user
+   }
 }}}
