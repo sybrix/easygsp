@@ -15,6 +15,7 @@ The following attributes must be set:
 
 The best place to store these would be in a properties.  Here's a code sample that reads the attributes from a properties file and adds them to the application object when onApplicationStart event is fired.
 
+=== The Set Up ===
 web.groovy
 {{{
 
