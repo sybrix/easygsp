@@ -36,4 +36,11 @@ database.driver=com.mysql.jdbc.Driver
 database.url=jdbc:mysql://localhost:3306/mysql
 database.password=superSecretPassword
 database.username=root
+
+# name prefix will server as "datasource" name
+easygspDB.database.database.driver=com.mysql.jdbc.Driver
+easygspDB.database.url=jdbc:mysql://localhost:3306/easygspDB
+easygspDB.database.password=superSecretPassword
+easygspDB.database.username=root
+
 }}}
