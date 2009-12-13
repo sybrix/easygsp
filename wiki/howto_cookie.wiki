@@ -19,7 +19,7 @@ Creates/Sets a cookie with the values for the specified attributes.
 || cookieName || Required. The name of the cookie||
 || value || Value to be stored with the cookie name. ||
 || maxAge || Maximum age of the cookie in  ~~seconds~~ days. (servlet API, accepts seconds,  days is more common)  ||
-|| path ||  Specifies a path for the cookie to which the client should return the cookie. Note: if you're app does not have it's own domain name, your root path will be your folder name.  That's to say setting the path to '/' will work, but the cookie will no be accessible to you.  A path of '/myCookiePath/' will. ||
+|| path ||  Specifies a path for the cookie to which the client should return the cookie. Note: if you're app does not have it's own domain name, your root path will be your folder name.  That's to say setting the path to '/' will work, but the cookie will no be accessible to you.  A path of '/myCookiePath/' will. When no path is specified, the path will be your folder name. ||
 || secure ||  Indicates to the browser whether the cookie should only be sent using a secure protocol, such as HTTPS or SSL.||
 
 
