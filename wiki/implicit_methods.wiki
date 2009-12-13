@@ -14,13 +14,14 @@ The following are accessible to every class, template and controller.
 || String encode(String s)|| Encodes string as  URL encoded string.  Returns a string. ||
 || String decode(String s)|| Decodes a URL encoded string.  Returns a string. ||
 || String htmlEncode(String s) || HTML encodes a string. Return a string. || 
-
+|| Integer toInt(String val) || Returns an Integer object for a string. ||
+|| Long toLong(String val) || Returns a Long object for a string. ||
+|| Double toDbl(String val) || Return a Double object for a string. ||
 
 The following are only access to the templates and controllers
 || *Object* || *Description* ||
 || redirect(String url) || Sends redirect command to browser.||
 || forward(String uri) || Forwards processing to the specified uri ||
 || bind(String key, Object value) || Bind is used in controllers to store name/value pairs  that will be used be in a view template.||
-|| Integer toInt(String val) || Returns an Integer object for a string. ||
-|| Long toLong(String val) || Returns a Long object for a string. ||
-|| Double toDbl(String val) || Return a Double object for a string. ||
+|| [howto_cookie Cookie setCookie(...)] || create a cookie, and adds it to the response ||
+|| [howto_cookie Cookie getCookie(cookieName)] || Returns the first cookie found that matches the name specified  ||
