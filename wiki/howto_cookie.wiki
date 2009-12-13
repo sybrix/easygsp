@@ -2,9 +2,9 @@
 
 = Reading/Writing Cookies =
 
-In addition to the servlet API methods for reading and writing cookies, there are 2 additional methods for manipulating cookies:
+In addition to the servlet API methods for reading and writing cookies, there are 2 additional implicit methods for manipulating cookies.  The Cookie object created and return is the Cookie object from the Servlet API jar. Minus the implicit methods,cookie support in EasyGSP is the same as in a traditional servlet based web application.
 
-The methods are available in all controllers and templates.
+The implicit methods are available in all controllers and templates.
 
 ==== public Cookie *getCookie*(String cookieName) ====
 
@@ -16,6 +16,17 @@ Creates/Sets a cookie with the values for the specified attributes.
 ==== Parameters ====
 || cookieName || Required. The name of the cookie||
 || value || Value to be stored with the cookie name. ||
-|| maxAge || Maximum age of the cookie in seconds.||
+|| maxAge || Maximum age of the cookie in minutes.  ||
 || path ||  Specifies a path for the cookie to which the client should return the cookie.||
 || secure ||  Indicates to the browser whether the cookie should only be sent using a secure protocol, such as HTTPS or SSL.||
+
+
+In use:
+{{{
+   def cookie = getCookie('myUsernameCookie')
+   
+  if (cookie == null){
+    def maxAge = 60 * 24 * 30; // 60 minutes X 24 hours X 30 days
+    cookie = setCookie('myUsernameCookie', username, maxAge) // expires in 30 days
+  }
+}}}
