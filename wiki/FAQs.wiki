@@ -8,4 +8,4 @@
 
 * Where can I Host my EasyGSP application  ?*
 
-Probably nowhere unless you're willing to pay for your own server.  Since I do recognize this as a problem, an ironic problem since easyGSP is trying to solve this very problem, contact me and if you've developed something in EasyGSP and now need a place to host it.  I can provide a certain amount of *absolutely no guarantee of anything* free hosting. You will be a testing guinea pig and we can help each other out.  
+Probably nowhere unless you're willing to pay for your own server.  Since I do recognize this as a problem, an ironic problem since easyGSP is trying to solve this very problem, contact me and if you've developed something in EasyGSP and now want a place to host it.  I can provide a certain amount of *absolutely no guarantee of anything* free hosting. You will be a testing guinea pig and we can help each other out.  
