@@ -21,7 +21,7 @@ public class Parsers {
 
         static {
                 isVirtualHostingEnabled = EasyGServer.propertiesFile.getBoolean("virtual.hosting", false);
-                String[] hosts = EasyGServer.propertiesFile.getString("default.host").split(",");
+                String[] hosts = EasyGServer.propertiesFile.getString("default.host","localhost").split(",");
                 for (String host : hosts) {
                         defaultVirtualHostList.add(host);
                 }
