@@ -566,6 +566,10 @@ public class RequestThread extends Thread {
 //        }
 
         protected static void sendError(int errorCode, String scriptPath, GSE3 gse, CustomServletBinding binding, Throwable e) {
+                if (RequestThreadInfo.get().errorOccurred()){
+                        return;
+                }
+
                 try {
 
                         ResponseImpl response = (ResponseImpl) binding.getVariable("response");
