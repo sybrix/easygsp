@@ -80,7 +80,8 @@ public class EasyGServer {
                         JCS.setConfigFilename(APP_DIR + File.separator + "conf" + File.separator + "cache.ccf");
 
                         System.setSecurityManager(new EasyGSecurityManager());
-
+                        System.setProperty("easygsp.version", "@easygsp_version");
+                        
 //                        log.fine("log fine");
 //                        log.finer("log finer");
 //                        log.finest("log finest");
@@ -88,11 +89,13 @@ public class EasyGServer {
 //                        log.info("log info");
 //                        log.severe("log severe");
 
-                        log.info("\nJRE_HOME: " + System.getProperty("java.home") +
+                        log.info(
+                                "\nEASYGSP_VERSION: " + System.getProperty("easygsp.version") +
+                                "\nJRE_HOME: " + System.getProperty("java.home") +
                                 "\nJAVA_VERSION: " + System.getProperty("java.version") +
                                 "\nGROOVY_VERSION: " + groovyVersion +
                                 "\nWORKING_DIR: " + APP_DIR +
-                                "\nGroovy Script Server Started. Listening on port " + propertiesFile.getString("server.port", 4444) +
+                                "\nGroovy Script Server Started. Listening on port " + propertiesFile.getInt("server.port", 4444) +
                                 "\n");
 
                         if (EasyGServer.propertiesFile.getBoolean("virtual.hosting", false) == true && EasyGServer.propertiesFile.getString("default.host","").equals("")){
@@ -115,7 +118,7 @@ public class EasyGServer {
                         //loadApplicationsFromFileSystem();
 
                         executorService = Executors.newCachedThreadPool();
-                        serverSocket = new ServerSocket(propertiesFile.getInt("server.port","4444"));
+                        serverSocket = new ServerSocket(propertiesFile.getInt("server.port",4444));
 
                         Thread shutdown = new Thread(new Shutdown(this));
                         shutdown.start();
@@ -231,7 +234,7 @@ public class EasyGServer {
         private void loadDatabaseDrivers() {
                 int index = 1;
                 String driver = null;
-                while (propertiesFile.get("database.driver." + index) != null) {
+                while (propertiesFile.getString("database.driver." + index) != null) {
                         try {
 
                                 driver = propertiesFile.getString("database.driver." + index++);

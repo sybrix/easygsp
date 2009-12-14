@@ -19,20 +19,20 @@ package com.sybrix.easygsp.exception;
  * PropertyNotFoundException <br/>
  * Description :
  */
-public class PropertyNotFoundException extends RuntimeException{
-        public PropertyNotFoundException() {
+public class PropertyFileException extends RuntimeException{
+        public PropertyFileException() {
                 super();
         }
 
-        public PropertyNotFoundException(Throwable cause) {
+        public PropertyFileException(Throwable cause) {
                 super(cause);
         }
 
-        public PropertyNotFoundException(String message) {
+        public PropertyFileException(String message) {
                 super(message);
         }
 
-        public PropertyNotFoundException(String message, Throwable cause) {
+        public PropertyFileException(String message, Throwable cause) {
                 super(message, cause);
         }
 }
