@@ -32,7 +32,7 @@ fileupload.gsp
                         } else {
                                 cout item.fieldName
                         }
-                        cout("file upload" + item);
+                        console("file upload" + item);
                 }
 
 
