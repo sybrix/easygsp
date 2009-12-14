@@ -178,8 +178,7 @@ public class RequestThread extends Thread {
 
                         //process the request
                         if (parsedRequest.getRequestURI().endsWith(templateExtension)) {
-                                RequestThreadInfo.get().setTemplateRequest(true);
-                                processTemplateRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
+                                 processTemplateRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         } else {
                                 processScriptRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         }

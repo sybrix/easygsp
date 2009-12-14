@@ -82,7 +82,7 @@ public class RequestImpl implements HttpServletRequest {
                 altGroovyExtension = EasyGServer.propertiesFile.getString("alt.groovy.extension",".gspx");
                 viewExtension = EasyGServer.propertiesFile.getString("view.extension",".gspx");
                 tempUploadDirectory = EasyGServer.propertiesFile.getString("file.upload.temp.directory", System.getProperty("java.io.tmpdir"));
-                maxUploadSize = EasyGServer.propertiesFile.getLong("file.upload.max.filesize", -1);
+                maxUploadSize = EasyGServer.propertiesFile.getLong("file.upload.max.filesize", -1L);
                 uploadThresholdSize = EasyGServer.propertiesFile.getInt("file.upload.threshold",2621440);
         }
 
@@ -114,6 +114,13 @@ public class RequestImpl implements HttpServletRequest {
                 Cookie[] cookieAry = new Cookie[cookies.values().size()];
                 cookies.values().toArray(cookieAry);
                 return cookieAry;
+        }
+
+        public Cookie getCookie(String cookieName) {
+                if (cookies == null)
+                        parseCookies();
+
+                return cookies.get(cookieName);
         }
 
         public long getDateHeader(String s) {

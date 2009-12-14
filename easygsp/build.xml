@@ -4,7 +4,7 @@
         <property environment="env"/>
 
         <property name="jdk" value="${env.JAVA_HOME}"/>
-        <property name="buildNumber" value="0.2.2"/>
+        <property name="buildNumber" value="0.2.4"/>
         <property name="easyGSPDir" value="easygsp-${buildNumber}"/>
         <property name="lib" value="lib"/>
         <property name="src" value="src"/>
@@ -56,6 +56,10 @@
                                 <include name="**/*.*"/>
                         </fileset>
                 </copy>
+
+                <replace file="${build}/src/com/sybrix/easygsp/server/EasyGServer.java">
+                        <replacefilter token="@easygsp_version" value="${buildNumber}"/>
+                </replace>
 
         </target>
 
@@ -112,7 +116,6 @@
                 <mkdir dir="deploy/${easyGSPDir}/temp"/>
                 <mkdir dir="deploy/${easyGSPDir}/conf/errors"/>
                 <mkdir dir="deploy/${easyGSPDir}/cache"/>
-                <mkdir dir="deploy/${easyGSPDir}/webapps"/>
                 <mkdir dir="deploy/${easyGSPDir}/examples"/>
 
                 <copy todir="deploy/${easyGSPDir}/bin">
@@ -149,28 +152,8 @@
                 <copy tofile="deploy/${easyGSPDir}/bin/easygsp.jar" file="${build}/easygsp.jar"/>
                 <copy tofile="deploy/${easyGSPDir}/release.txt" file="release.txt"/>
                 <copy tofile="deploy/${easyGSPDir}/license.txt" file="license.txt"/>
-                <replace
-                        file="deploy/${easyGSPDir}/conf/server.properties">
-                        <replacefilter
-                                token="C:/projects/easygsp/easygsp/webapps"
-                                value="C:/easygsp/webapps"/>
-                </replace>
 
                 <zip destfile="deploy/easygsp-${buildNumber}.zip" basedir="deploy"/>
-
-                <move todir="deploy/${easyGSPDir}/apps">
-                        <fileset dir="deploy/${easyGSPDir}/webapps"/>
-                </move>
-
-                <replace
-                        file="deploy/${easyGSPDir}/conf/server.properties">
-                        <replacefilter
-                                token="C:/easygsp/webapps"
-                                value="/usr/local/easygsp/webapps"/>
-                        <replacefilter
-                                token="C:/easygsp/temp"
-                                value="/usr/local/easygsp/temp"/>
-                </replace>
 
                 <tar destfile="deploy/${easyGSPDir}.tar" basedir="deploy">
                         <exclude name="**/*.zip"/>

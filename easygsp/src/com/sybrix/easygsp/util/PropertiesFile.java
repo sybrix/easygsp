@@ -16,29 +16,22 @@
 package com.sybrix.easygsp.util;
 
 
-import com.sybrix.easygsp.exception.PropertyNotFoundException;
+import com.sybrix.easygsp.exception.PropertyFileException;
+import com.sybrix.easygsp.exception.PropertyFormatException;
 
 import java.util.Properties;
 import java.util.Set;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 import java.net.URL;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 
 
 /**
  * General purpose properties file reader class.
  */
-public class PropertiesFile {
-        private Properties prop;
+public class PropertiesFile extends Properties{
         private String fileName;
-
+        private File propFile;
 
         /**
          * The fileName is the classpath location of the file relative to the root '/'  of the classpath.<br/>
@@ -61,17 +54,13 @@ public class PropertiesFile {
          */
         public PropertiesFile(String fileName) {
                 this.fileName = fileName;
+                this.propFile = new File(fileName);
                 load();
         }
 
-        public PropertiesFile() {
-
-        }
-
         public PropertiesFile(InputStream inputStream) {
-                prop = new Properties();
                 try {
-                        prop.load(inputStream);
+                        load(inputStream);
                 } catch (Exception e) {
                         throw new RuntimeException("Properties file load for inputstream failed", e);
                 } finally {
@@ -86,18 +75,17 @@ public class PropertiesFile {
          * Reads the property file from the file system.
          */
         public void load() {
-                prop = new Properties();
 
                 try {
                         if (fileName.startsWith("classPath:")) {
                                 URL url = getClass().getClassLoader().getResource(fileName.substring(10));
                                 FileInputStream fis = new FileInputStream(url.getFile());
-                                prop.load(fis);
+                                load(fis);
                                 fis.close();
                         } else {
 
                                 Reader fis = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "ISO-8859-1"));
-                                prop.load(fis);
+                                load(fis);
                                 fis.close();
                         }
 
@@ -111,91 +99,108 @@ public class PropertiesFile {
                 }
         }
 
-        /**
-         * @param key -  properties file key
-         * @return Returns string value mapped to this key in the properties file.
-         */
-        public String getString(String key, Object... obj) {
-
-                try {
-                        return prop.get(key).toString();
-
-                } catch (Exception e) {
-                        if (obj.length > 0) {
-                                return obj[0].toString();
-                        }
-                }
-
-                return null;
-        }
 
         /**
          * @param key -  properties file key
          * @return Returns the value mapped to this key in the properties file.
          */
-        public Object get(String key) {
+        public String getString(String key) {
                 try {
-                        return prop.get(key);
+                        return super.getProperty(key);
                 } catch (NullPointerException e) {
-                        throw new PropertyNotFoundException("property: " + key, e);
+                        return null;
                 }
         }
 
         public String getString(String key, String defaultValue) {
                 try {
-                        return prop.get(key).toString();
+                        return super.getProperty(key,defaultValue);
                 } catch (NullPointerException e) {
                         return defaultValue;
                 }
         }
 
 
-        /**
-         * Returns null if value can not be parsed as an integer.
-         *
-         * @param key -  properties file key
-         * @return Returns the Integer value mapped to this key in the properties file.
-         */
-        public Integer getInt(String key, Object... obj) {
+        public Integer getInt(String key) {
                 try {
-                        return Integer.parseInt(getString(key, obj));
+                        return Integer.parseInt(getString(key));
                 } catch (NumberFormatException e) {
-                        throw e;
+                        throw new PropertyFormatException("property: " + key, e);
+                } catch (NullPointerException e) {
+                        return null;
                 } catch (Exception e) {
-                        throw new PropertyNotFoundException("property: " + key + " not found in properties file");
+                        throw new PropertyFileException("property: " + key, e);
                 }
         }
 
-        public Long getLong(String key, Object... obj) {
+
+        public Integer getInt(String key, Integer defaultValue) {
                 try {
-                        return Long.parseLong(getString(key, obj));
-                } catch (NumberFormatException e) {
-                        throw e;
+                        Integer val = getInt(key);
+                        return val == null ? defaultValue : val;
                 } catch (Exception e) {
-                        throw new PropertyNotFoundException("property: " + key + " not found in properties file");
+                        return defaultValue;
                 }
         }
 
-        public Double getDouble(String key, Object... obj) {
+        public Long getLong(String key) {
                 try {
-                        return Double.parseDouble(getString(key, obj));
+                        return Long.parseLong(getString(key));
                 } catch (NumberFormatException e) {
-                        throw e;
+                        throw new PropertyFormatException("property: " + key, e);
+                                        } catch (NullPointerException e) {
+                        return null;
                 } catch (Exception e) {
-                        throw new PropertyNotFoundException("property: " + key + " not found in properties file");
+                        throw new PropertyFileException("property: " + key, e);
                 }
         }
 
-        public boolean getBoolean(String key, Boolean... obj) {
-                try {
 
-                        return getString(key, obj.toString()).equalsIgnoreCase("true");
+        public Long getLong(String key, Long defaultValue) {
+                try {
+                        Long val =  Long.parseLong(getString(key));
+                        return val == null ? defaultValue : val;
+                } catch (Exception e) {
+                        return defaultValue;
+                }
+        }
+
+
+        public Double getDouble(String key) {
+                try {
+                        return Double.parseDouble(getString(key));
+                } catch (NumberFormatException e) {
+                        throw new PropertyFormatException("property: " + key, e);
+                }catch (NullPointerException e){
+                        return null;
+                } catch (Exception e) {
+                        throw new PropertyFileException("property: " + key, e);
+                }
+        }
+
+        public Double getDouble(String key, Double defaultValue) {
+                try {
+                        Double val = Double.parseDouble(getString(key));
+                        return val == null ? defaultValue : val;
+                } catch (Exception e) {
+                        return defaultValue;
+                }
+        }
+
+
+        public Boolean getBoolean(String key) {
+                try {
+                        return new Boolean(getString(key));
                 } catch (Exception e) {
                         throw new RuntimeException(e);
                 }
         }
 
-        public Set getKeySet() {
-                return prop.keySet();
+        public Boolean getBoolean(String key, Boolean defaultValue) {
+                try {
+                        return getBoolean(key);
+                } catch (Exception e) {
+                        return defaultValue;
+                }
         }
 }

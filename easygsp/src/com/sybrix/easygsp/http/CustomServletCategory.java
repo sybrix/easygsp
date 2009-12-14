@@ -7,9 +7,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-public class CustomServletCategory  {
+public class CustomServletCategory {
 
         public static Object get(ServletContext context, String key) {
                 return context.getAttribute(key);
@@ -60,16 +62,16 @@ public class CustomServletCategory  {
         }
 
         public static void redirect(GroovyObject self, String s) throws IOException {
-                Binding binding = (Binding)self.getProperty("binding");
-                ResponseImpl response = (ResponseImpl)binding.getVariable("response");
-                RequestImpl request = (RequestImpl)binding.getVariable("request");
+                Binding binding = (Binding) self.getProperty("binding");
+                ResponseImpl response = (ResponseImpl) binding.getVariable("response");
+                RequestImpl request = (RequestImpl) binding.getVariable("request");
                 request.setAttribute("_explicitForward", true); // when true, controllers don't auto forward
                 response.sendRedirect(s);
         }
 
         public static void forward(GroovyObject self, String s) throws IOException, ServletException {
-                Binding binding = (Binding)self.getProperty("binding");
-                RequestImpl request = (RequestImpl)binding.getVariable("request");
+                Binding binding = (Binding) self.getProperty("binding");
+                RequestImpl request = (RequestImpl) binding.getVariable("request");
                 request.setAttribute("_explicitForward", true);
 
                 request.forward(s);
@@ -77,24 +79,70 @@ public class CustomServletCategory  {
 
 
         public static void bind(GroovyObject self, String name, Object val) throws IOException, ServletException {
-                Binding binding = (Binding)self.getProperty("binding");
+                Binding binding = (Binding) self.getProperty("binding");
                 binding.setVariable(name, val);
         }
 
-        public static Integer toInt(GroovyObject self, String val) throws IOException, ServletException {
-                if (val == null)
-                        return null;
-                
-                return Integer.parseInt(val);
+        public static Cookie getCookie(GroovyObject self, String cookieName) {
+                // ServletContextImpl app = RequestThreadInfo.get().getApplication();
+                Binding binding = (Binding) self.getProperty("binding");
+                RequestImpl request = (RequestImpl) binding.getVariable("request");
+                return request.getCookie(cookieName);
         }
 
-        public static Double toDbl(GroovyObject self, String val) throws IOException, ServletException {
-                return Double.parseDouble(val);
+        /**
+         * @param self
+         * @param cookieName
+         * @param args
+         */
+        public static Cookie setCookie(GroovyObject self, String cookieName, Object... args) {
+                // ServletContextImpl app = RequestThreadInfo.get().getApplication();
+                Binding binding = (Binding) self.getProperty("binding");
+                ResponseImpl response = (ResponseImpl) binding.getVariable("response");
+                Cookie cookie = new Cookie(cookieName, args.length > 0 ? args[0].toString() : "");
+
+                if (args.length > 1)
+                        if (args[1] != null)
+                                cookie.setMaxAge(Integer.parseInt(args[1].toString()) * 60 * 60 * 24);
+
+                if (args.length > 2)
+                        if (args[2] != null && args[2].toString().length() > 0)
+                                cookie.setPath(args[2].toString());
+
+                if (args.length > 3)
+                        if (args[3] != null && args[3].toString().length() > 0)
+                                cookie.setDomain(args[3].toString());
+
+                if (args.length > 4)
+                        if (args[4] != null)
+                                cookie.setSecure(args[4].toString().equalsIgnoreCase("true"));
+
+
+                response.addCookie(cookie);
+
+                return cookie;
         }
 
-        public static Long toLong(GroovyObject self, String val) throws IOException, ServletException {
-                return Long.parseLong(val);
-        }
+//        private static Cookie setCookie(GroovyObject self, Cookie cookieName, Object...cookieOptions){
+//              // ServletContextImpl app = RequestThreadInfo.get().getApplication();
+//                Binding binding = (Binding)self.getProperty("binding");
+//                RequestImpl request = (RequestImpl)binding.getVariable("request");
+//                Cookie c;
+//                
+//
+//                //0 - value
+//                //1 - int Age
+//                //2 - path
+//                //3 - domain
+//                //4 - secure
+//                return "$Version=" + cookie.getVersion() + "; " + cookie.getName() + "=" +
+//                        cookie.getValue() + (cookie.getPath() == null ? "" : "; $Path=" +
+//                        cookie.getPath()) + (cookie.getDomain() == null ? "" : "; $Domain=" +
+//                        cookie.getDomain());
+//
+//                Cookie c = new Cookie(cookieName, value)
+//                return null;
+//        }
 
 //        public static void log(GroovyObject self, String s) {
 //                System.out.println(s);
