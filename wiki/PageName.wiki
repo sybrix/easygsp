@@ -1,8 +1,0 @@
-#summary EasyGSP Library List.
-
-= EasyGSP Library List =
-
-Below is the list of libraries that EasyGSP ships with
-
-|| Product|| Version || Description ||
-
