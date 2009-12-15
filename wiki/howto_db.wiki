@@ -4,7 +4,7 @@
 
 [http://groovy.codehaus.org/Database+features Groovy has excellent database support.] Any valid Groovy database code should work in EasyGSP.   
 
-[howto_newSqlInstance EasyGSP also adds a method named "newSqlInstance()" to all controllers, classes and templates.]
+[howto_newSqlInstance EasyGSP also adds a method named "newSqlInstance()" to all controllers, classes and templates] for easyily retrieving a groovy.sql.Sql object.
 
 Below is an example of a template that connects to a database, executes a query and prints the data out to a table.
 *db.gsp*
