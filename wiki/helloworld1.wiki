@@ -2,7 +2,7 @@
 
 = Hello World =
 
-This hello world example demonstrates a script template with the code and template HTML in a single file.
+This hello world example demonstrates a template with the code and template HTML in a single file.
 
 {{{
   $ cd /$EASYGSP_HOME/webapps
