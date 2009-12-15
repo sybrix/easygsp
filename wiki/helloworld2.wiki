@@ -28,7 +28,7 @@ Create the following files in hello directory
         bind 'today', today
 }}}
 
-
+[explainBind What does this bind() method do ?]
 *helloworld.gspx*
 {{{
 <html>
