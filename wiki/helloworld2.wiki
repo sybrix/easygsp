@@ -4,9 +4,8 @@
 
 This hello world example demonstrates a controller script that forwards to a view template to render the HTML.  The controller and view are in separate files.  
 
-When helloworld.groovy is done processing it will automatically forward to helloworld.gspx.  If the [forward "forward()"] method is not explicitly called, the controller script will automatically forward to a template with the same name (with the .gspx extension).  In order for the auto forward to work, the controller and template must be in the same directory.  
+When helloworld.groovy is done processing it will automatically forward to helloworld.gspx.  When there is a controller and template with the same name(minus the extension), and the forward method is not explicity called,  the controller will automatically forward to the template.
 
-skip if hello dir already exists.
 {{{
   $ cd /$EASYGSP_HOME/webapps
   $ mkdir hello
