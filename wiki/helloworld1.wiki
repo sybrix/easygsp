@@ -39,4 +39,4 @@ Open your browser to :
   http://localhost:8080/hello/helloworld.gsp
 (Change the port number as needed to match your configuration)
 
-[Now Let's see this using an MVC approach]
+[helloworld2 Now Let's see this using an MVC approach]
