@@ -46,10 +46,10 @@ Whenever the web.groovy file is modified, the application will restart.
 This file can have the following methods
 
 ||Method||Description||
-||onApplicationStart||Invoked when the application is initially started and on the first request after the file has been altered.  ||
-||onApplicationEnd || Invoked when the server is shutdown. ||
-||onSessionStart || Invoked immediately after a session is created||
-||onSessionEnd|| Invoked when a session expires, is invalidated or when an application is restarted.||
+||void onApplicationStart(Application app)||Invoked when the application is initially started and on the first request after the file has been altered.  ||
+||void onApplicationEnd(Application app) || Invoked when the server is shutdown. ||
+||void onSessionStart(Session session) || Invoked immediately after a session is created||
+||void onSessionEnd(Session session)|| Invoked when a session expires, is invalidated or when an application is restarted.||
 
   * *onApplicationStart* and *onApplicationEnd* accept an app parameter which is a reference to the application (or ServletContext).
   * *onSessionStart* and *onSessionEnd* accept a reference to the session object in use.
