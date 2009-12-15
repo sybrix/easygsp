@@ -43,23 +43,23 @@ $ ./stop.sh
 To Install as Service
 {{{
    c:\ cd %EASYGSP_HOME%\bin
-   c:\ InstallEasyGSP-NT.bat
+   c:\%EASYGSP_HOME%\bin> InstallEasyGSP-NT.bat
 }}}
 
 To Remove Service
 {{{
    c:\ cd %EASYGSP_HOME%\bin    
-   c:\ UninstallEasyGSP-NT.bat
+   c:\%EASYGSP_HOME%\bin> UninstallEasyGSP-NT.bat
 }}}
 
 To start from the command line
 {{{
   c:\ cd %EASYGSP_HOME%\bin
-  c:\ EasyGSP.bat
+  c:\%EASYGSP_HOME%\bin EasyGSP.bat
 }}}
 
 To Stop
 {{{
    c:\ cd %EASYGSP_HOME%\bin
-   c:\ stop.bat
+   c:\%EASYGSP_HOME%\bin stop.bat
 }}}
