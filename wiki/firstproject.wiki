@@ -23,10 +23,12 @@ To create an application in EasyGSP, simply create a folder in the %EASYGSP_HOME
 
 *web.groovy*
 
-The web.groovy file allows you to specify what, needs to happen on application and session start and end events. Each application can have a web.groovy file.
+The web.groovy file allows you to specify what, needs to happen on application and session start and end events. Each application can have a web.groovy file. The web.groovy file must be located in a @ /APP_FOLDER/WEB-INF/web.groovy
 
 
-Like servlet based applications, EasyGSP applications can have a WEB-INF directory.  Within this directory the web.groovy file resides.If there is no web.groovy file, one will be created when the application starts.  Whenever this file is modified, the application will restart.
+Like servlet based applications, EasyGSP applications can have a WEB-INF directory.  But unlike servlet based applications, there is no lib or classes folder nor is there a web.xml file. 
+
+Whenever the web.groovy file is modified, the application will restart.
 
 {{{
  +-- $EASYGSP_HOME
