@@ -6,6 +6,6 @@
 
 *You can not add jars at the application level*. You can add additional jars for ALL applications by placing jars in the `$EASYGSP_HOME/lib` folder.  Again, these jars will be available to ALL applications.    EasyGSP applications don't have a context/WEB-INF/lib folder like serlvet based web applications.  
 
-* Where can I Host my EasyGSP application  ?*
+* Where can I host my EasyGSP application  ?*
 
 Probably nowhere unless you're willing to pay for your own server.  Since I do recognize this as a problem, an ironic problem since easyGSP is trying to solve this very problem, contact me and if you've developed something in EasyGSP and now want a place to host it.  I can provide a certain amount of *absolutely no guarantee of anything* free hosting for hardcore groovy developers.
