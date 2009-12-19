@@ -1,5 +1,13 @@
 #summary EasyGSP ORM
 
-= EasyGSP ORM =
+= Configuration =
+
+==== public static void GroovyORM.init(Properties propFile) ====
+Initializes the internal properties and datbase properties used for database operations
+
+==== public static void GroovyORM.injectMethods(Clazz clazz) ====
+Adds methods to the specified class for persistence and querying.
+
+
 
 
