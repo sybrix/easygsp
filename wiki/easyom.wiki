@@ -14,7 +14,7 @@ Use the following 2 methods to configure EasyOM.
 ==== public static void injectMethods(java.lang.Class clazz) ====
   Adds methods to the specified class for persistence and querying.
 
-To initialized EasyOM and to add the persistence methods to an application's entity classes, invoke the methods like so:
+To initialize EasyOM and to add the persistence methods to an application's entity classes, invoke the methods like so:
 
 {{{
    // or some other type of bootstrap method
