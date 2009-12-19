@@ -27,7 +27,7 @@ Tutorials/How To's
   * [howto_logging Logging]
 
 Scripts
-  * [howto_easygsp_orm The EasyGSP ORM Script]
+  * [easyom The EasyGSP ORM Script]
   * [howto_easygsp_framework Single Script WebFramework]
     
 [FAQs Frequently Asked Questions]
