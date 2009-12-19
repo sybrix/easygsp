@@ -15,7 +15,7 @@ If you start EasyGSP in a terminal window, and you want to write something out t
 console() == System.out.println()
 
 and System.out.println will still work, take your pick.
-If you use simply, println(), this will write to the response.outputstream, not to the console window.
+If you use println(), this will write to the response.outputstream, not to the console window.
 
 ==== void log() =====
 The log methods write to a log file on the file system.  When an application starts, if a WEB-INF folder does not exist, one is created. When a log statement is invoked, if a logs directory does not exist under the WEB-INF folder, one is created. The log files are rolled daily.
