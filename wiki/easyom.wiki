@@ -8,10 +8,10 @@ EasyOM and not EasyORM because it's not an ORM.  This class allows you to persis
 
 Use the following 2 methods to configure EasyOM.
 
-==== public static void GroovyORM.init(java.lang.Properties propFile) ====  
+==== public static void init(java.lang.Properties propFile) ====  
   Initializes the internal properties and datbase properties used for database operations
 
-==== public static void GroovyORM.injectMethods(Class clazz) ====
+==== public static void injectMethods(Class clazz) ====
   Adds methods to the specified class for persistence and querying.
 
 To initialized EasyOM and to add the persistence methods to an application's entity classes, invoke the methods like so:
