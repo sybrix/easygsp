@@ -26,4 +26,8 @@ Tutorials/How To's
   * [howto_jars Add Jar files]
   * [howto_logging Logging]
 
+Scripts
+  * [howto_easygsp_orm The EasyGSP ORM Script]
+  * [howto_easygsp_framework Single Script WebFramework]
+    
 [FAQs Frequently Asked Questions]
