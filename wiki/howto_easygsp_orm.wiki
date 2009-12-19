@@ -22,3 +22,18 @@ To initialized the ORM and to add the persistence methods to an application's en
        GroovyORM.injectMethods(model.EntityObject3.class)
    }
 }}}
+
+= Usage =
+The following methods are added to each object, injectMethods() is invoked on:
+|| insert() ||  ||
+|| update() ||  ||
+|| delete() ||  ||
+|| save() ||  ||
+|| find() ||  ||
+|| findAll() ||  ||
+|| list() || ||
+
+The following methods are added to the String class
+|| executeQuery || ||
+|| executeUpdate || ||
+|| executeScalar || ||
