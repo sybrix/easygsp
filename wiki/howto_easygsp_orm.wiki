@@ -2,12 +2,24 @@
 
 = Configuration =
 
+Use the following 2 methods to configure the ORM.
+
 ==== public static void GroovyORM.init(Properties propFile) ====
 Initializes the internal properties and datbase properties used for database operations
 
 ==== public static void GroovyORM.injectMethods(Clazz clazz) ====
 Adds methods to the specified class for persistence and querying.
 
+To initialized the ORM and to add the persistence methods to an application's entity classes, invoke the methods like so:
 
+{{{
+   // or some other type of bootstrap method
+   def onApplicationStart(app){
+       GroovyORM.init(loadPropertiesFile("db.properties"))
 
+       GroovyORM.injectMethods(model.EntityObject1.class)
+       GroovyORM.injectMethods(model.EntityObject2.class)
+       GroovyORM.injectMethods(model.EntityObject3.class)
+   }
+}}}
 
