@@ -1,0 +1,43 @@
+#summary EasyOM - Easy Object Mapping
+
+= About =
+EasyOM and not EasyORM because it's not an ORM.  This class allows you to persist single objects to the database by adding persistence methods to entity classes.  It also adds methods that allow executing SQL queries really easy. 
+
+
+= Configuration =
+
+Use the following 2 methods to configure EasyOM.
+
+==== public static void GroovyORM.init(java.lang.Properties propFile) ====
+Initializes the internal properties and datbase properties used for database operations
+
+==== public static void GroovyORM.injectMethods(Class clazz) ====
+Adds methods to the specified class for persistence and querying.
+
+To initialized the ORM and to add the persistence methods to an application's entity classes, invoke the methods like so:
+
+{{{
+   // or some other type of bootstrap method
+   def onApplicationStart(app){
+       GroovyORM.init(loadPropertiesFile("db.properties"))
+
+       GroovyORM.injectMethods(model.EntityObject1.class)
+       GroovyORM.injectMethods(model.EntityObject2.class)
+       GroovyORM.injectMethods(model.EntityObject3.class)
+   }
+}}}
+
+= Injected Methods =
+The following methods are added to each object, injectMethods() is invoked on:
+|| insert() ||  ||
+|| update() ||  ||
+|| delete() ||  ||
+|| save() ||  ||
+|| find() ||  ||
+|| findAll() ||  ||
+|| list() || ||
+
+The following methods are added to the String class
+|| executeQuery || ||
+|| executeUpdate || ||
+|| executeScalar || ||
