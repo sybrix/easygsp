@@ -1,5 +1,8 @@
 #summary EasyGSP ORM
 
+= About =
+This utility class adds ORM like features to entity objects.  ORM-like, because this really is not an ORM. It's more an OM utility, *O*bject *M*apping.  It purposely does not deal with the *R*elational part. Why ? Because, it's this part that makes ORM complicated. 
+
 = Configuration =
 
 Use the following 2 methods to configure the ORM.
@@ -23,7 +26,7 @@ To initialized the ORM and to add the persistence methods to an application's en
    }
 }}}
 
-= Usage =
+= Injected Methods =
 The following methods are added to each object, injectMethods() is invoked on:
 || insert() ||  ||
 || update() ||  ||
