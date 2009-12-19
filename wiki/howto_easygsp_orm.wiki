@@ -5,7 +5,7 @@ This utility class adds ORM like features to entity objects.  ORM-like, because 
 
 = Configuration =
 
-Use the following 2 methods to configure the ORM.
+Use the following 2 methods to configure EasyOM.
 
 ==== public static void GroovyORM.init(java.lang.Properties propFile) ====
 Initializes the internal properties and datbase properties used for database operations
