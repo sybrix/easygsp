@@ -1,7 +1,7 @@
 #summary EasyGSP ORM
 
 = About =
-This utility class adds ORM like features to entity objects.  ORM-like, because this really is not an ORM. It's more an OM utility, *O*bject *M*apping.  It purposely does not deal with the *R*elational part. Why ? Because, it's this part that makes ORM complicated. 
+This utility class adds ORM like features to entity objects.  ORM-like, because this really is not an ORM. It's more an OM utility, *O* bject *M* apping.  It purposely does not deal with the *R*elational part. Why ? Because, it's this part that makes ORM complicated. 
 
 = Configuration =
 
