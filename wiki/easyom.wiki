@@ -29,6 +29,14 @@ To initialize EasyOM and to add the persistence methods to an application's enti
    }
 }}}
 
+*properties file*
+The properties file expected by init must have the follow name value pairs
+||db.driver || ||
+||db.url || ||
+||db.username || ||
+||db.password || ||
+
+
 = Injected Methods =
 The following methods are added to each object, injectMethods() is invoked on:
 || insert() ||  ||
