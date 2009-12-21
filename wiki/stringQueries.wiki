@@ -4,12 +4,7 @@
   Executes a SELECT query and returns a list or GroovyResultRow a specified object type.
 
 {{{
-testStringExecuteQuery() {
-                insertRecord()
-
-                def r = "SELECT small_int_column as smallIntColumn FROM tblTestTable".executeQuery()
-                assertEquals(r[0].smallIntColumn, 254)
-        }
+    def users = "SELECT username, first_name firstName, last_name lastName FROM tblUser".executeQuery()
 
         public void testStringExecuteQueryWithPaging() {
 
