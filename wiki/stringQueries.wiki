@@ -4,8 +4,13 @@
   Executes a SELECT query and returns a list or GroovyResultRow a specified object type.
 
 {{{
-    def users = "SELECT username, first_name firstName, last_name lastName FROM tblUser".executeQuery()
 
+    def users = "SELECT username, first_name firstName, last_name lastName FROM tblUser".executeQuery()
+    users.each {
+       console "username: $it.username, real name:  $it.lastName, $it.firstName"
+    }
+
+}}}
         public void testStringExecuteQueryWithPaging() {
 
                 for (i in 0..5) {
