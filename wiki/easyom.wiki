@@ -68,7 +68,7 @@ Example:
   }
 }}}
 
-*Static Delete*
+==Static Methods==
 
 Each entity object has a static delete() method. Simply specify the values for the primary key(s) in a map to delete.
 
@@ -78,6 +78,7 @@ Each entity object has a static delete() method. Simply specify the values for t
         }
 }}}
 
+==== delete() ====
 ==== list() ====
 ==== find() ====
 ==== findAll() ====
