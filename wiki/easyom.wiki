@@ -57,7 +57,7 @@ The following methods are added to each object, injectMethods() is invoked on:
 || executeScalar || Executes a SELECT query and returns a single value (column 1 of the first row)||
 
 == StringQueries ==
-String queries allow you to do call an "execute" query method on String. 
+String queries allow you to do call an "execute" query method on a simple String. 
 
 {{{
     // returns the total number of records in table tblUser
