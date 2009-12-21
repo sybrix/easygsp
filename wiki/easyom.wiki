@@ -41,7 +41,7 @@ The properties file expected by EasyOM.init() must have the follow name value pa
 
 == Configuring Entity Objects ==
 To persist an entity object, the entity has to have 2 additional attributes in addition to its properties.
-
+|| *Property* || *Description* ||
 || List primaryKeys || List of primary key columns ||
 || List dynamicProperties || This list is used to store the names of columns changed since the persistence method invocation.  It ensures that only the properties updated are included in insert and update queries. ||
 
@@ -66,7 +66,7 @@ Example:
 }}}
 
 *Static Methods*
-|| publci static Integer delete() || deletes a row from the table ||
+|| public static Integer delete() || deletes a row from the table ||
 || static def find() || Returns a single entity ||
 || static def findAll() || Returns a list of entity objects ||
 || static def list() || Returns all of the entity objects in the table(unless paging parameters specified)||
