@@ -42,13 +42,43 @@ The properties file expected by EasyOM.init() must have the follow name value pa
 == Configuring Entity Objects ==
 To persist an entity object, the entity has to have 2 additional attributes in addition to its properties.
 || *Property* || *Description* ||
-|| List primaryKeys || List of primary key columns ||
+|| static List primaryKeys || List of primary key columns ||
 || List dynamicProperties || This list is used to store the names of columns changed since the persistence method invocation.  It ensures that only the properties updated are included in insert and update queries. ||
 
 There 2 additional optional configuration options:
 || *Property* || *Description* ||
-|| Map columns ||  Map that allows you to explicitly map a propertyName to a table column name. The property name is they key, the column name is the value|| 
-|| String tableName || The table name that the entity maps to.  Use this property when/if the entity name is not the same as the table name.|| 
+|| static Map columns ||  Map that allows you to explicitly map a propertyName to a table column name. The property name is they key, the column name is the value|| 
+|| static String tableName || The table name that the entity maps to.  Use this property when/if the entity name is not the same as the table name.|| 
+
+Persistable Entity Object 
+{{{
+   class User {
+      private def dynamicProperties = [] 
+      private static primaryKeys = ['username']
+    
+      String username
+      String lastName
+      String firstName
+   }
+
+}}}
+
+Persistable Entity Object, where entity name does name table name, and an explicit column to property map
+{{{
+   class User {
+      def dynamicProperties = [] 
+      static primaryKeys = ['username']
+      static tableName = 'tblProfile'  // the table name is tblProfile, not User
+      static columns = [address: 'address_line_1']
+
+      String username
+      String lastName
+      String firstName
+      String address   // address is not a real column name, address_line_1 is the column name 
+      
+   }
+
+}}}
 
 = Persistence Methods =
 The following methods are added to each object, injectMethods() is invoked on. Each method operates on "this" or the current object.  The methods don't accept any arguments  and all return an Integer indicating the number records affected by the query.
