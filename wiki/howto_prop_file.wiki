@@ -8,7 +8,7 @@ The easiest way to load a properties file is to use the method:
 
 This method is available in all classes, controllers and templates.
 
-PropertiesFile extends java.util.Properties and adds some methods for converting properties values into commonly used types.
+PropertiesFile extends java.util.Properties and adds some methods for converting property values into commonly used types.
 
 
 When your properties files are in the root of your app's WEB-INF folder.  You only need to specify the name of the file to load the file.
