@@ -68,6 +68,16 @@ Example:
   }
 }}}
 
+*Static Delete*
+
+Each entity object has a static delete() method. Simply specify the values for the primary key(s) in a map to delete.
+
+{{{
+        public void testStaticDelete() {
+                assertTrue User.delete([username: 'dsmith']) > 0
+        }
+}}}
+
 
 || recordCount || the total number of records in the DB for the specified query ||
 || page || The current page of the result set ||
