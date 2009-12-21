@@ -40,7 +40,7 @@ The properties file expected by EasyOM.init() must have the follow name value pa
 ||camel.case.table.name|| set true when underscores in table name should be converted to camel cased entity name||
 ||camel.case.column.name|| set true when underscores in column names should be converted to camel cased column name ||
 
-= Injected Methods =
+= Persistence Methods =
 The following methods are added to each object, injectMethods() is invoked on:
 || insert() ||  executes an insert statement for the entity for properties that have set since the last persistence method invocation||
 || update() ||  executes an update statement for the entity for properties that have set since the last persistence method invocation ||
