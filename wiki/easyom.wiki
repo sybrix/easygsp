@@ -62,8 +62,6 @@ The following methods are added to each object, injectMethods() is invoked on. E
 
 = Methods Explained =
 
-
-
 Example:
 {{{
    def insertNewUser(username, lastName, firstName){
@@ -81,6 +79,23 @@ Each entity object has a static delete() method. Simply specify the values for t
                 assertTrue User.delete([username: 'dsmith']) > 0
         }
 }}}
+
+find(), findAll, and delete() all accept a map with name value pairs that let your specify how the queries WHERE clause is crafted.  You can also only specify one type of logical operator: 'AND' or 'OR'. If no operator is specified, the 'AND' operator is assumed. There is no limit on the number of columns that can be in the WHERE clause.
+
+{{{
+    // returns first object in resultset where last name equals 'Smith' and first name equals 'John'
+    // find only returns 1 object 
+    User user = User.find([lastName:'Smith', firstName:'John'])
+    
+    //Returns a list of User objects where the last name is 'Smith' or 'Williams'
+    List users = User.findAll( operator:'OR', [lastName:'Smith', lastName:'Williams'])
+
+    //Deletes all objects from User table where lastname = 'Harrison'
+    User.delete([lastName:'Harrison'])
+    
+}}}
+
+
 
 ==== delete() ====
 ==== list() ====
