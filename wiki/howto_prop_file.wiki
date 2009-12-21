@@ -4,9 +4,7 @@
 
 The easiest way to load a properties file is to use the method: 
 
-{{{
-   public static PropertiesFile loadPropertiesFile(String fileName)
-}}}
+==== public static PropertiesFile loadPropertiesFile(String fileName)====
 
 This method is available in all classes, controllers and templates.
 
