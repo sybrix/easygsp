@@ -51,7 +51,7 @@ executeQuery() with parameter and result type.  When both are specified, result 
 
 == Paging ==
 
- To specify paging, the parameter list must be a map, with the following attributes.
+To specify paging, the parameter list must be a map, with the following attributes.
 Parameter Map:
 || page || The page being requested. Required. ||
 || pageSize || The number of records per page. Required.|| 
