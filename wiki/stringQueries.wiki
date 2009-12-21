@@ -49,8 +49,4 @@ executeQuery() with parameter and result type.  When both are specified, result 
 
     users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= ?".executeQuery(User.class, lastNameParameter)  
 
-    users.each {user ->
-       console "username: $user.username, real name:  $user.lastName, $user.firstName"
-    }
-
 }}}
