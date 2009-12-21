@@ -56,7 +56,7 @@ The following methods are added to each object, injectMethods() is invoked on:
 || executeUpdate || Used to execute insert, update and delete queries  ||
 || executeScalar || Executes a SELECT query and returns a single value (column 1 of the first row)||
 
-== list() ===
+= Methods Explained =
 
 
 || recordCount || the total number of records in the DB for the specified query ||
