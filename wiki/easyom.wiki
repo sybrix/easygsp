@@ -29,8 +29,7 @@ To initialize EasyOM and to add the persistence methods to an application's enti
    }
 }}}
 
-*properties file*
-The properties file expected by init must have the follow name value pairs
+The properties file expected by EasyOM.init() must have the follow name value pairs
 ||db.driver || ||
 ||db.url || ||
 ||db.username || ||
@@ -39,15 +38,15 @@ The properties file expected by init must have the follow name value pairs
 
 = Injected Methods =
 The following methods are added to each object, injectMethods() is invoked on:
-|| insert() ||  ||
-|| update() ||  ||
-|| delete() ||  ||
-|| save() ||  ||
-|| find() ||  ||
-|| findAll() ||  ||
-|| list() || ||
+|| insert() ||  executes an insert statement for the entity for properties that have set since the last persistence method invocation||
+|| update() ||  executes an update statement for the entity for properties that have set since the last persistence method invocation ||
+|| delete() || deletes a row from the table ||
+|| save() || executes an insert if the primary key(s) has no value, otherwise executes an update query ||
+|| find() || Returns a single entity ||
+|| findAll() || Returns a list of entity objects ||
+|| list() || Returns all of the entity objects in the table(unless paging parameters specified)||
 
 The following methods are added to the String class
-|| executeQuery || ||
-|| executeUpdate || ||
-|| executeScalar || ||
+|| executeQuery || Executes a SELECT query ||
+|| executeUpdate || Used to execute insert, update and delete queries  ||
+|| executeScalar || Executes a SELECT query and returns a single value (column 1 of the first row)||
