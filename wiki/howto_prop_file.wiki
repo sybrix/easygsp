@@ -38,13 +38,13 @@ Every controller and template has access the application (or ServletContext) obj
 
 PropertiesFile extended methods
 || Method || Description ||
-|| Integer getInt(String key) ||  Return Integer for value, throws NumberFormatException, NullPointerException ||
+|| Integer getInt(String key) ||  Return Integer for key, throws NumberFormatException, NullPointerException ||
 || Integer getInt(String key, Integer defaultValue) || Returns Integer for key, returns defaultValue when key returns null or exception occurs||
-|| String getString(String key) ||  ||
-|| String getString(String key, String defaultValue) ||  ||
-|| Long getLong(String key) ||  ||
-|| Long getLong(String key, Long defaultValue) ||  ||
-|| Double getDouble(String key) ||  ||
-|| Double getDouble(String key, Double defaultValue) ||  ||
+|| String getString(String key) || Returns value for key, null if key does not exists ||
+|| String getString(String key, String defaultValue) ||  Returns value for key, returns defaultValue if key does not exists||
+|| Long getLong(String key) || Return Long for key, throws NumberFormatException, NullPointerException ||
+|| Long getLong(String key, Long defaultValue) || Returns Long for key, returns defaultValue when key returns null or exception occurs ||
+|| Double getDouble(String key) || Return Double for key, throws NumberFormatException, NullPointerException ||
+|| Double getDouble(String key, Double defaultValue) || Returns Double for key, returns defaultValue when key returns null or exception occurs ||
 || Boolean getBoolean(String key) ||  ||
 || Boolean getBoolean(String key, Boolean defaultValue) ||  ||
