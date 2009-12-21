@@ -102,3 +102,21 @@ Executes an INSERT, UPDATE or DELETE query.
     
     }
  }}}
+
+Another executeUpdate example
+
+ {{{
+    def deleteUser(username){
+       "DELETE FROM tbluser WHERE username = ? ".executeUpdate([username])
+    }
+ }}}
+
+
+=== def executeScalar(List values) ===
+Returns a single value
+
+ {{{
+    def getTotalNumberUsers(username){
+       "SELECT count(*) FROM tblUsers".executeScalar()
+    }
+ }}}
