@@ -45,6 +45,11 @@ To persist an entity object, the entity has to have 2 additional attributes in a
 || List primaryKeys || List of primary key columns ||
 || List dynamicProperties || This list is used to store the names of columns changed since the persistence method invocation.  It ensures that only the properties updated are included in insert and update queries. ||
 
+There 2 additional optional configuration options:
+|| *Property* || *Description* ||
+|| Map columns ||  Map that allows you to explicitly map a propertyName to a table column name. The property name is they key, the column name is the value|| 
+|| String tableName || The table name that the entity maps to.  Use this property when/if the entity name is not the same as the table name.|| 
+
 = Persistence Methods =
 The following methods are added to each object, injectMethods() is invoked on. Each method operates on "this" or the current object.  The methods don't accept any arguments  and all return an Integer indicating the number records affected by the query.
 
