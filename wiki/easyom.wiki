@@ -52,7 +52,8 @@ Example:
 {{{
    def insertNewUser(username, lastName, firstName){
      User user = new User(username: username, firstName: firstName, lastName: lastName)
-     user.insert()
+     // insert new user, could have used user.save()
+     user.save()
 
      // now the the user
      user.delete()
