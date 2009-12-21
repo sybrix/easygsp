@@ -25,16 +25,29 @@ executeQuery() with return type specified. Returns a list of User objects
 }}}
 
 
-executeQuery() with parameter. 
+executeQuery() with parameter. One or parameters can be specified as arguments for executeQuery().
 
 {{{
     String lastName = 'Smith'
     def users
 
-    users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= ?".executeQuery(lastNameParameter)
-   
+    users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= ?".executeQuery(lastNameParameter)  
     // equivalent to above
     users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= $lastNameParameter".executeQuery()
+
+    users.each {user ->
+       console "username: $user.username, real name:  $user.lastName, $user.firstName"
+    }
+
+}}}
+
+executeQuery() with parameter and result type.  When both are specified, result type should be the first argument list, followed by the parameter values.
+
+{{{
+    String lastName = 'Smith'
+    def users
+
+    users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= ?".executeQuery(User.class, lastNameParameter)  
 
     users.each {user ->
        console "username: $user.username, real name:  $user.lastName, $user.firstName"
