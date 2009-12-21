@@ -37,7 +37,7 @@ class.getResourceAsStream() and class.getResource() are not recommended for loca
 Every controller and template has access the application (or ServletContext) object.  This object has a method named appPath() that will return the root directory for the application.  Use application.appPath to build paths to application resources.
 
 PropertiesFile extended methods
-|| Method || Description ||
+|| *Method* || *Description* ||
 || Integer getInt(String key) ||  Return Integer for key, throws NumberFormatException, NullPointerException ||
 || Integer getInt(String key, Integer defaultValue) || Returns Integer for key, returns defaultValue when key returns null or exception occurs||
 || String getString(String key) || Returns value for key, null if key does not exists ||
