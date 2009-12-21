@@ -1,5 +1,5 @@
 = Persistence Methods =
-[easyom << Back Configuration]
+<< [easyom Back Configuration]
 
 The following methods are added to each object, injectMethods() is invoked on. Each method operates on "this" or the current object.  The methods don't accept any arguments  and all return an Integer indicating the number records affected by the query.
 
