@@ -35,10 +35,10 @@ The properties file expected by EasyOM.init() must have the follow name value pa
 ||db.url || Database connection url ||
 ||db.username || Database username||
 ||db.password || Database password ||
-||use.table.prefix|| when 'true', a specified prefix will be prefixed to the entity name.  ie, if the entity name is "User", but the table name is "tblUser" ||
-||table.prefix|| ||
-||camel.case.table.name|| ||
-||camel.case.column.name|| ||
+||use.table.prefix|| when 'true', a specified prefix will be prefixed to the entity name.  ie, if the entity name is "User", but the table name is "tblUser" set this property to true and set table.prefix ||
+||table.prefix|| The table prefix. Use with "use.table.prefix" ||
+||camel.case.table.name|| set true when underscores in table name should be converted to camel cased entity name||
+||camel.case.column.name|| set true when underscores in column names should be converted to camel cased column name ||
 
 = Injected Methods =
 The following methods are added to each object, injectMethods() is invoked on:
