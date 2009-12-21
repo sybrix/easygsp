@@ -51,7 +51,7 @@ executeQuery() with parameter and result type.  When both are specified, result 
 
 }}}
 
-executeQuery() with paging.  When paging is required, the paging options and other all other query options must be specified as map attributes.  When paging is specified, the return object is a map.  The map contains 4 attributes w/values:  
+executeQuery() with paging. To specify paging, there must be page and pageSize attribues in the parameter map.  When paging is required, the paging options and other all other query options must be specified as map attributes.  When paging is specified, the return object is a map.  The map contains 4 attributes w/values:  
 
 || recordCount || the total number of records in the DB for the specified query ||
 || page || The current page of the result set ||
