@@ -91,4 +91,14 @@ Another example with paging, result type specified and query parameter values
 }}}
 
 
-=== def executeUpdates(Object`[]` parameters) ===
+=== Integer executeUpdate(List values) ===
+Executes an INSERT, UPDATE or DELETE query.
+ {{{
+    def createNewUser(username, lastName, firstName){
+       "INSERT INTO tbluser (username, first_name, last_name) VALUES('$username','$lastName', '$firstName')".executeUpdate()
+
+       // same as 
+       "INSERT INTO tbluser (username, first_name, last_name) VALUES(?,?,?)".executeUpdate([username, lastName, firstName])
+    
+    }
+ }}}
