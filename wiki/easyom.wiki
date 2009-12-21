@@ -3,7 +3,7 @@
 I'm still working on this......
 
 = About =
-EasyOM and not EasyORM because it's not an ORM.  This class allows you to persist single objects to the database by adding persistence methods to entity classes.  It also adds methods that allow executing SQL queries really easy. 
+EasyOM and not EasyORM because it's not an ORM.  This class allows you to persist single objects to the database by adding persistence methods to entity classes.  It also adds methods that allow you to execute "StringQueries".  
 
 
 = Configuration =
