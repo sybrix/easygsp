@@ -67,20 +67,15 @@ Example:
    def insertNewUser(username, lastName, firstName){
      User user = new User(username: username, firstName: firstName, lastName: lastName)
      user.insert()
+
+     // now the the user
+     user.delete()
   }
 }}}
 
 ==Static Methods==
 
-Each entity object has a static delete() method. Simply specify the values for the primary key(s) in a map to delete.
-
-{{{
-        public void testStaticDelete() {
-                assertTrue User.delete([username: 'dsmith']) > 0
-        }
-}}}
-
-find(), findAll, and delete() all accept a map with name value pairs that let your specify how the queries WHERE clause is crafted.  You can also only specify one type of logical operator: 'AND' or 'OR'. If no operator is specified, the 'AND' operator is assumed. There is no limit on the number of columns that can be in the WHERE clause.
+*find()*, *findAll()*, and *delete()* all accept a map with name value pairs that let your specify how the queries WHERE clause is crafted.  You can also only specify one type of logical operator: 'AND' or 'OR'. If no operator is specified, the 'AND' operator is assumed. There is no limit on the number of columns that can be in the WHERE clause.
 
 {{{
     // returns first object in resultset where last name equals 'Smith' and first name equals 'John'
