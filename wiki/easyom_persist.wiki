@@ -1,4 +1,6 @@
 = Persistence Methods =
+[easyom Configuration]
+
 The following methods are added to each object, injectMethods() is invoked on. Each method operates on "this" or the current object.  The methods don't accept any arguments  and all return an Integer indicating the number records affected by the query.
 
 || public Integer insert() ||  executes an insert statement for the entity for properties that have set since the last persistence method invocation||
