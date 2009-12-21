@@ -41,11 +41,12 @@ The properties file expected by EasyOM.init() must have the follow name value pa
 ||camel.case.column.name|| set true when underscores in column names should be converted to camel cased column name ||
 
 = Persistence Methods =
-The following methods are added to each object, injectMethods() is invoked on:
-|| insert() ||  executes an insert statement for the entity for properties that have set since the last persistence method invocation||
-|| update() ||  executes an update statement for the entity for properties that have set since the last persistence method invocation ||
-|| save() || executes an insert if the primary key(s) has no value, otherwise executes an update query ||
-|| delete() || deletes a this object from the table ||
+The following methods are added to each object, injectMethods() is invoked on. Each method operates on "this" or the current object.  These methods don't accept any arguments. And all return an Integer indicating the number records affected by the query.
+
+|| public Integer insert() ||  executes an insert statement for the entity for properties that have set since the last persistence method invocation||
+|| public Integer  update() ||  executes an update statement for the entity for properties that have set since the last persistence method invocation ||
+|| public Integer save() || executes an insert if the primary key(s) has no value, otherwise executes an update query ||
+|| public Integer delete() || deletes a this object from the table ||
 
 *Static Methods*
 || delete() || deletes a row from the table ||
@@ -61,7 +62,7 @@ The following methods are added to each object, injectMethods() is invoked on:
 
 = Methods Explained =
 
-insert(), update(), delete() and save() accept no arguments and returns an Integer to indicates the number of records updated.  Any of these methods can be call on an instantiated entity object.
+
 
 Example:
 {{{
