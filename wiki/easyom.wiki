@@ -49,10 +49,10 @@ The following methods are added to each object, injectMethods() is invoked on. E
 || public Integer delete() || deletes a this object from the table ||
 
 *Static Methods*
-|| delete() || deletes a row from the table ||
-|| find() || Returns a single entity ||
-|| findAll() || Returns a list of entity objects ||
-|| list() || Returns all of the entity objects in the table(unless paging parameters specified)||
+|| static def delete() || deletes a row from the table ||
+|| static def find() || Returns a single entity ||
+|| static def findAll() || Returns a list of entity objects ||
+|| static def list() || Returns all of the entity objects in the table(unless paging parameters specified)||
 
 
 *StringQueries*: The following methods are added to the String class
