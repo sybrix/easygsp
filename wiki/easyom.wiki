@@ -78,6 +78,9 @@ Each entity object has a static delete() method. Simply specify the values for t
         }
 }}}
 
+==== list() ====
+==== find() ====
+==== findAll() ====
 
 || recordCount || the total number of records in the DB for the specified query ||
 || page || The current page of the result set ||
