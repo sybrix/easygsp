@@ -30,10 +30,10 @@ To initialize EasyOM and to add the persistence methods to an application's enti
 }}}
 
 The properties file expected by EasyOM.init() must have the follow name value pairs
-||db.driver || ||
-||db.url || ||
-||db.username || ||
-||db.password || ||
+||db.driver || The database driver name||
+||db.url || Database connection url ||
+||db.username || Database username||
+||db.password || Database password ||
 
 
 = Injected Methods =
