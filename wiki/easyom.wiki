@@ -58,6 +58,16 @@ The following methods are added to each object, injectMethods() is invoked on:
 
 = Methods Explained =
 
+insert(), update(), delete() and save() accept no arguments and returns an Integer to indicates the number of records updated.  Any of these methods can be call on an instantiated entity object.
+
+Example:
+{{{
+   def insertNewUser(username, lastName, firstName){
+     User user = new User(username: username, firstName: firstName, lastName: lastName)
+     user.insert()
+  }
+}}}
+
 
 || recordCount || the total number of records in the DB for the specified query ||
 || page || The current page of the result set ||
