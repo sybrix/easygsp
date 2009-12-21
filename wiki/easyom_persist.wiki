@@ -83,7 +83,8 @@ Paged Result Map
     assertTrue(pagedResults.recordCount > 0)
     assertTrue(pagedResults.page == 2)
     assertTrue(pagedResults.pageCount > 0)
-    assertTrue(pagedResults.results.size() > 0)}}}
+    assertTrue(pagedResults.results.size() > 0)
+}}}
 
 
 == StringQueries ==
