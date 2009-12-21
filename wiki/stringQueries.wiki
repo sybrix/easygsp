@@ -59,7 +59,7 @@ executeQuery() with paging.  When paging is required, the paging options and oth
 || results || A list of GroovyRowResult objects, or a list of the specified return type ||
 
 {{{
-    def pagedResults = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= $lastNameParameter".executeQuery([page: 2, pageSize: 2])
+    def pagedResults = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= $lastNameParameter".executeQuery([page: 2, pageSize: 10])
 
     assertTrue(pagedResults.recordCount > 0)
     assertTrue(pagedResults.page == 2)
