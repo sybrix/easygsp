@@ -75,6 +75,17 @@ Paged Result Map
 || results || A list of GroovyRowResult objects, or a list of the specified return type ||
 
 
+{{{
+    //Returns page 2, of a list of User objects where state = 'FL' ordered By, the state column, then the lastName column in ascending order
+
+    def pageResults = User.findAll( operator:'OR', [state:'FL', orderBy:'state, lastName', page:2, pageSize:10])
+
+    assertTrue(pagedResults.recordCount > 0)
+    assertTrue(pagedResults.page == 2)
+    assertTrue(pagedResults.pageCount > 0)
+    assertTrue(pagedResults.results.size() > 0)}}}
+
+
 == StringQueries ==
 String queries allow you to do call an "execute" query method on a simple String. 
 
