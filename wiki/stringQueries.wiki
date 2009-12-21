@@ -3,14 +3,21 @@
 === def executeQuery(Object[] parameters) ===
   Executes a SELECT query and returns a list or GroovyResultRow a specified object type.
 
+When no parameters result type is specified, a list of GroovyResultRow objects is returned.  Then GroovyResultRow behave very much like a bean:
 {{{
 
     def users = "SELECT username, first_name firstName, last_name lastName FROM tblUser".executeQuery()
-    users.each {
-       console "username: $it.username, real name:  $it.lastName, $it.firstName"
+    users.each {user ->
+       console "username: $user.username, real name:  $user.lastName, $user.firstName"
     }
 
 }}}
+
+
+
+
+
+
         public void testStringExecuteQueryWithPaging() {
 
                 for (i in 0..5) {
