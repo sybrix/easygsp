@@ -3,6 +3,8 @@
 
 = StringQueries = 
 
+StringQueries work once the database configuration has been done. [easyom see instructions here] 
+
 === def executeQuery(Object`[]` parameters) ===
 Executes a SELECT query and returns a list or GroovyResultRow a specified object type.
 
