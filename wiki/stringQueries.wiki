@@ -53,9 +53,10 @@ executeQuery() with parameter and result type.  When both are specified, result 
 
 executeQuery() with paging.  When paging is required, the paging options and other all other query options must be specified as map attributes.  When paging is specified, the return object is a map.  The map contains 4 attributes w/values:  
  || recordCount||  the total number of records in the DB for the specified query||
- || page || The current page of the result set
+ || page || The current page of the result set ||
  || pageCount || The total number of pages in the query results || 
- || results || A list of GroovyRowResult objects, or a list of the specified return type.
+ || results || A list of GroovyRowResult objects, or a list of the specified return type. ||
+
 {{{
     def pagedResults = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= $lastNameParameter".executeQuery([page: 2, pageSize: 2])
 
