@@ -24,3 +24,20 @@ executeQuery() with return type specified. Returns a list of User objects
 
 }}}
 
+
+executeQuery() with parameter. 
+
+{{{
+    String lastName = 'Smith'
+    def users
+
+    users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= ?".executeQuery(lastNameParameter)
+   
+    // equivalent to above
+    users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= $lastNameParameter".executeQuery()
+
+    users.each {user ->
+       console "username: $user.username, real name:  $user.lastName, $user.firstName"
+    }
+
+}}}
