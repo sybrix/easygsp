@@ -5,7 +5,6 @@ I'm still working on this......
 = About =
 EasyOM and not EasyORM because it's not an ORM.  This class allows you to persist single objects to the database by adding persistence methods to entity classes.  It also adds methods that allow you to execute "StringQueries".  
 
-
 = Configuration =
 
 Use the following 2 methods to configure EasyOM.
@@ -39,6 +38,12 @@ The properties file expected by EasyOM.init() must have the follow name value pa
 ||table.prefix|| The table prefix. Use with "use.table.prefix" ||
 ||camel.case.table.name|| set true when underscores in table name should be converted to camel cased entity name||
 ||camel.case.column.name|| set true when underscores in column names should be converted to camel cased column name ||
+
+== Configuring Entity Objects ==
+To persist an entity object, the entity has to have 2 additional attributes in addition to its properties.
+
+|| List primaryKeys || List of primary key columns ||
+|| List dynamicProperties || This list is used to store the names of columns changed since the persistence method invocation.  It ensures that only the properties updated are included in insert and update queries. ||
 
 = Persistence Methods =
 The following methods are added to each object, injectMethods() is invoked on. Each method operates on "this" or the current object.  The methods don't accept any arguments  and all return an Integer indicating the number records affected by the query.
