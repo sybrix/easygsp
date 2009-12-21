@@ -48,6 +48,17 @@ The following methods are added to each object, injectMethods() is invoked on. E
 || public Integer save() || executes an insert if the primary key(s) has no value, otherwise executes an update query ||
 || public Integer delete() || deletes a this object from the table ||
 
+Example:
+{{{
+   def insertNewUser(username, lastName, firstName){
+     User user = new User(username: username, firstName: firstName, lastName: lastName)
+     user.insert()
+
+     // now the the user
+     user.delete()
+  }
+}}}
+
 *Static Methods*
 || publci static Integer delete() || deletes a row from the table ||
 || static def find() || Returns a single entity ||
@@ -60,18 +71,6 @@ The following methods are added to each object, injectMethods() is invoked on. E
 || executeUpdate || Used to execute insert, update and delete queries  ||
 || executeScalar || Executes a SELECT query and returns a single value (column 1 of the first row)||
 
-= Methods Explained =
-
-Example:
-{{{
-   def insertNewUser(username, lastName, firstName){
-     User user = new User(username: username, firstName: firstName, lastName: lastName)
-     user.insert()
-
-     // now the the user
-     user.delete()
-  }
-}}}
 
 ==Static Methods - WHERE clause ==
 
