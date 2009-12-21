@@ -76,7 +76,7 @@ Another example with paging and result type specified.
 
 Another example with paging, result type specified and query parameter values
 {{{
-
-    def pagedResults = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name = $lastNameParameter".executeQuery([page: 2, pageSize: 10, resultClass: User.class])
+    def params = ['Smith']
+    def pagedResults = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name = $lastNameParameter".executeQuery([page: 2, pageSize: 10, resultClass: User.class, parameters: params])
 
 }}}
