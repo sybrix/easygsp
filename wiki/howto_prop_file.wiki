@@ -38,8 +38,8 @@ Every controller and template has access the application (or ServletContext) obj
 
 PropertiesFile extended methods
 || Method || Description ||
-|| Integer getInt(String key) ||  ||
-|| Integer getInt(String key, Integer defaultValue) ||  ||
+|| Integer getInt(String key) ||  Return Integer for value, throws NumberFormatException, NullPointerException ||
+|| Integer getInt(String key, Integer defaultValue) || Returns Integer for key, returns defaultValue when key returns null or exception occurs||
 || String getString(String key) ||  ||
 || String getString(String key, String defaultValue) ||  ||
 || Long getLong(String key) ||  ||
