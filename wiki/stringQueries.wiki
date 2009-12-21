@@ -52,7 +52,8 @@ executeQuery() with parameter and result type.  When both are specified, result 
 == Paging ==
 
 To specify paging, the parameter list must be a map, with the following attributes.
-Parameter Map:
+
+*Parameter Map:*
 || page || The page being requested. Required. ||
 || pageSize || The number of records per page. Required.|| 
 || resultClass || The type of object in the results list. Optional.||
@@ -60,7 +61,7 @@ Parameter Map:
 
 When paging is specified, the return object is a map.  The map contains 4 attributes w/values:  
 
-Return Object
+*Return Object:*
 || recordCount || the total number of records in the DB for the specified query ||
 || page || The current page of the result set ||
 || pageCount || The total number of pages in the query results || 
