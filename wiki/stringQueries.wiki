@@ -41,7 +41,7 @@ executeQuery() with parameter. One or parameters can be specified as arguments f
 
 }}}
 
-executeQuery() with parameter and result type.  When both are specified, result type should be the first argument list, followed by the parameter values.
+executeQuery() with parameter and result type.  When both are specified, result type should be the first argument, followed by the parameter values.
 
 {{{
     String lastName = 'Smith'
