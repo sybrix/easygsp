@@ -45,6 +45,7 @@ The following methods are added to each object, injectMethods() is invoked on:
 || insert() ||  executes an insert statement for the entity for properties that have set since the last persistence method invocation||
 || update() ||  executes an update statement for the entity for properties that have set since the last persistence method invocation ||
 || save() || executes an insert if the primary key(s) has no value, otherwise executes an update query ||
+|| delete() || deletes a this object from the table ||
 
 Static Methods
 || delete() || deletes a row from the table ||
