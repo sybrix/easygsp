@@ -46,5 +46,5 @@ PropertiesFile extended methods
 || Long getLong(String key, Long defaultValue) || Returns Long for key, returns defaultValue when key returns null or exception occurs ||
 || Double getDouble(String key) || Return Double for key, throws NumberFormatException, NullPointerException ||
 || Double getDouble(String key, Double defaultValue) || Returns Double for key, returns defaultValue when key returns null or exception occurs ||
-|| Boolean getBoolean(String key) ||  ||
-|| Boolean getBoolean(String key, Boolean defaultValue) ||  ||
+|| Boolean getBoolean(String key) || Returns Boolean for key, throws NullPointerException ||
+|| Boolean getBoolean(String key, Boolean defaultValue) || Returns Boolean for key, returns defaultValue when key is null or exception occurs ||
