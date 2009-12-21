@@ -56,6 +56,15 @@ The following methods are added to each object, injectMethods() is invoked on:
 || executeUpdate || Used to execute insert, update and delete queries  ||
 || executeScalar || Executes a SELECT query and returns a single value (column 1 of the first row)||
 
+== list() ===
+
+
+|| recordCount || the total number of records in the DB for the specified query ||
+|| page || The current page of the result set ||
+|| pageCount || The total number of pages in the query results || 
+|| results || A list of GroovyRowResult objects, or a list of the specified return type ||
+
+
 == StringQueries ==
 String queries allow you to do call an "execute" query method on a simple String. 
 
