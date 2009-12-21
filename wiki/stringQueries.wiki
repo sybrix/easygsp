@@ -51,7 +51,7 @@ executeQuery() with parameter and result type.  When both are specified, result 
 
 == Paging ==
 
-To specify paging, the parameter list must be a map, with the following attributes.
+To specify paging, the query must have an ORDER BY clause, the parameter list must be a map with the following attributes.
 
 *Parameter Map:*
 || page || The page being requested. Required. ||
@@ -86,6 +86,6 @@ Another example with paging and result type specified.
 Another example with paging, result type specified and query parameter values
 {{{
     def params = ['Smith']
-    def pagedResults = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name = ?".executeQuery([page: 2, pageSize: 10, resultClass: User.class, parameters: params])
+    def pagedResults = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name = ? ORDER BY last_name".executeQuery([page: 2, pageSize: 10, resultClass: User.class, parameters: params])
 
 }}}
