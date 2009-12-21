@@ -117,6 +117,6 @@ Returns a single value
 
  {{{
     def getTotalNumberUsers(username){
-       "SELECT count(*) FROM tblUsers".executeScalar()
+       "SELECT count(*) FROM tblUser".executeScalar()
     }
  }}}
