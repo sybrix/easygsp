@@ -66,3 +66,9 @@ executeQuery() with paging. To specify paging, there must be page and pageSize a
     assertTrue(pagedResults.pageCount > 0)
     assertTrue(pagedResults.results.size() > 0)
 }}}
+
+Another example with paging and result type specified.
+{{{
+    def pagedResults = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= $lastNameParameter".executeQuery([page: 2, pageSize: 10, resultClass: User.class])
+
+}}}
