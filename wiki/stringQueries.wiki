@@ -1,9 +1,15 @@
 #summary StringQueries
 
-
 = StringQueries = 
+StringQueries add methods to the String class and allow you to invoke one of three execute methods on any String that happens to be a query.
 
-StringQueries work once the database configuration has been done. [easyom see instructions here] 
+The following methods are added to the String class
+|| executeQuery || Executes a SELECT query ||
+|| executeUpdate || Used to execute insert, update and delete queries  ||
+|| executeScalar || Executes a SELECT query and returns a single value (column 1 of the first row)||
+
+StringQueries can be executed with queries parameters, paging options and/or the object return type.  [stringQueries See all of the options here].
+
 
 === def executeQuery(Object`[]` parameters) ===
 Executes a SELECT query and returns a list or GroovyResultRow a specified object type.
