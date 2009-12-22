@@ -15,7 +15,7 @@ Example:
      // insert new user, could have used user.save()
      user.save()
 
-     // now the the user
+     // delete the user
      user.delete()
   }
 }}}
