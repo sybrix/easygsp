@@ -1,4 +1,3 @@
-'[
 = Persistence Methods =
 Back: [easyom Configuration]
 
