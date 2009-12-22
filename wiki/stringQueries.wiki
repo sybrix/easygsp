@@ -8,7 +8,7 @@ The following methods are added to the String class
 || def executeUpdate || Used to execute insert, update and delete queries  ||
 || def executeScalar || Executes a SELECT query and returns a single value (column 1 of the first row)||
 
-StringQueries can be executed with queries parameters, paging options and/or the object return type.  [stringQueries See all of the options here].
+StringQueries can be executed with queries parameters, paging options and/or the object return type.  
 
 
 === def executeQuery(Object`[]` parameters) ===
