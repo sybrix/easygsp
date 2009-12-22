@@ -93,4 +93,11 @@ String queries allow you to do call an "execute" query method on a simple String
     }
 }}}
 
+
+
+*StringQueries*: The following methods are added to the String class
+|| executeQuery || Executes a SELECT query ||
+|| executeUpdate || Used to execute insert, update and delete queries  ||
+|| executeScalar || Executes a SELECT query and returns a single value (column 1 of the first row)||
+
 StringQueries can be executed with queries parameters, paging options and/or the object return type.  [stringQueries See all of the options here].
