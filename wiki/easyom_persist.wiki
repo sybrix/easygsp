@@ -60,7 +60,7 @@ Example:
 }}}
 
 ==Static Methods - Paging ==
-To specify paging options for findAll or list(), include  page and pageSize keys with values, in the parameters map.  The returned object will be a Map.  The map will contain the following:
+To specify paging options for findAll or list(), include page and pageSize keys with values in the parameters map.  The returned object will be a Map.  The map will contain the following:
 
 
 Paged Result Map
