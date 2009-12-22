@@ -55,7 +55,7 @@ Example:
     //Returns a list of User objects where state = 'FL' ordered By, the state column, then the lastName column in ascending order
     List users = User.findAll( operator:'OR', [state:'FL', orderBy:'state, lastName'])
 
-    //Returns a list of User objects where state = 'FL' ordered By, the state column in ascending order, folloed by lastName column in descending order
+    //Returns a list of User objects where state = 'FL' ordered By, the state column in ascending order, followed by lastName column in descending order
     List users = User.findAll( operator:'OR', [state:'FL', orderBy:'state, lastName DESC'])   
 }}}
 
