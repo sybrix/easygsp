@@ -37,7 +37,7 @@ Example:
     User user = User.find([lastName:'Smith', firstName:'John'])
     
     //Returns a list of User objects where the last name is 'Smith' or 'Williams'
-    List users = User.findAll( operator:'OR', [lastName:'Smith', lastName:'Williams'])
+    List users = User.findAll(operator:'OR', lastName:'Smith', lastName:'Williams'])
 
     //Deletes all objects from User table where lastname = 'Harrison'
     User.delete([lastName:'Harrison'])
