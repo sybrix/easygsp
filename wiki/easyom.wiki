@@ -4,6 +4,8 @@
 = About =
 EasyOM and not EasyORM because it's not an ORM.  This class allows you to persist single objects to the database by adding persistence methods to entity classes.  It also adds methods that allow you to execute "StringQueries".  
 
+EasyOM only works with Firebird and MySQL database.  However, since it's just 1 groovy script, it should be pretty easy to make it work with other databases.
+
 = Configuration =
 
 Use the following 2 methods to configure EasyOM.
