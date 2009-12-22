@@ -31,6 +31,7 @@ Example:
 
 *find()*, *findAll()*, and *delete()* all accept a map with name value pairs that let your specify how the queries WHERE clause is crafted.  You can also only specify one type of logical operator: 'AND' or 'OR'. If no operator is specified, the 'AND' operator is assumed. There is no limit on the number of columns that can be in the WHERE clause.
 
+Example:
 {{{
     // returns first object in resultset where last name equals 'Smith' and first name equals 'John'
     // find only returns 1 object 
@@ -49,6 +50,7 @@ Example:
 To specify the where order by clause for *findAll()* or *list()*, simple add an 'orderBy'
 to the parameters map with a comma separated list of column or property names.
 
+Example:
 {{{
     //Returns a list of User objects where state = 'FL' ordered By, the state column, then the lastName column in ascending order
     List users = User.findAll( operator:'OR', [state:'FL', orderBy:'state, lastName'])
