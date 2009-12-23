@@ -47,7 +47,7 @@ Example:
 
 
 ==Static Methods - ORDER BY clause ==
-To specify the where order by clause for *findAll()* or *list()*, add an 'orderBy'
+To specify the ORDER BY clause for *findAll()* or *list()*, add an 'orderBy'
 to the parameters map with a comma separated list of column or property names.
 
 Example:
