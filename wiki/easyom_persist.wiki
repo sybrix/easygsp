@@ -21,6 +21,7 @@ Example:
 }}}
 
 ==Static Methods==
+In addition to the instance methods, the following state methods are added to each configured entity object:
 || public static Integer delete() || deletes a row from the table ||
 || static def find() || Returns a single entity ||
 || static def findAll() || Returns a list of entity objects ||
