@@ -1,3 +1,5 @@
+#summary Persistence Methods
+
 = Persistence Methods =
 Back: [easyom Configuration]  |  Next: [stringQueries StringQueries]
 
