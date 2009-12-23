@@ -1,7 +1,7 @@
 = Persistence Methods =
 Back: [easyom Configuration]  |  Next: [stringQueries StringQueries]
 
-The following methods are added to each object injectMethods() is invoked on. Each method operates on "this" or the current object.  The methods don't accept any arguments  and all return an Integer indicating the number records affected by the query.
+The following methods are added to each object EasyOM.injectMethods() is invoked on. Each method operates on "this" or the current object.  The methods don't accept any arguments  and all return an Integer indicating the number records affected by the query.
 
 || public Integer insert() ||  executes an insert statement for the entity for properties that have set since the last persistence method invocation||
 || public Integer  update() ||  executes an update statement for the entity for properties that have set since the last persistence method invocation ||
