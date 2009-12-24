@@ -5,7 +5,7 @@ Install/Configure
 
 Getting Started
   * [firstproject Creating an Application]
-  * [helloworld1 Hello World - Script Style]
+  * [helloworld1 Hello World - Template Style]
   * [helloworld2 Hello World - MVC Style]
   * [processingforms Processing Form Requests]
 
