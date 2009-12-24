@@ -1,4 +1,4 @@
-#summary Hello World - Script Style.
+#summary Hello World - Template Style
 
 = Hello World =
 
