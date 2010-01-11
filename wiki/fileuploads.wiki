@@ -23,18 +23,15 @@ fileupload.gsp
 
         def uploadLocation=''
 
-                request.parseFileUploads().each {item->
-                        if (!item.isFormField()) {
-                                File uploadedFile = new File(application.appPath + File.separator + item.name);
-                                //uploadedFile.mkdirs();
+                request.uploads.each {item->
+
+                                File uploadedFile = new File(application.appPath + File.separator + item.name)
+
                                 item.write(uploadedFile);
                                 uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath 
-                        } else {
-                                cout item.fieldName
-                        }
-                        console("file upload" + item);
-                }
 
+                        console 'file upload" + item
+                }
 
 %>
 
