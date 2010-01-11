@@ -11,4 +11,5 @@
 Probably nowhere unless you're willing to pay for your own server.  Since I do recognize this as a problem, an ironic problem since easyGSP is trying to solve this very problem, contact me and if you've developed something in EasyGSP and now want a place to host it.  I can provide a certain amount of *absolutely no guarantee of anything* free hosting for hardcore groovy developers.
 
 * Are taglibs supported ?*
+
 No.  At this time they are not.  If a case can be made the benefits of taglibs outweigh the cost of developing them and offer something significantly more useful than the include directive, then I would be willing to developing the feature.  Currently, I don't see the need, but this could change.
