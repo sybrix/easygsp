@@ -25,7 +25,7 @@ The following are accessible to every class, template and controller.
 || boolean isZipCode(String zipCode) || Returns true when zipCode is valid US zip code, false otherwise. regex: \\d{5}(-\\d{4}) ||
 || boolean isEmpty(Object obj) || Returns true is obj is null or obj.toString() is an empty string, false otherwise.|| 
 || boolean isEmailValid(String emailAddress)|| Returns return when emailAddress is a valid email address, false otherwise. regex: ||
-|| boolean isNumberic(String val)||Returns true when val contains only numeric values, false otherwise. regex: (\d+?) ||
+|| boolean isNumeric(String val)||Returns true when val contains only numeric values, false otherwise. regex: (\d+?) ||
 || boolean isPhoneValid(String val) ||Return true when val is a valid us phone number, false otherwise. regex: (\d-)?(\d{3}-)?\d{3}-\d{4}||
 
 
