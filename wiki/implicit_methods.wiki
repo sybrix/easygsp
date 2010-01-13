@@ -8,6 +8,7 @@
 The following are accessible to every class, template and controller.
 || *Object* || *Description* ||
 || console(object) || Writes object.toString() to the console window. Useful when developing ||
+|| println(object) || Writes object.toString() to the console window. Useful when developing ||
 || log(String s)|| Writes message to application's log file.  Log file located @ WEB-INF/logs. Messages are written to the log file at a specified interval, not immediately. ||
 || log(Throwable t)|| Writes exception to application's log file.  Log file located @ WEB-INF/logs ||
 || log(String logMessage, Throwable t) || Writes message and exception to log file. Log file located @ WEB-INF/logs ||
@@ -19,6 +20,13 @@ The following are accessible to every class, template and controller.
 || Double toDbl(String val) || Return a Double object for a string. ||
 || Sql newSqlInstance([String dataSourceName]) || Returns groovy.sql.Sql object.  Database parameters must be supplied as application attributes ||
 || [howto_prop_file Properties loadPropertiesFile(String fileName)] || Returns a properties file ||
+|| Object ifNull(Object obj, Object defaultValue)|| Returns defaultValue when obj is null||
+|| boolean isAlphaNumberic(String s) || Returns true, when s contains only numbers and/or letters, false otherwise. regex:  [a-zA-Z0-9]||
+|| boolean isZipCode(String zipCode) || Returns true when zipCode is valid US zip code, false otherwise. regex: \\d{5}(-\\d{4}) ||
+|| boolean isEmpty(Object obj) || Returns true is obj is null or obj.toString() is an empty string, false otherwise.|| 
+|| boolean isEmailValid(String emailAddress)|| Returns return when emailAddress is a valid email address, false otherwise. regex: ||
+|| boolean isNumberic(String val)||Returns true when val contains only numeric values, false otherwise. regex: (\d+?) ||
+|| boolean isPhoneValid(String val) ||Return true when val is a valid us phone number, false otherwise. regex: (\d-)?(\d{3}-)?\d{3}-\d{4}||
 
 
 The following are only access to the templates and controllers
@@ -28,3 +36,4 @@ The following are only access to the templates and controllers
 || bind(String key, Object value) || Bind is used in controllers to store name/value pairs  that will be used be in a view template.||
 || [howto_cookie Cookie setCookie(...)] || create a cookie, and adds it to the response ||
 || [howto_cookie Cookie getCookie(cookieName)] || Returns the first cookie found that matches the name specified  ||
+|| render(Object obj) || Writes obj to the response output stream|| 
