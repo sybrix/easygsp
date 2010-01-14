@@ -30,7 +30,7 @@ fileupload.gsp
                                 item.write(uploadedFile);
                                 uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath 
 
-                        console 'file upload" + item
+                        println 'file upload" + item
                 }
 
 %>
