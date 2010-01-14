@@ -10,23 +10,7 @@ The following are accessible to every class, template and controller.
 
 || println(Object object) || Writes object.toString() to the console window.  ||
 || log(String s)|| Writes message to application's log file.  Log file located @ WEB-INF/logs. Messages are written to the log file at a specified interval, not immediately. ||
-|| log(Throwable t)|| Writes exception to application's log file.  Log file located @ WEB-INF/logs ||
-|| log(String logMessage, Throwable t) || Writes message and exception to log file. Log file located @ WEB-INF/logs ||
-|| String encode(String s)|| Encodes string as  URL encoded string.  Returns a string. ||
-|| String decode(String s)|| Decodes a URL encoded string.  Returns a string. ||
-|| String htmlEncode(String s) || HTML encodes a string. Return a string. || 
-|| Integer toInt(String val) || Returns an Integer object for a string. ||
-|| Long toLong(String val) || Returns a Long object for a string. ||
-|| Double toDbl(String val) || Return a Double object for a string. ||
-|| [howto_newSqlInstance Sql newSqlInstance(String dataSourceName)] || Returns groovy.sql.Sql object.  Database parameters must be supplied as application attributes ||
-|| [howto_prop_file Properties loadPropertiesFile(String fileName)] || Returns a properties file ||
-|| Object ifNull(Object obj, Object defaultValue)|| Returns defaultValue when obj is null||
-|| boolean isAlphaNumberic(String s) || Returns true, when s contains only numbers and/or letters, false otherwise. regex:  [a-zA-Z0-9]||
-|| boolean isZipCode(String zipCode) || Returns true when zipCode is valid US zip code, false otherwise. regex: \\d{5}(-\\d{4}) ||
-|| boolean isEmpty(Object obj) || Returns true is obj is null or obj.toString() is an empty string, false otherwise.|| 
-|| boolean isEmailValid(String emailAddress)|| Returns return when emailAddress is a valid email address, false otherwise. regex: ||
-|| boolean isNumeric(String val)||Returns true when val contains only numeric values, false otherwise. regex: (\d+?) ||
-|| boolean isPhoneValid(String val) ||Return true when val is a valid us phone number, false otherwise. regex: (\d-)?(\d{3}-)?\d{3}-\d{4}||
+
 
 
 The following are only access to the templates and controllers
