@@ -4,7 +4,7 @@
         <property environment="env"/>
 
         <property name="jdk" value="${env.JAVA_HOME}"/>
-        <property name="buildNumber" value="0.2.4"/>
+        <property name="buildNumber" value="0.2.5"/>
         <property name="easyGSPDir" value="easygsp-${buildNumber}"/>
         <property name="lib" value="lib"/>
         <property name="src" value="src"/>
@@ -14,7 +14,7 @@
         <filelist id="jar.libraries" dir="lib">
                 <file name="commons-loggin-1.1.jar"/>
                 <file name="concurrent.jar"/>
-                <file name="groovy-all-1.7-beta-1.jar"/>
+                <file name="groovy-all.jar"/>
                 <file name="metamethods.jar"/>
                 <file name="httpclient-4.0-beta1.jar"/>
                 <file name="httpcore-4.0-beta3.jar"/>

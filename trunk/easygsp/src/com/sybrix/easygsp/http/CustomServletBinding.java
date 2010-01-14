@@ -206,12 +206,13 @@ public class CustomServletBinding extends Binding {
                 * Check implicite key names. See setVariable(String, Object)!
                 */
                 try {
-                        if ("out".equals(name)) {
-                                return response.getWriter();
-                        }
-                        if ("sout".equals(name)) {
-                                return response.getOutputStream();
-                        }
+//                        if ("out".equals(name)) {
+//                                return response.getWriter();
+//                        }
+//                        if ("sout".equals(name)) {
+//                                return response.getOutputStream();
+//                        }
+                        
                         if ("html".equals(name)) {
                                 if (html == null) {
                                         html = new MarkupBuilder(response.getWriter());

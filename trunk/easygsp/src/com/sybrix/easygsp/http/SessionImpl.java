@@ -171,7 +171,7 @@ public class SessionImpl implements HttpSession {
         public void invokeSessionStartScript() {
                 try {
                         if (application.groovyWebFileExists()) {
-                                GSE3 gse = application.getGroovyScriptEngine();
+                                GSE4 gse = application.getGroovyScriptEngine();
                                 Class clazz = gse.loadScriptByName("WEB-INF.web");
                                 GroovyObject o = (GroovyObject) clazz.newInstance();
                                 o.invokeMethod("onSessionStart", new Object[]{null});

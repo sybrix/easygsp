@@ -4,6 +4,7 @@ import com.sybrix.easygsp.server.EasyGServer
 import com.sybrix.easygsp.util.PropertiesFile
 import groovy.sql.Sql
 import java.sql.SQLException
+import com.sybrix.easygsp.util.Validator
 
 
 public class StaticControllerMethods {
@@ -20,6 +21,14 @@ public class StaticControllerMethods {
                 addToDbl(clazz)
                 addToInt(clazz)
                 addToLong(clazz)
+                addIsEmailValid(clazz)
+                addIsAlphaNumberic(clazz)
+                addIsEmailValid(clazz)
+                addIsPhoneValid(clazz)
+                addIsZipCodeValid(clazz)
+                addIsNumeric(clazz)
+                addIsEmpty(clazz)
+                addIfNull(clazz)
                 // email
                 // cookie
         }
@@ -169,4 +178,61 @@ public class StaticControllerMethods {
                 }
         }
 
+        private static def addIsEmailValid(java.lang.Class clazz) {
+                clazz.metaClass.static.isEmail = {String val ->
+                        return Validator.isEmailValid(val);
+                }
+        }
+
+        private static def addIsAlphaNumberic(java.lang.Class clazz){
+                clazz.metaClass.static.isAlphaNumberic = {String val ->
+                        return Validator.isAlphaNumeric(val);
+                }
+        }
+
+        private static def addIsZipCodeValid(java.lang.Class clazz){
+                clazz.metaClass.static.isZipCode = {String val ->
+                        return Validator.isZipCodeValid(val);
+                }                                               
+        }
+
+        private static def addIsPhoneValid(java.lang.Class clazz){
+                clazz.metaClass.static.isPhone = {String val ->
+                        return Validator.isValidPhone(val);
+                }
+        }
+
+        private static def addIsNumeric(java.lang.Class clazz){
+                clazz.metaClass.static.isNumeric = {String val ->
+                        return Validator.isNumeric(val);
+                }
+        }
+
+        private static def addIsEmpty(java.lang.Class clazz){
+                clazz.metaClass.static.isEmpty = {Object val ->
+                        return Validator.isEmpty(val);
+                }
+        }
+
+        private static def addIfNull(java.lang.Class clazz){
+                clazz.metaClass.static.ifNull = {Object val, defaultVal ->
+                        if (Validator.isEmpty(val))
+                                return defaultVal
+                        else
+                                return val;
+                }
+        }
+
+//                public static boolean isAlphaNumeric(String value) {
+//                return ALPHA_NUMERIC_PATTERN.matcher(value).matches();
+//        }
+//
+//        public static boolean isValidPhone(String value) {
+//                return PHONE_PATTERN.matcher(value).matches();
+//        }
+//
+//        public static boolean isZipCodeValid(String value) {
+//                return ZIPCODE_PATTERN.matcher(value).matches();
+//        }
+                                   
 }

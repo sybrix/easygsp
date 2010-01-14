@@ -121,6 +121,7 @@ public class ThreadMonitor {
                                         
                                         if (currentTime > requestThread.getStopTime()) {
                                                 log.fine("trying to stop a thread ....");
+                                                
                                                 if (requestThread.isAlive()) {
                                                         try {
                                                                 //requestThread.sendError(500, requestThread.getScriptPath(),requestThread.getApplication().getGroovyScriptEngine(),requestThread.getBinding(), new Exception("Thread exceeded maximum timeout."));
@@ -130,7 +131,6 @@ public class ThreadMonitor {
                                                         } catch (Throwable e) {
                                                                 // do nothing there.  An exception will be throw in the run of RequestThread
                                                                 // catch it and log it there
-
                                                         }
                                                 }
 

@@ -121,7 +121,7 @@ public class RequestThread extends Thread {
                                 application.startApplication();
 
                                 // did someone modify the web.groovy file ?
-                        } else if (application.groovyFileUpdated()) {
+                        } else if (application.webGroovyUpdated()) {
                                 log.log(FINE, "restarting application: " + application.getAppPath());
                                 application.killApp();
                                 application = EasyGServer.loadApplicationFromFileSystem(applications, parsedRequest.getAppName(), parsedRequest.getAppPath());
@@ -175,6 +175,11 @@ public class RequestThread extends Thread {
                         RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(root.getParent());
                         RequestThreadInfo.get().setCurrentFile(root.getAbsolutePath());
                         binding.setVariable("currentFile",root.getAbsolutePath());
+
+                        if (request.isMulitpart){
+                                request.parseFileUploads();
+                                request.setAttribute("isMultipart", true);
+                        }
 
                         //process the request
                         if (parsedRequest.getRequestURI().endsWith(templateExtension)) {
@@ -327,7 +332,7 @@ public class RequestThread extends Thread {
                 this.requestStartTime = requestStartTime;
         }
 
-        public static void processScriptRequest(final String requestURI, final GSE3 gse, final CustomServletBinding binding) {
+        public static void processScriptRequest(final String requestURI, final GSE4 gse, final CustomServletBinding binding) {
                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 
                 ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
@@ -340,7 +345,7 @@ public class RequestThread extends Thread {
                                                 RequestImpl request = (RequestImpl) binding.getVariable("request");
                                                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 
-                                                ((GSE3) getDelegate()).run(requestURI.replace(altExtension, groovyExtension), binding);
+                                                ((GSE4) getDelegate()).run(requestURI.replace(altExtension, groovyExtension), binding);
 
                                                 Boolean alreadyForwarded = (Boolean) request.getAttribute("_explicitForward");
 
@@ -416,7 +421,7 @@ public class RequestThread extends Thread {
         }
 
 
-        public static void processTemplateRequest(final String scriptPath, final GSE3 gse, final CustomServletBinding binding) {
+        public static void processTemplateRequest(final String scriptPath, final GSE4 gse, final CustomServletBinding binding) {
                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 
                 try {
@@ -428,9 +433,10 @@ public class RequestThread extends Thread {
                                                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
                                                 ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
 
-                                                application.getTemplateServlet().service(scriptPath, request, response, binding);
+                                                //application.getTemplateServlet().service(scriptPath, request, response, binding);
+                                                application.getTemplateServlet().service(request, response);
 //
-//                                                ((GSE3) getDelegate()).run(scriptPath.replace(altExtension, groovyExtension), binding);
+//                                                ((GSE4) getDelegate()).run(scriptPath.replace(altExtension, groovyExtension), binding);
 //
 //                                                Boolean alreadyForwarded = (Boolean) request.getAttribute("_explicitForward");
 //                                                long bufferSize = response.getBufferContentSize() == null ? 0 : response.getBufferContentSize();
@@ -507,7 +513,7 @@ public class RequestThread extends Thread {
                 }
         }
 
-//        public static void processTemplateRequest(final String scriptPath, final GSE3 gse, final CustomServletBinding binding) {
+//        public static void processTemplateRequest(final String scriptPath, final GSE4 gse, final CustomServletBinding binding) {
 //                ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 //
 //                Application application = (Application) binding.getVariable("application");
@@ -565,7 +571,7 @@ public class RequestThread extends Thread {
 //                }
 //        }
 
-        protected static void sendError(int errorCode, String scriptPath, GSE3 gse, CustomServletBinding binding, Throwable e) {
+        protected static void sendError(int errorCode, String scriptPath, GSE4 gse, CustomServletBinding binding, Throwable e) {
                 if (RequestThreadInfo.get().errorOccurred()){
                         return;
                 }
@@ -606,9 +612,13 @@ public class RequestThread extends Thread {
                         }
 
                         if (application.hasCustomErrorFile("error" + errorCode + templateExtension)) {
-                                RequestThread.processTemplateRequest(RequestThreadInfo.get().getApplication().getAppPath() + File.separator + "WEB-INF" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension, gse, binding);
+                                String errorScriptPath = RequestThreadInfo.get().getApplication().getAppPath() + File.separator + "WEB-INF" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension ;
+                                RequestThreadInfo.get().getParsedRequest().setRequestFilePath(errorScriptPath);
+                                RequestThread.processTemplateRequest(errorScriptPath, gse, binding);
                         } else {
-                                RequestThread.processTemplateRequest(EasyGServer.APP_DIR + File.separator + "conf" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension, gse, binding);
+                                String errorScriptPath = EasyGServer.APP_DIR + File.separator + "conf" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension;
+                                RequestThreadInfo.get().getParsedRequest().setRequestFilePath(errorScriptPath);
+                                RequestThread.processTemplateRequest(errorScriptPath, gse, binding);
                                 //sendError(errorCode, response, e, stackTraceElement, binding);
                         }
                         response.flushBuffer();

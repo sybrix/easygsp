@@ -16,6 +16,7 @@ public class RequestInfo {
         private ParsedRequest parsedRequest;
         private boolean errorOccurred = false;
         private CustomServletBinding binding;
+        private boolean codeBehindChanged=false;
 
         public RequestInfo() {
                 templateInfo = new TemplateInfo();
@@ -106,5 +107,13 @@ public class RequestInfo {
 
         public void setBinding(CustomServletBinding binding) {
                 this.binding = binding;
+        }
+
+        public boolean isCodeBehindNewer() {
+                return codeBehindChanged;
+        }
+
+        public void setCodeBehindChanged(boolean codeBehindChanged) {
+                this.codeBehindChanged = codeBehindChanged;
         }
 }

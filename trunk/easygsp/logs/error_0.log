@@ -1,81 +1,49 @@
-12/14/09 00:25.42 [INFO] - Thread monitor started  (timeout: 30)
-12/14/09 00:25.42 [INFO] - SessionMonitor started.
-12/14/09 00:25.42 [FINE] - Logger thread started
-12/14/09 00:25.42 [FINE] - loading database driver:org.firebirdsql.jdbc.FBDriver
-12/14/09 00:25.42 [FINE] - loading database driver:com.mysql.jdbc.Driver
-12/14/09 00:26.02 [FINE] - adding thread id:20 from running map
-12/14/09 00:26.02 [FINE] - parsed AppName: app1
-12/14/09 00:26.02 [FINE] - parsed AppDir: c:/easygsp/webapps/app1
-12/14/09 00:26.02 [FINE] - parsed RequestURIPath: c:/easygsp/webapps/app1/index.gspx
-12/14/09 00:26.02 [FINE] - parsed RequestURI: index.gspx
-12/14/09 00:26.02 [FINE] - loading application: c:\easygsp\webapps\app1
-12/14/09 00:26.02 [FINE] - starting application: c:\easygsp\webapps\app1
-12/14/09 00:26.03 [FINE] - invoking onApplicationStart for app1
-12/14/09 00:26.08 [FINE] - onApplicationStart successful for app1
-12/14/09 00:26.08 [FINEST] - SCGI headers
-	ACCEPT-ENCODING = gzip,deflate
-	USER-AGENT = Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.10) Gecko/2009042316 Firefox/3.0.10 (.NET CLR 3.5.30729)
+01/13/10 21:56.45 [INFO] - Thread monitor started  (timeout: 300)
+01/13/10 21:56.45 [INFO] - SessionMonitor started.
+01/13/10 21:56.45 [FINE] - Logger thread started
+01/13/10 21:56.45 [FINE] - loading database driver:org.firebirdsql.jdbc.FBDriver
+01/13/10 21:56.45 [FINE] - loading database driver:com.mysql.jdbc.Driver
+01/13/10 21:57.39 [FINE] - adding thread id:20 from running map
+01/13/10 21:57.39 [FINE] - parsed AppName: app1
+01/13/10 21:57.39 [FINE] - parsed AppDir: c:/projects/easygsp/easygsp/webapps/app1
+01/13/10 21:57.39 [FINE] - parsed RequestURIPath: c:/projects/easygsp/easygsp/webapps/app1/index.gspx
+01/13/10 21:57.39 [FINE] - parsed RequestURI: index.gspx
+01/13/10 21:57.39 [FINE] - loading application: c:\projects\easygsp\easygsp\webapps\app1
+01/13/10 21:57.39 [FINE] - starting application: c:\projects\easygsp\easygsp\webapps\app1
+01/13/10 21:57.39 [FINE] - invoking onApplicationStart for app1
+01/13/10 21:57.44 [FINE] - onApplicationStart successful for app1
+01/13/10 21:57.44 [FINEST] - SCGI headers
+	ACCEPT-ENCODING = deflate, gzip, x-gzip, identity, *;q=0
+	USER-AGENT = Opera/9.80 (Windows NT 6.0; U; en) Presto/2.2.15 Version/10.10
+	TE = deflate, gzip, chunked, identity, trailers
 	SCRIPT-NAME = /app1/index.gspx
-	DOCUMENT-ROOT = c:/easygsp/webapps
-	CACHE-CONTROL = max-age=0
-	COOKIE = bumblezee=OJQ8s%2FwR9hG6UWeJczUTpihXOcI4aABXfAMFB1AAY48n41Q%2FrDFscFhWnc396lCls319fCRW533H%0D%0A3zsqXzsskcqe3BbbCU3dBDmMEWdiBXoYgDsFQ61RDA%3D%3D; GSESSIONID=3EGDNEAYLR5DP8AO3; myCookieName=cookieValue
-	ACCEPT-LANGUAGE = en-us,en;q=0.5
+	DOCUMENT-ROOT = c:/projects/easygsp/easygsp/webapps
+	ACCEPT-LANGUAGE = en-US,en;q=0.9
+	COOKIE = __utmz=111872281.1255313992.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utma=111872281.448789227.1255313992.1256998899.1261175741.15; bumblezee=OJQ8s%2FwR9hG6UWeJczUTpihXOcI4aABXfAMFB1AAY48n41Q%2FrDFscAEUpDWQB76ikUUDAihMfZJG%0D%0AO4ol%2FQlRwEAFOBwL4YRsXri157XQUrFPI1mkrMYO8hLAj4PjVwKo2dmENcNf8iHcGCzZOYMz0Fwi%0D%0Arg7q7it7; GSESSIONID=VGDOWWBC342HWBGFH
 	HOST = localhost:8085
-	ACCEPT-CHARSET = ISO-8859-1,utf-8;q=0.7,*;q=0.7
+	ACCEPT-CHARSET = iso-8859-1, utf-8, utf-16, *;q=0.1
+	COOKIE- = $Version=1
 	SERVER-SOFTWARE = LightTPD/1.4.23 (Win32)
 	REQUEST-METHOD = GET
-	ACCEPT = text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+	ACCEPT = text/html, application/xml;q=0.9, application/xhtml+xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=0.1
 	SERVER-NAME = localhost
 	REMOTE-ADDR = 127.0.0.1
 	REDIRECT-STATUS = 200
-	KEEP-ALIVE = 300
-	CONNECTION = keep-alive
+	CONNECTION = Keep-Alive, TE
 	SERVER-PROTOCOL = HTTP/1.1
 	PATH-INFO = 
 	QUERY-STRING = 
 	SERVER-PORT = 8085
 	CONTENT-LENGTH = 0
-	REMOTE-PORT = 58740
+	REMOTE-PORT = 59233
 	SCGI = 1
-	REQUEST-URI = /app1/index.gspx
-	SCRIPT-FILENAME = c:/easygsp/webapps/app1/index.gspx
+	REQUEST-URI = /app1/
+	SCRIPT-FILENAME = c:/projects/easygsp/easygsp/webapps/app1/index.gspx
 	GATEWAY-INTERFACE = CGI/1.1
 	SERVER-ADDR = 127.0.0.1
 
-12/14/09 00:26.09 [INFO] - INSERT INTO tblprofile (last_name) VALUES (?)
-12/14/09 00:26.11 [FINE] com.sybrix.easygsp.http.RequestThread$1.call() - No signature of method: index.cout() is applicable for argument types: (java.lang.String) values: [ ok ]
-groovy.lang.MissingMethodException: No signature of method: index.cout() is applicable for argument types: (java.lang.String) values: [ ok ]
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter(unwrap:54)
-	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite(callCurrent:78)
-	at org.codehaus.groovy.runtime.callsite.CallSiteArray(defaultCallCurrent:44)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite(callCurrent:143)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite(callCurrent:151)
-	at index(run:57)
-	at com.sybrix.easygsp.http.GSE3(run:459)
-	at com.sybrix.easygsp.http.RequestThread$1(call:343)
-	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(use:93)
-	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(access$200:61)
-	at org.codehaus.groovy.runtime.GroovyCategorySupport(use:201)
-	at com.sybrix.easygsp.http.RequestThread(processScriptRequest:398)
-	at com.sybrix.easygsp.http.RequestThread(run:183)
-
-
-12/14/09 00:26.13 [FINE] - logging 5 message(s) in log queue
-12/14/09 00:26.17 [SEVERE] com.sybrix.easygsp.http.RequestThread$2.call() - C:\projects\easygsp\easygsp\conf\errors\error500.gsp
-com.sybrix.easygsp.exception.TemplateNotFoundException: C:\projects\easygsp\easygsp\conf\errors\error500.gsp
-	at com.sybrix.easygsp.http.TemplateServlet(service:457)
-	at com.sybrix.easygsp.http.RequestThread$2(call:431)
-	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(use:93)
-	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(access$200:61)
-	at org.codehaus.groovy.runtime.GroovyCategorySupport(use:201)
-	at com.sybrix.easygsp.http.RequestThread(processTemplateRequest:490)
-	at com.sybrix.easygsp.http.RequestThread(sendError:611)
-	at com.sybrix.easygsp.http.RequestThread$1(call:364)
-	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(use:93)
-	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(access$200:61)
-	at org.codehaus.groovy.runtime.GroovyCategorySupport(use:201)
-	at com.sybrix.easygsp.http.RequestThread(processScriptRequest:398)
-	at com.sybrix.easygsp.http.RequestThread(run:183)
-
-
-12/14/09 00:26.17 [FINE] - took 14902 ms
+01/13/10 21:57.45 [INFO] - INSERT INTO tblprofile (last_name) VALUES (?)
+01/13/10 21:57.45 [FINE] - logging 2 message(s) in log queue
+01/13/10 21:57.47 [FINE] - fowarding to file: view.gspx
+01/13/10 21:57.47 [FINE] - took 7899 ms
+01/13/10 21:57.50 [FINE] - logging 3 message(s) in log queue

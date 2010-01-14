@@ -38,9 +38,10 @@ grant codeBase "file:${easygsp.home}/lib/-" {
 };
 
 grant codeBase "file:/groovy/script" {
-    permission java.lang.RuntimePermission "accessDeclaredMembers";
+        permission java.lang.RuntimePermission "accessDeclaredMembers";
+        permission groovy.security.GroovyCodeSourcePermission "/groovy/script";
+        permission java.io.FilePermission "${easygsp.home}/webapps/-", "read,write";
 };
-
 
 grant codeBase "file:/groovy/security/-" {
     permission java.lang.RuntimePermission "accessDeclaredMembers";
@@ -71,6 +72,7 @@ grant {
     permission java.util.PropertyPermission "file.separator", "read";
     permission java.util.PropertyPermission "path.separator", "read";
     permission java.util.PropertyPermission "line.separator", "read";
+    permission java.util.PropertyPermission "groovy.source.encoding", "read";
 
     // JVM properties to allow read access
     permission java.util.PropertyPermission "java.version", "read";
