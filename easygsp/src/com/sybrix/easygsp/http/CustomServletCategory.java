@@ -61,6 +61,17 @@ public class CustomServletCategory {
                 request.setAttribute(key, value);
         }
 
+        public static void render(GroovyObject self, Object s) {
+                Binding binding = (Binding) self.getProperty("binding");
+                ResponseImpl response = (ResponseImpl) binding.getVariable("response");
+
+                try {
+                        response.getWriter().write(s.toString());
+                } catch (IOException e) {
+                        throw new RuntimeException("render() failed", e);
+                }
+        }
+
         public static void redirect(GroovyObject self, String s) throws IOException {
                 Binding binding = (Binding) self.getProperty("binding");
                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
