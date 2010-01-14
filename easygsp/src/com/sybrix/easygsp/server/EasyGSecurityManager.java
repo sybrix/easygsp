@@ -54,13 +54,14 @@ public class EasyGSecurityManager extends SecurityManager {
                         super.checkRead(file);
                 } else {
                        boolean b = file.startsWith(path.getAppPath());
-                       //System.out.println("file.startsWith - " + file  + ", " + path.getAppPath());
+
                         if (b) {
                                 return;
                         } else {
                                 try {
                                         super.checkRead(file);
                                 } catch (SecurityException e) {
+                                        //System.out.println("file.startsWith - " + file  + ", " + path.getAppPath());
                                         throw e;
                                 }
                         }

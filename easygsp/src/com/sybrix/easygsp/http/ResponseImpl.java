@@ -388,7 +388,7 @@ public class ResponseImpl implements HttpServletResponse {
                 if (statusCode == 200)
                         status = "OK";
 
-                headers.put("Status", statusCode);
+                headers.put("Status", String.valueOf(statusCode));
 
                 //buffer.append(ResponseHeaders.STATUS).append(":HTTP/1.1 ").append(statusCode).append(" ").append(status).append(ResponseHeaders.END_OF_LINE);
                 //buffer.append("HTTP/1.1 ").append(statusCode).append(" ").append(status).append(ResponseHeaders.END_OF_LINE);

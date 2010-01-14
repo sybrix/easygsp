@@ -51,7 +51,7 @@ import groovy.lang.Binding;
 
 /**
  * Custom implementation of HttpServletRequest <br/>
- */          
+ */
 public class RequestImpl implements HttpServletRequest {
         private static final Logger log = Logger.getLogger(RequestImpl.class.getName());
 
@@ -76,32 +76,38 @@ public class RequestImpl implements HttpServletRequest {
         private static String tempUploadDirectory;
         private static Long maxUploadSize;
         private static int uploadThresholdSize;
+        private Map uploads;
+        protected boolean isMulitpart = false;
 
         static {
                 templateExtension = EasyGServer.propertiesFile.getString("template.extension", ".gsp");
-                altGroovyExtension = EasyGServer.propertiesFile.getString("alt.groovy.extension",".gspx");
-                viewExtension = EasyGServer.propertiesFile.getString("view.extension",".gspx");
+                altGroovyExtension = EasyGServer.propertiesFile.getString("alt.groovy.extension", ".gspx");
+                viewExtension = EasyGServer.propertiesFile.getString("view.extension", ".gspx");
                 tempUploadDirectory = EasyGServer.propertiesFile.getString("file.upload.temp.directory", System.getProperty("java.io.tmpdir"));
                 maxUploadSize = EasyGServer.propertiesFile.getLong("file.upload.max.filesize", -1L);
-                uploadThresholdSize = EasyGServer.propertiesFile.getInt("file.upload.threshold",2621440);
+                uploadThresholdSize = EasyGServer.propertiesFile.getInt("file.upload.threshold", 2621440);
         }
 
-        public RequestImpl(InputStream ios, Map<String, String> headers, ServletContextImpl application, ResponseImpl response) {
+        public RequestImpl(InputStream ios, Map<String, String> headers, ServletContextImpl application, ResponseImpl response) throws FileUploadException {
 
+                
                 this.ios = ios;
                 this.headers = headers;
                 allParameters = new HashMap();
-                
+                requestAttributes = new HashMap();
+                isMulitpart = true;
+
                 if (!ServletFileUpload.isMultipartContent(this)) {
                         parseParameters();
                         parseFormParameters();
+                        isMulitpart = false;
+                        setAttribute("isMultipart", false);
                 }
-                requestAttributes = new HashMap();
+
                 this.application = application;
                 this.response = response;
 
         }
-
 
         public String getAuthType() {
                 throw new NotImplementedException("Request.getAuthType() is not implemented");
@@ -217,7 +223,7 @@ public class RequestImpl implements HttpServletRequest {
                         return session;
 
                 if (session == null && createSession) {
-                        session = new SessionImpl(application, EasyGServer.propertiesFile.getInt("session.timeout",15));
+                        session = new SessionImpl(application, EasyGServer.propertiesFile.getInt("session.timeout", 15));
                         servletBinding.setVariable("session", session);
 
                         application.getSessions().put(session.getId(), session);
@@ -548,14 +554,16 @@ public class RequestImpl implements HttpServletRequest {
                 if (file.endsWith(viewExtension)) {
                         file = constructForwardPath(file, servletBinding);
                         log.fine("fowarding to file: " + file);
-                        application.getTemplateServlet().service(file, this, response, servletBinding);
+                        //application.getTemplateServlet().service(file, this, response, servletBinding);
+                        application.getTemplateServlet().service(this, response);
                 } else {
                         RequestThread.processScriptRequest(file, application.getGroovyScriptEngine(), servletBinding);
                 }
         }
 
         public void forwardToView(String file) throws IOException, ServletException {
-                application.getTemplateServlet().service(file, this, response, servletBinding);
+                //application.getTemplateServlet().service(file, this, response, servletBinding);
+                application.getTemplateServlet().service(this, response);
         }
 
         protected static String constructForwardPath(String s, Binding binding) {
@@ -569,7 +577,7 @@ public class RequestImpl implements HttpServletRequest {
         }
 
         public List<FileItem> parseFileUploads(int threshold, long maxFileSize) throws FileUploadException {
-                 if (ServletFileUpload.isMultipartContent(this)) {
+                if (ServletFileUpload.isMultipartContent(this)) {
                         DiskFileItemFactory factory = new DiskFileItemFactory(threshold, new File(tempUploadDirectory));
 
                         // Create a new file upload handler
@@ -580,9 +588,13 @@ public class RequestImpl implements HttpServletRequest {
 
                         // Parse the request
                         List<FileItem> l = upload.parseRequest(this);
-                        for(FileItem f: l){
+                        uploads = new HashMap();
+                        for (FileItem f : l) {
                                 if (f.isFormField()) {
                                         allParameters.put(f.getFieldName(), f.getString());
+                                } else {
+                                        if (f.getSize()>0)
+                                                uploads.put(f.getFieldName(), f);
                                 }
                         }
 
@@ -592,6 +604,12 @@ public class RequestImpl implements HttpServletRequest {
                 } else {
                         return new ArrayList();
                 }
+        }
+
+        public Map getUploads(){
+                if (uploads == null)
+                        return new HashMap();
+                return uploads;
         }
 
         public List<FileItem> parseFileUploads() throws FileUploadException {

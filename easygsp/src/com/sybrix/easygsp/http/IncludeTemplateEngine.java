@@ -42,17 +42,17 @@ public class IncludeTemplateEngine extends TemplateEngine {
         private static final Logger log = Logger.getLogger(IncludeTemplateEngine.class.getName());
         private boolean verbose;
         private static int counter = 1;
-        //private GroovyShell groovyShell;
+        private GroovyShell groovyShell;
 
-        private GSE3 groovyScriptEngine;
+        //private GSE4 groovyScriptEngine;
 
 //        public IncludeTemplateEngine() {
 //                this(GroovyShell.class.getClassLoader());
 //        }
 
-        public IncludeTemplateEngine(GSE3 groovyScriptEngine) {
-                //this(groovyScriptEngine.getGroovyClassLoader());
-                this.groovyScriptEngine = groovyScriptEngine;
+        public IncludeTemplateEngine(GSE4 groovyScriptEngine) {
+                this(groovyScriptEngine.getGroovyClassLoader());
+                //this.groovyScriptEngine = groovyScriptEngine;
 
 
         }
@@ -68,12 +68,34 @@ public class IncludeTemplateEngine extends TemplateEngine {
         }
 
         public IncludeTemplateEngine(GroovyShell groovyShell) {
-          //      this.groovyShell = groovyShell;
+              this.groovyShell = groovyShell;
         }
 
+//        public Template createTemplate(Reader reader) throws CompilationFailedException, IOException {
+//                //return createTemplate(reader, null);
+//                return null;
+//        }
+
         public Template createTemplate(Reader reader) throws CompilationFailedException, IOException {
-                //return createTemplate(reader, null);
-                return null;
+                SimpleTemplate template = new SimpleTemplate();
+                String script = template.parse(reader, true);
+                try {
+
+                        //template.script = groovyShell.parse(script, "SimpleTemplateScript" + counter++ + ".groovy");
+
+                        String uniqueScriptName = "SimpleTemplateScript" + counter++ + ".groovy";
+                        RequestThreadInfo.get().setUniqueScriptName(uniqueScriptName.substring(0, uniqueScriptName.length() - 7));
+                        //template.setTemplateName(uniqueScriptName.substring(0, uniqueScriptName.length() - 7));
+
+
+                        template.script = groovyShell.parse(script, uniqueScriptName);
+                        //template.script = groovyScriptEngine.createScript(script,requestedUrl, uniqueScriptName, binding);
+                        StaticControllerMethods.addMethods(template.script.getClass());
+                } catch (Exception e) {
+                        throw new GroovyRuntimeException("Failed to parse template script (your template may contain an error or be trying to use expressions not currently supported): " + e.getMessage());
+                }
+
+                return template;
         }
 
         public Template createTemplate(Reader reader, String requestedUrl, String scriptFileName, Binding binding) throws CompilationFailedException, IOException {
@@ -81,23 +103,23 @@ public class IncludeTemplateEngine extends TemplateEngine {
                 String script = template.parse(reader, true);
 
 
-                if (verbose) {
-                        System.out.println("\n-- script source --");
-                        System.out.print(script);
-                        System.out.println("\n-- script end --\n");
-                }
+//                if (verbose) {
+//                        System.out.println("\n-- script source --");
+//                        System.out.print(script);
+//                        System.out.println("\n-- script end --\n");
+//                }
 
                 try {
 
                         //template.script = groovyShell.parse(script, "SimpleTemplateScript" + counter++ + ".groovy");
 
-                        String uniqueScriptName =  "SimpleTemplateScript" + counter++ + ".groovy";
-                        RequestThreadInfo.get().setUniqueScriptName(uniqueScriptName.substring(0,uniqueScriptName.length()-7));
-                        template.setTemplateName(uniqueScriptName.substring(0,uniqueScriptName.length()-7));
-                        //binding.setVariable("uniqueScriptName", template.getTemplateName());
+                        String uniqueScriptName = "SimpleTemplateScript" + counter++ + ".groovy";
+                        RequestThreadInfo.get().setUniqueScriptName(uniqueScriptName.substring(0, uniqueScriptName.length() - 7));
+                        //template.setTemplateName(uniqueScriptName.substring(0, uniqueScriptName.length() - 7));
 
-                        //template.script = groovyShell.parse(script, uniqueScriptName);
-                        template.script = groovyScriptEngine.createScript(new ByteArrayInputStream(script.getBytes()),requestedUrl, uniqueScriptName, binding);
+
+                        template.script = groovyShell.parse(script, uniqueScriptName);
+                        //template.script = groovyScriptEngine.createScript(script,requestedUrl, uniqueScriptName, binding);
                         StaticControllerMethods.addMethods(template.script.getClass());
                 } catch (Exception e) {
                         throw new GroovyRuntimeException("Failed to parse template script (your template may contain an error or be trying to use expressions not currently supported): " + e.getMessage());
@@ -119,6 +141,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                 public Writable make() {
                         return make(null);
                 }
+
                 private String templateName;
 
                 public String getTemplateName() {
@@ -275,7 +298,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                 String templateRoot;
                                 File f = null;
                                 if (path.charAt(0) == '/') {      //root request
-                                        
+
                                         if (File.separator.equals("/")) {
                                                 f = new File(RequestThreadInfo.get().getApplication().getAppPath() + path.trim());
                                         } else {
@@ -295,7 +318,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                 List entry = RequestThreadInfo.get().getTemplateInfo().getCache();
                                 entry.add(f.getAbsolutePath());
 
-                                log.fine("including file : " + f.getAbsolutePath() + ",  into parent file: " + f.getParentFile().getCanonicalPath()) ;
+                                log.fine("including file : " + f.getAbsolutePath() + ",  into parent file: " + f.getParentFile().getCanonicalPath());
 
                                 SimpleTemplate template = new SimpleTemplate();
                                 String script = null;

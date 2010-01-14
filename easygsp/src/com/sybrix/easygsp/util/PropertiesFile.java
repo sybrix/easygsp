@@ -189,11 +189,7 @@ public class PropertiesFile extends Properties{
 
 
         public Boolean getBoolean(String key) {
-                try {
-                        return new Boolean(getString(key));
-                } catch (Exception e) {
-                        throw new RuntimeException(e);
-                }
+                return new Boolean(getString(key));
         }
 
         public Boolean getBoolean(String key, Boolean defaultValue) {

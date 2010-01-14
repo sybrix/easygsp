@@ -26,14 +26,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
-import java.util.Set;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -55,7 +48,7 @@ public class ServletContextImpl implements ServletContext {
         private static final Logger log = Logger.getLogger(ServletContextImpl.class.getName());
 
         private String appPath;
-        private GSE3 groovyScriptEngine;
+        private GSE4 groovyScriptEngine;
 
         private TemplateServlet templateServlet;
         private boolean hasWebGroovy = false;
@@ -122,7 +115,7 @@ public class ServletContextImpl implements ServletContext {
                 this.appName = appName;
         }
 
-        protected GSE3 getGroovyScriptEngine() {
+        protected GSE4 getGroovyScriptEngine() {
                 return groovyScriptEngine;
         }
 
@@ -238,7 +231,7 @@ public class ServletContextImpl implements ServletContext {
                 this.resourceBundles = resourceBundles;
         }
 
-        public boolean groovyFileUpdated() {
+        public boolean webGroovyUpdated() {
                 File f = new File(groovyFilePath);
                 if (f.exists()) {
                         if (f.lastModified() != webGroovyLastModified) {
@@ -317,7 +310,8 @@ public class ServletContextImpl implements ServletContext {
                         //                                                Class gse = parentClassLoader.loadClass("groovy.util.GroovyScriptEngine");
                         //                                                Constructor con = gse.getConstructor(String[].class, ClassLoader.class);
                         //                                                groovyScriptEngine = (GSE3)con.newInstance(new String[]{appPath, appPath + System.getProperty("file.separator") + "WEB-INF"}, parentClassLoader);
-                        groovyScriptEngine = new GSE3(new String[]{appPath, appPath + File.separator + "WEB-INF"}, parentClassLoader);
+                        groovyScriptEngine = new GSE4(new String[]{appPath, appPath + File.separator + "WEB-INF"}, parentClassLoader);
+                        Map params = new HashMap();
                         templateServlet = new TemplateServlet(groovyScriptEngine);
                         log.fine("invoking onApplicationStart for " + appName);
                         //groovyScriptEngine = new GroovyScriptEngine(new String[]{appPath, appPath + System.getProperty("file.separator") + "WEB-INF"});
