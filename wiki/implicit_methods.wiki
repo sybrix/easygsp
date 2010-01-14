@@ -18,7 +18,7 @@ The following are accessible to every class, template and controller.
 || Integer toInt(String val) || Returns an Integer object for a string. ||
 || Long toLong(String val) || Returns a Long object for a string. ||
 || Double toDbl(String val) || Return a Double object for a string. ||
-|| Sql [newSqlInstance howto_newSqlInstance]([String dataSourceName]) || Returns groovy.sql.Sql object.  Database parameters must be supplied as application attributes ||
+|| [howto_newSqlInstance Sql newSqlInstance(`[`String dataSourceName`]`)] || Returns groovy.sql.Sql object.  Database parameters must be supplied as application attributes ||
 || [howto_prop_file Properties loadPropertiesFile(String fileName)] || Returns a properties file ||
 || Object ifNull(Object obj, Object defaultValue)|| Returns defaultValue when obj is null||
 || boolean isAlphaNumberic(String s) || Returns true, when s contains only numbers and/or letters, false otherwise. regex:  [a-zA-Z0-9]||
