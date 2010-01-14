@@ -4,18 +4,14 @@
 
 Every class, controller and template can call the follow methods:
 || *Object* || *Description* ||
-|| void console(Object object) || Writes object.toString() to the console/terminal window. Useful when developing ||
+|| void println (Object object) || Writes object.toString() to the console/terminal window. Useful when developing ||
 || void log(String s)|| Writes message to application's log file.  Log file located @ WEB-INF/logs. Messages are written to the log file at a specified interval, not immediately. ||
 || void log(Throwable t)|| Writes exception to application's log file.  Log file located @ WEB-INF/logs ||
 || void log(String logMessage, Throwable t) || Writes message and exception to log file. Log file located @ WEB-INF/logs ||
 
 ==== void console(Object message) =====
-If you start EasyGSP in a terminal window, and you want to write something out to the console, use the console() method.  
+If you start EasyGSP in a terminal window, and you want to write something out to the console, use the println() method.  
 
-console() == System.out.println()
-
-and System.out.println will still work, take your pick.
-If you use println(), this will write to the response.outputstream, not to the console window.
 
 ==== void log() =====
 The log methods write to a log file on the file system.  When an application starts, if a WEB-INF folder does not exist, one is created. When a log statement is invoked, if a logs directory does not exist under the WEB-INF folder, one is created. The log files are rolled daily.
