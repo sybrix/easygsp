@@ -8,7 +8,7 @@ The following methods are added to each object EasyOM.injectMethods() is invoked
 || public Integer insert() ||  executes an insert statement for the entity for properties that have set since the last persistence method invocation||
 || public Integer  update() ||  executes an update statement for the entity for properties that have set since the last persistence method invocation ||
 || public Integer save() || executes an insert if the primary key(s) has no value, otherwise executes an update query ||
-|| public Integer delete() || deletes a this object from the table ||
+|| public Integer delete() || deletes this object from the table ||
 
 Example:
 {{{
