@@ -12,4 +12,4 @@ Probably nowhere unless you're willing to pay for your own server.  Since I do r
 
 * Are taglibs supported ?*
 
-No.  At this time they are not.  If a case can be made the benefits of taglibs outweigh the cost of developing them and offer something significantly more useful than the include directive, then I would be willing to developing the feature.  Currently, I don't see the need, but this could change.
+No.  At this time they are not.  If a case can be made that the benefits of taglibs outweigh the cost of developing them and offer something significantly more useful than the include directive, then I would be willing to develop this feature.  Currently, I don't see the need, but this could change.
