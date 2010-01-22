@@ -9,7 +9,7 @@ Every class, controller and template can call the follow methods:
 || void log(Throwable t)|| Writes exception to application's log file.  Log file located @ WEB-INF/logs ||
 || void log(String logMessage, Throwable t) || Writes message and exception to log file. Log file located @ WEB-INF/logs ||
 
-==== void console(Object message) =====
+==== void println(Object message) =====
 If you start EasyGSP in a terminal window, and you want to write something out to the console, use the println() method.  
 
 
