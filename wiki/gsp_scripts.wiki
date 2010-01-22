@@ -42,7 +42,7 @@ This is a valid EasyGSP template.
                                 item.write(uploadedFile);
                                 uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath + ' ' + params.var
                         } else {
-                                console item.fieldName
+                                println item.fieldName
                         }
                         println ("file upload" + item);
                 }
