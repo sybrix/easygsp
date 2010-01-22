@@ -24,7 +24,7 @@ EasyGSP groovy scripts come in 2 flavors: GSP and GSPX. GSP and GSPX refer the f
 The GSP extensions indicates a template where the logic and html are in the same script.  The GSPX extension refers to a page developed in the MVC method.
 
 == Templates ==
-GSP templates will usually contain application logic and the HTML to be rendered to the client.  They are the equivalent of a PHP or ASP script. Groovy's documentation for [http://groovy.codehaus.org/Groovlets Groovlets] and [http://groovy.codehaus.org/Groovy+Templates TemplateServlet]  is valid documentation for how EasyGSP's script's and templates work.  Behind the scenes EasyGSP is based very much on these 2 servlets.  But  EasyGSP templates allow any valid groovy code, including import statements.
+GSP templates will usually contain application logic and the HTML to be rendered to the client.  They are the equivalent of a PHP or ASP script. Groovy's documentation for [http://groovy.codehaus.org/Groovlets Groovlets] and [http://groovy.codehaus.org/Groovy+Templates TemplateServlet]  is valid documentation for how EasyGSP's script's and templates work.  Behind the scenes EasyGSP is based very much on these 2 servlets.  
 
 This is a valid EasyGSP template.
 
