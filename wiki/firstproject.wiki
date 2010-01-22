@@ -3,12 +3,9 @@
 = Creating an Application=
 
 
-To create an application in EasyGSP, simply create a folder in the %EASYGSP_HOME%/webapps directory.  A folder in this directory represents an application. 
+To create an application in EasyGSP, simply create a folder in the %EASYGSP_HOME%/webapps directory(your HTTP server should serve documents from this directory).  A folder in this directory represents an application. 
 
 
-<font color="red">
-*%EASYGSP_HOME%/webapps refers to the HTDOCS or DocumentRoot directory of your HTTP Server.  You can point your HTTP Server here or create a link so that %EASYGSP_HOME%/webapps will get you to your HTTP content.*
-</font>
 
 *Application Directory Layout*
 {{{
