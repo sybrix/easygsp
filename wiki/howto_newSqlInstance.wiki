@@ -59,7 +59,7 @@ index.gsp
     def db = newSqlInstance()
 
     d.rows("SELECT host FROM user").each {
-        console it.host
+        println it.host
    }
 }}}
 
@@ -69,6 +69,6 @@ To connect to the other database in the properties file, specify the datasource 
     def db = newSqlInstance('easygspDB')
 
     d.rows("SELECT user FROM user").each {
-        console it.user
+        println it.user
    }
 }}}
