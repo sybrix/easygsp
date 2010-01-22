@@ -1,7 +1,7 @@
 #summary Templates, Controllers and Classes
 
 =  Templates, Controllers and Classes =
-Ultimately every groovy controller and template is converted to a class, but it's worth pointing their differences for EasyGSP development.
+Ultimately every groovy controller and template is converted to a class, but it's worth pointing out their differences for EasyGSP development.
 
 *Controllers*  
   A controller is any valid groovy script. What EasyGSP calls a controller is called a "script" in Groovy. Controllers don't have to be created with the "class" keyword, they don't have to inherit anything nor do they have to have any methods.  These are not EasyGSP features, but rather groovy features. Once a controller is processed it will be forwarded to a template. A controller cannot be a blank file, the controller has to have some code. 
