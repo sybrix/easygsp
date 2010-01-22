@@ -31,17 +31,8 @@ Open the startup and stop scripts and correct the JAVA_HOME and EASYGSP_HOME pat
   * vi start.sh
 
 
-EasyGSP will service request from the DocumentRoot/HtDocs directory of your HTTP server.
+LightTPD/Apache's htdoc/documentroot should point to $EASYGSP_HOME/webapps 
 
-
-* Move the Examples *
-
-Copy the examples directory to your DocumentRoot directory
-
-  *  $ mv /usr/local/easygsp/examples /var/www
-
-  replace /var/www with your docroot if this is not the correct location
-  
 
 * Start EasyGSP *
 
