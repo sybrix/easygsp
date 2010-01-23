@@ -38,7 +38,7 @@ or you could use named parameters via a map.
    def cookie = getCookie('myUsernameCookie')
    
   if (cookie == null){
-    cookie = setCookie([cookiedName:'myUsernameCookie', value: username, maxAge:30]) // expires in 30 days
+    cookie = setCookie([cookieName:'myUsernameCookie', value: username, maxAge:30]) // expires in 30 days
   }
 
 }}}
