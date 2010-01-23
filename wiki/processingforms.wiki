@@ -19,7 +19,7 @@ Not that you would use the servlet API equivalent, but it's there just in case.
 
 Below is a simple example of a form that captures user info, and processes it when submitted.
 
-*forms.gsp* - The example is in the %EASYGSP_HOME%\webapps\examples directory
+*forms.gsp* - The example is in the %EASYGSP_HOME%/webapps/examples directory
 
 
 {{{
