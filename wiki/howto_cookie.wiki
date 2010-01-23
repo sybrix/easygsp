@@ -14,6 +14,9 @@ Returns the first cookie that matches the specified name for the current path. I
 ==== public Cookie *setCookie*(String cookieName, `[`String value, `[`Integer maxAge, `[`String path, `[`String domain, `[` Boolean secure`]]]]]`) ====
 Creates/Sets a cookie with the values for the specified attributes.
 
+==== public Cookie *setCookie*(Map parameters) ====
+Creates/Sets a cookie with the keys and values for the specified attributes.
+
 
 ==== Parameters ====
 || cookieName || Required. The name of the cookie||
