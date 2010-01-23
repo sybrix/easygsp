@@ -2,7 +2,7 @@
 
 = Logging =
 
-Every class, controller and template can call the follow methods:
+Every class, controller and template can call the follow methods to log application activity:
 || *Object* || *Description* ||
 || void println (Object object) || Writes object.toString() to the console/terminal window. Useful when developing ||
 || void log(String s)|| Writes message to application's log file.  Log file located @ WEB-INF/logs. Messages are written to the log file at a specified interval, not immediately. ||
