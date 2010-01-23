@@ -2,7 +2,7 @@
 
 = Reading from a Properties =
 
-The easiest way to load a properties file is to use the method: 
+The easiest way to load a properties file is to use the loadPropertiesFile() method: 
 
 ==== public static PropertiesFile loadPropertiesFile(String fileName)====
 
