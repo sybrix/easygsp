@@ -32,6 +32,19 @@ In use:
   }
 }}}
 
+or you could use named parameters via a map.
+
+{{{
+   def cookie = getCookie('myUsernameCookie')
+   
+  if (cookie == null){
+    cookie = setCookie([cookiedName:'myUsernameCookie', value: username, maxAge:30]) // expires in 30 days
+  }
+
+}}}
+
+
+
 Optional arguments(sort of): 
 
 The parameters list is really an array (Object...args). You can only skip an argument if you don't need any that come after it.  If you don't want to specify an argument, you can enter null.
