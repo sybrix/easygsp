@@ -3,14 +3,17 @@
 = Processing File Uploads =
 
 EasyGSP uses [http://commons.apache.org/fileupload/ Apache's Commons File Upload] library to process file uploads. 
-When the page is posted, call request.parseFileUploads(), it returns a List of `FileItems`.  
+When a multipart page is posted, the contents are parsed and are available on the request method via a method named getUploads().
 
-Method signature:<br/>
-List`<org.apache.commons.fileupload.FileItem>` parseFileUploads()
 
-This methods returns an empty list or a List of `FileItems`, never null.
+Method signature (Request object):<br/>
+Map`<String, Object>` getUploads()
 
-`**` *Note* - when attemping to write a fileItem of size 0, an `FileNotFoundException` exception may be thrown.  It's best to check that size is greater than zero before writing.
+The key is the name of the upload(the name in the input tag), the value is a, org.apache.commons.fileupload.FileItem.  When there are multiple uploads with the same name, uploads will be in a java.util.List object. The list object will contain org.apache.commons.fileupload.FileItem.  
+
+
+When there are no uploads this method returns an empty Map.
+
 
 fileupload.gsp
 {{{
