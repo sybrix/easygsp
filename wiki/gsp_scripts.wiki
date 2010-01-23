@@ -35,15 +35,14 @@ This is a valid EasyGSP template.
 
         def uploadLocation=''
 
-                for (FileItem item: request.parseFileUploads()) {
-                        if (!item.isFormField() && item.size > 0) {
-                                File uploadedFile = new File(application.appPath + File.separator + item.name);
+                request.uploads.each {
+                        FileItem item = it.value
+
+                        File uploadedFile = new File(application.appPath + File.separator + item.name);
                                 //uploadedFile.mkdirs();
-                                item.write(uploadedFile);
-                                uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath + ' ' + params.var
-                        } else {
-                                println item.fieldName
-                        }
+                        item.write(uploadedFile);
+                        uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath + ' ' + params.var
+
                         println ("file upload" + item);
                 }
 
