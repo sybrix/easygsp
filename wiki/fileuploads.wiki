@@ -26,7 +26,8 @@ fileupload.gsp
 
         def uploadLocation=''
 
-                request.uploads.each {item->
+                request.uploads.each {
+                         FileItem item = it.value
 
                                 File uploadedFile = new File(application.appPath + File.separator + item.name)
 
