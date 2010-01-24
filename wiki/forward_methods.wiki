@@ -24,8 +24,7 @@ You can forward to any view, enter the path as the parameter.
 }}}
 
 == Auto Forward ==
-There is a controller and view, with the same name, minus the extension, like index.groovy, index.gsp and in the same directory, control will automatically be forwarded to the view when the controller is done processing, if the forward method is not explicitly invoked.
-
+Auto forward saves you a line of code. When there is a controller and view, with the same name (minus the extension), like index.groovy, index.gspx and in the same directory, control will automatically be forwarded to the view when the controller is done processing, if the forward method is not explicitly invoked.
 
 index.groovy, this controller will auto-forward to index.gspx
 {{{
