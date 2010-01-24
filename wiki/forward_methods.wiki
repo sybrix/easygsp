@@ -8,3 +8,34 @@ The syntax for the forward() method is:
      forward('forwardToPath')
 }}}
 
+Processing can be forwarded to a template(.gsp/.gspx files) or a controller(.groovy file).
+
+When forwarding to a controller, the path must end with the .groovy extension. 
+{{{
+   // do some stuff, an when done forward to another controller
+   forward 'index.groovy'
+}}}
+
+
+You can forward to any view, enter the path as the parameter.
+{{{
+   // do some processing and now forward to view
+   forward 'index.gspx'
+}}}
+
+== Auto Forward ==
+There is a controller and view, with the same name, minus the extension, like index.groovy, index.gsp and in the same directory, control will automatically be forwarded to the view when the controller is done processing, if the forward method is not explicitly invoked.
+
+
+index.groovy, this controller will auto-forward to index.gspx
+{{{
+
+   if (request.getMethod().equals('POST')){
+      saveData()
+     
+   } 
+   
+   bind 'today', new Date().toString()
+}}}
+
+If there is no index.gspx and forward is not explicitly called, an exception will be thrown.
