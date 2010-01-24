@@ -38,3 +38,24 @@ index.groovy, this controller will auto-forward to index.gspx
 }}}
 
 If there is no index.gspx and forward is not explicitly called, an exception will be thrown.
+
+
+= Redirect  =
+
+The syntax for the redirect() method is:
+
+{{{
+     redirect('url')
+}}}
+
+
+
+= Include =
+The include directive can be used in templates(.gspx/.gsp files).  The include directive simply replaces the directive itself with the code from the included template. The included template can contain any valid groovy and template code.
+
+<%@ include 'WEB-INF/includes/header.gsp' %>
+ 
+<div>My main content here.</div>
+ 
+<%@ include 'WEB-INF/includes/footer.gsp' %>
+ 
