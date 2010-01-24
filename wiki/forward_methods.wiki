@@ -1,0 +1,10 @@
+#summary Forwards, Redirect and Includes
+
+= Forward =
+
+The syntax for the forward() method is:
+
+{{{
+     forward('forwardToPath')
+}}}
+
