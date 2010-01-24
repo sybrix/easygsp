@@ -16,6 +16,7 @@ Reference
   * [gsp_scripts Templates/Controllers]
   * [implicit_objects Implicit Objects]
   * [implicit_methods Implicit Methods]
+  * [forward_methods forward/redirect/include]
 
 Tutorials/How To's
   * [howto_db Connect to Database]
