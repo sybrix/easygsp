@@ -12,7 +12,7 @@ Processing can be forwarded to a template(.gsp/.gspx files) or a controller(.gro
 
 When forwarding to a controller, the path must end with the .groovy extension. 
 {{{
-   // do some stuff, an when done forward to another controller
+   // do some stuff, and when done forward to another controller
    forward 'index.groovy'
 }}}
 
