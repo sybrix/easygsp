@@ -17,6 +17,7 @@ public class RequestInfo {
         private boolean errorOccurred = false;
         private CustomServletBinding binding;
         private boolean codeBehindChanged=false;
+        private int forwardCount=0;
 
         public RequestInfo() {
                 templateInfo = new TemplateInfo();
@@ -115,5 +116,13 @@ public class RequestInfo {
 
         public void setCodeBehindChanged(boolean codeBehindChanged) {
                 this.codeBehindChanged = codeBehindChanged;
+        }
+
+        public void increaseForwardCount(){
+                forwardCount++;
+        }
+
+        public int getForwardCount(){
+                return forwardCount;
         }
 }

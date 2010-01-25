@@ -56,8 +56,6 @@ grant codeBase "file:${easygsp.home}/webapps/-" {
 
 
 grant {
-    permission java.net.SocketPermission "localhost:3050", "connect";
-    permission java.net.SocketPermission "localhost:3306", "connect";
 
     // Required for JNDI lookup of named JDBC DataSource's and
     // javamail named MimePart DataSource used to send mail
@@ -90,15 +88,22 @@ grant {
     permission java.util.PropertyPermission "java.vm.vendor", "read";
     permission java.util.PropertyPermission "java.vm.name", "read";
     permission java.util.PropertyPermission "java.vm.name", "read";
-
     permission java.util.PropertyPermission "easygsp.home", "read";
+    permission java.util.PropertyPermission "FBLog4j", "read";
+    permission java.util.PropertyPermission "org.apache.commons.logging.LogFactory.HashtableImpl", "read";
+    permission java.util.PropertyPermission "user.name", "read";
 
     permission java.io.FilePermission "${easygsp.home}/lib/jaybird-full-2.1.6.jar", "read";
     // groovy templates seem to needs test;.
-    permission java.util.PropertyPermission "FBLog4j", "read";
-    permission java.util.PropertyPermission "org.apache.commons.logging.LogFactory.HashtableImpl", "read";
-    permission java.lang.RuntimePermission "accessDeclaredMembers";
-    permission java.util.PropertyPermission "user.name", "read";
+
+        permission java.lang.RuntimePermission "accessDeclaredMembers";
+        permission java.lang.RuntimePermission "accessClassInPackage.sun.net.www.protocol.http";
+        permission java.lang.RuntimePermission "accessClassInPackage.sun.net.www.protocol.https";
+
+        permission java.net.SocketPermission "localhost:3050", "connect";
+        permission java.net.SocketPermission "localhost:3306", "connect";
+        permission java.net.SocketPermission "*:0-" , "connect,resolve";
+    
 };
 
 

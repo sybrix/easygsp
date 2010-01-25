@@ -19,6 +19,7 @@ import com.sybrix.easygsp.http.ServletContextImpl;
 import com.sybrix.easygsp.http.RequestThreadInfo;
 
 import java.io.FileDescriptor;
+import java.io.IOException;
 
 /**
  * SCGISecurityManager <br/>
@@ -32,7 +33,7 @@ public class EasyGSecurityManager extends SecurityManager {
                 allowAWT = EasyGServer.propertiesFile.getBoolean("allow.awt", false);
                 allowSwing = EasyGServer.propertiesFile.getBoolean("allow.swing", false);
         }
-        
+
         public void checkDelete(String file) {
                 super.checkDelete(file);
         }
@@ -53,17 +54,26 @@ public class EasyGSecurityManager extends SecurityManager {
                 if (path == null) {
                         super.checkRead(file);
                 } else {
-                       boolean b = file.startsWith(path.getAppPath());
+                        //boolean b = file.startsWith(path.getAppPath());
 
-                        if (b) {
-                                return;
-                        } else {
-                                try {
+                        
+                        try {
+                                boolean b = false;
+                                if (file.indexOf("..") > -1)
+                                        b = new java.io.File(file).getCanonicalPath().startsWith(path.getAppPath()); // this is slow
+                                else
+                                        b = file.startsWith(path.getAppPath());
+
+                                if (b) {
+                                        return;
+                                } else {
                                         super.checkRead(file);
-                                } catch (SecurityException e) {
-                                        //System.out.println("file.startsWith - " + file  + ", " + path.getAppPath());
-                                        throw e;
                                 }
+                        } catch (IOException e) {
+                                throw new SecurityException(e);
+                        } catch (SecurityException e) {
+                                //System.out.println("file.startsWith - " + file  + ", " + path.getAppPath());
+                                throw e;
                         }
                 }
         }

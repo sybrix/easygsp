@@ -26,4 +26,12 @@
 - modified to allow errorPages to GSPs instead of static and groovy files
 - fixed ThreadDeath errors to use normal error handling
 
+0.3 1/24/2010
+ - Fixed forward() method, now can forward to controller or template 
+ - println no longer writes to response.out, render does
+ - Class loader prevents access to com.sybrix.easygsp packages from webapps
+ - added "app" var to binding as shortcut for "application"
+ - added setCookie(Map) method
+ - added Clustering (not good implementation, will redo)
+ - removed non-working examples
  

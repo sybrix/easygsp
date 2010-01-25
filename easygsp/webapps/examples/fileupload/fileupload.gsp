@@ -1,21 +1,20 @@
 <%
 
-        import groovy.sql.Sql   %>
+        import groovy.sql.Sql  
         import org.apache.commons.fileupload.FileItem
 
         def uploadLocation=''
 
-                for (FileItem item: request.parseFileUploads()) {
-                        if (!item.isFormField() && item.size > 0) {
-                                File uploadedFile = new File(application.appPath + File.separator + item.name);
-                                //uploadedFile.mkdirs();
-                                item.write(uploadedFile);
-                                uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath + ' ' + params.var
-                        } else {
-                                cout item.fieldName
-                        }
-                        System.out.println("file upload" + item);
-                }
+        request.uploads.each {
+                FileItem item = it.value
+
+                File uploadedFile = new File(application.appPath + File.separator + item.name);
+                //uploadedFile.mkdirs();
+                item.write(uploadedFile);
+                uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath + ' ' + params.var
+
+                println("file upload" + item);
+        }
 
 
 %>

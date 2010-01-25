@@ -22,13 +22,7 @@ import groovy.text.SimpleTemplateEngine;
 import groovy.text.Template;
 import groovy.text.TemplateEngine;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.util.Date;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -361,7 +355,7 @@ public class TemplateServlet extends AbstractHttpServlet {
      * @throws ServletException
      *            if the HTTP request cannot be handled
      */
-    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException {
 
         if (verbose) {
             log("Creating/getting cached template...");
@@ -372,9 +366,11 @@ public class TemplateServlet extends AbstractHttpServlet {
         //
         //File file = super.getScriptUriAsFile(request);
         File file = new File(RequestThreadInfo.get().getParsedRequest().getRequestFilePath());
-             
+
         String name = file.getName();
-//        if (!file.exists()) {
+        if (!file.exists()) {
+                throw new FileNotFoundException("file " + file.getAbsolutePath() + " not found");
+        }
 //            response.sendError(HttpServletResponse.SC_NOT_FOUND);
 //            return; // throw new IOException(file.getAbsolutePath());
 //        }

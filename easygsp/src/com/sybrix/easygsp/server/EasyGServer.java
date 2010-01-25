@@ -81,7 +81,7 @@ public class EasyGServer {
 
                         System.setSecurityManager(new EasyGSecurityManager());
                         System.setProperty("easygsp.version", "@easygsp_version");
-                        
+
 //                        log.fine("log fine");
 //                        log.finer("log finer");
 //                        log.finest("log finest");
@@ -91,21 +91,30 @@ public class EasyGServer {
 
                         log.info(
                                 "\nEASYGSP_VERSION: " + System.getProperty("easygsp.version") +
-                                "\nJRE_HOME: " + System.getProperty("java.home") +
-                                "\nJAVA_VERSION: " + System.getProperty("java.version") +
-                                "\nGROOVY_VERSION: " + groovyVersion +
-                                "\nWORKING_DIR: " + APP_DIR +
-                                "\nGroovy Script Server Started. Listening on port " + propertiesFile.getInt("server.port", 4444) +
-                                "\n");
+                                        "\nJRE_HOME: " + System.getProperty("java.home") +
+                                        "\nJAVA_VERSION: " + System.getProperty("java.version") +
+                                        "\nGROOVY_VERSION: " + groovyVersion +
+                                        "\nWORKING_DIR: " + APP_DIR +
+                                        "\nGroovy Script Server Started. Listening on port " + propertiesFile.getInt("server.port", 4444) +
+                                        "\n");
 
-                        if (EasyGServer.propertiesFile.getBoolean("virtual.hosting", false) == true && EasyGServer.propertiesFile.getString("default.host","").equals("")){
+                        if (EasyGServer.propertiesFile.getBoolean("virtual.hosting", false) == true && EasyGServer.propertiesFile.getString("default.host", "").equals("")) {
                                 throw new RuntimeException("When virtual.hosting == true, a default.host value is required.");
                         }
-                                
-                        if (!propertiesFile.getBoolean("logging.custom.configure",false)){
+
+                        if (!propertiesFile.getBoolean("logging.custom.configure", false)) {
                                 autoConfigureLogger();
                         }
-                        
+
+
+                        CacheKeyManager.init();
+
+                        if (propertiesFile.getBoolean("clear.cache.onstart",true)) {
+                                CacheKeyManager.removeAll();
+                                ApplicationCache.getInstance().clear();
+                                SessionCache.getInstance().clear();
+                        }
+
                         ThreadMonitor.start();
                         sessionMonitor = new SessionMonitor(applications);
                         sessionMonitor.start();
@@ -118,16 +127,14 @@ public class EasyGServer {
                         //loadApplicationsFromFileSystem();
 
                         executorService = Executors.newCachedThreadPool();
-                        serverSocket = new ServerSocket(propertiesFile.getInt("server.port",4444));
+                        serverSocket = new ServerSocket(propertiesFile.getInt("server.port", 4444));
 
                         Thread shutdown = new Thread(new Shutdown(this));
                         shutdown.start();
 
                         Runtime.getRuntime().addShutdownHook(new ShutdownHook(this));
 
-
                         loadDatabaseDrivers();
-
 
                         try {
                                 JCS.getInstance("appCache").get("");
@@ -136,7 +143,6 @@ public class EasyGServer {
                         } catch (CacheException e) {
                                 log.log(Level.SEVERE, "error initializing cache", e);
                         }
-
 
                         Socket socket = null;
                         while (!stopRequested) {
@@ -198,7 +204,7 @@ public class EasyGServer {
 
         private void autoConfigureLogger() {
                 Handler h = null;
-                 String logDir = "";
+                String logDir = "";
                 try {
                         logDir = propertiesFile.getString("logging.output.dir", APP_DIR + File.separator + "logs" + File.separator + "error_%g.log");
                         h = new FileHandler(logDir, propertiesFile.getInt("logging.max.file.size"), propertiesFile.getInt("logging.file.count"), false);
@@ -209,7 +215,7 @@ public class EasyGServer {
                         Handler[] handlers = Logger.getLogger("").getHandlers();
                         for (Handler handler : handlers) {
                                 //handler.setFormatter(new CustomFormatter());
-                                handler.setLevel(Level.parse(propertiesFile.getString("logging.level","SEVERE").toUpperCase()));
+                                handler.setLevel(Level.parse(propertiesFile.getString("logging.level", "SEVERE").toUpperCase()));
                         }
                 } catch (IOException e) {
                         throw new RuntimeException("IOException in autoConfigureLogger(), logDir=" + logDir, e);
@@ -267,8 +273,8 @@ public class EasyGServer {
                 File file = null;
 
 //                if (propertiesFile.getString("groovy.webapp.dir").equals(docRoot) || (EasyGServer.isWindows && propertiesFile.getString("groovy.webapp.dir").equalsIgnoreCase(docRoot))) {
-                        //File files = new File(appPath);
-                        file = new File(appPath);
+                //File files = new File(appPath);
+                file = new File(appPath);
 //                } else {
 //                        file = new File(docRoot);
 //                }

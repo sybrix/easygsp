@@ -40,6 +40,7 @@ import java.io.InputStream;
 import java.io.File;
 
 import java.util.logging.Logger;
+
 import static java.util.logging.Level.*;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -90,7 +91,7 @@ public class RequestImpl implements HttpServletRequest {
 
         public RequestImpl(InputStream ios, Map<String, String> headers, ServletContextImpl application, ResponseImpl response) throws FileUploadException {
 
-                
+
                 this.ios = ios;
                 this.headers = headers;
                 allParameters = new HashMap();
@@ -120,6 +121,14 @@ public class RequestImpl implements HttpServletRequest {
                 Cookie[] cookieAry = new Cookie[cookies.values().size()];
                 cookies.values().toArray(cookieAry);
                 return cookieAry;
+        }
+
+        protected void removeCookie(String cookieName) {
+                if (cookies == null)
+                        parseCookies();
+
+
+                cookies.remove(cookieName);
         }
 
         public Cookie getCookie(String cookieName) {
@@ -217,6 +226,18 @@ public class RequestImpl implements HttpServletRequest {
                 Cookie requestCookie = cookies.get("GSESSIONID");
                 if (requestCookie != null) {
                         session = application.getSessions().get(requestCookie.getValue());
+
+                        // try cache
+                        if (session == null) {
+                                log.fine("trying locate session in cache");
+                                boolean exists = CacheKeyManager.sessionIdExist(application.getAppName(), requestCookie.getValue());
+                                if (exists) {
+                                        log.fine("session(" + requestCookie.getValue() + ") found in cache");
+                                        session = application.recreateSession(requestCookie.getValue());
+                                } else{
+                                        log.fine("session(" + requestCookie.getValue() + ") NOT found in cache");
+                                }
+                        }
                 }
 
                 if (session != null)
@@ -233,7 +254,6 @@ public class RequestImpl implements HttpServletRequest {
                         cookie.setPath("/");
 
                         response.addCookie(cookie);
-
                         try {
                                 if (application.groovyWebFileExists()) {
                                         application.invokeWebMethod("onSessionStart", session);
@@ -242,7 +262,6 @@ public class RequestImpl implements HttpServletRequest {
                                 log.log(SEVERE, "onSessionStart failed.", e);
                         }
                 }
-
 
                 return session;
         }
@@ -550,13 +569,34 @@ public class RequestImpl implements HttpServletRequest {
         }
 
         public void forward(String file) throws IOException, ServletException {
+                RequestThreadInfo.get().increaseForwardCount();
 
-                if (file.endsWith(viewExtension)) {
+                if (file.endsWith(viewExtension) || file.endsWith(templateExtension)) {
                         file = constructForwardPath(file, servletBinding);
                         log.fine("fowarding to file: " + file);
                         //application.getTemplateServlet().service(file, this, response, servletBinding);
+                        if (!RequestThreadInfo.get().getParsedRequest().getRequestURI().equals(file)){
+                                RequestThreadInfo.get().getParsedRequest().setRequestURI(file);
+                                RequestThreadInfo.get().getParsedRequest().setRequestFilePath(
+                                        RequestThreadInfo.get().getParsedRequest().getAppPath() + "/" + file
+
+                                );
+                                //requestURIPath = webAppDir + "/" + path;
+                        }
                         application.getTemplateServlet().service(this, response);
-                } else {
+                } else if (file.endsWith(".groovy")) {
+                        file = constructForwardPath(file, servletBinding).replace(".groovy", ".gspx");
+
+                        if (!RequestThreadInfo.get().getParsedRequest().getRequestURI().equals(file)){
+                                RequestThreadInfo.get().getParsedRequest().setRequestURI(file);
+                                RequestThreadInfo.get().getParsedRequest().setRequestFilePath(
+                                        RequestThreadInfo.get().getParsedRequest().getAppPath() + "/" + file
+
+                                );
+                                //requestURIPath = webAppDir + "/" + path;
+                        }
+
+                        setAttribute("_explicitForward", false);
                         RequestThread.processScriptRequest(file, application.getGroovyScriptEngine(), servletBinding);
                 }
         }
@@ -593,8 +633,19 @@ public class RequestImpl implements HttpServletRequest {
                                 if (f.isFormField()) {
                                         allParameters.put(f.getFieldName(), f.getString());
                                 } else {
-                                        if (f.getSize()>0)
-                                                uploads.put(f.getFieldName(), f);
+                                        if (f.getSize() > 0){
+                                                if (uploads.containsKey(f.getFieldName()))  {
+                                                        Object obj  = uploads.get(f.getFieldName());
+                                                        if (obj instanceof List){
+                                                               ((List)obj).add(f);
+                                                        } else {
+                                                                List newUploads = new ArrayList() ;
+                                                                newUploads.add(obj);
+                                                                uploads.put(f.getFieldName(), newUploads);
+                                                        }
+                                                } else
+                                                        uploads.put(f.getFieldName(), f);
+                                        }
                                 }
                         }
 
@@ -606,7 +657,7 @@ public class RequestImpl implements HttpServletRequest {
                 }
         }
 
-        public Map getUploads(){
+        public Map getUploads() {
                 if (uploads == null)
                         return new HashMap();
                 return uploads;

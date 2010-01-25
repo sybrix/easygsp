@@ -10,6 +10,14 @@
       <maximumStackSize value="32" />
       <properties />
     </buildFile>
+    <buildFile url="file://$PROJECT_DIR$/../cacheserver/build.xml">
+      <additionalClassPath />
+      <antReference projectDefault="true" />
+      <customJdkName value="" />
+      <maximumHeapSize value="128" />
+      <maximumStackSize value="32" />
+      <properties />
+    </buildFile>
   </component>
   <component name="Archetypes.Configuration">
     <option name="archetypesFileLocation" value="archetypes.xml" />
@@ -253,6 +261,7 @@
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../cacheserver/cacheserver.iml" filepath="$PROJECT_DIR$/../cacheserver/cacheserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/easygsp.iml" filepath="$PROJECT_DIR$/easygsp.iml" />
     </modules>
   </component>

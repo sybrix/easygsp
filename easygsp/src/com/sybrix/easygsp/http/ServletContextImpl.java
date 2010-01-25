@@ -44,7 +44,7 @@ import org.codehaus.groovy.runtime.GroovyCategorySupport;
  * Application (aka ServletContext) <br/>
  * Description : EasyGSP ServletContext implementation.
  */
-public class ServletContextImpl implements ServletContext {
+public class ServletContextImpl implements ServletContext, Serializable {
         private static final Logger log = Logger.getLogger(ServletContextImpl.class.getName());
 
         private String appPath;
@@ -54,7 +54,7 @@ public class ServletContextImpl implements ServletContext {
         private boolean hasWebGroovy = false;
         private String appId;
         private volatile boolean started;
-        private List<String> attributeNames;
+        private Set<String> attributeNames;
         private Map<String, SessionImpl> sessions;
         private String groovyFilePath;
         private File appFile;
@@ -69,12 +69,12 @@ public class ServletContextImpl implements ServletContext {
                 this.appFile = dir;
                 this.appId = MD5.hash(dir.getAbsolutePath());
                 this.appPath = dir.getAbsolutePath();
-                attributeNames = new ArrayList();
+                attributeNames = new HashSet();
                 groovyFilePath = appPath + System.getProperty("file.separator") + "WEB-INF" + System.getProperty("file.separator") + "web.groovy";
                 File _groovyFile = new File(groovyFilePath);
 
                 hasWebGroovy = _groovyFile.exists();
-                if (hasWebGroovy)  {
+                if (hasWebGroovy) {
                         webGroovyLastModified = _groovyFile.lastModified();
                 } else {
                         createWebGroovyFile(_groovyFile);
@@ -88,7 +88,6 @@ public class ServletContextImpl implements ServletContext {
 
                 attributeMap = new AttributeMap();
                 errorFiles = new ArrayList();
-
         }
 
         protected File getAppFile() {
@@ -254,19 +253,19 @@ public class ServletContextImpl implements ServletContext {
                         f.getParentFile().mkdir();
 
                         String webGroovy =
-                        "class web {\n"  +
-                        "\t        def onApplicationStart(app){\n"  +
-                        "\t        }\n\n"  +
+                                "class web {\n" +
+                                        "\t        def onApplicationStart(app){\n" +
+                                        "\t        }\n\n" +
 
-                        "\t        def onApplicationEnd(app){\n"  +
-                        "\t        }\n\n"  +
+                                        "\t        def onApplicationEnd(app){\n" +
+                                        "\t        }\n\n" +
 
-                        "\t        def onSessionStart(session){\n"  +
-                        "\t        }\n\n"  +
+                                        "\t        def onSessionStart(session){\n" +
+                                        "\t        }\n\n" +
 
-                        "\t        def onSessionEnd(session){\n"  +
-                        "\t       }\n" +
-                        "}";
+                                        "\t        def onSessionEnd(session){\n" +
+                                        "\t       }\n" +
+                                        "}";
 
                         FileWriter fw = new FileWriter(f);
                         fw.write(webGroovy);
@@ -275,26 +274,27 @@ public class ServletContextImpl implements ServletContext {
 
                         webGroovyLastModified = f.lastModified();
                 } catch (IOException e) {
-                        log.log(Level.SEVERE, "Unable to create web.groovy @ " + f.getAbsolutePath(),e);
+                        log.log(Level.SEVERE, "Unable to create web.groovy @ " + f.getAbsolutePath(), e);
                 }
-
         }
 
         public void setAttribute(String key, Object value) {
                 ApplicationCache.getInstance().put(appId, key, value);
                 attributeNames.add(key);
+                CacheKeyManager.setAppKey(appName, key);
         }
 
         public void removeAttribute(String key) {
                 ApplicationCache.getInstance().remove(appId, key);
                 attributeNames.remove(key);
+                CacheKeyManager.removeAppKey(appName, key);
         }
 
         public String getServletContextName() {
                 return null;
         }
 
-        protected synchronized void startApplication() {
+        protected synchronized void startApplication(boolean resumeState) {
                 if (started)
                         return;
 
@@ -315,6 +315,12 @@ public class ServletContextImpl implements ServletContext {
                         templateServlet = new TemplateServlet(groovyScriptEngine);
                         log.fine("invoking onApplicationStart for " + appName);
                         //groovyScriptEngine = new GroovyScriptEngine(new String[]{appPath, appPath + System.getProperty("file.separator") + "WEB-INF"});
+
+
+                        if (resumeState) {
+                                reEstablishState();
+                        }
+
                         if (hasWebGroovy) {
                                 invokeWebMethod("onApplicationStart", this);
                         }
@@ -340,6 +346,34 @@ public class ServletContextImpl implements ServletContext {
                 }
         }
 
+        public void reEstablishState() {
+                List<String> keys = CacheKeyManager.getAllAppKeys(appName);
+                for (String key : keys) {
+                        attributeNames.add(key);
+                }
+
+                List<String> sessionIds = CacheKeyManager.getAllSessionIds(appName);
+                for (String sessionId : sessionIds) {
+                        recreateSession(sessionId);
+                }
+        }
+
+        protected SessionImpl recreateSession(String sessionId) {
+                SessionImpl session = new SessionImpl(this, sessionId, EasyGServer.propertiesFile.getInt("session.timeout", 15));
+                sessions.put(sessionId, session);
+                List<String> sessionKeys = CacheKeyManager.getAllSessionKeys(appName, session.getId());
+                for (String sessionKey : sessionKeys) {
+                        session.addSessionAttributeName(sessionKey);
+                        Long lastAccessedTime = (Long) SessionCache.getInstance().get(session.getId(), "lastAccessedTime");
+                        SessionCache.getInstance().remove(appName, session.getId(), "lastAccessedTime", false);
+                        if (lastAccessedTime != null)
+                                session.setLastAccessTime(lastAccessedTime);
+                }
+
+                return session;
+        }
+
+
         private void loadErrorFiles() {
                 errorFiles.clear();
                 File f = new File(appPath + File.separator + "WEB-INF" + File.separator + "errors");
@@ -356,7 +390,6 @@ public class ServletContextImpl implements ServletContext {
 
         protected void invokeWebMethod(final String method, final Object... param) throws ClassNotFoundException,
                 InstantiationException, IllegalAccessException, ScriptException, ResourceException {
-
 
                 Closure closure = new Closure(groovyScriptEngine) {
 
@@ -387,15 +420,15 @@ public class ServletContextImpl implements ServletContext {
                 for (String attributeName : attributeNames) {
                         ApplicationCache.getInstance().remove(appId, attributeName);
                 }
-
+                CacheKeyManager.removeApp(appId);
                 Object keys[] = sessions.keySet().toArray();
                 for (Object key : keys) {
                         sessions.get(key.toString()).invalidate();
                         sessions.remove(key.toString());
                 }
         }
-
         // should this hidden >
+
         public void stopApplication() {
                 try {
                         if (hasWebGroovy) {
@@ -444,11 +477,13 @@ public class ServletContextImpl implements ServletContext {
                 public Object put(Object key, Object value) {
                         //return attributeNames.put(key.toString(), value);
                         ApplicationCache.getInstance().put(appId, key.toString(), value);
+                        CacheKeyManager.setAppKey(appName, key.toString());
                         return null;
                 }
 
                 public Object remove(Object key) {
                         ApplicationCache.getInstance().remove(appId, key.toString());
+                        CacheKeyManager.removeAppKey(appName, key.toString());
                         return null;
                 }
 

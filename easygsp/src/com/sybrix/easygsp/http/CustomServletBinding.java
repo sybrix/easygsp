@@ -83,7 +83,7 @@ public class CustomServletBinding extends Binding {
                 binding.setVariable("response", response);
                 binding.setVariable("context", context);
                 binding.setVariable("application", context);
-
+                binding.setVariable("app", context);
 //        binding.setVariable("sessionAttr", ((SessionImpl)request.getSession(false)).getSessionMap());
 //        binding.setVariable("requestAttr", ((RequestImpl)request).getAttributes());
 //        binding.setVariable("appAttr", ((Application)context).getAttributes());

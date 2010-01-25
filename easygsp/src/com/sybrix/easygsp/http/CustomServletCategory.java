@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Map;
 
 public class CustomServletCategory {
 
@@ -88,7 +89,6 @@ public class CustomServletCategory {
                 request.forward(s);
         }
 
-
         public static void bind(GroovyObject self, String name, Object val) throws IOException, ServletException {
                 Binding binding = (Binding) self.getProperty("binding");
                 binding.setVariable(name, val);
@@ -99,6 +99,17 @@ public class CustomServletCategory {
                 Binding binding = (Binding) self.getProperty("binding");
                 RequestImpl request = (RequestImpl) binding.getVariable("request");
                 return request.getCookie(cookieName);
+        }
+
+        public static Cookie setCookie(GroovyObject self, Map parameters) {
+                String cookieName = (String) parameters.get("cookieName");
+                String value = (String) parameters.get("value");
+                String path = (String) parameters.get("path");
+                String domain = (String) parameters.get("domain");
+                Object secure = parameters.get("secure");
+                Object maxAge = parameters.get("maxAge");
+
+                return setCookie(self, cookieName, value, maxAge, path, domain, secure);
         }
 
         /**
