@@ -84,8 +84,7 @@ Open browser, goto
 
 ==Configuring LightTPD==
 
-Download one of the minimal config files or manually change your existing config file with
-the downloaded one.
+Download one of the minimal config files or manually update your existing config file.
 
 Current file locations:
      # Linux  - /etc/lighttpd/lighttpd.conf
@@ -98,9 +97,12 @@ Download config file from:
     # http://easygsp.googlecode.com/files/lighttpd-inc.conf
 
 
-*Or manually change config file:*
+*Or manually update config file:*
 
 Basically, you enable mod_scgi, setup up the scgi_server and extensions, prevent the groovy, gsp and gpsx pages from being served by Lighttpd and add the EasyGSP pages to the welcome/index pages list
+
+LightTPD htdoc should point to $EASYGSP_HOME/webapps 
+
 
 {{{
      
