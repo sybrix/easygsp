@@ -94,7 +94,7 @@ grant codeBase "file:C:/projects/easygsp/easygsp/lib/groovy-all-1.6.1.jar" {
 
 
 grant {
-        
+
       permission java.security.AllPermission;
     permission java.net.SocketPermission "localhost:3050", "connect";
     permission java.util.PropertyPermission "java.home", "read";

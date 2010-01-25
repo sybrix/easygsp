@@ -146,9 +146,7 @@ public class StaticControllerMethods {
                         try {
                                 Sql.newInstance(url, username, pwd, driver)
                         } catch (SQLException e) {
-                                throw e;
-                        } catch (Throwable e) {
-                                throw new RuntimeException("newSqlInstance() failed. Make sure app['database.*]' properties are set.", e)
+                                throw new RuntimeException("newSqlInstance() failed. Make sure app['database.*]' properties are set and correct.", e)
                         }
                 }
         }

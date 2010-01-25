@@ -1,9 +1,10 @@
 package com.sybrix.easygsp.http;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Date;
+import com.sybrix.easygsp.server.ConsoleServer;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.io.FileWriter;
 import java.io.File;
@@ -30,7 +31,7 @@ public class EasyGSPLogger {
         private List<LogMessage> incomingMessages = Collections.synchronizedList(new ArrayList<LogMessage>());
         private List<LogMessage> messageQueue = new ArrayList<LogMessage>();
         private SimpleDateFormat fileNameSDF = new SimpleDateFormat("MM_dd_yyyy");
-        
+         
 
         public void log(LogMessage message) {
                 incomingMessages.add(message);

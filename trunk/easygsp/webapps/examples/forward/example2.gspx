@@ -1,0 +1,9 @@
+<html>
+        <head>
+                <title>Forward</title>
+        </head>
+        <body>
+                Today is ${today}<br/>
+                Tomorrow is ${tomorrow}<br/>
+        </body>
+</html>

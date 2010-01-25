@@ -32,7 +32,6 @@ public class SessionCache {
 
         private SessionCache() {
                 try {
-                        
 
                         jcsCache = JCS.getInstance("sessionCache");
                 } catch (CacheException e) {
@@ -52,21 +51,40 @@ public class SessionCache {
                 return jcsCache.get(session_id + "_" + key);
         }
 
-        public void put(String session_id, String key, Object value) {
+        protected final Object get(String id) {
+                return jcsCache.get(id);
+        }
+
+        public void put(String appId, String session_id, String key, Object value) {
                 try {
                         jcsCache.put(session_id + "_" + key, value);
+                        CacheKeyManager.setSessionKey(appId, session_id, key);
+
                 } catch (CacheException e) {
                         throw new RuntimeException(e.getMessage(), e);
                 }
         }
 
-        public void remove(String session_id, String key) {
+        public void remove(String appId, String session_id, String key, boolean updateKeyCache) {
                 try {
                         jcsCache.remove(session_id + "_" + key);
+                        if (updateKeyCache)
+                                CacheKeyManager.removeSessionKey(appId, session_id);
                 } catch (CacheException e) {
                         throw new RuntimeException(e.getMessage(), e);
                 }
+        }
 
+        public void remove(String appId, String session_id, String key) {
+                remove(appId, session_id, key, true);
+        }
+
+        public void clear() {
+                try {
+                        jcsCache.clear();
+                } catch (CacheException e) {
+                        //do nothing
+                }
         }
 
 }

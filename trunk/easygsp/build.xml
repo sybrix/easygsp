@@ -4,18 +4,16 @@
         <property environment="env"/>
 
         <property name="jdk" value="${env.JAVA_HOME}"/>
-        <property name="buildNumber" value="0.2.5"/>
+        <property name="buildNumber" value="0.3"/>
         <property name="easyGSPDir" value="easygsp-${buildNumber}"/>
         <property name="lib" value="lib"/>
         <property name="src" value="src"/>
         <property name="build" value="build"/>
 
-
         <filelist id="jar.libraries" dir="lib">
-                <file name="commons-loggin-1.1.jar"/>
+                <file name="commons-logging-1.1.jar"/>
                 <file name="concurrent.jar"/>
                 <file name="groovy-all.jar"/>
-                <file name="metamethods.jar"/>
                 <file name="httpclient-4.0-beta1.jar"/>
                 <file name="httpcore-4.0-beta3.jar"/>
                 <file name="httpmime-4.0-beta1.jar"/>
@@ -25,7 +23,6 @@
                 <file name="commons-io-1.4.jar"/>
                 <file name="commons-fileupload-1.2.1.jar"/>
         </filelist>
-
 
         <path id="jdk.lib">
                 <pathelement location="${jdk}/lib/tools.jar"/>
@@ -43,7 +40,6 @@
                  classname="org.codehaus.groovy.ant.Groovyc"
                  classpathref="project.class.path"/>
 
-
         <target name="copy.files">
                 <delete dir="${build}"/>
                 <mkdir dir="build"/>
@@ -57,18 +53,13 @@
                         </fileset>
                 </copy>
 
-                <replace file="${build}/src/com/sybrix/easygsp/server/EasyGServer.java">
-                        <replacefilter token="@easygsp_version" value="${buildNumber}"/>
-                </replace>
-
         </target>
-
 
         <!-- compile application -->
         <target name="compile" depends="copy.files">
                 <groovyc classpathref="project.class.path" srcdir="build/src" destdir="${build}/java/classes">
                         <javac deprecation="false" nowarn="false"
-                               target="1.5" debug="true" bootclasspathref="jdk.lib" classpathref="project.class.path">
+                               target="1.5" debug="false" bootclasspathref="jdk.lib" classpathref="project.class.path">
                                 <include name="**/*.java"/>
                                 <include name="**/*.groovy"/>
                                 <include name="**/*.properties"/>
@@ -88,19 +79,6 @@
                 <copy tofile="bin/easygsp.jar" file="${build}/easygsp.jar"/>
         </target>
 
-        <!--target name="compile.metamethods">
-                <groovyc classpathref="project.class.path" srcdir="${groovySrc}" destdir="${build}/groovy/classes">
-
-                        <javac target="1.5" source="1.5" debug="false" nowarn="true" deprecation="true">
-                                <include name="**/*.groovy"/>
-                        </javac>
-                </groovyc>
-        </target-->
-
-        <!-- target name="metamethods.jar" depends="compile.metamethods">
-                <jar destfile="lib/metamethods.jar" basedir="${build}/groovy/classes"/>
-        </target-->
-
         <target name="javadoc">
                 <javadoc sourcepath="${src}" destdir="deploy/${easyGSPDir}/javadocs"/>
         </target>
@@ -116,7 +94,8 @@
                 <mkdir dir="deploy/${easyGSPDir}/temp"/>
                 <mkdir dir="deploy/${easyGSPDir}/conf/errors"/>
                 <mkdir dir="deploy/${easyGSPDir}/cache"/>
-                <mkdir dir="deploy/${easyGSPDir}/examples"/>
+                <mkdir dir="deploy/${easyGSPDir}/webapps"/>
+                <mkdir dir="deploy/${easyGSPDir}/webapps/examples"/>
 
                 <copy todir="deploy/${easyGSPDir}/bin">
                         <fileset dir="bin">
@@ -128,6 +107,7 @@
                 <copy todir="deploy/${easyGSPDir}/conf/errors">
                         <fileset dir="conf/errors">
                                 <include name="**/*.*"/>
+
                         </fileset>
                 </copy>
                 <copy todir="deploy/${easyGSPDir}/lib">
@@ -136,7 +116,7 @@
                                 <exclude name="junit-3.8.2.jar"/>
                         </fileset>
                 </copy>
-                <copy todir="deploy/${easyGSPDir}/examples">
+                <copy todir="deploy/${easyGSPDir}/webapps/examples">
                         <fileset dir="webapps/examples">
                                 <include name="**/*"/>
                         </fileset>
@@ -146,6 +126,7 @@
                         <fileset dir="conf">
                                 <include name="**/*"/>
                                 <exclude name="scgi_dev.policy"/>
+                                <exclude name="remote*.ccf"/>
                         </fileset>
                 </copy>
 
@@ -162,6 +143,4 @@
                 <gzip src="deploy/${easyGSPDir}.tar" destfile="deploy/${easyGSPDir}.tar.gz"/>
 
         </target>
-
-
 </project>

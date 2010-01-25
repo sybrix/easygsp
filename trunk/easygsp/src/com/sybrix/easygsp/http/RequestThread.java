@@ -118,15 +118,20 @@ public class RequestThread extends Thread {
 
                         if (!application.isStarted()) {
                                 log.log(FINE, "starting application: " + application.getAppPath());
-                                application.startApplication();
+                                application.startApplication(true);
 
                                 // did someone modify the web.groovy file ?
                         } else if (application.webGroovyUpdated()) {
                                 log.log(FINE, "restarting application: " + application.getAppPath());
-                                application.killApp();
+                                boolean resumeState = true;
+                                if (application.getAttribute("killStateOnRestart") == null || ((Boolean) application.getAttribute("killStateOnRestart"))) {
+                                        application.killApp();
+                                        resumeState = false;
+                                }
+
                                 application = EasyGServer.loadApplicationFromFileSystem(applications, parsedRequest.getAppName(), parsedRequest.getAppPath());
                                 RequestThreadInfo.get().setApplication(application);
-                                application.startApplication();
+                                application.startApplication(resumeState);
                         }
 
                         RequestImpl request = new RequestImpl(inputStream, headers, application, response);
@@ -136,6 +141,8 @@ public class RequestThread extends Thread {
                         request.setAttribute("_explicitForward", false);
 
                         SessionImpl session = (SessionImpl) request.getSession(false);
+
+
                         if (session != null)
                                 session.updateLastAccessedTime();
 
@@ -174,16 +181,16 @@ public class RequestThread extends Thread {
 
                         RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(root.getParent());
                         RequestThreadInfo.get().setCurrentFile(root.getAbsolutePath());
-                        binding.setVariable("currentFile",root.getAbsolutePath());
+                        binding.setVariable("currentFile", root.getAbsolutePath());
 
-                        if (request.isMulitpart){
+                        if (request.isMulitpart) {
                                 request.parseFileUploads();
                                 request.setAttribute("isMultipart", true);
                         }
 
                         //process the request
                         if (parsedRequest.getRequestURI().endsWith(templateExtension)) {
-                                 processTemplateRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
+                                processTemplateRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         } else {
                                 processScriptRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         }
@@ -349,7 +356,7 @@ public class RequestThread extends Thread {
 
                                                 Boolean alreadyForwarded = (Boolean) request.getAttribute("_explicitForward");
 
-                                                if ((response.getBufferContentSize() == null) && alreadyForwarded == false) {
+                                                if ((response.getBufferContentSize() == null || response.getBufferContentSize() == 0) && alreadyForwarded == false) {
                                                         request.forwardToView(requestURI.replace(altExtension, viewExtension));
 //                                                      int i = scriptPath.lastIndexOf('/');
 //                                                        if (i == -1)
@@ -386,10 +393,10 @@ public class RequestThread extends Thread {
                                         } catch (ServletException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
                                                 sendError(500, requestURI, gse, binding, e);
-                                        }catch(ThreadDeath e){
+                                        } catch (ThreadDeath e) {
                                                 // do nothing
                                                 log.fine("Thread killed the hard way. script: " + requestURI);
-                                                sendError(500, requestURI, gse, binding, new Exception("Thread exceeded max allowed time limit.",e));
+                                                sendError(500, requestURI, gse, binding, new Exception("Thread exceeded max allowed time limit.", e));
 
                                         } catch (Throwable e) {
                                                 log.log(Level.SEVERE, e.getMessage(), e);
@@ -450,7 +457,9 @@ public class RequestThread extends Thread {
 //                                                }
 
                                                 return null;
-
+                                        } catch (FileNotFoundException e) {
+                                                log.log(Level.FINE, e.getMessage(), e);
+                                                sendError(404, scriptPath, gse, binding, e);
                                         } catch (MissingPropertyException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
                                                 sendError(500, scriptPath, gse, binding, e);
@@ -481,9 +490,9 @@ public class RequestThread extends Thread {
                                         } catch (ServletException e) {
                                                 log.log(Level.SEVERE, e.getMessage(), e);
                                                 sendError(500, scriptPath, gse, binding, e);
-                                        }catch(ThreadDeath e){
+                                        } catch (ThreadDeath e) {
                                                 log.fine("Thread killed the hard way. script: " + scriptPath);
-                                                sendError(500, scriptPath, gse, binding, new Exception("Thread exceeded max allowed time limit.",e));
+                                                sendError(500, scriptPath, gse, binding, new Exception("Thread exceeded max allowed time limit.", e));
                                         } catch (Throwable e) {
                                                 log.log(Level.SEVERE, e.getMessage(), e);
                                                 sendError(500, scriptPath, gse, binding, e);
@@ -572,7 +581,7 @@ public class RequestThread extends Thread {
 //        }
 
         protected static void sendError(int errorCode, String scriptPath, GSE4 gse, CustomServletBinding binding, Throwable e) {
-                if (RequestThreadInfo.get().errorOccurred()){
+                if (RequestThreadInfo.get().errorOccurred()) {
                         return;
                 }
 
@@ -612,7 +621,7 @@ public class RequestThread extends Thread {
                         }
 
                         if (application.hasCustomErrorFile("error" + errorCode + templateExtension)) {
-                                String errorScriptPath = RequestThreadInfo.get().getApplication().getAppPath() + File.separator + "WEB-INF" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension ;
+                                String errorScriptPath = RequestThreadInfo.get().getApplication().getAppPath() + File.separator + "WEB-INF" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension;
                                 RequestThreadInfo.get().getParsedRequest().setRequestFilePath(errorScriptPath);
                                 RequestThread.processTemplateRequest(errorScriptPath, gse, binding);
                         } else {
@@ -644,7 +653,7 @@ public class RequestThread extends Thread {
         private static StackTraceElement findErrorInStackTrace(CustomServletBinding binding, Throwable e) {
                 File f = null;
 
-                f = new File((String)binding.getVariable("currentFile"));
+                f = new File((String) binding.getVariable("currentFile"));
 
                 if (f != null) {
                         if (e.getStackTrace() != null) {

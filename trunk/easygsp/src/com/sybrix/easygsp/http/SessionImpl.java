@@ -20,6 +20,7 @@ import com.sybrix.easygsp.exception.NotImplementedException;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 import javax.servlet.ServletContext;
+import java.io.Serializable;
 import java.util.Enumeration;
 import java.util.Random;
 import java.util.List;
@@ -41,27 +42,44 @@ import groovy.lang.GroovyObject;
  * Session <br/>
  * Description :
  */
-public class SessionImpl implements HttpSession {
-        private static final Logger log = Logger.getLogger(SessionImpl.class.getName());
+public class SessionImpl implements HttpSession, Serializable {
 
-        private static Random random = new Random(System.currentTimeMillis());
+        private transient static final Logger log = Logger.getLogger(SessionImpl.class.getName());
+
+        private transient static Random random = new Random(System.currentTimeMillis());
         private String sessionId;
-        private long creationTime;
-        private long lastAccessedTime;
-        private ServletContextImpl application;
-        private int maxInactiveInterval;
+        private Long creationTime;
+        private Long lastAccessedTime;
+        private transient ServletContextImpl application;
+        private Integer maxInactiveInterval;
 
-        private List<String> attributeNames;
-        private SessionMap sessionMap;
+        private transient Set<String> attributeNames;
+        private transient SessionMap sessionMap;
 
         public SessionImpl(ServletContextImpl application, int maxInactiveInterval) {
+                this.application = application;
+                this.maxInactiveInterval = maxInactiveInterval;
+
                 sessionId = createSessionId();
                 creationTime = System.currentTimeMillis();
                 lastAccessedTime = System.currentTimeMillis();
+                attributeNames = new HashSet();
+                sessionMap = new SessionMap();
+        }
+
+        public SessionImpl(ServletContextImpl application, String sessionId,  int maxInactiveInterval) {
                 this.application = application;
                 this.maxInactiveInterval = maxInactiveInterval;
-                attributeNames = new ArrayList();
+
+                this.sessionId = sessionId;
+                creationTime = System.currentTimeMillis();
+                lastAccessedTime = System.currentTimeMillis();
+                attributeNames = new HashSet();
                 sessionMap = new SessionMap();
+        }
+
+        protected final void addSessionAttributeName(String attributeName){
+                attributeNames.add(attributeName);
         }
 
         private String createSessionId() {
@@ -73,7 +91,7 @@ public class SessionImpl implements HttpSession {
                         if (c >= 58 && c <= 64)
                                 continue;
                         sb.append((char) c);
-                        if (numberCount > 15)
+                        if (numberCount > 20)
                                 break;
                         numberCount++;
                 }
@@ -89,8 +107,13 @@ public class SessionImpl implements HttpSession {
                 return sessionId;
         }
 
+        public void setLastAccessTime(Long lastAccessTime){
+                this.lastAccessedTime = lastAccessTime;
+        }
+
         public void updateLastAccessedTime() {
                 lastAccessedTime = System.currentTimeMillis();
+                SessionCache.getInstance().put(application.getAppName(), getId(), "lastAccessTime", lastAccessedTime);
         }
 
         public long getLastAccessedTime() {
@@ -129,23 +152,27 @@ public class SessionImpl implements HttpSession {
                 return Collections.enumeration(attributeNames);
         }
 
-
         public String[] getValueNames() {
                 return new String[0];
         }
 
-        public void setAttribute(String s, Object o) {
-                SessionCache.getInstance().put(sessionId, s, o);
-                attributeNames.add(s);
+        public void setAttribute(String key, Object value) {
+
+                SessionCache.getInstance().put(application.getAppName(), sessionId, key, value);
+                attributeNames.add(key);
         }
 
         public void putValue(String s, Object o) {
                 throw new NotImplementedException("Session.putValue() is not implemented");
         }
 
-        public void removeAttribute(String s) {
-                SessionCache.getInstance().remove(sessionId, s);
-                attributeNames.add(s);
+        public void removeAttribute(String key) {
+                SessionCache.getInstance().remove(application.getAppName(), sessionId, key);
+                attributeNames.remove(key);
+        }
+
+        protected final void setApplication(ServletContextImpl application) {
+                this.application = application;
         }
 
         public void removeValue(String s) {
@@ -154,8 +181,11 @@ public class SessionImpl implements HttpSession {
 
         public synchronized void invalidate() {
                 for (String attribute : attributeNames) {
-                        SessionCache.getInstance().remove(sessionId, attribute);
+                        SessionCache.getInstance().remove(application.getAppName(), sessionId, attribute);
+
                 }
+                SessionCache.getInstance().remove(application.getAppName(), sessionId, "lastAccessedTime", false);
+                CacheKeyManager.removeSession(application.getAppName(),sessionId);
                 attributeNames.clear();
                 application.getSessions().remove(sessionId);
         }
@@ -177,9 +207,9 @@ public class SessionImpl implements HttpSession {
                                 o.invokeMethod("onSessionStart", new Object[]{null});
                         }
                 } catch (ScriptException e) {
-                       log.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
+                        log.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
                 } catch (ResourceException e) {
-                       log.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
+                        log.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
                 } catch (IllegalAccessException e) {
                         log.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
                 } catch (InstantiationException e) {
@@ -209,57 +239,56 @@ public class SessionImpl implements HttpSession {
 //
 //        }
 
-        class SessionMap implements Map{
-              public int size() {
-                      return attributeNames.size();
-              }
+        class SessionMap implements Map {
+                public int size() {
+                        return attributeNames.size();
+                }
 
-              public boolean isEmpty() {
-                      return attributeNames.isEmpty();
-              }
+                public boolean isEmpty() {
+                        return attributeNames.isEmpty();
+                }
 
-              public boolean containsKey(Object key) {
-                      return attributeNames.contains(key);
-              }
+                public boolean containsKey(Object key) {
+                        return attributeNames.contains(key);
+                }
 
-              public boolean containsValue(Object value) {
-                      return false;
-              }
+                public boolean containsValue(Object value) {
+                        return false;
+                }
 
-              public Object get(Object key) {
-                      return SessionCache.getInstance().get(sessionId, key.toString());
-              }
+                public Object get(Object key) {
+                        return SessionCache.getInstance().get(sessionId, key.toString());
+                }
 
-              public Object put(Object key, Object value) {
-                      //return attributeNames.put(key.toString(), value);
-                      SessionCache.getInstance().put(sessionId, key.toString(),value);
-                      return null;
-              }
+                public Object put(Object key, Object value) {
+                        //return attributeNames.put(key.toString(), value);
+                        SessionCache.getInstance().put(application.getAppName(), sessionId, key.toString(), value);
+                        return null;
+                }
 
-              public Object remove(Object key) {
-                      SessionCache.getInstance().remove(sessionId, key.toString());
-                      return null;
-              }
+                public Object remove(Object key) {
+                        SessionCache.getInstance().remove(application.getAppName(), sessionId, key.toString());
+                        return null;
+                }
 
-              public void putAll(Map m) {
+                public void putAll(Map m) {
 
-              }
+                }
 
-              public void clear() {
+                public void clear() {
 
-              }
+                }
 
-              public Set keySet() {
-                      return new HashSet(attributeNames);
-              }
+                public Set keySet() {
+                        return new HashSet(attributeNames);
+                }
 
-              public Collection values() {
-                      return null;
-              }
+                public Collection values() {
+                        return null;
+                }
 
-              public Set entrySet() {
-                     return null;
-              }
+                public Set entrySet() {
+                        return null;
+                }
         }
-
 }

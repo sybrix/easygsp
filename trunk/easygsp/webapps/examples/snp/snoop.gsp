@@ -19,18 +19,18 @@
 <body bgcolor="white">
 <h1> Request Information </h1>
 <font size="4">
-JSP Request Method: <% out.print(util.HTMLFilter.filter(request.getMethod())); %>
+JSP Request Method: <%= util.HTMLFilter.filter(request.getMethod()) %>
 <br>
 Request URI: <%= request.getRequestURI() %>
 <br>
 Request Protocol: <%= request.getProtocol() %>
 
 <br>
-Query string: <% out.print(util.HTMLFilter.filter(request.getQueryString())); %>
+Query string: <%= util.HTMLFilter.filter(request.getQueryString()) %>
 <br>
 Content length: <%= request.getContentLength() %>
 <br>
-Content type: <% out.print(util.HTMLFilter.filter(request.getContentType())); %>
+Content type: <%= util.HTMLFilter.filter(request.getContentType()) %>
 <br>
 Server name: <%= request.getServerName() %>
 <br>
@@ -41,7 +41,7 @@ Remote address: <%= request.getRemoteAddr() %>
 Remote host: <%= request.getRemoteHost() %>
 
 <hr>
-The browser you are using is <% out.print(util.HTMLFilter.filter(request.getHeader("User-Agent"))); %>
+The browser you are using is <%=  util.HTMLFilter.filter(request.getHeader("User-Agent")) %>
 <hr>
 </font>
 </body>

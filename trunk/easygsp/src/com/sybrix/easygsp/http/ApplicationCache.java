@@ -15,11 +15,9 @@ public class ApplicationCache {
         private static ApplicationCache _instance;
         private static JCS jcsCache;
 
-        private ApplicationCache()  {
+        private ApplicationCache() {
                 try {
-
                         jcsCache = JCS.getInstance("appCache");
-                        
                 } catch (CacheException e) {
                         throw new RuntimeException(e.getMessage(), e);
                 }
@@ -43,7 +41,6 @@ public class ApplicationCache {
                 } catch (CacheException e) {
                         throw new RuntimeException(e.getMessage(), e);
                 }
-
         }
 
         public void remove(String appId, String key) {
@@ -52,7 +49,15 @@ public class ApplicationCache {
                 } catch (CacheException e) {
                         throw new RuntimeException(e.getMessage(), e);
                 }
+        }
 
+
+        public void clear() {
+                try {
+                        jcsCache.clear();
+                } catch (CacheException e) {
+                        //do nothing
+                }
         }
 
 }
