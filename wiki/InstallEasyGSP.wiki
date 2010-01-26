@@ -31,7 +31,7 @@ Open the startup and stop scripts and correct the JAVA_HOME and EASYGSP_HOME pat
   * vi start.sh
 
 
-LightTPD/Apache's htdoc/documentroot should point to $EASYGSP_HOME/webapps 
+Modify LightTPD so that the "documentroot" points to $EASYGSP_HOME/webapps 
 
 
 * Start EasyGSP *
