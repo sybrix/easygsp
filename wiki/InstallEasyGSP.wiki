@@ -146,15 +146,28 @@ restart LightTPD
 
 ==Configuring Apache==
 
-Add the following to the httpd.conf.  Remaining Apache configuration details are forthcoming as this configuration is not as complete as the LightTPD example.
+Add the following to the httpd.conf. 
 
 {{{
          LoadModule scgi_module modules/mod_scgi.so
          SCGIMount / 127.0.0.1:4444
  
-         <locationmatch [^(\.gsp|\.gspx)]$>
+         <locationmatch [^(\.gsp|\.gspx|/)]$>
 	     SCGIHandler Off
          </locationmatch>
+
+         <IfModule dir_module>
+             DirectoryIndex index.gspx index.gsp index.html
+         </IfModule>
+
+         <Directory "C:/easygsp/webapps">
+           Options Indexes FollowSymLinks
+
+           AllowOverride None
+
+           Order allow,deny
+           Allow from all
+         </Directory>
 
 }}}
 
