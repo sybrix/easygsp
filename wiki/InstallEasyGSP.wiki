@@ -161,7 +161,7 @@ Add the following to the httpd.conf.
          </IfModule>
 
          <Directory "C:/easygsp/webapps">
-           Options Indexes FollowSymLinks
+           Options FollowSymLinks
 
            AllowOverride None
 
