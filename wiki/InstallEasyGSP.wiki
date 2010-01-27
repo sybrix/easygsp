@@ -160,10 +160,10 @@ Modify httpd.conf to match the following:
              DirectoryIndex index.gspx index.gsp index.html
          </IfModule>
 
-         # point to $EASYGSP_HOME
+         # point to $EASYGSP_HOME/webapps
          DocumentRoot "C:/easygsp/webapps"
 
-         # point to $EASYGSP_HOME         
+         # point to $EASYGSP_HOME/webapps         
          <Directory "C:/easygsp/webapps">
            Options FollowSymLinks
 
