@@ -119,14 +119,16 @@ LightTPD htdoc should point to $EASYGSP_HOME/webapps
 			( "localhost" =>
 				(
 					"host" => "127.0.0.1",
-					"port" =>  4444
+					"port" =>  4444,
+                                        "check-local" => "disable"  
 				)
 			),
 		".gsp" =>
 			( "localhost" =>
 				(
 					"host" => "127.0.0.1",
-					"port" =>  4444
+					"port" =>  4444,
+                                        "check-local" => "disable"
 				)
 			)			
 			
