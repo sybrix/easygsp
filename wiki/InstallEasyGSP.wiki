@@ -146,7 +146,7 @@ restart LightTPD
 
 ==Configuring Apache==
 
-Add the following to the httpd.conf. 
+Modify httpd.conf to match the following:
 
 {{{
          LoadModule scgi_module modules/mod_scgi.so
@@ -160,6 +160,10 @@ Add the following to the httpd.conf.
              DirectoryIndex index.gspx index.gsp index.html
          </IfModule>
 
+         # point to $EASYGSP_HOME
+         DocumentRoot "C:/easygsp/webapps"
+
+         # point to $EASYGSP_HOME         
          <Directory "C:/easygsp/webapps">
            Options FollowSymLinks
 
