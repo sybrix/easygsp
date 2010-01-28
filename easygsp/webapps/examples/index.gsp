@@ -92,7 +92,7 @@
 
                 <td VALIGN=TOP WIDTH="30%"><a href="num/numguess.gsp"><img SRC="images/execute.gif" HSPACE=4 BORDER=0 align=TOP></a><a href="num/numguess.gsp">Execute</a></td>
 
-                <td WIDTH="30%"><a href="num/numguess.html"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="num/numguess.html">Source</a></td>
+                <td WIDTH="30%"><a href="viewsource.gsp?p=<%= encode('num/numguess.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="viewsource.gsp?p=<%= encode('num/numguess.gsp') %>">Source</a></td>
         </tr>
 
         <tr VALIGN=TOP>
@@ -100,7 +100,7 @@
 
                 <td VALIGN=TOP WIDTH="30%"><a href="dates/date.gsp"><img SRC="images/execute.gif" HSPACE=4 BORDER=0 align=TOP></a><a href="dates/date.gsp">Execute</a></td>
 
-                <td WIDTH="30%"><a href="dates/date.html"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="dates/date.html">Source</a></td>
+                <td WIDTH="30%"><a href="viewsource.gsp?p=<%= encode('dates/date.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="viewsource.gsp?p=<%= encode('dates/date.gsp') %>">Source</a></td>
         </tr>
 
         <tr VALIGN=TOP>
@@ -108,7 +108,7 @@
 
                 <td WIDTH="30%"><a href="snp/snoop.gsp"><img SRC="images/execute.gif" HSPACE=4 BORDER=0 align=TOP></a><a href="snp/snoop.gsp">Execute</a></td>
 
-                <td WIDTH="30%"><a href="snp/snoop.html"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="snp/snoop.html">Source</a></td>
+                <td WIDTH="30%"><a href="viewsource.gsp?p=<%= encode('snp/snoop.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="viewsource.gsp?p=<%= encode('snp/snoop.gsp') %>">Source</a></td>
         </tr>
 
         <tr VALIGN=TOP>
@@ -116,23 +116,23 @@
 
                 <td WIDTH="30%"><a href="errors/index.gsp"><img SRC="images/execute.gif" HSPACE=4 BORDER=0 align=TOP></a><a href="errors/index.gsp">Execute</a></td>
 
-                <td WIDTH="30%"><a href="error/er.html"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="error/er.html">Source</a></td>
+                <td WIDTH="30%"><a href="viewsource.gsp?p=<%= encode('errors/index.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="viewsource.gsp?p=<%= encode('errors/index.gsp') %>">Source</a></td>
         </tr>
         <tr VALIGN=TOP>
                 <td>ErrorPage(404)&nbsp;</td>
 
                 <td WIDTH="30%"><a href="errors/index2.gsp"><img SRC="images/execute.gif" HSPACE=4 BORDER=0 align=TOP></a><a href="errors/index2.gsp">Execute</a></td>
 
-                <td WIDTH="30%"><a href="error/er.html"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="error/er.html">Source</a></td>
+                <td WIDTH="30%"></td>
         </tr>
 
 
         <tr VALIGN=TOP>
                 <td>Include&nbsp;</td>
 
-                <td VALIGN=TOP WIDTH="30%"><a href="/include/include.gsp"><img SRC="images/execute.gif" HSPACE=4 BORDER=0 align=TOP></a><a href="include/include.gsp">Execute</a></td>
+                <td VALIGN=TOP WIDTH="30%"><a href="include/include.gsp"><img SRC="images/execute.gif" HSPACE=4 BORDER=0 align=TOP></a><a href="include/include.gsp">Execute</a></td>
 
-                <td WIDTH="30%"><a href="include/inc.html"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="include/inc.html">Source</a></td>
+                <td WIDTH="30%"><a href="viewsource.gsp?p=<%= encode('include/include.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="include.gsp?p=<%= encode('include/include.gsp') %>">Source</a></td>
         </tr>
 
         <tr VALIGN=TOP>
@@ -140,7 +140,7 @@
 
                 <td VALIGN=TOP WIDTH="30%"><a href="forward/forward.gsp"><img SRC="images/execute.gif" HSPACE=4 BORDER=0 align=TOP></a><a href="forward/forward.gsp">Execute</a></td>
 
-                <td WIDTH="30%"><a href="forward/fwd.html"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="forward/fwd.html">Source</a></td>
+                <td WIDTH="30%"><a href="viewsource.gsp?p=<%= encode('forward/forward.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="viewsource.gsp?p=<%= encode('forward/forward.gsp') %>">Source</a></td>
         </tr>
         <tr valign=TOP>
                 <td>Redirect</td>

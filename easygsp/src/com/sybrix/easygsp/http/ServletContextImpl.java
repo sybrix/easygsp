@@ -452,6 +452,15 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 this.templateServlet = templateServlet;
         }
 
+        public Class classForName(String name) {
+                try {
+                        ServletContextImpl app = RequestThreadInfo.get().getApplication();
+                        return app.getGroovyScriptEngine().loadScriptByName(name);
+                } catch (Exception e) {
+                        throw new RuntimeException("Unable to load classFor: " + name, e);
+                }
+        }
+
         class AttributeMap implements Map {
 
                 public int size() {
