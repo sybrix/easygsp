@@ -1,0 +1,49 @@
+01/13/10 21:56.45 [INFO] - Thread monitor started  (timeout: 300)
+01/13/10 21:56.45 [INFO] - SessionMonitor started.
+01/13/10 21:56.45 [FINE] - Logger thread started
+01/13/10 21:56.45 [FINE] - loading database driver:org.firebirdsql.jdbc.FBDriver
+01/13/10 21:56.45 [FINE] - loading database driver:com.mysql.jdbc.Driver
+01/13/10 21:57.39 [FINE] - adding thread id:20 from running map
+01/13/10 21:57.39 [FINE] - parsed AppName: app1
+01/13/10 21:57.39 [FINE] - parsed AppDir: c:/projects/easygsp/easygsp/webapps/app1
+01/13/10 21:57.39 [FINE] - parsed RequestURIPath: c:/projects/easygsp/easygsp/webapps/app1/index.gspx
+01/13/10 21:57.39 [FINE] - parsed RequestURI: index.gspx
+01/13/10 21:57.39 [FINE] - loading application: c:\projects\easygsp\easygsp\webapps\app1
+01/13/10 21:57.39 [FINE] - starting application: c:\projects\easygsp\easygsp\webapps\app1
+01/13/10 21:57.39 [FINE] - invoking onApplicationStart for app1
+01/13/10 21:57.44 [FINE] - onApplicationStart successful for app1
+01/13/10 21:57.44 [FINEST] - SCGI headers
+	ACCEPT-ENCODING = deflate, gzip, x-gzip, identity, *;q=0
+	USER-AGENT = Opera/9.80 (Windows NT 6.0; U; en) Presto/2.2.15 Version/10.10
+	TE = deflate, gzip, chunked, identity, trailers
+	SCRIPT-NAME = /app1/index.gspx
+	DOCUMENT-ROOT = c:/projects/easygsp/easygsp/webapps
+	ACCEPT-LANGUAGE = en-US,en;q=0.9
+	COOKIE = __utmz=111872281.1255313992.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utma=111872281.448789227.1255313992.1256998899.1261175741.15; bumblezee=OJQ8s%2FwR9hG6UWeJczUTpihXOcI4aABXfAMFB1AAY48n41Q%2FrDFscAEUpDWQB76ikUUDAihMfZJG%0D%0AO4ol%2FQlRwEAFOBwL4YRsXri157XQUrFPI1mkrMYO8hLAj4PjVwKo2dmENcNf8iHcGCzZOYMz0Fwi%0D%0Arg7q7it7; GSESSIONID=VGDOWWBC342HWBGFH
+	HOST = localhost:8085
+	ACCEPT-CHARSET = iso-8859-1, utf-8, utf-16, *;q=0.1
+	COOKIE- = $Version=1
+	SERVER-SOFTWARE = LightTPD/1.4.23 (Win32)
+	REQUEST-METHOD = GET
+	ACCEPT = text/html, application/xml;q=0.9, application/xhtml+xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=0.1
+	SERVER-NAME = localhost
+	REMOTE-ADDR = 127.0.0.1
+	REDIRECT-STATUS = 200
+	CONNECTION = Keep-Alive, TE
+	SERVER-PROTOCOL = HTTP/1.1
+	PATH-INFO = 
+	QUERY-STRING = 
+	SERVER-PORT = 8085
+	CONTENT-LENGTH = 0
+	REMOTE-PORT = 59233
+	SCGI = 1
+	REQUEST-URI = /app1/
+	SCRIPT-FILENAME = c:/projects/easygsp/easygsp/webapps/app1/index.gspx
+	GATEWAY-INTERFACE = CGI/1.1
+	SERVER-ADDR = 127.0.0.1
+
+01/13/10 21:57.45 [INFO] - INSERT INTO tblprofile (last_name) VALUES (?)
+01/13/10 21:57.45 [FINE] - logging 2 message(s) in log queue
+01/13/10 21:57.47 [FINE] - fowarding to file: view.gspx
+01/13/10 21:57.47 [FINE] - took 7899 ms
+01/13/10 21:57.50 [FINE] - logging 3 message(s) in log queue
