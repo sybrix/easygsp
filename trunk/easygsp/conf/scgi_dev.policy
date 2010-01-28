@@ -92,7 +92,7 @@ grant codeBase "file:C:/projects/easygsp/easygsp/lib/groovy-all-1.6.1.jar" {
     permission java.security.AllPermission;
 };
 
-
+                               
 grant {
 
       permission java.security.AllPermission;

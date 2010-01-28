@@ -69,18 +69,28 @@ public class Parsers {
                                 appName = path.substring(0, path.substring(1).indexOf('/') + 1);
                                 requestURI = scriptName.substring(scgiMount.length() + appName.length() + 2);
                                 requestURIPath = webAppDir + "/" + path;
+                                if (requestURIPath.endsWith("/")){
+                                        if (new File(requestURIPath + "index.gspx").exists()){
+                                                requestURIPath = requestURIPath + "index.gspx";
+                                                requestURI = "index.gspx";
+                                        } else {
+                                                requestURIPath = requestURIPath + "index.gsp";
+                                                requestURI = "index.gsp";
+                                        }
+                                }
                                 path = webAppDir + "/" + appName;
                         }
-                        log.fine("parsed AppName: " + appName);
-                        log.fine("parsed AppDir: " + path);
-                        log.fine("parsed RequestURIPath: " + requestURIPath);
-                        log.fine("parsed AppName: " + appName);
 
                         parsedRequest.setAppName(appName);
                         parsedRequest.setAppPath(path);
                         parsedRequest.setRequestFilePath(requestURIPath);
                         parsedRequest.setRequestURI(requestURI);
 
+                        log.fine("parsed AppName: " + appName);
+                        log.fine("parsed AppDir: " + parsedRequest.getAppPath());
+                        log.fine("parsed RequestURIPath: " + requestURIPath);
+                        log.fine("parsed RequestURI: " + requestURI);
+                        
                         return parsedRequest;
                 }
         }

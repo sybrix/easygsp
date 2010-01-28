@@ -220,7 +220,6 @@ public class StaticControllerMethods {
                                 return val;
                 }
         }
-
 //                public static boolean isAlphaNumeric(String value) {
 //                return ALPHA_NUMERIC_PATTERN.matcher(value).matches();
 //        }
