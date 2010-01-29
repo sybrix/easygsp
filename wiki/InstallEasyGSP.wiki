@@ -148,14 +148,15 @@ restart LightTPD
 
 ==Configuring Apache==
 
-Modify httpd.conf to match the following:
 
+Modify httpd.conf to match the following:
+<font color="firebrick">This configuration only partially works.  The goal is to get the SCGI mod to only handle .gspx and .gspx files. It's not reasonable exclude every possible file extension. Help here would be greatly appreciated. </font>
 {{{
          LoadModule scgi_module modules/mod_scgi.so
          SCGIMount / 127.0.0.1:4444
  
-         <locationmatch [^(\.gsp|\.gspx|/)]$>
-	     SCGIHandler Off
+         <locationmatch (\.js|\.gif|\.ico|\.css|\.swf|\.png|\.tiff)+$>
+	      SCGIHandler Off
          </locationmatch>
 
          <IfModule dir_module>
