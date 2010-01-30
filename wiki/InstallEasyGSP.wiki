@@ -150,7 +150,9 @@ restart LightTPD
 
 
 Modify httpd.conf to match the following:
-<font color="firebrick">This configuration only partially works.  The goal is to get the SCGI mod to only handle .gspx and .gspx files. It's not reasonable exclude every possible file extension. Help here would be greatly appreciated. </font>
+
+<font color="firebrick">The configuration does not address the trailing slash problem.  It's also less than ideal because every file type that should not be handled by scgi is not included in this configuration.  There seems to be no way to tell apache to only allow the scgi server to process .gspx and .gsp files.  I highly suggest using LightTPD if you're not an Apache whiz.
+</font>
 {{{
          LoadModule scgi_module modules/mod_scgi.so
          SCGIMount / 127.0.0.1:4444
