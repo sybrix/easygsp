@@ -113,7 +113,7 @@ LightTPD htdoc should point to $EASYGSP_HOME/webapps
  
       url.access-deny             	= ( "~", ".inc", "WEB-INF")
       static-file.exclude-extensions 	= (  ".gsp", ".gspx", ".groovy")
-      index-file.names            	= ( "index.gsp", "index.gspx", "index.html", "index.htm", "default.htm", "index`")
+      index-file.names            	= (  "index.gspx", "index.gsp", "index.html", "index.htm", "default.htm", "index`")
       scgi.server  = (
                 ".gspx" =>
 			( "localhost" =>
