@@ -155,8 +155,11 @@ Modify httpd.conf to match the following:
          LoadModule scgi_module modules/mod_scgi.so
          SCGIMount / 127.0.0.1:4444
  
-         <locationmatch (\.js|\.gif|\.ico|\.css|\.swf|\.png|\.tiff)+$>
-	      SCGIHandler Off
+         <locationmatch (\.js|\.gif|\.ico|\.css|\.swf|\.png|\.tiff|\.jpeg|\.json|\.zip|\.tar\.gz|\.mp3|\.doc)+$>
+	     SCGIHandler Off
+         </locationmatch>
+         <locationmatch "/images|css|js|docs/">
+	     SCGIHandler Off
          </locationmatch>
 
          <IfModule dir_module>
