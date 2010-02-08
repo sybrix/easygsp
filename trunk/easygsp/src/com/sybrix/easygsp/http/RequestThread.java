@@ -4,14 +4,7 @@ import com.sybrix.easygsp.server.EasyGServer;
 import com.sybrix.easygsp.exception.ApplicationNotFoundException;
 import com.sybrix.easygsp.exception.TemplateNotFoundException;
 
-import java.io.InputStream;
-import java.io.IOException;
-import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.StringWriter;
-import java.io.File;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
@@ -53,7 +46,7 @@ public class RequestThread extends Thread {
         private Socket socket;
         private long requestStartTime;
         private long requestEndTime;
-        private long id = 0;
+        private static long id = 0;
         private static int threadTimeoutInSeconds;
 
         private File root = null;
@@ -81,6 +74,7 @@ public class RequestThread extends Thread {
         }
 
         public RequestThread(Socket socket, Map applications) {
+                super("EasyGSP Request Thread " + ++id);
                 requestStartTime = System.currentTimeMillis();
                 stopTime = requestStartTime + (threadTimeoutInSeconds * 1000);
                 this.socket = socket;
@@ -181,7 +175,6 @@ public class RequestThread extends Thread {
 
                         RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(root.getParent());
                         RequestThreadInfo.get().setCurrentFile(root.getAbsolutePath());
-                        binding.setVariable("currentFile", root.getAbsolutePath());
 
                         if (request.isMulitpart) {
                                 request.parseFileUploads();
@@ -291,6 +284,10 @@ public class RequestThread extends Thread {
                 }
         }
 
+        protected void closeSocket() {
+                closeSocket(socket);
+        }
+
         private void closeSocket(Socket socket) {
                 try {
                         socket.close();
@@ -340,7 +337,7 @@ public class RequestThread extends Thread {
         }
 
         public static void processScriptRequest(final String requestURI, final GSE4 gse, final CustomServletBinding binding) {
-                ResponseImpl response = (ResponseImpl) binding.getVariable("response");
+                final ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 
                 ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
 
@@ -351,13 +348,17 @@ public class RequestThread extends Thread {
                                         try {
                                                 RequestImpl request = (RequestImpl) binding.getVariable("request");
                                                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
+                                                String groovyFileName = requestURI.replace(altExtension, groovyExtension);
+                                                RequestThreadInfo.get().setCurrentFile((RequestThreadInfo.get().getApplication().getAppPath() + File.separator + groovyFileName).replace("/", File.separator));
 
-                                                ((GSE4) getDelegate()).run(requestURI.replace(altExtension, groovyExtension), binding);
+                                                ((GSE4) getDelegate()).run(groovyFileName, binding);
 
                                                 Boolean alreadyForwarded = (Boolean) request.getAttribute("_explicitForward");
 
                                                 if ((response.getBufferContentSize() == null || response.getBufferContentSize() == 0) && alreadyForwarded == false) {
-                                                        request.forwardToView(requestURI.replace(altExtension, viewExtension));
+                                                        String templatePath = requestURI.replace(altExtension, viewExtension);
+
+                                                        request.forwardToView(templatePath);
 //                                                      int i = scriptPath.lastIndexOf('/');
 //                                                        if (i == -1)
 //                                                                //replace .groovy w/ .gsp
@@ -369,6 +370,7 @@ public class RequestThread extends Thread {
                                                 return null;
 
                                         } catch (MissingPropertyException e) {
+                                                response.clearBuffer();
                                                 log.log(Level.FINE, e.getMessage(), e);
                                                 sendError(500, requestURI, gse, binding, e);
                                         } catch (MissingMethodException e) {
@@ -394,7 +396,7 @@ public class RequestThread extends Thread {
                                                 log.log(Level.FINE, e.getMessage(), e);
                                                 sendError(500, requestURI, gse, binding, e);
                                         } catch (ThreadDeath e) {
-                                                // do nothing
+
                                                 log.fine("Thread killed the hard way. script: " + requestURI);
                                                 sendError(500, requestURI, gse, binding, new Exception("Thread exceeded max allowed time limit.", e));
 
@@ -436,9 +438,13 @@ public class RequestThread extends Thread {
 
                                 public Object call() {
                                         try {
+                                                if (!RequestThreadInfo.get().errorOccurred())
+                                                        RequestThreadInfo.get().setCurrentFile(scriptPath);
+
                                                 RequestImpl request = (RequestImpl) binding.getVariable("request");
                                                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
                                                 ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
+
 
                                                 //application.getTemplateServlet().service(scriptPath, request, response, binding);
                                                 application.getTemplateServlet().service(request, response);
@@ -586,38 +592,77 @@ public class RequestThread extends Thread {
                 }
 
                 try {
-
                         ResponseImpl response = (ResponseImpl) binding.getVariable("response");
+                        response.flushWriter();
+                        response.clearBuffer();
+
+                        RequestError requestError = RequestThreadInfo.get().getRequestError();
                         ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
                         RequestImpl request = (RequestImpl) binding.getVariable("request");
                         StackTraceElement stackTraceElement = findErrorInStackTrace(binding, e);
 
                         RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(null);
+                        String appPath = RequestThreadInfo.get().getApplication().getAppPath() + File.separator;
+                        String appPath2 = "/" + RequestThreadInfo.get().getParsedRequest().getAppPath() + "/";
 
                         RequestThreadInfo.get().setErrorOccurred(true);
                         response.setStatus(errorCode, e.getMessage());
-                        StringWriter sw = new StringWriter();
-                        PrintWriter pw = new PrintWriter(sw);
-                        e.printStackTrace(pw);
 
-                        String errorMessage = sw.toString().replaceAll("\n", "<br/>");
-                        binding.setVariable("errorScript", scriptPath);
-                        binding.setVariable("errorMessage", errorMessage);
-                        binding.setVariable("error", e);
-                        binding.setVariable("stackTraceElement", stackTraceElement);
+                        requestError.setErrorCode(errorCode);
+                        requestError.setScriptPath(RequestThreadInfo.get().getCurrentFile());
+                        if (e.getMessage()==null)
+                                requestError.setErrorMessage("");
+                        else
+                                requestError.setErrorMessage(e.getMessage().replace(appPath, "").replace(appPath2, ""));
+                        
+                        requestError.setException(e, appPath, appPath2);
+
+                        binding.setVariable("exceptionName", e.getClass().getName());
+                        binding.setVariable("requestError", requestError);
 
                         if (stackTraceElement != null) {
-                                String path = stackTraceElement.getFileName();
-                                if (RequestThreadInfo.get().getParsedRequest().getRequestFilePath().endsWith(templateExtension)) {
-                                        path = scriptPath;
-                                }
+                                try {
+                                        File f = new File(RequestThreadInfo.get().getCurrentFile());
+                                        BufferedReader br = new BufferedReader(new FileReader(f));
+                                        String line = null;
+                                        StringBuffer lineBuffer = new StringBuffer();
+                                        int lineCt = 1;
 
-                                String lineNumberMessage = "Error occurred in " + path + " @ lineNumber: " + (stackTraceElement.getLineNumber() - 2);
-                                binding.setVariable("lineNumber", stackTraceElement.getLineNumber());
-                                binding.setVariable("lineNumberMessage", lineNumberMessage);
+                                        while ((line = br.readLine()) != null) {
+                                                if (lineCt >= stackTraceElement.getLineNumber() - 10 && (lineCt <= stackTraceElement.getLineNumber() + 10)) {
+                                                        lineBuffer.append("<div class=\"sourceLine\"><div class=\"sourceLineNumber\">").append(lineCt).append("</div>");
+                                                        lineBuffer.append("<div class=\"sourceCode\">");
+                                                        lineBuffer.append(line.length() == 0 ? "&nbsp;" : StaticControllerMethods.htmlEncode(line).replaceAll(" ", "&nbsp;"));
+                                                        lineBuffer.append("</div></div>");
+                                                }
+
+                                                lineCt++;
+                                        }
+                                        requestError.setSource(lineBuffer.toString());
+                                        br.close();
+                                } catch (Exception ex) {
+                                        log.log(Level.SEVERE, "Unable to parse source code to display on error page", ex);
+                                }
+                        }
+
+                        String path = RequestThreadInfo.get().getCurrentFile().replace(appPath, "").replace(appPath2, "");
+                        if (stackTraceElement != null) {
+//
+//                                if (RequestThreadInfo.get().isTemplateRequest()) {
+//                                        path = path.replace(appPath, "");
+//                                }
+
+                                String lineNumberMessage = "Error occurred in <span class=\"path\">" + path + "</span> @ lineNumber: " + (stackTraceElement.getLineNumber());
+                                requestError.setLineNumberMessage(lineNumberMessage);
+                                requestError.setLineNumber(stackTraceElement.getLineNumber());
                         } else {
-                                binding.setVariable("lineNumber", -1);
-                                binding.setVariable("lineNumberMessage", "");
+                                if (RequestThreadInfo.get().isTemplateRequest()) {
+                                        String lineNumberMessage = "Error occurred in <span class=\"path\">" + path + "</span>";
+                                        requestError.setLineNumberMessage(lineNumberMessage);
+                                } else {
+                                        requestError.setLineNumberMessage("");
+                                }
+                                requestError.setLineNumber(-1);
                         }
 
                         if (application.hasCustomErrorFile("error" + errorCode + templateExtension)) {
@@ -630,7 +675,7 @@ public class RequestThread extends Thread {
                                 RequestThread.processTemplateRequest(errorScriptPath, gse, binding);
                                 //sendError(errorCode, response, e, stackTraceElement, binding);
                         }
-                        response.flushBuffer();
+                        //response.flushBuffer();
 
                 } catch (Throwable e1) {
                         log.log(Level.FINE, e1.getMessage(), e1);
@@ -651,17 +696,27 @@ public class RequestThread extends Thread {
 //        }
 
         private static StackTraceElement findErrorInStackTrace(CustomServletBinding binding, Throwable e) {
-                File f = null;
+                // File f = null;
 
-                f = new File((String) binding.getVariable("currentFile"));
+                // f = new File(RequestThreadInfo.get().getCurrentFile());
 
-                if (f != null) {
-                        if (e.getStackTrace() != null) {
+                if (RequestThreadInfo.get().isTemplateRequest()) {
+                        if (e.getStackTrace() != null && RequestThreadInfo.get().getUniqueTemplateScriptName() != null) {
                                 for (StackTraceElement stackTraceElement : e.getStackTrace()) {
                                         if (stackTraceElement.getFileName() != null) {
-                                                if (stackTraceElement.getFileName().startsWith(f.getName())) {
+                                                if (stackTraceElement.getFileName().startsWith(RequestThreadInfo.get().getUniqueTemplateScriptName())) {
                                                         return stackTraceElement;
                                                 }
+                                        }
+                                }
+                        }
+                } else {
+                        String appPath = RequestThreadInfo.get().getApplication().getAppPath();
+                        String currentFile = RequestThreadInfo.get().getCurrentFile().substring(appPath.length() + 1);
+                        for (StackTraceElement stackTraceElement : e.getStackTrace()) {
+                                if (stackTraceElement.getFileName() != null) {
+                                        if (stackTraceElement.getFileName().endsWith(currentFile)) {
+                                                return stackTraceElement;
                                         }
                                 }
                         }

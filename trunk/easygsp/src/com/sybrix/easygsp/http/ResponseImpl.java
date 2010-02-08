@@ -137,6 +137,7 @@ public class ResponseImpl implements HttpServletResponse {
                 //Date: Wed, 01 Jul 2009 12:53:21 GMT
                 //
                 boolean secure = request.isSecure();
+                //@todo - fix for apache
                 String script = request.getHeader(RequestHeaders.SCRIPT_NAME);
                 String scriptPath = script.substring(0, script.lastIndexOf("/"));
                 String server = request.getHeader(RequestHeaders.SERVER_NAME);
@@ -162,6 +163,18 @@ public class ResponseImpl implements HttpServletResponse {
 
                 flushBuffer();
                 //throw new NotImplementedException("Response.sendRedirect() is not implemented");
+        }
+        protected void clearBuffer(){
+                if (byteArrayBuffer != null)
+                        byteArrayBuffer.reset();
+        }
+
+        protected void flushWriter(){
+                try {
+                        getWriter().flush();
+                } catch (IOException e) {
+
+                }
         }
 
         public void setDateHeader(String header, long value) {
@@ -407,4 +420,5 @@ public class ResponseImpl implements HttpServletResponse {
 
                 return buffer.toString();
         }
+
 }

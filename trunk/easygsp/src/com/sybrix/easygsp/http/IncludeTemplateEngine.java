@@ -41,7 +41,7 @@ import com.sybrix.easygsp.http.StaticControllerMethods;
 public class IncludeTemplateEngine extends TemplateEngine {
         private static final Logger log = Logger.getLogger(IncludeTemplateEngine.class.getName());
         private boolean verbose;
-        private static int counter = 1;
+        private static long counter = 1;
         private GroovyShell groovyShell;
 
         //private GSE4 groovyScriptEngine;
@@ -68,7 +68,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
         }
 
         public IncludeTemplateEngine(GroovyShell groovyShell) {
-              this.groovyShell = groovyShell;
+                this.groovyShell = groovyShell;
         }
 
 //        public Template createTemplate(Reader reader) throws CompilationFailedException, IOException {
@@ -84,10 +84,10 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         //template.script = groovyShell.parse(script, "SimpleTemplateScript" + counter++ + ".groovy");
 
                         String uniqueScriptName = "SimpleTemplateScript" + counter++ + ".groovy";
-                        RequestThreadInfo.get().setUniqueScriptName(uniqueScriptName.substring(0, uniqueScriptName.length() - 7));
+
                         //template.setTemplateName(uniqueScriptName.substring(0, uniqueScriptName.length() - 7));
-
-
+                        if (!RequestThreadInfo.get().errorOccurred())
+                                RequestThreadInfo.get().setUniqueTemplateScriptName(uniqueScriptName);
                         template.script = groovyShell.parse(script, uniqueScriptName);
                         //template.script = groovyScriptEngine.createScript(script,requestedUrl, uniqueScriptName, binding);
                         StaticControllerMethods.addMethods(template.script.getClass());
@@ -114,10 +114,10 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         //template.script = groovyShell.parse(script, "SimpleTemplateScript" + counter++ + ".groovy");
 
                         String uniqueScriptName = "SimpleTemplateScript" + counter++ + ".groovy";
-                        RequestThreadInfo.get().setUniqueScriptName(uniqueScriptName.substring(0, uniqueScriptName.length() - 7));
                         //template.setTemplateName(uniqueScriptName.substring(0, uniqueScriptName.length() - 7));
-
-
+                        if (!RequestThreadInfo.get().errorOccurred())
+                                RequestThreadInfo.get().setUniqueTemplateScriptName(uniqueScriptName);
+                        //RequestThreadInfo.get().getRequestError().setTemplatePath(requestedUrl);
                         template.script = groovyShell.parse(script, uniqueScriptName);
                         //template.script = groovyScriptEngine.createScript(script,requestedUrl, uniqueScriptName, binding);
                         StaticControllerMethods.addMethods(template.script.getClass());
@@ -152,6 +152,10 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         this.templateName = templateName;
                 }
 
+                public Script getScript() {
+                        return script;
+                }
+
                 public Writable make(final Map map) {
                         return new Writable() {
                                 /**
@@ -167,10 +171,14 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                                 binding = new Binding(map);
 
                                         Script scriptObject = InvokerHelper.createScript(script.getClass(), binding);
-                                        PrintWriter pw = new PrintWriter(writer);
-                                        scriptObject.setProperty("rout", pw);
+                                        //PrintWriter pw = new PrintWriter(writer);
+                                        scriptObject.setProperty("rout", writer);
                                         scriptObject.run();
-                                        pw.flush();
+                                        try {
+                                                writer.flush();
+                                        } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                        }
                                         return writer;
                                 }
 

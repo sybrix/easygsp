@@ -10,7 +10,7 @@ public class RequestInfo {
         private ServletContextImpl application;
         private boolean templateRequest;
         private boolean scriptProcessed;
-        private String uniqueScriptName;
+        private String uniqueTemplateScriptName;
         private String realScriptName;
         private TemplateInfo templateInfo;
         private ParsedRequest parsedRequest;
@@ -18,20 +18,25 @@ public class RequestInfo {
         private CustomServletBinding binding;
         private boolean codeBehindChanged=false;
         private int forwardCount=0;
+       private RequestError requestError;
 
         public RequestInfo() {
                 templateInfo = new TemplateInfo();
+                requestError = new RequestError();
         }
 
         public String getCurrentFile() {
-                if (!isTemplateRequest() && isScriptProcessed()) {
-                        return currentFile;
-                } else if (!isTemplateRequest()) {
-                        return currentFile.replace(RequestThread.altExtension,RequestThread.groovyExtension);
-                } else {
-                        return uniqueScriptName + RequestThread.groovyExtension;
-                }
-                //return currentFile;
+                return currentFile;
+//                if (!isTemplateRequest() && isScriptProcessed()) {
+//                        return currentFile;
+//                } else if (!isTemplateRequest()) {
+//                        return currentFile.replace(RequestThread.altExtension,RequestThread.groovyExtension);
+//                } else if (isTemplateRequest()) {
+//
+//                } else {
+//                        return uniqueTemplateScriptName + RequestThread.groovyExtension;
+//                }
+//                //return currentFile;
         }
 
         public void setCurrentFile(String currentFile) {
@@ -62,12 +67,12 @@ public class RequestInfo {
                 this.scriptProcessed = scriptProcessed;
         }
 
-        public String getUniqueScriptName() {
-                return uniqueScriptName;
+        public String getUniqueTemplateScriptName() {
+                return uniqueTemplateScriptName;
         }
 
-        public void setUniqueScriptName(String uniqueScriptName) {
-                this.uniqueScriptName = uniqueScriptName;
+        public void setUniqueTemplateScriptName(String uniqueTemplateScriptName) {
+                this.uniqueTemplateScriptName = uniqueTemplateScriptName;
         }
 
         public String getRealScriptName() {
@@ -124,5 +129,12 @@ public class RequestInfo {
 
         public int getForwardCount(){
                 return forwardCount;
+        }
+
+        public RequestError getRequestError() {
+                return requestError;
+        }
+        public void setRequestError(RequestError requestError) {
+                this.requestError = requestError;
         }
 }

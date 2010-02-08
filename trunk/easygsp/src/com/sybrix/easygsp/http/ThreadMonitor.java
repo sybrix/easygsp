@@ -56,12 +56,12 @@ public class ThreadMonitor {
 //                monitor.stopList.remove(thread);
 //        }
 
-        public static boolean isEmpty(){
+        public static boolean isEmpty() {
                 return monitor.stopList.isEmpty() && monitor.pendingList.isEmpty();
         }
 
-        public static int size(){
-               log.info("pending: " + monitor.pendingList.size());
+        public static int size() {
+                log.info("pending: " + monitor.pendingList.size());
                 log.info("stopList: " + monitor.stopList.size());
                 return monitor.stopList.size() + monitor.pendingList.size();
 
@@ -118,24 +118,37 @@ public class ThreadMonitor {
                                 Iterator iter = stopList.iterator();
                                 while (iter.hasNext()) {
                                         RequestThread requestThread = (RequestThread) iter.next();
-                                        
+
                                         if (currentTime > requestThread.getStopTime()) {
-                                                log.fine("trying to stop a thread ....");
-                                                
+
+
                                                 if (requestThread.isAlive()) {
+                                                        log.fine("trying to stop a thread ....");
+
+
+                                                        requestThread.closeSocket();
+                                                        try {
+                                                                requestThread.interrupt();
+                                                        } catch (Exception e) {
+
+                                                        }
+                                                        
                                                         try {
                                                                 //requestThread.sendError(500, requestThread.getScriptPath(),requestThread.getApplication().getGroovyScriptEngine(),requestThread.getBinding(), new Exception("Thread exceeded maximum timeout."));
 //                                                                requestThread.sendError("Thread exceeded maximum timeout.");
 //                                                                requestThread.sleep(500);
+
                                                                 requestThread.stop();
+                                                                log.fine("stopped called on thread ....");
                                                         } catch (Throwable e) {
                                                                 // do nothing there.  An exception will be throw in the run of RequestThread
                                                                 // catch it and log it there
+                                                                e.getStackTrace();
                                                         }
                                                 }
 
                                                 iter.remove();
-                                        } else if (requestThread.getRequestEndTime() >0){
+                                        } else if (requestThread.getRequestEndTime() > 0) {
                                                 iter.remove();
                                         }
                                 }

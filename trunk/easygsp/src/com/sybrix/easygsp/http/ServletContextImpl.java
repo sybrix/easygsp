@@ -35,7 +35,7 @@ import java.net.MalformedURLException;
 import java.io.*;
 
 import com.sybrix.easygsp.exception.NotImplementedException;
-import com.sybrix.easygsp.util.MD5;
+import com.sybrix.easygsp.util.Hash;
 import com.sybrix.easygsp.http.TemplateServlet;
 import com.sybrix.easygsp.server.EasyGServer;
 import org.codehaus.groovy.runtime.GroovyCategorySupport;
@@ -67,7 +67,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
         public ServletContextImpl(File dir) {
                 //this.appId = MD5.hash(dir);
                 this.appFile = dir;
-                this.appId = MD5.hash(dir.getAbsolutePath());
+                this.appId = Hash.MD5(dir.getAbsolutePath());
                 this.appPath = dir.getAbsolutePath();
                 attributeNames = new HashSet();
                 groovyFilePath = appPath + System.getProperty("file.separator") + "WEB-INF" + System.getProperty("file.separator") + "web.groovy";
@@ -394,16 +394,19 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 Closure closure = new Closure(groovyScriptEngine) {
 
                         public Object call() {
-                                try {
-                                        Class clazz = groovyScriptEngine.loadScriptByName("web.groovy");
+                                synchronized (groovyScriptEngine) {
+                                        try {
+                                                Class clazz = groovyScriptEngine.loadScriptByName("web.groovy");
 
-                                        GroovyObject o = (GroovyObject) clazz.newInstance();
-                                        o.invokeMethod(method, param);
+                                                GroovyObject o = (GroovyObject) clazz.newInstance();
+                                                o.invokeMethod(method, param);
 
-                                } catch (Throwable e) {
-                                        log.log(Level.SEVERE, e.getMessage(), e);
+                                        } catch (Throwable e) {
+                                                log.log(Level.SEVERE, e.getMessage(), e);
+                                        }
+
+                                        groovyScriptEngine.notifyAll();
                                 }
-
                                 return null;
                         }
 
