@@ -1,28 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project relativePaths="false" version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" name="Default" comment="0.3.1  1/28/10&#10;- fixed apache index page problem&#10;- added classForName method on ServletContextImpl&#10;- corrected paths in example page&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticControllerMethods.groovy" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticControllerMethods.groovy" />
-      <change type="MOVED" beforePath="C:\projects\easygsp\easygsp\src\com\sybrix\easygsp\util\MD5.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/util/Hash.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ThreadMonitor.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ThreadMonitor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestError.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestInfo.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ParsingUtil.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ParsingUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestImpl.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/error_0.log" afterPath="$PROJECT_DIR$/logs/error_0.log" />
-      <change type="DELETED" beforePath="C:\projects\easygsp\easygsp\src\com\sybrix\easygsp\http\GSE3.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/Parsers.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/Parsers.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ResponseImpl.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ResponseImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/easygsp.iws" afterPath="$PROJECT_DIR$/easygsp.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cache/appCache.data" afterPath="$PROJECT_DIR$/cache/appCache.data" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/databases/app1/APP1.FDB" afterPath="$PROJECT_DIR$/databases/app1/APP1.FDB" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ServletContextImpl.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ServletContextImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/errors/error500.gsp" afterPath="$PROJECT_DIR$/conf/errors/error500.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java" />
+    <list default="true" readonly="true" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/CacheKeyManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/server.properties" afterPath="$PROJECT_DIR$/conf/server.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/easygsp.iws" afterPath="$PROJECT_DIR$/easygsp.iws" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="easygsp.iws" />
@@ -117,28 +99,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RequestThread.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="RequestThread.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="603" column="90" selection-start="33754" selection-end="33754" vertical-scroll-proportion="0.034764826">
+            <state line="603" column="90" selection-start="33754" selection-end="33754" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServletContextImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/ServletContextImpl.java">
+      <file leaf-file-name="CacheKeyManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/CacheKeyManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="86" selection-start="1870" selection-end="1870" vertical-scroll-proportion="0.0">
+            <state line="16" column="13" selection-start="337" selection-end="337" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RequestThreadInfo.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThreadInfo.java">
+      <file leaf-file-name="logging.properties" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conf/logging.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="23" selection-start="296" selection-end="296" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.properties" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/conf/server.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="18" selection-start="105" selection-end="105" vertical-scroll-proportion="0.16966067">
               <folding />
             </state>
           </provider>
@@ -621,46 +612,6 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="easygsp" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="easygsp" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="conf" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="errors" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="easygsp" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="easygsp" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="easygsp" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="cache" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="easygsp" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
           <option name="myItemId" value="cacheserver" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
         </PATH_ELEMENT>
@@ -1037,18 +988,18 @@
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.09107579" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3782267" sideWeight="0.5" order="9" side_tool="false" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3782267" sideWeight="0.5" order="9" side_tool="false" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11666667" sideWeight="0.61391693" order="8" side_tool="false" x="1361" y="154" width="296" height="210" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11666667" sideWeight="0.6105499" order="8" side_tool="false" x="1361" y="154" width="296" height="210" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40516275" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28507295" sideWeight="0.0" order="3" side_tool="false" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31422272" sideWeight="0.5" order="11" side_tool="false" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3815937" sideWeight="0.5" order="12" side_tool="false" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3815937" sideWeight="0.5" order="12" side_tool="false" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23263507" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1845679" sideWeight="0.7070707" order="11" side_tool="false" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23166259" sideWeight="0.7607497" order="10" side_tool="false" x="1064" y="64" width="539" height="907" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23271605" sideWeight="0.61391693" order="2" side_tool="false" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23395061" sideWeight="0.6105499" order="2" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" />
       <window_info id="Web Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25427872" sideWeight="0.5" order="6" side_tool="false" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" />
@@ -1082,7 +1033,7 @@
     <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.3.1  1/28/10&#10;- fixed apache index page problem&#10;- added classForName method on ServletContextImpl&#10;- corrected paths in example page&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.3.2  2/8/10&#10;- improved 500 error page&#10;- more Apache index page fixes&#10;- changed default return value for params.get to return String not null, per api spec&#10;- added md5 and sha1 implicit methods&#10;- fixed GSE4 potential deadlock&#10;- improved thread killer process" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -1101,6 +1052,7 @@
     <MESSAGE value="0.2 .1  11/23/2009&#10;- fix the problem related to differences in Apache vs LightTPD scgi headers&#10;- Removed the need for easygsp to have to have a property that indicated where the docroot for the http server is&#10;" />
     <MESSAGE value="0.2 .5  01/13/2010&#10;- updated to Groovy v1.7 ()&#10;- changed added render method to template and controller category&#10;- added validation methods to Static methods class&#10;- added read/write permission to policy file for /groovy/script&#10;" />
     <MESSAGE value="0.3.1  1/28/10&#10;- fixed apache index page problem&#10;- added classForName method on ServletContextImpl&#10;- corrected paths in example page&#10;" />
+    <MESSAGE value="0.3.2  2/8/10&#10;- improved 500 error page&#10;- more Apache index page fixes&#10;- changed default return value for params.get to return String not null, per api spec&#10;- added md5 and sha1 implicit methods&#10;- fixed GSE4 potential deadlock&#10;- improved thread killer process" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1132,27 +1084,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/conf/server.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="17" selection-start="104" selection-end="104" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/Parsers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="189" column="0" selection-start="10423" selection-end="10423" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/util/CustomLogFormatter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="0" selection-start="1322" selection-end="1322" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="365" column="0" selection-start="14609" selection-end="14609" vertical-scroll-proportion="0.0">
@@ -1239,7 +1170,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="603" column="90" selection-start="33754" selection-end="33754" vertical-scroll-proportion="0.034764826">
+        <state line="603" column="90" selection-start="33754" selection-end="33754" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/CacheKeyManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="13" selection-start="337" selection-end="337" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/logging.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/server.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="18" selection-start="105" selection-end="105" vertical-scroll-proportion="0.16966067">
           <folding />
         </state>
       </provider>
