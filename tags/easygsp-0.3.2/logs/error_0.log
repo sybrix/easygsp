@@ -1,0 +1,91 @@
+02/07/10 13:58.34 [FINE] - CacheKeyManager initialized.
+02/07/10 13:58.36 [INFO] - Thread monitor started  (timeout: 60)
+02/07/10 13:58.36 [INFO] - SessionMonitor started.
+02/07/10 13:58.36 [FINE] - Logger thread started
+02/07/10 13:58.36 [FINE] - loading database driver:org.firebirdsql.jdbc.FBDriver
+02/07/10 13:58.36 [FINE] - loading database driver:com.mysql.jdbc.Driver
+02/07/10 13:59.22 [FINE] - adding thread id:21 from running map
+02/07/10 13:59.22 [FINE] - parsed AppName: tradestore
+02/07/10 13:59.22 [FINE] - parsed AppDir: c:/easygsp/webapps/tradestore
+02/07/10 13:59.22 [FINE] - parsed RequestURIPath: c:/easygsp/webapps/tradestore/index.gspx
+02/07/10 13:59.22 [FINE] - parsed RequestURI: index.gspx
+02/07/10 13:59.22 [FINE] - loading application: c:\easygsp\webapps\tradestore
+02/07/10 13:59.22 [FINE] - starting application: c:\easygsp\webapps\tradestore
+02/07/10 13:59.22 [FINE] - invoking onApplicationStart for tradestore
+02/07/10 13:59.28 [INFO] - EasyOM loaded class:model.Game
+02/07/10 13:59.28 [INFO] - EasyOM loaded class:model.GameCustomer
+02/07/10 13:59.28 [INFO] - EasyOM loaded class:model.GameCustomerAddress
+02/07/10 13:59.29 [INFO] - EasyOM loaded class:model.GameEsrbRating
+02/07/10 13:59.29 [INFO] - EasyOM loaded class:model.GameGenre
+02/07/10 13:59.29 [INFO] - EasyOM loaded class:model.GamePaymentType
+02/07/10 13:59.29 [INFO] - EasyOM loaded class:model.GameReview
+02/07/10 13:59.29 [INFO] - EasyOM loaded class:model.GameState
+02/07/10 13:59.29 [INFO] - EasyOM loaded class:model.GameSystem
+02/07/10 13:59.29 [INFO] - EasyOM loaded class:model.GameTitle
+02/07/10 13:59.29 [INFO] - EasyOM loaded class:GameTradeInvoice
+02/07/10 13:59.29 [INFO] - EasyOM loaded class:GameTradeInvoiceX
+02/07/10 13:59.29 [INFO] - EasyOM loaded class:model.VwAllGames
+02/07/10 13:59.29 [INFO] - EasyOM loaded class:model.VwGameCustomerAddress
+02/07/10 13:59.29 [INFO] - EasyOM loaded class:model.VwGameGenre
+02/07/10 13:59.29 [FINE] - onApplicationStart successful for tradestore
+02/07/10 13:59.32 [INFO] - SELECT game_title_id as gameTitleId, game_title as gameTitle, game_genre_id as gameGenreId, title_description as titleDescription, developer as developer, esrb_rating as esrbRating, publisher as publisher, game_genre as gameGenre, game_id as gameId, game_system_id as gameSystemId, small_image_url as smallImageUrl, large_image_url as largeImageUrl, medium_image_url as mediumImageUrl, quantity_in_stock as quantityInStock, weight as weight, trade_price as tradePrice, cash_trade_price as cashTradePrice, cost as cost, retail_price as retailPrice, active as active, upc_code as upcCode, accepting_trades as acceptingTrades, game_system_code as gameSystemCode, game_system as gameSystem, game_count as gameCount FROM vw_all_games WHERE accepting_trades = ?  
+02/07/10 13:59.32 [INFO] - SELECT game_genre_id as gameGenreId, description as description, sort_order as sortOrder FROM vw_game_genre ORDER BY description
+02/07/10 13:59.32 [INFO] - SELECT game_system_id as gameSystemId, game_system_code as gameSystemCode, game_system as gameSystem FROM game_system ORDER BY game_system
+02/07/10 13:59.33 [FINE] - took 10618 ms
+02/07/10 13:59.34 [FINE] - adding thread id:23 from running map
+02/07/10 13:59.34 [FINE] - parsed AppName: tradestore
+02/07/10 13:59.34 [FINE] - parsed AppDir: c:/easygsp/webapps/tradestore
+02/07/10 13:59.34 [FINE] - parsed RequestURIPath: c:/easygsp/webapps/tradestore/index.gspx
+02/07/10 13:59.34 [FINE] - parsed RequestURI: index.gspx
+02/07/10 13:59.34 [INFO] - SELECT game_title_id as gameTitleId, game_title as gameTitle, game_genre_id as gameGenreId, title_description as titleDescription, developer as developer, esrb_rating as esrbRating, publisher as publisher, game_genre as gameGenre, game_id as gameId, game_system_id as gameSystemId, small_image_url as smallImageUrl, large_image_url as largeImageUrl, medium_image_url as mediumImageUrl, quantity_in_stock as quantityInStock, weight as weight, trade_price as tradePrice, cash_trade_price as cashTradePrice, cost as cost, retail_price as retailPrice, active as active, upc_code as upcCode, accepting_trades as acceptingTrades, game_system_code as gameSystemCode, game_system as gameSystem, game_count as gameCount FROM vw_all_games WHERE game_id = ?  
+02/07/10 13:59.34 [FINE] - took 418 ms
+02/07/10 13:59.34 [FINE] - adding thread id:24 from running map
+02/07/10 13:59.34 [FINE] - parsed AppName: tradestore
+02/07/10 13:59.34 [FINE] - parsed AppDir: c:/easygsp/webapps/tradestore
+02/07/10 13:59.34 [FINE] - parsed RequestURIPath: c:/easygsp/webapps/tradestore/trades.gspx
+02/07/10 13:59.34 [FINE] - parsed RequestURI: trades.gspx
+02/07/10 13:59.34 [INFO] - SELECT payment_type_id as paymentTypeId, payment_type as paymentType, sort_order as sortOrder FROM game_payment_type ORDER BY sort_order
+02/07/10 13:59.34 [FINE] - took 410 ms
+02/07/10 13:59.36 [FINE] - logging 4 message(s) in log queue
+02/07/10 13:59.36 [FINE] - adding thread id:25 from running map
+02/07/10 13:59.36 [FINE] - parsed AppName: tradestore
+02/07/10 13:59.36 [FINE] - parsed AppDir: c:/easygsp/webapps/tradestore
+02/07/10 13:59.36 [FINE] - parsed RequestURIPath: c:/easygsp/webapps/tradestore/trades.gspx
+02/07/10 13:59.36 [FINE] - parsed RequestURI: trades.gspx
+02/07/10 13:59.36 [INFO] - SELECT payment_type_id as paymentTypeId, payment_type as paymentType, sort_order as sortOrder FROM game_payment_type ORDER BY sort_order
+02/07/10 13:59.37 [SEVERE] com.sybrix.easygsp.http.RequestThread$1.call() - null
+java.lang.NullPointerException
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter(setGroovyObjectProperty:531)
+	at trades(doGet:22)
+	at sun.reflect.NativeMethodAccessorImpl(invoke0:-2)
+	at sun.reflect.NativeMethodAccessorImpl(invoke:39)
+	at sun.reflect.DelegatingMethodAccessorImpl(invoke:25)
+	at java.lang.reflect.Method(invoke:597)
+	at org.codehaus.groovy.reflection.CachedMethod(invoke:88)
+	at groovy.lang.MetaMethod(doMethodInvoke:233)
+	at groovy.lang.MetaClassImpl(invokeMethod:1058)
+	at groovy.lang.ExpandoMetaClass(invokeMethod:915)
+	at groovy.lang.MetaClassImpl(invokeMethod:886)
+	at groovy.lang.MetaClassImpl(invokeMethod:699)
+	at groovy.lang.GroovyObjectSupport(invokeMethod:44)
+	at groovy.lang.Script(invokeMethod:78)
+	at groovy.lang.GroovyObject$invokeMethod(call:-1)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray(defaultCall:40)
+	at groovy.lang.GroovyObject$invokeMethod(call:-1)
+	at util.Framework(processPage:57)
+	at util.Framework$processPage$0(callStatic:-1)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray(defaultCallStatic:48)
+	at util.Framework$processPage$0(callStatic:-1)
+	at util.Framework(processPage:24)
+	at util.Framework$processPage(call:-1)
+	at trades(run:5)
+	at com.sybrix.easygsp.http.GSE4(run:520)
+	at com.sybrix.easygsp.http.RequestThread$1(call:354)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(use:93)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(access$200:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport(use:201)
+	at com.sybrix.easygsp.http.RequestThread(processScriptRequest:412)
+	at com.sybrix.easygsp.http.RequestThread(run:188)
+
+
+02/07/10 13:59.53 [FINE] - logging 1 message(s) in log queue
