@@ -23,7 +23,7 @@ import java.io.UnsupportedEncodingException;
  * MD5 <br/>
  * Description :
  */
-public class MD5 {
+public class Hash {
         public static String convertToHex(byte[] data) {
                 StringBuffer buf = new StringBuffer();
                 for (int i = 0; i < data.length; i++) {
@@ -40,10 +40,25 @@ public class MD5 {
                 return buf.toString();
         }
 
-        public static String hash(String text) {
+        public static String MD5(String text) {
                 try {
                         MessageDigest md;
                         md = MessageDigest.getInstance("MD5");
+                        byte[] md5hash = new byte[32];
+                        md.update(text.getBytes("iso-8859-1"), 0, text.length());
+                        md5hash = md.digest();
+                        return convertToHex(md5hash);
+                } catch (NoSuchAlgorithmException e) {
+                        throw new RuntimeException(e);
+                } catch (UnsupportedEncodingException e) {
+                        throw new RuntimeException(e);
+                }
+        }
+
+        public static String SHA1(String text) {
+                try {
+                        MessageDigest md;
+                        md = MessageDigest.getInstance("SHA-1");
                         byte[] md5hash = new byte[32];
                         md.update(text.getBytes("iso-8859-1"), 0, text.length());
                         md5hash = md.digest();

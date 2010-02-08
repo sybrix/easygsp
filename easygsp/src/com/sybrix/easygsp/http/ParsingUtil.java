@@ -122,7 +122,7 @@ public class ParsingUtil {
                                 throw new IllegalArgumentException("bad parameter");
 
                         final String name = decode(nameValue[0], encoding);
-                        String value = null;
+                        String value = "";
                         if (nameValue.length == 2)
                                 value = decode(nameValue[1], encoding);
                         if (parameters.containsKey(name)) {

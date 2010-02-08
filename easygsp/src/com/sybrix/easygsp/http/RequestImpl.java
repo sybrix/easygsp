@@ -226,18 +226,6 @@ public class RequestImpl implements HttpServletRequest {
                 Cookie requestCookie = cookies.get("GSESSIONID");
                 if (requestCookie != null) {
                         session = application.getSessions().get(requestCookie.getValue());
-
-                        // try cache
-                        if (session == null) {
-                                log.fine("trying locate session in cache");
-                                boolean exists = CacheKeyManager.sessionIdExist(application.getAppName(), requestCookie.getValue());
-                                if (exists) {
-                                        log.fine("session(" + requestCookie.getValue() + ") found in cache");
-                                        session = application.recreateSession(requestCookie.getValue());
-                                } else{
-                                        log.fine("session(" + requestCookie.getValue() + ") NOT found in cache");
-                                }
-                        }
                 }
 
                 if (session != null)

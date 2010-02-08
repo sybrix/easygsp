@@ -5,6 +5,7 @@ import com.sybrix.easygsp.util.PropertiesFile
 import groovy.sql.Sql
 import java.sql.SQLException
 import com.sybrix.easygsp.util.Validator
+import com.sybrix.easygsp.util.Hash
 
 
 public class StaticControllerMethods {
@@ -29,6 +30,8 @@ public class StaticControllerMethods {
                 addIsNumeric(clazz)
                 addIsEmpty(clazz)
                 addIfNull(clazz)
+                addMD5(clazz)
+                addSHA1(clazz)
                 // email
                 // cookie
         }
@@ -95,24 +98,7 @@ public class StaticControllerMethods {
 
         private static def addHtmlEncode(java.lang.Class clazz) {
                 clazz.metaClass.'static'.htmlEncode = {String s ->
-                        StringBuffer encodedString = new StringBuffer("");
-                        char[] chars = s.toCharArray();
-                        for (char c: chars) {
-                                if (c == '<') {
-                                        encodedString.append("&lt;");
-                                } else if (c == '>') {
-                                        encodedString.append("&gt;");
-                                } else if (c == '\'') {
-                                        encodedString.append("&apos;");
-                                } else if (c == '"') {
-                                        encodedString.append("&quot;");
-                                } else if (c == '&') {
-                                        encodedString.append("&amp;");
-                                } else {
-                                        encodedString.append(c);
-                                }
-                        }
-                        return encodedString.toString();
+                        return htmlEncode(s);
                 }
         }
 
@@ -138,7 +124,7 @@ public class StaticControllerMethods {
                                 dataSource = ''
                         else
                                 dataSource += '.'
-                        
+
                         def driver = app.getAttribute(dataSource + 'database.driver');
                         def url = app.getAttribute(dataSource + 'database.url')
                         def pwd = app.getAttribute(dataSource + 'database.password')
@@ -177,47 +163,59 @@ public class StaticControllerMethods {
         }
 
         private static def addIsEmailValid(java.lang.Class clazz) {
-                clazz.metaClass.static.isEmail = {String val ->
+                clazz.metaClass.static.isEmailValid = {String val ->
                         return Validator.isEmailValid(val);
                 }
         }
 
-        private static def addIsAlphaNumberic(java.lang.Class clazz){
+        private static def addIsAlphaNumberic(java.lang.Class clazz) {
                 clazz.metaClass.static.isAlphaNumberic = {String val ->
                         return Validator.isAlphaNumeric(val);
                 }
         }
 
-        private static def addIsZipCodeValid(java.lang.Class clazz){
+        private static def addIsZipCodeValid(java.lang.Class clazz) {
                 clazz.metaClass.static.isZipCode = {String val ->
                         return Validator.isZipCodeValid(val);
-                }                                               
+                }
         }
 
-        private static def addIsPhoneValid(java.lang.Class clazz){
+        private static def addIsPhoneValid(java.lang.Class clazz) {
                 clazz.metaClass.static.isPhone = {String val ->
                         return Validator.isValidPhone(val);
                 }
         }
 
-        private static def addIsNumeric(java.lang.Class clazz){
+        private static def addIsNumeric(java.lang.Class clazz) {
                 clazz.metaClass.static.isNumeric = {String val ->
                         return Validator.isNumeric(val);
                 }
         }
 
-        private static def addIsEmpty(java.lang.Class clazz){
+        private static def addIsEmpty(java.lang.Class clazz) {
                 clazz.metaClass.static.isEmpty = {Object val ->
                         return Validator.isEmpty(val);
                 }
         }
 
-        private static def addIfNull(java.lang.Class clazz){
+        private static def addIfNull(java.lang.Class clazz) {
                 clazz.metaClass.static.ifNull = {Object val, defaultVal ->
                         if (Validator.isEmpty(val))
                                 return defaultVal
                         else
                                 return val;
+                }
+        }
+
+        private static def addMD5(java.lang.Class clazz) {
+                clazz.metaClass.static.MD5 = {String val ->
+                        return Hash.MD5(val)
+                }
+        }
+
+        private static def addSHA1(java.lang.Class clazz) {
+                clazz.metaClass.static.SHA1 = {String val ->
+                        return Hash.SHA1(val)
                 }
         }
 //                public static boolean isAlphaNumeric(String value) {
@@ -231,5 +229,25 @@ public class StaticControllerMethods {
 //        public static boolean isZipCodeValid(String value) {
 //                return ZIPCODE_PATTERN.matcher(value).matches();
 //        }
-                                   
+
+        public static String htmlEncode(String s) {
+                StringBuffer encodedString = new StringBuffer("");
+                char[] chars = s.toCharArray();
+                for (char c: chars) {
+                        if (c == '<') {
+                                encodedString.append("&lt;");
+                        } else if (c == '>') {
+                                encodedString.append("&gt;");
+                        } else if (c == '\'') {
+                                encodedString.append("&apos;");
+                        } else if (c == '"') {
+                                encodedString.append("&quot;");
+                        } else if (c == '&') {
+                                encodedString.append("&amp;");
+                        } else {
+                                encodedString.append(c);
+                        }
+                }
+                return encodedString.toString();
+        }
 }

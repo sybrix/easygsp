@@ -5,7 +5,7 @@
 
 
         <property name="jdk" value="${env.JAVA_HOME}"/>
-        <property name="buildNumber" value="0.3.1"/>
+        <property name="buildNumber" value="0.3.2"/>
         <property name="easyGSPDir" value="easygsp-${buildNumber}"/>
         <property name="lib" value="lib"/>
         <property name="src" value="src"/>
@@ -53,14 +53,16 @@
                                 <include name="**/*.*"/>
                         </fileset>
                 </copy>
-
+                <replace file="${build}/src/com/sybrix/easygsp/server/EasyGServer.java">
+                        <replacefilter token="@easygsp_version" value="${buildNumber}"/>
+                </replace>
         </target>
 
         <!-- compile application -->
         <target name="compile" depends="copy.files">
                 <groovyc classpathref="project.class.path" srcdir="build/src" destdir="${build}/java/classes">
                         <javac deprecation="false" nowarn="false"
-                               target="1.5" debug="false" bootclasspathref="jdk.lib" classpathref="project.class.path">
+                               target="1.5" debug="true" bootclasspathref="jdk.lib" classpathref="project.class.path">
                                 <include name="**/*.java"/>
                                 <include name="**/*.groovy"/>
                                 <include name="**/*.properties"/>

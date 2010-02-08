@@ -21,7 +21,7 @@ public class Parsers {
 
         static {
                 isVirtualHostingEnabled = EasyGServer.propertiesFile.getBoolean("virtual.hosting", false);
-                String[] hosts = EasyGServer.propertiesFile.getString("default.host","localhost").split(",");
+                String[] hosts = EasyGServer.propertiesFile.getString("default.host", "localhost").split(",");
                 for (String host : hosts) {
                         defaultVirtualHostList.add(host);
                 }
@@ -47,7 +47,7 @@ public class Parsers {
 //                        }
                         if (isVirtualHostingEnabled && !defaultVirtualHostList.contains(hostName)) {
                                 String scriptName = headers.get(RequestHeaders.PATH_INFO);
-                                appName = webAppDir.substring(webAppDir.lastIndexOf('/')+1, webAppDir.length());
+                                appName = webAppDir.substring(webAppDir.lastIndexOf('/') + 1, webAppDir.length());
                                 requestURI = scriptName.substring(1);
                                 requestURIPath = webAppDir + scriptName;
                                 path = webAppDir;
@@ -56,7 +56,7 @@ public class Parsers {
                                 String scriptName = headers.get(RequestHeaders.PATH_INFO);
                                 appName = parseFirstFolderName(scriptName);
                                 requestURIPath = webAppDir + scriptName;
-                                
+
                                 webAppDir = webAppDir + "/" + appName;
                                 requestURI = scriptName.substring(appName.length() + 2);
 
@@ -64,13 +64,18 @@ public class Parsers {
 
                         } else {
                                 String scriptName = headers.get(RequestHeaders.SCRIPT_NAME) + headers.get(RequestHeaders.PATH_INFO);
-
+                                if (!(scriptName.endsWith(".gspx") || scriptName.endsWith(".gsp")))
+                                        if (!scriptName.endsWith("/")){
+                                                scriptName += "/";
+                                                
+                                        }
                                 path = scriptName.substring(scgiMount.length() + 1);
+
                                 appName = path.substring(0, path.substring(1).indexOf('/') + 1);
                                 requestURI = scriptName.substring(scgiMount.length() + appName.length() + 2);
                                 requestURIPath = webAppDir + "/" + path;
-                                if (requestURIPath.endsWith("/")){
-                                        if (new File(requestURIPath + "index.gspx").exists()){
+                                if (requestURIPath.endsWith("/")) {
+                                        if (new File(requestURIPath + "index.gspx").exists()) {
                                                 requestURIPath = requestURIPath + "index.gspx";
                                                 requestURI = "index.gspx";
                                         } else {
@@ -90,20 +95,20 @@ public class Parsers {
                         log.fine("parsed AppDir: " + parsedRequest.getAppPath());
                         log.fine("parsed RequestURIPath: " + requestURIPath);
                         log.fine("parsed RequestURI: " + requestURI);
-                        
+
                         return parsedRequest;
                 }
         }
 
-        private static String parseFirstFolderName(String path){
-                return path.substring(1,path.lastIndexOf('/'));
+        private static String parseFirstFolderName(String path) {
+                return path.substring(1, path.lastIndexOf('/'));
         }
 
-        private static String parseLastFolderName(String path){
-                   int lengthWithoutLastSlash = path.length() - 1;
-                   int lastSlashIndex = path.substring(0, lengthWithoutLastSlash).lastIndexOf('/');
+        private static String parseLastFolderName(String path) {
+                int lengthWithoutLastSlash = path.length() - 1;
+                int lastSlashIndex = path.substring(0, lengthWithoutLastSlash).lastIndexOf('/');
 
-                return path.substring(lastSlashIndex,lengthWithoutLastSlash);
+                return path.substring(lastSlashIndex, lengthWithoutLastSlash);
         }
 
         public static class LightyParser extends PathParser {
