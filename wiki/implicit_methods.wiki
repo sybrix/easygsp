@@ -28,6 +28,9 @@ The following are accessible to every class, template and controller.
 || boolean isPhoneValid(String val) ||Return true when val is a valid us phone number, false otherwise. regex: `(\d-)?(\d{3}-)?\d{3}-\d{4}`||
 ||String MD5(String val) || ||
 ||String SHA1(String val) || ||
+||String formatMoney(Double double) || ||
+||String formatMoney(BigDecimal double) || ||
+
 
 The following are only access to the templates and controllers
 || *Object* || *Description* ||
