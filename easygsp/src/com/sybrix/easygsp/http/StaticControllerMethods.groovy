@@ -6,9 +6,13 @@ import groovy.sql.Sql
 import java.sql.SQLException
 import com.sybrix.easygsp.util.Validator
 import com.sybrix.easygsp.util.Hash
+import java.text.DecimalFormat
 
 
 public class StaticControllerMethods {
+
+
+
         public static addMethods(Class clazz) {
                 addLogMethod(clazz)
                 addLogThrowableMethod(clazz)
@@ -32,6 +36,10 @@ public class StaticControllerMethods {
                 addIfNull(clazz)
                 addMD5(clazz)
                 addSHA1(clazz)
+                addFormatBigDecimal(clazz)
+                addFormatDouble(clazz)
+                addFormatMoney(clazz)
+                addFormatMoneyDouble(clazz)
                 // email
                 // cookie
         }
@@ -218,6 +226,36 @@ public class StaticControllerMethods {
                         return Hash.SHA1(val)
                 }
         }
+
+        private static def addFormatBigDecimal(java.lang.Class clazz) {
+                clazz.metaClass.static.format = {BigDecimal val, String pattern ->
+                        DecimalFormat decimalFormat = new DecimalFormat(pattern)
+                        return decimalFormat.format(val.toDouble())
+                }
+        }
+
+        private static def addFormatDouble(java.lang.Class clazz) {
+                clazz.metaClass.static.format = {java.lang.Double val, String pattern ->
+                        DecimalFormat decimalFormat = new DecimalFormat(pattern)
+                        return decimalFormat.format(val)
+                }
+        }
+
+        private static def addFormatMoney(java.lang.Class clazz) {
+                clazz.metaClass.static.formatMoney = {java.math.BigDecimal val ->
+                        DecimalFormat moneyFormatter = DecimalFormat.getCurrencyInstance()
+                        return moneyFormatter.format(val.toDouble())
+                }
+        }
+
+        private static def addFormatMoneyDouble(java.lang.Class clazz) {
+                clazz.metaClass.static.formatMoney = {java.lang.Double val ->
+                        DecimalFormat moneyFormatter = DecimalFormat.getCurrencyInstance()
+                        return moneyFormatter.format(val)
+                }
+        }
+
+
 //                public static boolean isAlphaNumeric(String value) {
 //                return ALPHA_NUMERIC_PATTERN.matcher(value).matches();
 //        }

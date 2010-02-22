@@ -44,7 +44,7 @@ public class EasyGServer {
         private static final Logger log = Logger.getLogger(EasyGServer.class.getName());
 
         private ServerSocket serverSocket;
-        private ExecutorService executorService;
+        //private ExecutorService executorService;
         private boolean isRunning;
 
         private ConcurrentHashMap<String, ServletContextImpl> applications = new ConcurrentHashMap();
@@ -57,15 +57,23 @@ public class EasyGServer {
         private static String serverDir;
         public static String APP_DIR;
         private SessionMonitor sessionMonitor;
+        private String groovyVersion;
+        private ConsoleServer consoleServer;
 
         static {
                 //APP_DIR = System.getProperty("easygsp.home");
         }
 
-        public EasyGServer(String groovyVersion) {
-                try {
-                        isWindows = System.getProperty("os.name").toLowerCase().contains("windows") || System.getProperty("os.name").toLowerCase().contains("winnt");
+        public EasyGServer() {
+                groovyVersion = org.codehaus.groovy.runtime.InvokerHelper.getVersion();
+                ;
+        }
 
+        public EasyGServer(String groovyVersion) {
+                this.groovyVersion = groovyVersion;
+        }
+        public void start() {
+                try {
                         APP_DIR = System.getProperty("easygsp.home");
                         if (APP_DIR == null) {
                                 throw new RuntimeException("-Deasygsp.home start up parameter not found");
@@ -75,6 +83,13 @@ public class EasyGServer {
                         }
 
                         propertiesFile = new PropertiesFile(APP_DIR + File.separator + "conf" + File.separator + "server.properties");
+                        if (EasyGServer.propertiesFile.getInt("console.server.port", -1) > -1) {
+                                consoleServer = new ConsoleServer();
+                                consoleServer.start();
+                        }
+
+                        isWindows = System.getProperty("os.name").toLowerCase().contains("windows") || System.getProperty("os.name").toLowerCase().contains("winnt");
+
                         System.setProperty("jcs.auxiliary.DC.attributes.DiskPath", APP_DIR + File.separator + "cache");
 
                         JCS.setConfigFilename(APP_DIR + File.separator + "conf" + File.separator + "cache.ccf");
@@ -106,14 +121,14 @@ public class EasyGServer {
                                 autoConfigureLogger();
                         }
 
-
                         CacheKeyManager.init();
 
-                        if (propertiesFile.getBoolean("clear.cache.onstart",true)) {
+                        if (propertiesFile.getBoolean("clear.cache.onstart", true)) {
                                 CacheKeyManager.removeAll();
                                 ApplicationCache.getInstance().clear();
                                 SessionCache.getInstance().clear();
                         }
+
 
                         ThreadMonitor.start();
                         sessionMonitor = new SessionMonitor(applications);
@@ -126,7 +141,7 @@ public class EasyGServer {
 
                         //loadApplicationsFromFileSystem();
 
-                        executorService = Executors.newCachedThreadPool();
+                        //executorService = Executors.newCachedThreadPool();
                         serverSocket = new ServerSocket(propertiesFile.getInt("server.port", 4444));
 
                         Thread shutdown = new Thread(new Shutdown(this));
@@ -190,6 +205,9 @@ public class EasyGServer {
 
                         log.info("shutdown complete");
                         log.fine("stopped");
+
+                        consoleServer.stopThread();
+
                         System.exit(0);
                 } catch (Exception e) {
                         log.log(Level.SEVERE, "EasyGSP Server startup failed.", e);
@@ -293,7 +311,8 @@ public class EasyGServer {
         public static void main(String arg[]) {
                 String groovyVersion = org.codehaus.groovy.runtime.InvokerHelper.getVersion();
 
-                new EasyGServer(groovyVersion);
+                EasyGServer server = new EasyGServer(groovyVersion);
+                server.start();
         }
 
         public static String getServerDir() {
@@ -311,4 +330,5 @@ public class EasyGServer {
         public static boolean isStopped() {
                 return stopRequested;
         }
+
 }

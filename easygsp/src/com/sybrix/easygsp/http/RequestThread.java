@@ -248,7 +248,7 @@ public class RequestThread extends Thread {
 
                                 try {
                                         //File f = new File(application.getAppPath() + File.separator + "WEB-INF" + File.separator + "i18n" + File.separator + "resources_" + selectedLanguage.getLanguageCode().toLowerCase() + "_" + selectedLanguage.getCountryCode().toUpperCase() + ".properties");
-                                        ResourceBundle bundle = ResourceBundle.getBundle("resources", selectedLanguage.getLocale(), new BundleClassLoader(application.getAppPath(), application.getGroovyScriptEngine().getGroovyClassLoader()));
+                                        ResourceBundle bundle = ResourceBundle.getBundle("resources", selectedLanguage.getLocale());
 
                                         if (bundle != null) {
 
@@ -610,11 +610,11 @@ public class RequestThread extends Thread {
 
                         requestError.setErrorCode(errorCode);
                         requestError.setScriptPath(RequestThreadInfo.get().getCurrentFile());
-                        if (e.getMessage()==null)
+                        if (e.getMessage() == null)
                                 requestError.setErrorMessage("");
                         else
                                 requestError.setErrorMessage(e.getMessage().replace(appPath, "").replace(appPath2, ""));
-                        
+
                         requestError.setException(e, appPath, appPath2);
 
                         binding.setVariable("exceptionName", e.getClass().getName());
@@ -697,7 +697,6 @@ public class RequestThread extends Thread {
 
         private static StackTraceElement findErrorInStackTrace(CustomServletBinding binding, Throwable e) {
                 // File f = null;
-
                 // f = new File(RequestThreadInfo.get().getCurrentFile());
 
                 if (RequestThreadInfo.get().isTemplateRequest()) {
