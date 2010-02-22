@@ -299,12 +299,9 @@ public class ServletContextImpl implements ServletContext, Serializable {
                         return;
 
                 try {
-                        //                                                groovyClassLoader = new GroovyClassLoader();
-                        //                                                groovyClassLoader.addClasspath(appPath + "/WEB-INF");
-                        //                                                invokeWebMethod("onApplicationStart", this);
 
                         loadErrorFiles();
-                        AppClassLoader parentClassLoader = new AppClassLoader(new URL[]{}, this.getClass().getClassLoader());
+                        AppClassLoader parentClassLoader = new AppClassLoader(new URL[]{});
                         parentClassLoader.setAllowThreads(EasyGServer.propertiesFile.getBoolean("allow.threads", false));
 
                         //                                                Class gse = parentClassLoader.loadClass("groovy.util.GroovyScriptEngine");

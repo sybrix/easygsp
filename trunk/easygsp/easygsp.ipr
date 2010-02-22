@@ -291,8 +291,8 @@
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../cacheserver/cacheserver.iml" filepath="$PROJECT_DIR$/../cacheserver/cacheserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/easygsp.iml" filepath="$PROJECT_DIR$/easygsp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starter/starter.iml" filepath="$PROJECT_DIR$/starter/starter.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">

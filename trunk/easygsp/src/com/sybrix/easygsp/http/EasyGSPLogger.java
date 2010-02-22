@@ -1,7 +1,5 @@
 package com.sybrix.easygsp.http;
 
-import com.sybrix.easygsp.server.ConsoleServer;
-
 import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
