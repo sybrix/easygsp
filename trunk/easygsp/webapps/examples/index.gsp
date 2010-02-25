@@ -92,7 +92,10 @@
 
                 <td VALIGN=TOP WIDTH="30%"><a href="num/numguess.gsp"><img SRC="images/execute.gif" HSPACE=4 BORDER=0 align=TOP></a><a href="num/numguess.gsp">Execute</a></td>
 
-                <td WIDTH="30%"><a href="viewsource.gsp?p=<%= encode('num/numguess.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="viewsource.gsp?p=<%= encode('num/numguess.gsp') %>">Source</a></td>
+                <td WIDTH="30%">
+                        <a href="viewsource.gsp?p=<%= encode('num/numguess.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a>
+                        <a href="viewsource.gsp?p=<%= encode('num/numguess.gsp') %>">Source</a>,  <a href="viewsource.gsp?p=<%= encode('WEB-INF/num/NumberGuessBean.groovy') %>">NumberGuessBean.groovy</a>
+                </td>
         </tr>
 
         <tr VALIGN=TOP>
@@ -132,7 +135,7 @@
 
                 <td VALIGN=TOP WIDTH="30%"><a href="include/include.gsp"><img SRC="images/execute.gif" HSPACE=4 BORDER=0 align=TOP></a><a href="include/include.gsp">Execute</a></td>
 
-                <td WIDTH="30%"><a href="viewsource.gsp?p=<%= encode('include/include.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="include.gsp?p=<%= encode('include/include.gsp') %>">Source</a></td>
+                <td WIDTH="30%"><a href="viewsource.gsp?p=<%= encode('include/include.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="viewsource.gsp?p=<%= encode('include/include.gsp') %>">include.gsp</a>, <a href="viewsource.gsp?p=<%= encode('include/header.gsp') %>">header.gsp</a>, <a href="viewsource.gsp?p=<%= encode('include/comboBox.gsp') %>">comboBox.gsp</a></td>
         </tr>
 
         <tr VALIGN=TOP>
@@ -140,7 +143,7 @@
 
                 <td VALIGN=TOP WIDTH="30%"><a href="forward/forward.gsp"><img SRC="images/execute.gif" HSPACE=4 BORDER=0 align=TOP></a><a href="forward/forward.gsp">Execute</a></td>
 
-                <td WIDTH="30%"><a href="viewsource.gsp?p=<%= encode('forward/forward.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="viewsource.gsp?p=<%= encode('forward/forward.gsp') %>">Source</a></td>
+                <td WIDTH="30%"><a href="viewsource.gsp?p=<%= encode('forward/forward.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="viewsource.gsp?p=<%= encode('forward/forward.gsp') %>">forward.gsp</a>,<a href="viewsource.gsp?p=<%= encode('forward/view.gsp') %>">view.gsp</a></td>
         </tr>
         <tr valign=TOP>
                 <td>Redirect</td>
@@ -148,6 +151,34 @@
 
                 <td width="30%"><a href="viewsource.gsp?p=<%= encode('redirect/redirect.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a>
                         <a href="viewsource.gsp?p=<%= encode('redirect/redirect.gsp') %>" target="_blank">Source</a></td>
+        </tr>
+        <tr valign=TOP>
+                <td>Cookies</td>
+                <td valign=TOP width="30%"><a href="cookies/cookies.gsp"><img src="images/execute.gif" hspace=4 border=0 align=top></a><a href="cookies/cookies.gsp">Execute</a></td>
+
+                <td width="30%"><a href="viewsource.gsp?p=<%= encode('cookies/cookies.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a>
+                        <a href="viewsource.gsp?p=<%= encode('cookies/cookies.gsp') %>" target="_blank">Source</a></td>
+        </tr>
+        <tr valign=TOP>
+                <td>Database 1</td>
+                <td valign=TOP width="30%"><a href="db/db.gsp"><img src="images/execute.gif" hspace=4 border=0 align=top></a><a href="db/db.gsp">Execute</a></td>
+
+                <td width="30%"><a href="viewsource.gsp?p=<%= encode('db/db.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a>
+                        <a href="viewsource.gsp?p=<%= encode('db/db.gsp') %>" target="_blank">Source</a></td>
+        </tr>
+        <tr valign=TOP>
+                <td>Database 2 </td>
+                <td valign=TOP width="30%"><a href="db/db2.gsp"><img src="images/execute.gif" hspace=4 border=0 align=top></a><a href="db/db2.gsp">Execute</a></td>
+
+                <td width="30%"><a href="viewsource.gsp?p=<%= encode('db/db2.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a>
+                        <a href="viewsource.gsp?p=<%= encode('db/db2.gsp') %>" target="_blank">Source</a></td>
+        </tr>
+        <tr valign=TOP>
+                <td>MVC</td>
+                <td valign=TOP width="30%"><a href="mvc/mvc.gspx"><img src="images/execute.gif" hspace=4 border=0 align=top></a><a href="mvc/mvc.gspx">Execute</a></td>
+
+                <td width="30%"><a href="viewsource.gsp?p=<%= encode('mvc/mvc.gspx') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a>
+                        <a href="viewsource.gsp?p=<%= encode('mvc/mvc.gspx') %>" target="_blank">mvc.gspx</a>, <a href="viewsource.gsp?p=<%= encode('mvc/mvc.groovy') %>" target="_blank">mvc.groovy</a></td></td>
         </tr>
 </table>
 

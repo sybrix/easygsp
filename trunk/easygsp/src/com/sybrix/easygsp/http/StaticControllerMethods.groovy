@@ -40,6 +40,7 @@ public class StaticControllerMethods {
                 addFormatDouble(clazz)
                 addFormatMoney(clazz)
                 addFormatMoneyDouble(clazz)
+                addProperties(clazz)
                 // email
                 // cookie
         }
@@ -144,7 +145,21 @@ public class StaticControllerMethods {
                         }
                 }
         }
-
+/*
+        public static void registerEvents(Object page) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+                Method methods[] = page.getClass().getMethods();
+                for (Method method : methods) {
+                        //public void registerEvent(String objectName, String function, boolean isButton) {
+                        Event eventAnnotation = method.getAnnotation(Event.class);
+                        if (eventAnnotation != null) {
+                                String names[] = eventAnnotation.source().split(",");
+                                for (String name : names) {
+                                        invokeMethod(page, "registerEvent", new Class[]{String.class, String.class, Boolean.class}, name.trim(), method.getName(), new Boolean(false));
+                                }
+                        }
+                }
+        }
+  */
         private static def addToInt(java.lang.Class clazz) {
                 clazz.metaClass.static.toInt = {String val ->
                         if (val == null)
@@ -255,7 +270,15 @@ public class StaticControllerMethods {
                 }
         }
 
-
+        private static def addProperties(java.lang.Class clazz) {
+                clazz.metaClass.static.addProperties = {app, propFile ->
+                        def en = propFile.propertyNames()
+                        while(en.hasMoreElements()){
+                                String key = en.nextElement()
+                                app[key] = propFile.get(key)
+                        }
+                }
+        }
 //                public static boolean isAlphaNumeric(String value) {
 //                return ALPHA_NUMERIC_PATTERN.matcher(value).matches();
 //        }
