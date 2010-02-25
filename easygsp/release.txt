@@ -35,3 +35,15 @@
  - added Clustering (not good implementation, will redo)
  - removed non-working examples
  
+0.3.2  2/8/10
+- improved 500 error page
+- more Apache index page fixes
+- changed default return value for params.get to return String not null, per api spec
+- added md5 and sha1 implicit methods
+- fixed GSE4 potential deadlock
+- improved thread killer process
+
+0.3.3  2/22/10
+- added ConsoleServer for socket IDE support
+- added format methods to StaticControllerMethods
+- webapp  classloader excludes jcs package

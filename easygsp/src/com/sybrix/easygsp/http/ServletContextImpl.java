@@ -432,7 +432,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
         public void stopApplication() {
                 try {
                         if (hasWebGroovy) {
-                                invokeWebMethod("onApplicationStop", this);
+                                invokeWebMethod("onApplicationEnd", this);
                         }
                         started = false;
                 } catch (Exception e) {

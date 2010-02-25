@@ -205,8 +205,8 @@ public class EasyGServer {
 
                         log.info("shutdown complete");
                         log.fine("stopped");
-
-                        consoleServer.stopThread();
+                        if (consoleServer != null)
+                                consoleServer.stopThread();
 
                         System.exit(0);
                 } catch (Exception e) {
