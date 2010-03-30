@@ -20,6 +20,8 @@ Reference
   * [forward_methods forward/redirect/include]
   * [clustering Clustering/Failover]
   * [class_reloading ClassReloading]
+  * [howto_logging Logging]
+
 
 Tutorials/How To's
   * [howto_db Connect to Database]
@@ -28,7 +30,7 @@ Tutorials/How To's
   * [howto_cookie Read/Write a cookie]
   * [howto_prop_file Use a Properties File]
   * [howto_jars Add Jar files]
-  * [howto_logging Logging]
+
 
 Scripts
   * [easyom EasyOM - Single Script ORM]
