@@ -13,7 +13,7 @@ Getting Started
 Reference
   * [lifecycle EasyGSP Page LifeCycle]
   * [servletapi Servlet API]
-  * [contollers Controllers]
+  * [controllers Controllers]
   * [gsp_scripts Templates/Views]
   * [template_inheritance Template Inheritance]
   * [implicit_objects Implicit Objects]
