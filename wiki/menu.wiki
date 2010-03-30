@@ -21,6 +21,7 @@ Reference
   * [clustering Clustering/Failover]
   * [class_reloading ClassReloading]
   * [howto_logging Logging]
+  * [email Sending Emails]
 
 
 Tutorials/How To's
