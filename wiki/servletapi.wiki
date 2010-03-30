@@ -6,10 +6,10 @@
 
 
 The servlet API interfaces implemented are: 
-  * Request
-  * Response
-  * Context (referred to as Application in EasyGSP)
-  * Session  
+  * [ref_request Request]
+  * [ref_respons Response ]
+  * [ref_context Context] (referred to as Application in EasyGSP)
+  * [ref_session Session]
 
 
 Each of these is available in all controllers and templates as [implicit_objects implicit objects].
