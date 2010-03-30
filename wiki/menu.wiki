@@ -14,9 +14,12 @@ Reference
   * [lifecycle EasyGSP Page LifeCycle]
   * [servletapi Servlet API]
   * [gsp_scripts Templates/Controllers]
+  * [template_inheritance Template Inheritance]
   * [implicit_objects Implicit Objects]
   * [implicit_methods Implicit Methods]
   * [forward_methods forward/redirect/include]
+  * [clustering Clustering/Failover]
+  * [class_reloading ClassReloading]
 
 Tutorials/How To's
   * [howto_db Connect to Database]
