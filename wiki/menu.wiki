@@ -20,7 +20,7 @@ Reference
   * [implicit_methods Implicit Methods]
   * [forward_methods forward/redirect/include]
   * [clustering Clustering/Failover]
-  * [class_reloading ClassReloading]
+  * [class_reloading Class Reloading]
   * [howto_logging Logging]
   * [email Sending Emails]
 
