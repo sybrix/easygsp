@@ -1,0 +1,21 @@
+#summary Sending Emails
+
+= Sending Emails =
+
+
+The implicit method "sendEmail()" can be used to send multipart emails.  Multipart emails can contain plain text, html and attactments.  This method simply uses the Java Mail API to send emails.
+
+{{{
+      public void sendEmail(Map emailParameters)
+}}}
+
+The allow parameters are listed:
+|| Property || Required || Description
+|| to || X || The value can be a List of emails, a comma separated list of emails or a single email||
+|| from || X ||  single email address ||
+|| cc || || || 
+|| bcc || || || 
+|| subject || X || ||
+|| body ||  || || 
+|| htmlBody ||  || ||  
+|| attachments ||  || ||  
