@@ -11,7 +11,7 @@ The implicit method "sendEmail()" can be used to send multipart emails.  Multipa
 
 The allowed parameters are listed:
 || Property || Required || Description ||
-|| to ||  || The value can be a List of emails, a comma separated list of emails or a single email||
+|| to ||  || Acceptable values: List of emails, a comma separated list of email addresses or a single email address ||
 || from || yes ||  single email address ||
 || cc || || || 
 || bcc || || || 
