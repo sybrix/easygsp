@@ -11,11 +11,11 @@ The implicit method "sendEmail()" can be used to send multipart emails.  Multipa
 
 The allowed parameters are listed:
 || Property || Required || Description ||
-|| to || <center>X</center> || The value can be a List of emails, a comma separated list of emails or a single email||
-|| from || X ||  single email address ||
+|| to ||  || The value can be a List of emails, a comma separated list of emails or a single email||
+|| from || yes ||  single email address ||
 || cc || || || 
 || bcc || || || 
-|| subject || X || ||
+|| subject ||  || ||
 || body ||  || || 
 || htmlBody ||  || ||  
 || attachments ||  || ||  
