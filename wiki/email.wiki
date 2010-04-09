@@ -13,9 +13,9 @@ The allowed parameters are listed:
 || Property || Required || Description ||
 || to ||  || Acceptable values: List of emails, a comma separated list of email addresses or a single email address ||
 || from || yes ||  single email address ||
-|| cc || || || 
-|| bcc || || || 
-|| subject ||  || ||
-|| body ||  || || 
-|| htmlBody ||  || ||  
-|| attachments ||  || ||  
+|| cc || || see "to" || 
+|| bcc || || see "to"  || 
+|| subject ||  || Email subject||
+|| body ||  || Plain text version of the email body || 
+|| htmlBody ||  || HTML version of the email body.  Not required, but can be used alone or with the "body" property ||  
+|| attachments ||   || Map<String, Object> of file attachments.  Allowable map values are: File, String (to a file path) and/or ByteArrayDataSource.  The key is a string where the string is the name of the file as should be represented in the email. ||  
