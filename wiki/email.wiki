@@ -18,4 +18,47 @@ The allowed parameters are listed:
 || subject ||  || Email subject||
 || body ||  || Plain text version of the email body || 
 || htmlBody ||  || HTML version of the email body.  Not required, but can be used alone or with the "body" property ||  
-|| attachments ||   || Map<String, Object> of file attachments.  Allowable map values are: File, String (to a file path) and/or ByteArrayDataSource.  The key is a string where the string is the name of the file as should be represented in the email. ||  
+|| attachments ||   || Map<String, Object> of file attachments.  Allowable map values are: File, String (to a file path) and/or ByteArrayDataSource.  The key is a string where the string is the name of the file as should be represented in the email. An email can contain zero or more attachments || 
+
+== Specifying SMTP Settings == 
+
+== Examples == 
+
+Plain text email
+{{{
+   def prop = [:]
+   prop.to = 'dsmith03@gmail.com'
+   prop.from = 'easygsp@gmail.com'
+   prop.subject = 'Email Example'
+   prop.body = 'This email is just a test'
+
+   sendEmail(prop)
+}}}
+
+HTML Email to multiple recipients
+{{{
+   def prop = [:]
+   prop.to = ['dsmith03@gmail.com', 'joe.blow@gmail.com', 'easygsp@yahoo.com']  // List of email recipients
+   prop.from = 'easygsp@gmail.com'
+   prop.subject = 'Email Example'
+   prop.body = 'This email is just a test.'
+   prop.htmlBody = """This email <strong>is</strong> just a <font color="red">test</font>."""
+
+   sendEmail(prop)
+}}}
+
+Email w/attachments
+{{{
+   def prop = [:]
+   prop.to = ['dsmith03@gmail.com', 'joe.blow@gmail.com', 'easygsp@yahoo.com']  // List of email recipients
+   prop.from = 'easygsp@gmail.com'
+   prop.subject = 'Email Example'
+   prop.body = 'This email is just a test and it has attachments.'
+   prop.htmlBody = """This email <strong>is</strong> just a <font color="red">test</font> and it has attachments."""
+
+   def myAttachments = ['release.txt':new File('/temp/release.txt')]
+   prop.attachments = myAttachments
+
+   sendEmail(prop)
+}}}
+
