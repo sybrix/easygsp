@@ -20,7 +20,35 @@ The allowed parameters are listed:
 || htmlBody ||  || HTML version of the email body.  Not required, but can be used alone or with the "body" property ||  
 || attachments ||   || Map<String, Object> of file attachments.  Allowable map values are: File, String (to a file path) and/or ByteArrayDataSource.  The key is a string where the string is the name of the file as should be represented in the email. An email can contain zero or more attachments || 
 
+== How it works == 
+The sendEmail() method is asynchronous.  The email is not sent as soon as this method returns.   Emails are queued and sent as soon as something is in the queue.  The queue processed all emails until the queue is empty.   Basically all emails are sent as early as possible on a first in, first out basis.
+
 == Specifying SMTP Settings == 
+The smtp properties(host name, port, login info, etc) are first read as application attributes, if the required attribute does not exist then the default value, which comes from the server.properties file is used.  So if you use Gmail for your smtp host, you can specify your smtp properties as app attributes and they will be used instead of the server default values.
+
+|| Property || Description ||
+|| smtp.host || ||
+|| smtp.port || || 
+|| smtp.username || ||
+|| smtp.password || ||
+|| smtp.authentication.required || ||
+
+The best place to set these properties for your application is in the web.groovy onApplicationStart method - when it starts.
+
+web.groovy
+{{{
+     def onApplicationStart(app){
+
+          app['smtp.host'] = 'one_of_their_servers@gmail.com'
+          app['smtp.port'] =  465
+          app['smtp.username'] = 'dsmith03'
+          app['smtp.password'] =  'password'
+          app['smtp.authentication.required'] = true
+     }
+
+}}}
+
+
 
 == Examples == 
 
@@ -61,4 +89,3 @@ Email w/attachments
 
    sendEmail(prop)
 }}}
-
