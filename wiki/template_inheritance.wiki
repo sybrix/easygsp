@@ -33,8 +33,8 @@ mainTemplate.gspx
 </html>
 }}}
 
-
-<%@ extends "base.html" %>
+{{{
+<%@ extends "mainTemplate.gspx" %>
 
 <%@ block title %>My amazing blog<%@ endblock %>
 
@@ -46,3 +46,4 @@ mainTemplate.gspx
 <% } %>
 
 <%@ endblock %>
+}}}
