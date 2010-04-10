@@ -32,3 +32,17 @@ mainTemplate.gspx
 </body>
 </html>
 }}}
+
+
+<%@ extends "base.html" %>
+
+<%@ block title %>My amazing blog<%@ endblock %>
+
+<%@ block content %}
+
+<% blog_entries{entry-> %>
+    <h2>${entry.title}</h2>
+    <p>${entry.body}</p>
+<% } %>
+
+<%@ endblock %>
