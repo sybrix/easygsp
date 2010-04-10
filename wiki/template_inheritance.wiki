@@ -6,6 +6,7 @@ Template inheritance allows you to build a base "skeleton" template that contain
 
 This initial implementation of template inheritance borrows heavily from Django's idea of how template inheritance should work.
 
+mainTemplate.gspx
 {{{
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
