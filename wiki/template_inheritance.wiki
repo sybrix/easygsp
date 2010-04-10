@@ -33,7 +33,7 @@ mainTemplate.gspx
 </html>
 }}}
 
-
+The child template - blog.gspx
 {{{
 <%@ extends "mainTemplate.gspx" %>
 
