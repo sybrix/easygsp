@@ -34,8 +34,8 @@ EasyGSP's configuration file is located @ $EASYGSP_HOME/conf/server.properties
 || file.monitor.enabled || true || ||
 || file.monitor.interval || 5 || ||
 || file.monitor.path || webapps || ||
-|| use.manual.file.monitor || false ||
-|| smtp.host ||  ||
+|| use.manual.file.monitor || false || ||
+|| smtp.host ||  || ||
 || smtp.port || false || ||
 || smtp.username || false || ||
 || smtp.password || false || ||
