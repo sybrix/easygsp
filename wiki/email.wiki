@@ -13,8 +13,8 @@ The allowed parameters are listed:
 || Property || Required || Description ||
 || to ||  || Acceptable values: List of emails, a comma separated list of email addresses or a single email address ||
 || from || yes ||  single email address ||
-|| cc || || see "to" || 
-|| bcc || || see "to"  || 
+|| cc || || see "to" description || 
+|| bcc || || see "to"  description || 
 || subject ||  || Email subject||
 || body ||  || Plain text version of the email body || 
 || htmlBody ||  || HTML version of the email body.  Not required, but can be used alone or with the "body" property ||  
