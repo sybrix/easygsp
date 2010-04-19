@@ -30,7 +30,8 @@ The following are accessible to every class, template and controller.
 ||String SHA1(String val) || ||
 ||String formatMoney(Double double) || ||
 ||String formatMoney(BigDecimal double) || ||
-
+||String formatDate(Object date) || ||
+||String sendEmail(Map properties) || ||
 
 The following are only access to the templates and controllers
 || *Object* || *Description* ||
