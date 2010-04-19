@@ -33,13 +33,12 @@ The smtp properties(host name, port, login info, etc) are first read as applicat
 || smtp.password || ||
 || smtp.authentication.required || ||
 
-The best place to set these properties for your application is in the web.groovy onApplicationStart method - when it starts.
+The best place to set these properties for a particular application is in the web.groovy onApplicationStart method - when it starts.
 
 web.groovy
 {{{
      def onApplicationStart(app){
-
-          app['smtp.host'] = 'one_of_their_servers@gmail.com'
+          app['smtp.host'] = 'server1.gmail.com'
           app['smtp.port'] =  465
           app['smtp.username'] = 'dsmith03'
           app['smtp.password'] =  'password'
