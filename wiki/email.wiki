@@ -26,12 +26,12 @@ The sendEmail() method is asynchronous.  Emails are not sent as soon as this met
 == Specifying SMTP Settings == 
 The smtp properties(host name, port, login info, etc) are first read as application attributes, if the required attribute does not exist then the default value, which comes from the server.properties file is used.  So if you use Gmail for your smtp host, you can specify your smtp properties as app attributes and they will be used instead of the server default values.
 
-|| Property || Description ||
-|| smtp.host || ||
-|| smtp.port || || 
-|| smtp.username || ||
-|| smtp.password || ||
-|| smtp.authentication.required || ||
+|| Property || 
+|| smtp.host || 
+|| smtp.port ||  
+|| smtp.username || 
+|| smtp.password || 
+|| smtp.authentication.required || 
 
 The best place to set these properties for a particular application is in the web.groovy onApplicationStart method.  If an application attempts to send an email and an SMTP property is missing as an app attribute, then the server values will be used instead.
 
