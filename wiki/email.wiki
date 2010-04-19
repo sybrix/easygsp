@@ -33,7 +33,7 @@ The smtp properties(host name, port, login info, etc) are first read as applicat
 || smtp.password || ||
 || smtp.authentication.required || ||
 
-The best place to set these properties for a particular application is in the web.groovy onApplicationStart method - when it starts.
+The best place to set these properties for a particular application is in the web.groovy onApplicationStart method.  If an application attempts to send an email and an SMTP property is missing as an app attribute, then the server values will be used instead.
 
 web.groovy
 {{{
@@ -46,7 +46,6 @@ web.groovy
      }
 
 }}}
-
 
 
 == Examples == 
