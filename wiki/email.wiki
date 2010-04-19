@@ -61,7 +61,7 @@ Plain text email
    sendEmail(prop)
 }}}
 
-HTML Email to multiple recipients
+Plain Text & HTML Email to multiple recipients
 {{{
    def prop = [:]
    prop.to = ['dsmith03@gmail.com', 'joe.blow@gmail.com', 'easygsp@yahoo.com']  // List of email recipients
@@ -73,7 +73,7 @@ HTML Email to multiple recipients
    sendEmail(prop)
 }}}
 
-Email w/attachments
+Plain Text & HTML Email w/attachments
 {{{
    def prop = [:]
    prop.to = ['dsmith03@gmail.com', 'joe.blow@gmail.com', 'easygsp@yahoo.com']  // List of email recipients
