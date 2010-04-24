@@ -4,4 +4,4 @@
 
 EasyGSP class reloading allow you to make a change to script, class or template and view the change immediately.  Restarts to the server are not required to review the effect of code changes.  
 
-Every easygsp application has it's own class loader.  Classloaders may need to be reloaded when certain application files are changed. As of version .40 EasyGSP uses the JNotify library to monitor file changes. 
+Every easygsp application has it's own class loader.  Classloaders may need to be reloaded when certain application files are changed. As of version .4 EasyGSP uses the JNotify library to monitor file changes. 
