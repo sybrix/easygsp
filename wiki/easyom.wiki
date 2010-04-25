@@ -8,6 +8,9 @@ EasyOM only works with Firebird and MySQL database.  However, since it's just 1 
 
  * Configuration
  * Persisting Object
+ * Retrieving Data 
+ * StringQueries
+ * Transactions
 
 ==[http://code.google.com/p/easygsp/downloads/list Download EasyOM Here]==
 
