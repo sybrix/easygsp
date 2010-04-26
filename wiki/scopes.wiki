@@ -65,3 +65,41 @@ Usage:
    request.currentPage = 1
 
 }}}
+
+
+== Bind Method == 
+
+Groovy has this thing call a Binding object.  As such every EasyGSP request has one as well. Key/Value pairs set via the bind method allows the key to be access as bean.  This makes for a very compact way of accessing key/value pairs from controller and page templates.  The life span of a values set via bind, is the same as request scope, but the difference is in how you access the values.
+
+Let's say there's a User object with username, firstname and lastname properties.
+Request vs Bind
+
+{{{
+     
+   // via the request method
+   request.user = new User('dsmith', 'David', 'Smith')
+   request.lastLogin = new Date()
+   
+   // bind method 
+   bind 'user',new User('dsmith', 'David', 'Smith')
+   bind 'lastLogin', new Date()
+
+}}}
+
+Access the values in a template
+{{{
+  <!-- request Attributes -->
+  <div>${request.user.lastName}, ${request.user.firstName}</div>
+  <div>${request.lastLogin.time}</div>
+
+
+  <!-- binding object variables, less code is better -->
+  <div>${user.lastName}, ${user.firstName}</div>
+  <div>${lastLogin.time}</div>
+
+
+}}}
+
+
+
+
