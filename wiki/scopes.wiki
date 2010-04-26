@@ -28,9 +28,15 @@ Using a flash variable
   <div class="successMessage">${flash.success}</div>
 }}}
 
+
 The above variables will be available for the next request by the current user but will be not be available for any request after that.
 
 == Request, Session and Application Scope ==
+||application ||  this scope allows you to share state across the entire web application|| 
+||session || allows associating state with a given user and typically uses cookies to associate a session with a client||
+||request || allows the storage of objects for the current request only||
+
+
 Request, Session and Application(ServletContext) scope in EasyGSP works exactly as it does in any servlet api implementation. EasyGSP actually implements the servlet api with regard to the the HttpServletRequest, HttpSession and ServletContext.  Accessing these scopes can be done using the familiar java syntax or the groovier shorthand syntax.
 
 request, session and app implicit objects are bound to every controller script and gsp/gspx template. They be accessed and used without any explicit declaration.
