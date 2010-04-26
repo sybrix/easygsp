@@ -3,6 +3,7 @@
 = StringQueries = 
 StringQueries add methods to the String class and allow you to invoke one of three execute methods on any String that happens to be a query.
 
+
 The following methods are added to the String class
 || def executeQuery || Executes a SELECT query ||
 || def executeUpdate || Used to execute insert, update and delete queries  ||
@@ -132,3 +133,14 @@ Returns a single value
        "SELECT count(*) FROM tblUser".executeScalar()
     }
  }}}
+
+
+== StringQueries ==
+String queries allow you to do call an "execute" query method on a simple String. 
+
+{{{
+    // returns the total number of records in table tblUser
+    def getTotalRecordCount(){
+       "SELECT count(*) FROM tblUser".executeScalar()
+    }
+}}}
