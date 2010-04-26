@@ -1,5 +1,7 @@
 #summary StringQueries
-[easyom Configuration]
+
+Back: [easyom_query Retrieving Data]  |  Next: [easyom_persist Persisting Data]
+
 = StringQueries = 
 StringQueries add methods to the String class and allow you to invoke one of three execute methods on any String that happens to be a query.
 
