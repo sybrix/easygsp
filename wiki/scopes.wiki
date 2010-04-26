@@ -22,8 +22,8 @@ Setting a flash scope variable
 }}}
 
 *When a flash variable does not exist, the flash object returns an empty string a the value.* 
-Using a flash variable
 
+Using a flash variable
 {{{
   <div class="successMessage">${flash.success}</div>
 }}}
