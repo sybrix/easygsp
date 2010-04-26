@@ -10,7 +10,7 @@ Variables set in flash scope have a life span of the request in which they are s
 
 Flash scope can be accessed from any controller script or gsp/gspx template.  Its syntax for getting/setting values is the same as that of a java.util.Map.
 
-Flash scope requires an active session.
+*Flash scope requires an active session.*
 
 Setting a flash scope variable
 {{{
@@ -19,6 +19,13 @@ Setting a flash scope variable
       flash.put('anotherSuccessMessage', 'Event this works')
 
       redirect 'index.gspx'
+}}}
+
+*When a flash variable does not exist, the flash object returns an empty string a the value.* 
+Using a flash variable
+
+{{{
+  <div class="successMessage">${flash.success}</div>
 }}}
 
 The above variables will be available for the next request by the current user but will be not be available for any request after that.
