@@ -1,7 +1,8 @@
 #summary Querying Data
 
-= Querying Data =
 Back: [easyom Configuration]  |  Next: [stringQueries StringQueries]
+
+= Querying Data =
 
 ==Static Methods==
 In addition to the instance methods, the following static methods are added to each configured entity object:
