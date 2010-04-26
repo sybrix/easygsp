@@ -32,7 +32,7 @@ Using a flash variable
 The above variables will be available for the next request by the current user but will be not be available for any request after that.
 
 == Request, Session and Application Scope ==
-||application ||  this scope allows you to share state across the entire web application|| 
+||application || allows you to share state across the entire web application|| 
 ||session || allows associating state with a given user and typically uses cookies to associate a session with a client||
 ||request || allows the storage of objects for the current request only||
 
