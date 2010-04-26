@@ -88,7 +88,7 @@ Request vs Bind
 
 }}}
 
-Request, session, and app attributes must all be accessed via their respective objects, binding variables can simply be access via their key name.
+* Request, session, and app attributes must all be accessed via their respective objects, binding variables can simply be access via their key name. *
 
 Access the values in a template
 {{{
@@ -103,5 +103,3 @@ Access the values in a template
 
 
 }}}
-
-
