@@ -48,12 +48,12 @@ The servlet context can be accessed as app or application.
    app.smtpHost = 'localhost'
 
 
-   // Accessing session 
+   // Accessing session scope variables
    session.setAttribute("userName","me")
    session['userName'] = 'me'
    session.userName = 'me'
 
-   // Accessing request 
+   // Accessing request scope variables
    request.setAttribute("currentPage",1)
    request['currentPage'] = 1
    request.currentPage = 1
