@@ -29,3 +29,32 @@ Using a flash variable
 }}}
 
 The above variables will be available for the next request by the current user but will be not be available for any request after that.
+
+
+Request, Session and Application(ServletContext) scope in EasyGSP works exactly as it does in any servlet api implementation. EasyGSP actually implements the servlet api with regard to the the HttpServletRequest, HttpSession and ServletContext.  Accessing these scopes can be done using the familiar java syntax or the groovier shorthand syntax.
+
+The servlet context can be accessed as app or application.
+{{{
+   // ok
+   app.setAttribute("smptHost","localhost")
+   
+   // groovy
+   app["smptHost"] = "localhost"
+   
+   // groovier
+   app.smtpHost = 'localhost'
+
+
+   // Accessing session values
+   session.setAttribute("userName","me")
+   session['userName'] = 'me'
+   session.userName = 'me'
+
+   // Accessing request values
+   request.setAttribute("currentPage",1)
+   request['currentPage'] = 1
+   request.currentPage = 1
+
+}}}
+
+
