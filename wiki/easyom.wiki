@@ -7,7 +7,7 @@ EasyOM and not EasyORM because it's not an ORM.  This class allows you to persis
 EasyOM only works with Firebird and MySQL database.  However, since it's just 1 groovy script, it should be pretty easy to make it work with other databases.
 
  * Configuration
- * Retrieving Data 
+ * [easyom_query Retrieving Data]
  * [easyom_persist Persisting Object]
  * StringQueries
  * [easyom_trans Transactions]
