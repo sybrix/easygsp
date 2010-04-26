@@ -41,7 +41,7 @@ Request, Session and Application(ServletContext) scope in EasyGSP works exactly 
 
 request, session and app implicit objects are bound to every controller script and gsp/gspx template. They be accessed and used without any explicit declaration.
 
-The servlet context can be accessed as app or application.
+Usage:
 {{{
    // Access application scope variables
    // ok
