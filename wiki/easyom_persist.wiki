@@ -23,13 +23,3 @@ Example:
 }}}
 
 
-
-== StringQueries ==
-String queries allow you to do call an "execute" query method on a simple String. 
-
-{{{
-    // returns the total number of records in table tblUser
-    def getTotalRecordCount(){
-       "SELECT count(*) FROM tblUser".executeScalar()
-    }
-}}}
