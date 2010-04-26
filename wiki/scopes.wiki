@@ -35,6 +35,7 @@ Request, Session and Application(ServletContext) scope in EasyGSP works exactly 
 
 The servlet context can be accessed as app or application.
 {{{
+   // Access application scope variables
    // ok
    app.setAttribute("smptHost","localhost")
    
@@ -45,16 +46,14 @@ The servlet context can be accessed as app or application.
    app.smtpHost = 'localhost'
 
 
-   // Accessing session values
+   // Accessing session 
    session.setAttribute("userName","me")
    session['userName'] = 'me'
    session.userName = 'me'
 
-   // Accessing request values
+   // Accessing request 
    request.setAttribute("currentPage",1)
    request['currentPage'] = 1
    request.currentPage = 1
 
 }}}
-
-
