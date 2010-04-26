@@ -1,0 +1,24 @@
+#summary Scope
+
+= Scope =
+
+There are 4 primary scopes in EasyGSP:  Flash, Request, Session and Application.  If your backgroup is java web development each of these work as you would expect.
+
+== Flash ==
+
+Variables set in flash scope have a life span of the request in which they are set, and one subsequent request.  This is useful for simple notifications and alerts, that need to exists even after a redirect request.
+
+Flash scope can be accessed from any controller script or gsp/gspx template.  Its syntax for getting/setting values is the same as that of a java.util.Map.
+
+Flash scope requires an active session.
+
+Setting a flash scope variable
+{{{
+      flash.success = 'Your account was successfully created'
+      flash['success message'] = 'This syntax works too'
+      flash.put('anotherSuccessMessage', 'Event this works')
+
+      redirect 'index.gspx'
+}}}
+
+The above variables will be available for the next request by the current user but will be not be available for any request after that.
