@@ -8,7 +8,7 @@ EasyOM allows for transactions via it's withTransaction method.  This method acc
 {{{
      import static util.EasyOM.*
      
-     // User and Address are EasyOM enabled objects
+     // assume User and Address are EasyOM enabled objects
      def saveUser(){
            def user = new User([firstName:'Brian', lastName:'Jermaine'])
            def address = new Address([address:'PO Box 100',city:'Quincy', state:'FL'])
