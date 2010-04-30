@@ -1,6 +1,6 @@
 #summary EasyOM Transactions
 
-Back: [stringQueries StringQueries] 
+Back: [easyom_persist Persisting Data]
 
 = Transactions=
 
