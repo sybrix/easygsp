@@ -4,7 +4,12 @@
 
 EasyOM allows for transactions via it's withTransaction method.  This method accepts a closure and any EasyOM queries run within the closure are included in the transaction.  If any exception occurs, all DML statements are rolled back.
 
+The EasyOM withTransaction method :
+{{{
+     public static void withTransaction(Closure closure)
+}}}
 
+Example:
 {{{
      import static util.EasyOM.*
      
