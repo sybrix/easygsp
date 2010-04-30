@@ -1,13 +1,24 @@
 #summary EasyOM Transactions
 
-= Introduction =
+= Transactions=
 
-Add your content here.
+EasyOM allows for transactions via it's withTransaction method.  This method accepts a closure and any EasyOM queries run within the closure are included in the transaction.  If any exception occurs, all DML statements are rolled back.
 
 
-= Details =
+{{{
+     import static util.EasyOM.*
+     
+     // User and Address are EasyOM enabled objects
+     def saveUser(){
+           def user = new User([firstName:'Brian', lastName:'Jermaine'])
+           def address = new Address([address:'PO Box 100',city:'Quincy', state:'FL'])
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+           withTransaction{
+               user.save()
+               address.save() 
+           }
+     }
+
+}}}
+
+The withTransaction was made available via the static import.  Otherwise, it would have been `EasyOM.withTransaction{}`
