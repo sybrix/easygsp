@@ -2,7 +2,7 @@
 
 = Transactions=
 
-EasyOM allows for transactions via it's withTransaction method.  This method accepts a closure and any EasyOM queries run within the closure are included in the transaction.  If any exception occurs, all DML statements are rolled back.
+EasyOM allows for transactions via it's withTransaction method.  This method accepts a closure and any EasyOM queries run within the closure are included in the transaction.  If any exception occurs, all DML statements are rolled back, otherwise they are all commited to the database.
 
 The EasyOM withTransaction method :
 {{{
