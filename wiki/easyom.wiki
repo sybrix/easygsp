@@ -15,7 +15,8 @@ EasyOM only works with Firebird and MySQL database.  However, since it's just 1 
 ==[http://code.google.com/p/easygsp/downloads/list Download EasyOM Here]==
 
 = Configuration =
-To use, add EasyOM.groovy to your project.
+To use, extract the zip, findEasyOM.groovy, add it to your project.  Either put it in a "util" package or change the package name in the groovy file.
+
 
 Use the following 2 methods to configure EasyOM.
 
