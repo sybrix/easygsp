@@ -1,0 +1,35 @@
+<html>
+        <head>
+                <title>MVC</title>
+        </head>
+
+        <body>
+
+        MVC views end with .gspx extension <br/>
+        MVC controllers are groovy scripts or classes.
+        
+                <form action="mvc.gspx" method="post">
+
+                        <table>
+                                <tr>
+                                        <td colspan="2">${message}</td>
+                                </tr>
+                                <tr>
+                                        <td>First Name</td>
+                                        <td><input type="text" name="firstName"> </td>
+                                </tr>
+                                <tr>
+                                        <td>Last Name</td>
+                                        <td><input type="text" name="lastName"></td>
+                                </tr>
+                                <tr>
+                                        <td colspan="2"><input type="submit" name="submit" value="Submit"></td>
+                                </tr>
+
+
+                        </table>
+
+                </form>
+
+        </body>
+</html>
