@@ -146,13 +146,24 @@ public class ResponseImpl implements HttpServletResponse {
                         serverPort = "";
                 }
                 String url = null;
+
                 if (s.startsWith("https://") || s.startsWith("http://")) {
                         url = s;
                 } else {
-                        if (s.startsWith("/"))
-                                url = (secure ? "https//" : "http://") + server + serverPort + scriptPath + s;
-                        else
-                                url = (secure ? "https//" : "http://") + server + serverPort + scriptPath + "/" + s;
+                        if (EasyGServer.propertiesFile.getBoolean("virtual.hosting", false)) {
+                                if (s.startsWith("/"))
+                                        url = (secure ? "https://" : "http://") + server + serverPort + s;
+                                else
+                                        url = (secure ? "https://" : "http://") + server + serverPort + "/" + s;
+
+                        } else {
+                                if (s.startsWith("/"))
+                                        url = (secure ? "https://" : "http://") + server + serverPort + scriptPath + s;
+                                else
+                                        url = (secure ? "https://" : "http://") + server + serverPort + scriptPath + "/" + s;
+                        }
+
+                        log.log(Level.FINEST, "url:" + url + ", scriptPath: " + scriptPath);
                 }
 
                 getByteArrayBuffer().write(("The URL has moved <a href=\"" + url + "\">here</a>").getBytes());
@@ -164,12 +175,13 @@ public class ResponseImpl implements HttpServletResponse {
                 flushBuffer();
                 //throw new NotImplementedException("Response.sendRedirect() is not implemented");
         }
-        protected void clearBuffer(){
+
+        protected void clearBuffer() {
                 if (byteArrayBuffer != null)
                         byteArrayBuffer.reset();
         }
 
-        protected void flushWriter(){
+        protected void flushWriter() {
                 try {
                         getWriter().flush();
                 } catch (IOException e) {

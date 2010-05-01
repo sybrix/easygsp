@@ -15,6 +15,7 @@
  */
 package com.sybrix.easygsp.http;
 
+import com.sybrix.easygsp.util.StringUtil;
 import groovy.util.ScriptException;
 import groovy.util.ResourceException;
 
@@ -48,28 +49,33 @@ public class ServletContextImpl implements ServletContext, Serializable {
         private static final Logger log = Logger.getLogger(ServletContextImpl.class.getName());
 
         private String appPath;
-        private GSE4 groovyScriptEngine;
+        private transient GSE4 groovyScriptEngine;
 
-        private TemplateServlet templateServlet;
+        private transient TemplateServlet templateServlet;
         private boolean hasWebGroovy = false;
         private String appId;
         private volatile boolean started;
-        private Set<String> attributeNames;
         private Map<String, SessionImpl> sessions;
         private String groovyFilePath;
         private File appFile;
         private String appName;
-        private AttributeMap attributeMap;
         private long webGroovyLastModified;
         private ConcurrentHashMap resourceBundles;
         private List<String> errorFiles;
-
+        //private Set attributeNames;
+        private Map appAttributes;
+        private long startTime;
+        private long lastFileCheck;
+        private long lastRestartTime;
+        private boolean hasOnScriptStart = true;
+        private boolean hasOnScriptEnd = true;
+        
         public ServletContextImpl(File dir) {
                 //this.appId = MD5.hash(dir);
                 this.appFile = dir;
                 this.appId = Hash.MD5(dir.getAbsolutePath());
-                this.appPath = dir.getAbsolutePath();
-                attributeNames = new HashSet();
+                this.appPath = StringUtil.capDriveLetter(dir.getAbsolutePath());
+
                 groovyFilePath = appPath + System.getProperty("file.separator") + "WEB-INF" + System.getProperty("file.separator") + "web.groovy";
                 File _groovyFile = new File(groovyFilePath);
 
@@ -86,8 +92,13 @@ public class ServletContextImpl implements ServletContext, Serializable {
 
                 appName = dir.getName();
 
-                attributeMap = new AttributeMap();
+
                 errorFiles = new ArrayList();
+                appAttributes = new HashMap();
+//                if (EasyGServer.propertiesFile.getBoolean("file.monitor.enabled", false)) {
+//                        FileMonitorThread.addApp(this);
+//                }
+                lastFileCheck = System.currentTimeMillis();
         }
 
         protected File getAppFile() {
@@ -114,7 +125,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 this.appName = appName;
         }
 
-        protected GSE4 getGroovyScriptEngine() {
+        public GSE4 getGroovyScriptEngine() {
                 return groovyScriptEngine;
         }
 
@@ -203,22 +214,22 @@ public class ServletContextImpl implements ServletContext, Serializable {
         }
 
         public Object getAttribute(String key) {
-                return ApplicationCache.getInstance().get(appId, key);
+                return appAttributes.get(key);
         }
 
         public Enumeration getAttributeNames() {
-                return Collections.enumeration(attributeNames);
+                return Collections.enumeration(appAttributes.keySet());
         }
 
         protected Map getAttributes() {
-                return attributeMap;
+                return appAttributes;
         }
 
         protected boolean hasCustomErrorFile(String fileName) {
                 return errorFiles.contains(fileName);
         }
 
-        boolean isStarted() {
+        public boolean isStarted() {
                 return started;
         }
 
@@ -228,6 +239,24 @@ public class ServletContextImpl implements ServletContext, Serializable {
 
         public void setResourceBundles(ConcurrentHashMap resourceBundles) {
                 this.resourceBundles = resourceBundles;
+        }
+
+        public boolean hasOnScriptStartMethod() {
+                return hasOnScriptStart;
+        }
+
+        public boolean hasOnScriptEndMethod() {
+                return hasOnScriptEnd;
+        }
+
+
+        public void setHasOnScriptStart(boolean hasOnScriptStart) {
+                this.hasOnScriptStart = hasOnScriptStart;
+        }
+
+
+        public void setHasOnScriptEnd(boolean hasOnScriptEnd) {
+                this.hasOnScriptEnd = hasOnScriptEnd;
         }
 
         public boolean webGroovyUpdated() {
@@ -260,7 +289,6 @@ public class ServletContextImpl implements ServletContext, Serializable {
                                         "\t        def onApplicationEnd(app){\n" +
                                         "\t        }\n\n" +
 
-                                        "\t        def onSessionStart(session){\n" +
                                         "\t        }\n\n" +
 
                                         "\t        def onSessionEnd(session){\n" +
@@ -279,96 +307,107 @@ public class ServletContextImpl implements ServletContext, Serializable {
         }
 
         public void setAttribute(String key, Object value) {
-                ApplicationCache.getInstance().put(appId, key, value);
-                attributeNames.add(key);
-                CacheKeyManager.setAppKey(appName, key);
+//                attributeNames.add(key);
+                appAttributes.put(key, value);
+//                ApplicationCache.getInstance().put(appId, key, value);
+//                CacheKeyManager.setAppKey(appName, key);
         }
 
         public void removeAttribute(String key) {
-                ApplicationCache.getInstance().remove(appId, key);
-                attributeNames.remove(key);
-                CacheKeyManager.removeAppKey(appName, key);
+                //ApplicationCache.getInstance().remove(appId, key);
+                //attributeNames.remove(key);
+                appAttributes.remove(key);
+                //CacheKeyManager.removeAppKey(appName, key);
         }
 
         public String getServletContextName() {
                 return null;
         }
 
-        protected synchronized void startApplication(boolean resumeState) {
+        public synchronized void startApplication() {
                 if (started)
                         return;
 
                 try {
+                        startTime = System.currentTimeMillis();
+                        lastRestartTime = System.currentTimeMillis();
 
                         loadErrorFiles();
                         AppClassLoader parentClassLoader = new AppClassLoader(new URL[]{});
+
                         parentClassLoader.setAllowThreads(EasyGServer.propertiesFile.getBoolean("allow.threads", false));
 
-                        //                                                Class gse = parentClassLoader.loadClass("groovy.util.GroovyScriptEngine");
-                        //                                                Constructor con = gse.getConstructor(String[].class, ClassLoader.class);
-                        //                                                groovyScriptEngine = (GSE3)con.newInstance(new String[]{appPath, appPath + System.getProperty("file.separator") + "WEB-INF"}, parentClassLoader);
                         groovyScriptEngine = new GSE4(new String[]{appPath, appPath + File.separator + "WEB-INF"}, parentClassLoader);
-                        Map params = new HashMap();
+
                         templateServlet = new TemplateServlet(groovyScriptEngine);
                         log.fine("invoking onApplicationStart for " + appName);
                         //groovyScriptEngine = new GroovyScriptEngine(new String[]{appPath, appPath + System.getProperty("file.separator") + "WEB-INF"});
-
-
-                        if (resumeState) {
-                                reEstablishState();
-                        }
 
                         if (hasWebGroovy) {
                                 invokeWebMethod("onApplicationStart", this);
                         }
 
-                        //                        groovyScriptEngine = new GroovyScriptEngine(new String[]{appPath});
-                        //                        Class clazz = groovyScriptEngine.loadScriptByName("WEB-INF.web");
-                        //                        GroovyObject o = (GroovyObject) clazz.newInstance();
-                        //                        o.invokeMethod("onApplicationStart", new Object[]{this});
                         started = true;
-                        //                } catch (IOException e) {
-                        //                        log.log(Level.SEVERE, "onApplicationStart failed. IOException.", e);
-                        //                } catch (ScriptException e) {
-                        //                        log.log(Level.SEVERE, "onApplicationStart failed. ScriptException.", e);
-                        //                } catch (ResourceException e) {
-                        //                        log.log(Level.SEVERE, "onApplicationStart failed. ResourceException.", e);
-                        //                } catch (IllegalAccessException e) {
-                        //                        log.log(Level.SEVERE, "onApplicationStart failed. IllegalAccessException.", e);
-                        //                } catch (InstantiationException e) {
-                        //                        log.log(Level.SEVERE, "onApplicationStart failed. InstantiationException.", e);
                         log.fine("onApplicationStart successful for " + appName);
                 } catch (Exception e) {
                         log.log(Level.FINE, "onApplicationStart failed.", e);
                 }
         }
 
-        public void reEstablishState() {
-                List<String> keys = CacheKeyManager.getAllAppKeys(appName);
-                for (String key : keys) {
-                        attributeNames.add(key);
-                }
+        public synchronized void restart() {
+                try {
+                        synchronized (groovyScriptEngine) {
+                                log.fine("restarting application...");
+                                File f = saveSessionsToDisk();
+                                sessions.clear();
+                                RequestThreadInfo.get().setApplication(this);
+                                started = false;
 
-                List<String> sessionIds = CacheKeyManager.getAllSessionIds(appName);
-                for (String sessionId : sessionIds) {
-                        recreateSession(sessionId);
+                                startApplication();
+                                GroovyObjectInputStream gois = new GroovyObjectInputStream(groovyScriptEngine.getGroovyClassLoader(), new FileInputStream(f));
+                                sessions = (Map) gois.readObject();
+                                for (SessionImpl s : sessions.values()) {
+                                        s.setApplication(this);
+                                }
+
+                                gois.close();
+                        }
+
+                } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                } catch (IOException e) {
+                        e.printStackTrace();
+                } finally {
+                        lastRestartTime = System.currentTimeMillis();
                 }
         }
 
-        protected SessionImpl recreateSession(String sessionId) {
-                SessionImpl session = new SessionImpl(this, sessionId, EasyGServer.propertiesFile.getInt("session.timeout", 15));
-                sessions.put(sessionId, session);
-                List<String> sessionKeys = CacheKeyManager.getAllSessionKeys(appName, session.getId());
-                for (String sessionKey : sessionKeys) {
-                        session.addSessionAttributeName(sessionKey);
-                        Long lastAccessedTime = (Long) SessionCache.getInstance().get(session.getId(), "lastAccessedTime");
-                        SessionCache.getInstance().remove(appName, session.getId(), "lastAccessedTime", false);
-                        if (lastAccessedTime != null)
-                                session.setLastAccessTime(lastAccessedTime);
-                }
+//        public void reEstablishState() {
+//                List<String> keys = CacheKeyManager.getAllAppKeys(appName);
+//                for (String key : keys) {
+//                        attributeNames.add(key);
+//                }
+//
+//                List<String> sessionIds = CacheKeyManager.getAllSessionIds(appName);
+//                for (String sessionId : sessionIds) {
+//                        recreateSession(sessionId);
+//                }
+//        }
 
-                return session;
-        }
+//        protected SessionImpl recreateSession(String sessionId) {
+//                SessionImpl session = new SessionImpl(this, sessionId, EasyGServer.propertiesFile.getInt("session.timeout", 15));
+//                sessions.put(sessionId, session);
+//                List<String> sessionKeys = CacheKeyManager.getAllSessionKeys(appName, session.getId());
+//                for (String sessionKey : sessionKeys) {
+//                        session.addSessionAttributeName(sessionKey);
+//                        Long lastAccessedTime = (Long) SessionCache.getInstance().get(session.getId(), "lastAccessedTime");
+//                        SessionCache.getInstance().remove(appName, session.getId(), "lastAccessedTime", false);
+//                        if (lastAccessedTime != null)
+//                                session.setLastAccessTime(lastAccessedTime);
+//                }
+//
+//                return session;
+//        }
 
 
         private void loadErrorFiles() {
@@ -385,7 +424,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
 
         }
 
-        protected void invokeWebMethod(final String method, final Object... param) throws ClassNotFoundException,
+        protected synchronized void invokeWebMethod(final String method, final Object... param) throws ClassNotFoundException,
                 InstantiationException, IllegalAccessException, ScriptException, ResourceException {
 
                 Closure closure = new Closure(groovyScriptEngine) {
@@ -417,18 +456,28 @@ public class ServletContextImpl implements ServletContext, Serializable {
         }
 
         protected void killApp() {
-                for (String attributeName : attributeNames) {
-                        ApplicationCache.getInstance().remove(appId, attributeName);
-                }
-                CacheKeyManager.removeApp(appId);
+//                for (String attributeName : attributeNames) {
+//                        ApplicationCache.getInstance().remove(appId, attributeName);
+//                }
+                appAttributes.clear();
                 Object keys[] = sessions.keySet().toArray();
                 for (Object key : keys) {
                         sessions.get(key.toString()).invalidate();
                         sessions.remove(key.toString());
                 }
         }
-        // should this hidden >
 
+        private File saveSessionsToDisk() throws IOException {
+                File f = new File(System.getProperty("easygsp.home") + File.separator + "work" + File.separator + appName + File.separator + "appName.data");
+                f.getParentFile().mkdirs();
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+                oos.writeObject(sessions);
+                oos.close();
+
+                return f;
+        }
+
+        // should this hidden >
         public void stopApplication() {
                 try {
                         if (hasWebGroovy) {
@@ -440,7 +489,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 }
         }
 
-        protected Map<String, SessionImpl> getSessions() {
+        public Map<String, SessionImpl> getSessions() {
                 return sessions;
         }
 
@@ -461,59 +510,74 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 }
         }
 
-        class AttributeMap implements Map {
+//        class AttributeMap implements Map {
+//
+//                public int size() {
+//                        return attributeNames.size();
+//                }
+//
+//                public boolean isEmpty() {
+//                        return attributeNames.isEmpty();
+//                }
+//
+//                public boolean containsKey(Object key) {
+//                        return attributeNames.contains(key);
+//                }
+//
+//                public boolean containsValue(Object value) {
+//                        return false;
+//                }
+//
+//                public Object get(Object key) {
+//                        return ApplicationCache.getInstance().get(appId, key.toString());
+//                }
+//
+//                public Object put(Object key, Object value) {
+//                        //return attributeNames.put(key.toString(), value);
+//                        ApplicationCache.getInstance().put(appId, key.toString(), value);
+//                        CacheKeyManager.setAppKey(appName, key.toString());
+//                        return null;
+//                }
+//
+//                public Object remove(Object key) {
+//                        ApplicationCache.getInstance().remove(appId, key.toString());
+//                        CacheKeyManager.removeAppKey(appName, key.toString());
+//                        return null;
+//                }
+//
+//                public void putAll(Map m) {
+//
+//                }
+//
+//                public void clear() {
+//
+//                }
+//
+//                public Set keySet() {
+//                        return new HashSet(attributeNames);
+//                }
+//
+//                public Collection values() {
+//                        return null;
+//                }
+//
+//                public Set entrySet() {
+//                        return null;
+//                }
+//        }
 
-                public int size() {
-                        return attributeNames.size();
-                }
+        public long getLastFileCheck() {
+                return lastFileCheck;
+        }
 
-                public boolean isEmpty() {
-                        return attributeNames.isEmpty();
-                }
+        public long getStartTime() {
+                return startTime;
+        }
+        public void updateLastFileCheck() {
+                lastFileCheck = System.currentTimeMillis();
+        }
 
-                public boolean containsKey(Object key) {
-                        return attributeNames.contains(key);
-                }
-
-                public boolean containsValue(Object value) {
-                        return false;
-                }
-
-                public Object get(Object key) {
-                        return ApplicationCache.getInstance().get(appId, key.toString());
-                }
-
-                public Object put(Object key, Object value) {
-                        //return attributeNames.put(key.toString(), value);
-                        ApplicationCache.getInstance().put(appId, key.toString(), value);
-                        CacheKeyManager.setAppKey(appName, key.toString());
-                        return null;
-                }
-
-                public Object remove(Object key) {
-                        ApplicationCache.getInstance().remove(appId, key.toString());
-                        CacheKeyManager.removeAppKey(appName, key.toString());
-                        return null;
-                }
-
-                public void putAll(Map m) {
-
-                }
-
-                public void clear() {
-
-                }
-
-                public Set keySet() {
-                        return new HashSet(attributeNames);
-                }
-
-                public Collection values() {
-                        return null;
-                }
-
-                public Set entrySet() {
-                        return null;
-                }
+        public long getLastRestartTime() {
+                return lastRestartTime;
         }
 }

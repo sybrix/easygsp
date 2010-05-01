@@ -22,11 +22,15 @@ import groovy.lang.*;
 import java.io.*;
 import java.util.Map;
 import java.util.List;
+import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.codehaus.groovy.control.CompilationFailedException;
 import org.codehaus.groovy.runtime.InvokerHelper;
 import com.sybrix.easygsp.http.StaticControllerMethods;
+import com.sybrix.easygsp.exception.InheritedTemplateException;
+import com.sybrix.easygsp.exception.ParentTemplateException;
 
 /**
  * http://www.antoniogoncalves.org/xwiki/bin/view/Blog/TemplateWithTemplatesInGroovy
@@ -53,8 +57,6 @@ public class IncludeTemplateEngine extends TemplateEngine {
         public IncludeTemplateEngine(GSE4 groovyScriptEngine) {
                 this(groovyScriptEngine.getGroovyClassLoader());
                 //this.groovyScriptEngine = groovyScriptEngine;
-
-
         }
 
         public IncludeTemplateEngine(boolean verbose) {
@@ -78,16 +80,23 @@ public class IncludeTemplateEngine extends TemplateEngine {
 
         public Template createTemplate(Reader reader) throws CompilationFailedException, IOException {
                 SimpleTemplate template = new SimpleTemplate();
-                String script = template.parse(reader, true);
+                SimpleTemplate.InheritedTemplateInfo inheritedTemplate = new SimpleTemplate.InheritedTemplateInfo();
                 try {
+                        String script = template.parse(reader, true, inheritedTemplate);
+
+                        if (inheritedTemplate.inherited) {
+                                Reader sr = new BufferedReader(new StringReader(inheritedTemplate.getMergedContents().toString()));
+                                script = template.parse(sr, true, new SimpleTemplate.InheritedTemplateInfo());
+                        }
+
 
                         //template.script = groovyShell.parse(script, "SimpleTemplateScript" + counter++ + ".groovy");
-
                         String uniqueScriptName = "SimpleTemplateScript" + counter++ + ".groovy";
 
                         //template.setTemplateName(uniqueScriptName.substring(0, uniqueScriptName.length() - 7));
                         if (!RequestThreadInfo.get().errorOccurred())
                                 RequestThreadInfo.get().setUniqueTemplateScriptName(uniqueScriptName);
+
                         template.script = groovyShell.parse(script, uniqueScriptName);
                         //template.script = groovyScriptEngine.createScript(script,requestedUrl, uniqueScriptName, binding);
                         StaticControllerMethods.addMethods(template.script.getClass());
@@ -98,16 +107,15 @@ public class IncludeTemplateEngine extends TemplateEngine {
                 return template;
         }
 
-        public Template createTemplate(Reader reader, String requestedUrl, String scriptFileName, Binding binding) throws CompilationFailedException, IOException {
+        public Template createTemplate(Reader reader, String requestedUrl, String scriptFileName, Binding binding) throws CompilationFailedException, IOException, InheritedTemplateException, ParentTemplateException {
                 SimpleTemplate template = new SimpleTemplate();
-                String script = template.parse(reader, true);
+                SimpleTemplate.InheritedTemplateInfo inheritedTemplate = new SimpleTemplate.InheritedTemplateInfo();
+                String script = template.parse(reader, true, inheritedTemplate);
 
-
-//                if (verbose) {
-//                        System.out.println("\n-- script source --");
-//                        System.out.print(script);
-//                        System.out.println("\n-- script end --\n");
-//                }
+                if (inheritedTemplate.inherited) {
+                        Reader sr = new BufferedReader(new StringReader(inheritedTemplate.getMergedContents().toString()));
+                        script = template.parse(sr, true, new SimpleTemplate.InheritedTemplateInfo());
+                }
 
                 try {
 
@@ -117,6 +125,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         //template.setTemplateName(uniqueScriptName.substring(0, uniqueScriptName.length() - 7));
                         if (!RequestThreadInfo.get().errorOccurred())
                                 RequestThreadInfo.get().setUniqueTemplateScriptName(uniqueScriptName);
+
                         //RequestThreadInfo.get().getRequestError().setTemplatePath(requestedUrl);
                         template.script = groovyShell.parse(script, uniqueScriptName);
                         //template.script = groovyScriptEngine.createScript(script,requestedUrl, uniqueScriptName, binding);
@@ -203,13 +212,15 @@ public class IncludeTemplateEngine extends TemplateEngine {
                  * @return the parsed text
                  * @throws IOException if something goes wrong
                  */
-                protected String parse(Reader reader, boolean rootTemplate) throws IOException {
+                protected String parse(Reader reader, boolean rootTemplate, InheritedTemplateInfo templateInfo) throws IOException, InheritedTemplateException, ParentTemplateException {
                         if (!reader.markSupported()) {
                                 reader = new BufferedReader(reader);
                         }
+
                         StringWriter sw = new StringWriter();
                         if (rootTemplate)
                                 startScript(sw);
+
                         int c;
                         while ((c = reader.read()) != -1) {
                                 if (c == '<') {
@@ -225,14 +236,14 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                                 if (c == '=') {
                                                         groovyExpression(reader, sw);
                                                 } else if (c == '@') {
-                                                        processDirective(reader, sw);
+                                                        processDirective(reader, sw, templateInfo);
 
                                                 } else {
                                                         reader.reset();
                                                         groovySection(reader, sw);
                                                 }
                                         }
-                                        continue;// at least '<' is consumed … read next chars.
+                                        continue;// at least '<' is consumed â€¦ read next chars.
                                 }
                                 if (c == '$') {
                                         reader.mark(1);
@@ -245,7 +256,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                                 sw.write("${");
                                                 processGSstring(reader, sw);
                                         }
-                                        continue;// at least '$' is consumed … read next chars.
+                                        continue;// at least '$' is consumed â€¦ read next chars.
                                 }
                                 if (c == '\"') {
                                         sw.write('\\');
@@ -266,7 +277,10 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                 }
                                 sw.write(c);
                         }
-                        endScript(sw);
+
+                        if (!templateInfo.isInherited())
+                                endScript(sw);
+
                         return sw.toString();
                 }
 
@@ -279,29 +293,319 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         sw.write("\");\n");
                 }
 
-                private void processDirective(Reader reader, StringWriter sw) throws IOException {
+                private void processDirective(Reader reader, StringWriter sw, InheritedTemplateInfo inheritedTemplateInfo) throws IOException, InheritedTemplateException, ParentTemplateException {
+                        Directive directive = parseDirective(reader);
+
+                        if (directive.isInclude()) {
+                                processIncludeDirective(sw, directive.parts[2]);
+                        } else if (directive.isInheritedTemplated()) {
+                                inheritedTemplateInfo.inherited = true;
+                                inheritedTemplateInfo.mergedContents = new StringWriter();
+                                inheritedTemplateInfo.setParentTemplate(directive.parts[2]);
+                                inheritedTemplateInfo.setChildTemplate(RequestThreadInfo.get().getParsedRequest().getRequestURI());
+
+                                String path = directive.parts[2];
+
+                                File file = null;
+                                File f = null;
+                                if (path.charAt(0) == '/') {      //root request
+                                        if (File.separator.equals("/")) {
+                                                file = new File(RequestThreadInfo.get().getApplication().getAppPath() + path);
+                                        } else {
+                                                file = new File(RequestThreadInfo.get().getApplication().getAppPath() + path.replaceAll("/", "\\\\"));
+                                        }
+                                } else {
+                                       f = new File(RequestThreadInfo.get().getParsedRequest().getRequestFilePath()).getParentFile();
+
+                                        if (File.separator.equals("/")) {
+                                                file = new File(f.getAbsolutePath() + File.separator + path.trim());
+                                        } else {
+                                                file = new File(f.getAbsolutePath() + File.separator + path.trim().replaceAll("/", "\\\\"));
+                                        }
+                                }
+
+                                RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(file.getCanonicalFile().getParent());
+                                
+                                processChildTemplate(reader, inheritedTemplateInfo.mergedContents, file.getName(), inheritedTemplateInfo);
+
+                        }
+                }
+
+                private String processChildTemplate(Reader reader, StringWriter sw, String parentFile, InheritedTemplateInfo inheritedTemplateInfo) throws InheritedTemplateException, ParentTemplateException {
+                        Map blocks = new HashMap();
+
+                        try {
+                                if (!reader.markSupported()) {
+                                        reader = new BufferedReader(reader);
+                                }
+
+                                int c;
+                                while ((c = reader.read()) != -1) {
+                                        if (c == '<') {
+                                                reader.mark(1);
+                                                c = reader.read();
+                                                if (c != '%') {
+                                                        sw.write('<');
+                                                        reader.reset();
+                                                } else {
+                                                        reader.mark(1);
+                                                        c = reader.read();
+                                                        if (c == '@') {
+                                                                Directive d = parseDirective(reader);
+                                                                if (d.isStartBlock()) {
+                                                                        parseChildBlock(reader, d.getBlockName(), blocks);
+                                                                        continue;
+                                                                }
+                                                        }
+                                                }
+                                        }
+
+                                }
+                        } catch (IOException e) {
+                                throw new InheritedTemplateException("IOException occurring processing child template. child: " + inheritedTemplateInfo.getChildTemplate() + ", parent: " + inheritedTemplateInfo.getParentTemplate() + e.getMessage(), e);
+                        }
+
+                        return mergeContentsWithParentTemplate(sw, blocks, parentFile, inheritedTemplateInfo);
+                }
+
+                public String mergeContentsWithParentTemplate(StringWriter sw, Map blocks, String parentFile, InheritedTemplateInfo inheritedTemplateInfo) throws ParentTemplateException {
+                        String fileEncoding = System.getProperty("groovy.source.encoding");
+
+                        Reader reader = null;
+                        try {
+                                File file = null;
+
+                                String templateRoot;
+                                if (parentFile.charAt(0) == '/') {      //root request
+
+                                        if (File.separator.equals("/")) {
+                                                file = new File(RequestThreadInfo.get().getApplication().getAppPath() + parentFile.trim());
+                                        } else {
+                                                file = new File(RequestThreadInfo.get().getApplication().getAppPath() + parentFile.trim().replaceAll("/", "\\\\"));
+                                        }
+                                        templateRoot = RequestThreadInfo.get().getApplication().getAppPath();
+                                } else {
+                                        if (File.separator.equals("/")) {
+                                                file = new File(RequestThreadInfo.get().getTemplateInfo().getTemplateRoot() + File.separator + parentFile.trim());
+                                        } else {
+                                                file = new File(RequestThreadInfo.get().getTemplateInfo().getTemplateRoot() + File.separator + parentFile.trim().replaceAll("/", "\\\\"));
+                                        }
+
+                                        templateRoot = RequestThreadInfo.get().getTemplateInfo().getTemplateRoot();
+                                }
+
+                                RequestThreadInfo.get().getTemplateInfo().getChildren().add(file.getAbsolutePath());
+                                reader = fileEncoding == null ? new FileReader(file) : new InputStreamReader(new FileInputStream(file), fileEncoding);
+
+
+                                if (!reader.markSupported()) {
+                                        reader = new BufferedReader(reader);
+                                }
+
+                                int c;
+                                while ((c = reader.read()) != -1) {
+                                        if (c == '<') {
+                                                reader.mark(1);
+                                                c = reader.read();
+                                                if (c != '%') {
+                                                        sw.write('<');
+                                                        reader.reset();
+                                                } else {
+                                                        reader.mark(1);
+                                                        c = reader.read();
+                                                        if (c == '@') {
+                                                                Directive d = parseDirective(reader);
+                                                                if (d.isStartBlock()) {
+                                                                        parseParentBlock(sw, reader, d.getBlockName(), d.passThruParentContent(), blocks, inheritedTemplateInfo);
+                                                                        continue;
+                                                                } else {
+                                                                        sw.write(d.directive);
+                                                                }
+
+                                                        } else {
+                                                                sw.write("<%");
+                                                                sw.write(c);
+                                                        }
+                                                }
+                                                continue;// at least '<' is consumed â€¦ read next charshttp://feedproxy.google.com/%7Er/Techcrunch/%7E3/HjXrnVivdQ4/.
+                                        }
+
+                                        sw.write(c);
+                                }
+
+                                return sw.toString();
+                        } catch (IOException e) {
+                                throw new ParentTemplateException(e);
+                        } finally {
+                                closeReader(reader);
+                        }
+                }
+
+                private void parseParentBlock(StringWriter contents, Reader reader, String blockName, boolean passThruParentContent, Map<String, String> blocks, InheritedTemplateInfo inheritedTemplateInfo) throws ParentTemplateException {
+
                         int c;
+                        try {
+                                while ((c = reader.read()) != -1) {
+                                        if (c == '<') {
+                                                reader.mark(1);
+                                                c = reader.read();
+                                                if (c != '%') {
+                                                        if (passThruParentContent)
+                                                                contents.write('<');
+
+                                                        reader.reset();
+                                                } else {
+                                                        reader.mark(1);
+                                                        c = reader.read();
+                                                        if (c == '@') {
+                                                                Directive directive = parseDirective(reader);
+
+                                                                if (directive.isEndBlock()) {
+                                                                        if (blocks.containsKey(blockName)) {
+                                                                                contents.write(blocks.get(blockName));
+                                                                        }
+                                                                        break;
+                                                                } else {
+                                                                        if (passThruParentContent)
+                                                                                contents.write(directive.directive);
+                                                                }
+
+                                                        } else {
+                                                                if (passThruParentContent) {
+                                                                        contents.write("<%");
+                                                                        contents.write(c);
+                                                                }
+                                                        }
+                                                }
+                                                continue;// at least '<' is consumed â€¦ read next chars.
+                                        }
+
+                                        if (passThruParentContent)
+                                                contents.write(c);
+                                }
+                        } catch (IOException e) {
+                                throw new ParentTemplateException("IOException occurring processing child template. child: " + inheritedTemplateInfo.getChildTemplate() + ", parent: " + inheritedTemplateInfo.getParentTemplate() + e.getMessage(), e);
+                        }
+                }
+
+
+                private void parseChildBlock(Reader reader, String blockName, Map blocks) throws IOException {
+                        int c;
+                        StringWriter contents = new StringWriter();
+                        while ((c = reader.read()) != -1) {
+                                if (c == '<') {
+                                        reader.mark(1);
+                                        c = reader.read();
+                                        if (c != '%') {
+                                                contents.write('<');
+                                                reader.reset();
+                                        } else {
+                                                reader.mark(1);
+                                                c = reader.read();
+                                                if (c == '@') {
+                                                        Directive directive = parseDirective(reader);
+                                                        if (directive.isEndBlock()) {
+                                                                blocks.put(blockName, contents.toString());
+                                                                break;
+                                                        } else {
+                                                                contents.write(directive.directive);
+                                                        }
+                                                } else {
+                                                        contents.write("<%");
+                                                        contents.write(c);
+                                                }
+                                        }
+                                        continue;
+                                }
+
+//                                if (c == '\"') {
+//                                        contents.write('\\');
+//                                }
+
+                                contents.write(c);
+                        }
+                }
+
+                private Directive parseDirective(Reader reader) throws IOException {
                         StringWriter directiveWriter = new StringWriter();
+                        int c = -1;
+                        directiveWriter.write("<%@");
 
                         while ((c = reader.read()) != -1) {
-
-                                if (c == '>')
-                                        break;
-
-                                if (c != '\n' && c != '\r') {
+                                if (c == '%') {
+                                        c = reader.read();
+                                        if (c != '>') {
+                                                directiveWriter.write('%');
+                                                directiveWriter.write(c);
+                                        } else {
+                                                directiveWriter.write("%>");
+                                                break;
+                                        }
+                                } else {
                                         directiveWriter.write(c);
                                 }
                         }
 
-                        String directive = directiveWriter.toString().trim();
-                        int i = directive.indexOf(' ');
+                        String parts[] = parseSections(directiveWriter.toString().trim());
+                        Directive d = new Directive(directiveWriter.toString(), parts, parts[1]);
 
-                        if (directive.substring(0, i).equalsIgnoreCase("include")) {
-                                processIncludeDirective(sw, directive.split("'")[1]);
-                        }
+                        return d;
                 }
 
-                private void processIncludeDirective(StringWriter sw, String path) throws IncludeDirectiveException {
+                private String trimQuotes(String s) {
+                        String val = s.trim();
+
+                        if (val.charAt(0) == '\'' && val.charAt(val.length()-1) == '\''){
+                              return val.substring(1,val.charAt(val.length()-1));
+                        } else if (val.charAt(0) == '\"' && val.charAt(val.length()-1) == '\"'){
+                              return val.substring(1,val.charAt(val.length()-1));
+                        }
+
+                        return s;
+                }
+
+                private String[] parseSections(String s) {
+                        List<String> sections = new ArrayList();
+                        boolean singleQuoteStart = false;
+                        boolean doubleQuoteStart = false;
+                        StringBuffer sb = new StringBuffer();
+                        for (int i = 0; i < s.length(); i++) {
+                                if (s.charAt(i) == '\"' && singleQuoteStart == false && doubleQuoteStart == false) {
+                                        doubleQuoteStart = true;
+                                        continue;
+                                } else if (s.charAt(i) == '\'' && singleQuoteStart == false && doubleQuoteStart == true) {
+                                        doubleQuoteStart = false;
+                                        continue;
+                                }
+
+                                if (s.charAt(i) == '\'' && singleQuoteStart == false && doubleQuoteStart == false) {
+                                        singleQuoteStart = true;
+                                        continue;
+                                } else if (s.charAt(i) == '\'' && singleQuoteStart == true && doubleQuoteStart == false) {
+                                        singleQuoteStart = false;
+                                        continue;
+                                }
+
+                                if (singleQuoteStart || doubleQuoteStart) {
+                                        sb.append(s.charAt(i));
+                                        continue;
+                                }
+
+                                if (s.charAt(i) != ' ') {
+                                        sb.append(s.charAt(i));
+                                } else {
+                                        sections.add(sb.toString());
+                                        sb.setLength(0);
+                                }
+                        }
+
+                        String[] sc = new String[sections.size()];
+                        sections.toArray(sc);
+
+                        return sc;
+                }
+
+                private void processIncludeDirective(StringWriter sw, String path) throws IncludeDirectiveException, InheritedTemplateException, ParentTemplateException {
                         try {
                                 String templateRoot;
                                 File f = null;
@@ -323,16 +627,18 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                         templateRoot = RequestThreadInfo.get().getTemplateInfo().getTemplateRoot();
                                 }
 
-                                List entry = RequestThreadInfo.get().getTemplateInfo().getCache();
-                                entry.add(f.getAbsolutePath());
+                                RequestThreadInfo.get().getTemplateInfo().getChildren().add(f.getAbsolutePath());
 
-                                log.fine("including file : " + f.getAbsolutePath() + ",  into parent file: " + f.getParentFile().getCanonicalPath());
+//                                List entry = RequestThreadInfo.get().getTemplateInfo().getCache();
+//                                entry.add(f.getAbsolutePath());
+
+                                //log.fine("including file : " + f.getAbsolutePath() + ",  into parent file: " + f.getParentFile().getCanonicalPath());
 
                                 SimpleTemplate template = new SimpleTemplate();
                                 String script = null;
 
                                 RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(f.getParentFile().getCanonicalPath());
-                                script = template.parse(new FileReader(f), false);
+                                script = template.parse(new FileReader(f), false, new InheritedTemplateInfo());
                                 RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(templateRoot);
 
                                 sw.write(script);
@@ -353,6 +659,18 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                         break;
                                 }
                         }
+                }
+
+                private void closeReader(Reader reader) {
+                        if (reader != null) {
+                                try {
+                                        reader.close();
+                                } catch (IOException ignore) {
+                                        // e.printStackTrace();
+                                }
+                        }
+
+
                 }
 
                 /**
@@ -409,6 +727,97 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         }
                         sw.write(";\nrout.print(\"");
                 }
+
+                public static class InheritedTemplateInfo {
+                        boolean inherited = false;
+                        StringWriter mergedContents;
+                        String parentTemplate;
+                        String childTemplate;
+
+                        public InheritedTemplateInfo() {
+
+                        }
+
+                        public InheritedTemplateInfo(boolean inherited, StringWriter mergedContents) {
+                                this.inherited = inherited;
+                                this.mergedContents = mergedContents;
+                        }
+
+                        public boolean isInherited() {
+                                return inherited;
+                        }
+
+                        public void setInherited(boolean inherited) {
+                                this.inherited = inherited;
+                        }
+
+                        public StringWriter getMergedContents() {
+                                return mergedContents;
+                        }
+
+                        public void setMergedContents(StringWriter mergedContents) {
+                                this.mergedContents = mergedContents;
+                        }
+
+                        public String getParentTemplate() {
+                                return parentTemplate;
+                        }
+                        public void setParentTemplate(String parentTemplate) {
+                                this.parentTemplate = parentTemplate;
+                        }
+                        public String getChildTemplate() {
+                                return childTemplate;
+                        }
+                        public void setChildTemplate(String childTemplate) {
+                                this.childTemplate = childTemplate;
+                        }
+                }
+
+                private class Directive {
+                        String directive;
+                        String parts[];
+                        String name;
+
+                        public Directive(String directive, String[] parts, String name) {
+                                this.directive = directive;
+                                this.parts = parts;
+                                this.name = name;
+                        }
+
+                        public boolean isStartBlock() {
+                                return name.equalsIgnoreCase("block");
+                        }
+
+                        public boolean isEndBlock() {
+                                return name.equalsIgnoreCase("endblock");
+                        }
+
+                        public boolean isInclude() {
+                                return name.equalsIgnoreCase("include");
+                        }
+
+                        public boolean isInheritedTemplated() {
+                                return name.equalsIgnoreCase("extends");
+                        }
+
+                        public String getBlockName() {
+                                if (parts.length > 2)
+                                        return parts[2];
+                                else
+                                        return "";
+
+                        }
+
+                        public boolean passThruParentContent() {
+                                if (parts.length > 3)
+                                        return parts[3].equalsIgnoreCase("add");
+                                else
+                                        return false;
+
+                        }
+
+                }
         }
+
 
 }

@@ -5,17 +5,12 @@ import com.sybrix.easygsp.exception.ApplicationNotFoundException;
 import com.sybrix.easygsp.exception.TemplateNotFoundException;
 
 import java.io.*;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.HashMap;
-import java.util.ResourceBundle;
-import java.util.MissingResourceException;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+
 import static java.util.logging.Level.*;
+
 import java.net.Socket;
 
 import groovy.util.ResourceException;
@@ -84,7 +79,7 @@ public class RequestThread extends Thread {
         public void run() {
 
                 long startTime = System.currentTimeMillis();
-
+                SessionImpl session = null;
 
                 try {
                         // bufferize the io stream
@@ -112,20 +107,18 @@ public class RequestThread extends Thread {
 
                         if (!application.isStarted()) {
                                 log.log(FINE, "starting application: " + application.getAppPath());
-                                application.startApplication(true);
-
+                                application.startApplication();
+                                EasyGServer.sendToChannel(new ClusterMessage(application.getAppName(), application.getAppPath(), "", "appStart", new Object[]{}));
                                 // did someone modify the web.groovy file ?
+
                         } else if (application.webGroovyUpdated()) {
                                 log.log(FINE, "restarting application: " + application.getAppPath());
-                                boolean resumeState = true;
-                                if (application.getAttribute("killStateOnRestart") == null || ((Boolean) application.getAttribute("killStateOnRestart"))) {
-                                        application.killApp();
-                                        resumeState = false;
-                                }
 
                                 application = EasyGServer.loadApplicationFromFileSystem(applications, parsedRequest.getAppName(), parsedRequest.getAppPath());
                                 RequestThreadInfo.get().setApplication(application);
-                                application.startApplication(resumeState);
+                                application.startApplication();
+                                EasyGServer.sendToChannel(new ClusterMessage(application.getAppName(), application.getAppPath(), "", "appStart", new Object[]{}));
+
                         }
 
                         RequestImpl request = new RequestImpl(inputStream, headers, application, response);
@@ -134,13 +127,16 @@ public class RequestThread extends Thread {
                         // when false, request will auto forward to view
                         request.setAttribute("_explicitForward", false);
 
-                        SessionImpl session = (SessionImpl) request.getSession(false);
-
-
-                        if (session != null)
-                                session.updateLastAccessedTime();
+                        session = (SessionImpl) request.getSession(false);
 
                         binding = new CustomServletBinding(request, response, application, headers);
+
+                        if (session != null){
+                                session.updateLastAccessedTime();
+                                expireFlashMessages(session);
+                                binding.setVariable("flash", session.getFlash());
+                        }
+
                         request.setServletBinding(binding);
                         RequestThreadInfo.get().setBinding(binding);
 
@@ -181,12 +177,21 @@ public class RequestThread extends Thread {
                                 request.setAttribute("isMultipart", true);
                         }
 
+//                        if (application.hasOnScriptStartMethod()) {
+//                                try {
+//                                        application.invokeWebMethod("onScriptStart", request, response);
+//                                } catch (Exception e) {
+//                                        application.setHasOnScriptStart(false);
+//                                        e.printStackTrace();
+//                                }
+//                        }
                         //process the request
                         if (parsedRequest.getRequestURI().endsWith(templateExtension)) {
                                 processTemplateRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         } else {
                                 processScriptRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         }
+
 
                 } catch (ApplicationNotFoundException e) {
                         sendError(404, scriptPath, application.getGroovyScriptEngine(), binding, e);
@@ -209,7 +214,23 @@ public class RequestThread extends Thread {
 
                 }
 
+                if (session != null)
+                        EasyGServer.sendToChannel(new ClusterMessage(application.getAppName(), application.getAppPath(), session.getId(), "session", new Object[]{session}));
+
                 log.fine("took " + (System.currentTimeMillis() - startTime) + " ms");
+        }
+
+        private void expireFlashMessages(SessionImpl session) {
+                Map<String, FlashMessage> flash = session.getFlash();
+                Iterator i = flash.keySet().iterator();
+                while(i.hasNext()){
+                       String key = (String)i.next();
+                       FlashMessage msg = flash.get(key);
+                        if (msg.isExpired())
+                                flash.remove(key);
+                        else
+                                msg.setExpired(true);
+                }
         }
 
         private void determineBundle(Map headers) {

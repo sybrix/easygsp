@@ -17,6 +17,7 @@ package com.sybrix.easygsp.server;
 
 import com.sybrix.easygsp.http.ServletContextImpl;
 import com.sybrix.easygsp.http.RequestThreadInfo;
+import com.sybrix.easygsp.util.StringUtil;
 
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class EasyGSecurityManager extends SecurityManager {
         }
 
         public void checkDelete(String file) {
-                super.checkDelete(file);
+               doCheckReadOrWrite(file);
         }
 
         public void checkRead(FileDescriptor fd) {
@@ -60,9 +61,9 @@ public class EasyGSecurityManager extends SecurityManager {
                         try {
                                 boolean b = false;
                                 if (file.indexOf("..") > -1)
-                                        b = new java.io.File(file).getCanonicalPath().startsWith(path.getAppPath()); // this is slow
+                                        b = new java.io.File(StringUtil.capDriveLetter(file)).getCanonicalPath().startsWith(path.getAppPath()); // this is slow
                                 else
-                                        b = file.startsWith(path.getAppPath());
+                                        b = StringUtil.capDriveLetter(file).startsWith(path.getAppPath());
 
                                 if (b) {
                                         return;

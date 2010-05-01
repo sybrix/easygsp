@@ -89,7 +89,7 @@ public class AppClassLoader extends URLClassLoader {
         }
 
         public Class<?> loadClass(String name) throws ClassNotFoundException {
-                if (name.equals("java.lang.Thread") || name.startsWith("com.sybrix.easygsp") || name.startsWith("org.apache.jcs"))
+                if (name.equals("java.lang.Thread") || name.startsWith("com.sybrix.easygsp") )
                         throw new ClassNotFoundException(name);
                 return super.loadClass(name);
         }
@@ -105,10 +105,10 @@ public class AppClassLoader extends URLClassLoader {
         protected synchronized Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
                 ServletContextImpl path = RequestThreadInfo.get().getApplication();
                 if (path != null) {
-                        if ((name.equals("java.lang.Thread") && allowThreads == false)
-                                || name.startsWith("com.sybrix.easygsp") || name.startsWith("org.apache.jcs")) {
-                                throw new ClassNotFoundException(name);
-                        }
+//                        if ((name.equals("java.lang.Thread") && allowThreads == false)
+//                                || name.startsWith("com.sybrix.easygsp")) {
+//                                throw new ClassNotFoundException(name);
+//                        }
                 }
                 return super.loadClass(name, resolve);
         }
