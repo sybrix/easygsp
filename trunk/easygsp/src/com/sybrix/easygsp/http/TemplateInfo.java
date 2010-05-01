@@ -2,6 +2,8 @@ package com.sybrix.easygsp.http;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * TemplateInfo <br/>
@@ -10,16 +12,16 @@ import java.util.ArrayList;
  */
 public class TemplateInfo {
         private String templateRoot;
-        private List cache;
         private Boolean sourceNewer = false;
+        TemplateServlet.TemplateCacheEntry cachEntry;
+        private Set children;
 
         public TemplateInfo() {
-                cache = new ArrayList();
+                children = new HashSet();
         }
-
-        public TemplateInfo(String templateRoot, List cache) {
+        public TemplateInfo(String templateRoot) {
+                this();
                 this.templateRoot = templateRoot;
-                this.cache = cache;
         }
 
         public String getTemplateRoot() {
@@ -30,19 +32,18 @@ public class TemplateInfo {
                 this.templateRoot = templateRoot;
         }
 
-        public List getCache() {
-                return cache;
-        }
-
-        public void setCache(List cache) {
-                this.cache = cache;
-        }
-
         public Boolean isSourceNewer() {
                 return sourceNewer;
         }
 
         public void setSourceNewer(Boolean sourceNewer) {
                 this.sourceNewer = sourceNewer;
+        }
+        
+        public Set getChildren() {
+                return children;
+        }
+        public void setChildren(Set children) {
+                this.children = children;
         }
 }

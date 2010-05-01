@@ -5,10 +5,10 @@
         if (!session)
                 request.getSession(true)
 
-       def s = app.appPath + "\\..\\t" + session.uniqueId
+       def s = getAppName.appPath + "\\..\\t" + session.uniqueId
        println s
        
-        def f = new File(app.appPath + "\\..\\t" + session.uniqueId).mkdirs()
+        def f = new File(getAppName.appPath + "\\..\\t" + session.uniqueId).mkdirs()
         def d = new File("c:\\projects\\easygsp\\easygsp\\webapps\\app1\\time.gsp")
 
         d.write("hello")

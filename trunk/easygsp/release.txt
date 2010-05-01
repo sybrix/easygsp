@@ -9,12 +9,10 @@
 - Reverted back to singe GroovyScriptEngine for scripts and templates
 
 
-
 0.2  11/11/2009
 - Changed implicit cout() method to console()
 - Fix bug in log() method
 - added implicit methods to event calls in web.groovy
-
 
 
 0.2.1  11/23/2009
@@ -47,3 +45,12 @@
 - added ConsoleServer for socket IDE support
 - added format methods to StaticControllerMethods
 - webapp  classloader excludes jcs package
+
+0.4   4/27/10
+- Clustering support via JGroups
+- EasyOM Transactions support
+- email support via implicit sendEmail method
+- Class reloading via JNotify file monitoring
+- added bind(Map values)
+- added Template Inheritance
+

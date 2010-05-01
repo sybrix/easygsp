@@ -42,7 +42,13 @@ public class Shutdown implements Runnable {
                         }
                 }
 
-                PropertiesFile propertiesFile = new PropertiesFile(APP_DIR + File.separator + "conf" + File.separator + "server.properties");
+                PropertiesFile propertiesFile = null;//new PropertiesFile(APP_DIR + File.separator + "conf" + File.separator + "server.properties");
+                String propFile = System.getProperty("easygsp.propFile");
+                if (propFile == null)
+                        propertiesFile = new PropertiesFile(APP_DIR + File.separator + "conf" + File.separator + "server.properties");
+                else
+                        propertiesFile = new PropertiesFile(propFile);
+
                 try {
                         Socket s = new Socket("localhost", propertiesFile.getInt("shutdown.port", 4446));
                         s.getOutputStream().write("1".getBytes());

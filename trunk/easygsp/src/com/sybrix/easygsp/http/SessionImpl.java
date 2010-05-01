@@ -16,20 +16,13 @@
 package com.sybrix.easygsp.http;
 
 import com.sybrix.easygsp.exception.NotImplementedException;
+import com.sybrix.easygsp.server.EasyGServer;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 import javax.servlet.ServletContext;
 import java.io.Serializable;
-import java.util.Enumeration;
-import java.util.Random;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 import java.util.logging.Logger;
 
 import static java.util.logging.Level.SEVERE;
@@ -44,17 +37,18 @@ import groovy.lang.GroovyObject;
  */
 public class SessionImpl implements HttpSession, Serializable {
 
-        private transient static final Logger log = Logger.getLogger(SessionImpl.class.getName());
+        private static final long serialVersionUID = 1L;
 
-        private transient static Random random = new Random(System.currentTimeMillis());
+        private static final Logger log = Logger.getLogger(SessionImpl.class.getName());
+        private static Random random = new Random(System.currentTimeMillis());
+
         private String sessionId;
         private Long creationTime;
         private Long lastAccessedTime;
         private transient ServletContextImpl application;
         private Integer maxInactiveInterval;
-
-        private transient Set<String> attributeNames;
-        private transient SessionMap sessionMap;
+        private Map sessionAttributes;
+        private Map<String, FlashMessage> flash;
 
         public SessionImpl(ServletContextImpl application, int maxInactiveInterval) {
                 this.application = application;
@@ -63,24 +57,21 @@ public class SessionImpl implements HttpSession, Serializable {
                 sessionId = createSessionId();
                 creationTime = System.currentTimeMillis();
                 lastAccessedTime = System.currentTimeMillis();
-                attributeNames = new HashSet();
-                sessionMap = new SessionMap();
+                sessionAttributes = new HashMap();
+                flash = new FlashMap();
         }
 
-        public SessionImpl(ServletContextImpl application, String sessionId,  int maxInactiveInterval) {
+        public SessionImpl(ServletContextImpl application, String sessionId, int maxInactiveInterval) {
                 this.application = application;
                 this.maxInactiveInterval = maxInactiveInterval;
 
                 this.sessionId = sessionId;
                 creationTime = System.currentTimeMillis();
                 lastAccessedTime = System.currentTimeMillis();
-                attributeNames = new HashSet();
-                sessionMap = new SessionMap();
+                sessionAttributes = new HashMap();
+                flash = new FlashMap();
         }
 
-        protected final void addSessionAttributeName(String attributeName){
-                attributeNames.add(attributeName);
-        }
 
         private String createSessionId() {
                 StringBuffer sb = new StringBuffer();
@@ -107,13 +98,19 @@ public class SessionImpl implements HttpSession, Serializable {
                 return sessionId;
         }
 
-        public void setLastAccessTime(Long lastAccessTime){
-                this.lastAccessedTime = lastAccessTime;
+        public void setLastAccessTime(Long lastAccessTime) {
+                if (lastAccessTime > this.lastAccessedTime)
+                        this.lastAccessedTime = lastAccessTime;
+
+
         }
 
         public void updateLastAccessedTime() {
                 lastAccessedTime = System.currentTimeMillis();
-                SessionCache.getInstance().put(application.getAppName(), getId(), "lastAccessTime", lastAccessedTime);
+
+//                SessionMessage sessionMessage = new SessionMessage(application.getAppName(), application.getAppPath(), sessionId, "setLastAccessTime", new Object[]{lastAccessedTime});
+//                EasyGServer.sendToChannel(sessionMessage);
+
         }
 
         public long getLastAccessedTime() {
@@ -141,7 +138,7 @@ public class SessionImpl implements HttpSession, Serializable {
         }
 
         public Object getAttribute(String s) {
-                return SessionCache.getInstance().get(sessionId, s);
+                return sessionAttributes.get(s);
         }
 
         public Object getValue(String s) {
@@ -149,7 +146,7 @@ public class SessionImpl implements HttpSession, Serializable {
         }
 
         public Enumeration getAttributeNames() {
-                return Collections.enumeration(attributeNames);
+                return Collections.enumeration(sessionAttributes.keySet());
         }
 
         public String[] getValueNames() {
@@ -157,9 +154,14 @@ public class SessionImpl implements HttpSession, Serializable {
         }
 
         public void setAttribute(String key, Object value) {
+                sessionAttributes.put(key, value);
 
-                SessionCache.getInstance().put(application.getAppName(), sessionId, key, value);
-                attributeNames.add(key);
+//                SessionMessage sessionMessage = new SessionMessage(application.getAppName(), application.getAppPath(), sessionId, "remote_setAttribute", new Object[]{key, value});
+//                EasyGServer.sendToChannel(sessionMessage);
+        }
+
+        public void remote_setAttribute(String key, Object value) {
+                sessionAttributes.put(key, value);
         }
 
         public void putValue(String s, Object o) {
@@ -167,11 +169,12 @@ public class SessionImpl implements HttpSession, Serializable {
         }
 
         public void removeAttribute(String key) {
-                SessionCache.getInstance().remove(application.getAppName(), sessionId, key);
-                attributeNames.remove(key);
+                sessionAttributes.remove(key);
+//                SessionCache.getInstance().remove(application.getAppName(), sessionId, key);
+//                attributeNames.remove(key);
         }
 
-        protected final void setApplication(ServletContextImpl application) {
+        public final void setApplication(ServletContextImpl application) {
                 this.application = application;
         }
 
@@ -180,13 +183,15 @@ public class SessionImpl implements HttpSession, Serializable {
         }
 
         public synchronized void invalidate() {
-                for (String attribute : attributeNames) {
-                        SessionCache.getInstance().remove(application.getAppName(), sessionId, attribute);
+                sessionAttributes.clear();
+                application.getSessions().remove(sessionId);
 
-                }
-                SessionCache.getInstance().remove(application.getAppName(), sessionId, "lastAccessedTime", false);
-                CacheKeyManager.removeSession(application.getAppName(),sessionId);
-                attributeNames.clear();
+                ClusterMessage sessionMessage = new ClusterMessage(application.getAppName(), application.getAppPath(), sessionId, "remote_invalidate", new Object[]{});
+                EasyGServer.sendToChannel(sessionMessage);
+        }
+
+        public synchronized void remote_invalidate() {
+                sessionAttributes.clear();
                 application.getSessions().remove(sessionId);
         }
 
@@ -194,9 +199,9 @@ public class SessionImpl implements HttpSession, Serializable {
                 return false;
         }
 
-        public SessionMap getSessionMap() {
-                return sessionMap;
-        }
+//        public SessionMap getSessionMap() {
+//                return sessionMap;
+//        }
 
         public void invokeSessionStartScript() {
                 try {
@@ -217,7 +222,15 @@ public class SessionImpl implements HttpSession, Serializable {
                 }
         }
 
-//        public void invokeSessionStopScript() {
+        public Map<String, FlashMessage> getFlash() {
+                return flash;
+        }
+
+        public void setFlash(Map<String, FlashMessage> flash) {
+                this.flash = flash;
+        }
+
+        //        public void invokeSessionStopScript() {
 //                        try {
 //                                if (application.groovyWebFileExists()) {
 //                                        GSE3 gse = application.getGroovyScriptEngine();
@@ -239,56 +252,56 @@ public class SessionImpl implements HttpSession, Serializable {
 //
 //        }
 
-        class SessionMap implements Map {
-                public int size() {
-                        return attributeNames.size();
-                }
-
-                public boolean isEmpty() {
-                        return attributeNames.isEmpty();
-                }
-
-                public boolean containsKey(Object key) {
-                        return attributeNames.contains(key);
-                }
-
-                public boolean containsValue(Object value) {
-                        return false;
-                }
-
-                public Object get(Object key) {
-                        return SessionCache.getInstance().get(sessionId, key.toString());
-                }
-
-                public Object put(Object key, Object value) {
-                        //return attributeNames.put(key.toString(), value);
-                        SessionCache.getInstance().put(application.getAppName(), sessionId, key.toString(), value);
-                        return null;
-                }
-
-                public Object remove(Object key) {
-                        SessionCache.getInstance().remove(application.getAppName(), sessionId, key.toString());
-                        return null;
-                }
-
-                public void putAll(Map m) {
-
-                }
-
-                public void clear() {
-
-                }
-
-                public Set keySet() {
-                        return new HashSet(attributeNames);
-                }
-
-                public Collection values() {
-                        return null;
-                }
-
-                public Set entrySet() {
-                        return null;
-                }
-        }
+//        class SessionMap implements Map {
+//                public int size() {
+//                        return attributeNames.size();
+//                }
+//
+//                public boolean isEmpty() {
+//                        return attributeNames.isEmpty();
+//                }
+//
+//                public boolean containsKey(Object key) {
+//                        return attributeNames.contains(key);
+//                }
+//
+//                public boolean containsValue(Object value) {
+//                        return false;
+//                }
+//
+//                public Object get(Object key) {
+//                        return SessionCache.getInstance().get(sessionId, key.toString());
+//                }
+//
+//                public Object put(Object key, Object value) {
+//                        //return attributeNames.put(key.toString(), value);
+//                        SessionCache.getInstance().put(application.getAppName(), sessionId, key.toString(), value);
+//                        return null;
+//                }
+//
+//                public Object remove(Object key) {
+//                        SessionCache.getInstance().remove(application.getAppName(), sessionId, key.toString());
+//                        return null;
+//                }
+//
+//                public void putAll(Map m) {
+//
+//                }
+//
+//                public void clear() {
+//
+//                }
+//
+//                public Set keySet() {
+//                        return new HashSet(attributeNames);
+//                }
+//
+//                public Collection values() {
+//                        return null;
+//                }
+//
+//                public Set entrySet() {
+//                        return null;
+//                }
+//        }
 }

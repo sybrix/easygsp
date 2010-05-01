@@ -154,7 +154,7 @@ public class ThreadMonitor {
                                 }
                         }
 
-                        log.fine("ThreadMonitor stopped.");
+                        log.fine("ThreadMonitor stopped");
                 }
 
                 public void add(RequestThread t) {

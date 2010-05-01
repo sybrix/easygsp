@@ -47,6 +47,7 @@ import org.codehaus.groovy.runtime.DefaultGroovyMethods;
 import org.codehaus.groovy.tools.gse.DependencyTracker;
 import org.codehaus.groovy.tools.gse.StringSetMap;
 import groovy.util.*;
+import com.sybrix.easygsp.server.EasyGServer;
 
 /**
  * Specific script engine able to reload modified scripts as well as dealing properly
@@ -96,7 +97,7 @@ public class GSE4 implements ResourceConnector {
 
         //TODO: more finals?
 
-        private static class ScriptCacheEntry {
+        public static class ScriptCacheEntry implements Serializable {
                 final private Class scriptClass;
                 final private long lastModified;
                 final private Set<String> dependencies;
@@ -108,7 +109,12 @@ public class GSE4 implements ResourceConnector {
                 }
         }
 
+        public void addScriptCacheEntry(String entryName, ScriptCacheEntry scriptCacheEntry){
+                scriptCache.put(entryName, scriptCacheEntry);
+        }
+
         private class ScriptClassLoader extends GroovyClassLoader {
+
                 public ScriptClassLoader(GroovyClassLoader loader) {
                         super(loader);
                         setResLoader();
@@ -191,6 +197,9 @@ public class GSE4 implements ResourceConnector {
                                 Set<String> value = convertToPaths(entry.getValue());
                                 ScriptCacheEntry cacheEntry = new ScriptCacheEntry(clazz, time, value);
                                 scriptCache.put(entryName, cacheEntry);
+
+//                                EasyGServer.sendToChannel(new ClusterMessage(RequestThreadInfo.get().getApplication().getAppName(),
+//                                        RequestThreadInfo.get().getApplication().getAppPath(),"","scriptCache", new Object[]{entryName, cacheEntry}));
 
                                 StaticControllerMethods.addMethods(clazz);
                         }
@@ -408,22 +417,34 @@ public class GSE4 implements ResourceConnector {
          * @throws ScriptException   if there is a problem parsing the script
          */
         public Class loadScriptByName(String scriptName) throws ResourceException, ScriptException {
+
                 URLConnection conn = rc.getResourceConnection(scriptName);
                 String path = conn.getURL().getPath();
                 ScriptCacheEntry entry = scriptCache.get(path);
                 Class clazz = null;
-                if (entry != null) clazz = entry.scriptClass;
+                if (entry != null) {
+                        clazz = entry.scriptClass;
+                }
 
                 if (isSourceNewer(entry)) {
                         RequestThreadInfo.get().setCodeBehindChanged(true);
                         try {
                                 String encoding = conn.getContentEncoding() != null ? conn.getContentEncoding() : "UTF-8";
                                 clazz = groovyLoader.parseClass(DefaultGroovyMethods.getText(conn.getInputStream(), encoding), conn.getURL().getPath());
+
+                                //saveToDisk(new File(path), RequestThreadInfo.get().getApplication().getAppPath(), clazz);
+
+                                //EasyGServer.addScriptToState(RequestThreadInfo.get().getApplication().getAppName(), RequestThreadInfo.get().getApplication().getAppPath(), scriptName);
                         } catch (IOException e) {
                                 throw new ResourceException(e);
                         }
                 }
+
                 return clazz;
+        }
+
+        public void saveToDisk(File scriptFile, String applicationPath, Class cls){
+                //ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream())
         }
 
         public Class loadScriptByName(String script, String requestedUrl, String scriptName, String appPath) throws ResourceException, ScriptException {
@@ -437,31 +458,20 @@ public class GSE4 implements ResourceConnector {
                 } catch (UnsupportedEncodingException e) {
                         throw new ResourceException(e);
                 }
-//                URLConnection conn = null;
-//                try {
-//                        if (File.separatorChar == '\\'){
-//                                conn = new URL("file://" + appPath.replace("\\\\","/") + "/" + requestedUrl).openConnection();
-//                        } else {
-//                                conn = new URL(appPath + File.separator + requestedUrl).openConnection();
-//                        }
-//                } catch (IOException e) {
-//                        e.printStackTrace();
-//                }
 
                 Class clazz = null;
                 if (entry != null) clazz = entry.scriptClass;
 
                 if (isSourceNewer(entry)) {
                         try {
-                                 RequestThreadInfo.get().setCodeBehindChanged(true);
+                                RequestThreadInfo.get().setCodeBehindChanged(true);
                                 System.out.println("GSE4 recompile");
                                 //clazz = groovyLoader.parseClass(gcs);
                                 //clazz = groovyLoader.parseClass(new GroovyCodeSource(scriptInputStream, scriptName, "/groovy/script"));
 
-
-                                //String encoding = "UTF-8";
-                                encoding = "windows-1252";
+                                encoding = conn.getContentEncoding() != null ? conn.getContentEncoding() : "UTF-8";
                                 clazz = groovyLoader.parseClass(DefaultGroovyMethods.getText(scriptInputStream, encoding), RequestThreadInfo.get().getParsedRequest().getRequestFilePath());
+                                //EasyGServer.addScriptToState(RequestThreadInfo.get().getApplication().getAppName(), requestedUrl);
                         } catch (Exception e) {
                                 throw new ResourceException(e);
                         }
@@ -520,6 +530,11 @@ public class GSE4 implements ResourceConnector {
                 return createScript(scriptName, binding).run();
         }
 
+        public Object run(Script script, Binding binding) throws ResourceException, ScriptException {
+                script.setBinding(binding);
+                return script.run();
+
+        }
         /**
          * Creates a Script with a given scriptName and binding.
          *
@@ -555,6 +570,9 @@ public class GSE4 implements ResourceConnector {
                         if (entryChangeTime > lastMod) {
                                 ScriptCacheEntry newEntry = new ScriptCacheEntry(depEntry.scriptClass, time, depEntry.dependencies);
                                 scriptCache.put(scriptName, newEntry);
+                            //    EasyGServer.sendToChannel(new ClusterMessage(RequestThreadInfo.get().getApplication().getAppName(),
+                            //            RequestThreadInfo.get().getApplication().getAppPath(),"","scriptCache", new Object[]{scriptName, newEntry}));
+
                                 continue;
                         }
                         RequestThreadInfo.get().setCodeBehindChanged(true);

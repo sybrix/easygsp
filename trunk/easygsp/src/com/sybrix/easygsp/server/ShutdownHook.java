@@ -1,7 +1,5 @@
 package com.sybrix.easygsp.server;
 
-import java.io.IOException;
-
 /**
  * ShutdownHookThread <br/>
  *

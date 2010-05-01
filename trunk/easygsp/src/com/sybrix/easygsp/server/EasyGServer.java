@@ -19,10 +19,9 @@ package com.sybrix.easygsp.server;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.logging.Handler;
@@ -30,24 +29,32 @@ import java.util.logging.FileHandler;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ByteArrayInputStream;
 
+import com.sybrix.easygsp.email.EmailService;
 import com.sybrix.easygsp.http.*;
+import com.sybrix.easygsp.logging.LoggerThread;
 import com.sybrix.easygsp.util.PropertiesFile;
 import com.sybrix.easygsp.util.CustomLogFormatter;
 import com.sybrix.easygsp.exception.ApplicationNotFoundException;
-import org.apache.jcs.JCS;
-import org.apache.jcs.engine.control.CompositeCacheManager;
-import org.apache.jcs.access.exception.CacheException;
+import org.jgroups.*;
+import org.jgroups.conf.ClassConfigurator;
+import org.jgroups.util.Util;
+import groovy.util.ScriptException;
+import groovy.util.ResourceException;
 
 
-public class EasyGServer {
+public class EasyGServer extends ReceiverAdapter {
         private static final Logger log = Logger.getLogger(EasyGServer.class.getName());
+        public static JChannel jgroupsChannel;
 
         private ServerSocket serverSocket;
         //private ExecutorService executorService;
         private boolean isRunning;
 
         private ConcurrentHashMap<String, ServletContextImpl> applications = new ConcurrentHashMap();
+
+        public static Map<AppId, Set<String>> loadedScripts = new ConcurrentHashMap();
         public static PropertiesFile propertiesFile;
         public static boolean isWindows;
 
@@ -59,6 +66,8 @@ public class EasyGServer {
         private SessionMonitor sessionMonitor;
         private String groovyVersion;
         private ConsoleServer consoleServer;
+        private static Boolean clusteringEnabled = false;
+        private static volatile Boolean isSettingState = false;
 
         static {
                 //APP_DIR = System.getProperty("easygsp.home");
@@ -66,12 +75,12 @@ public class EasyGServer {
 
         public EasyGServer() {
                 groovyVersion = org.codehaus.groovy.runtime.InvokerHelper.getVersion();
-                ;
         }
 
         public EasyGServer(String groovyVersion) {
                 this.groovyVersion = groovyVersion;
         }
+
         public void start() {
                 try {
                         APP_DIR = System.getProperty("easygsp.home");
@@ -82,19 +91,26 @@ public class EasyGServer {
                                 APP_DIR = APP_DIR.substring(0, APP_DIR.length() - 1);
                         }
 
-                        propertiesFile = new PropertiesFile(APP_DIR + File.separator + "conf" + File.separator + "server.properties");
+                        String propFile = System.getProperty("easygsp.propFile");
+                        if (propFile == null)
+                                propertiesFile = new PropertiesFile(APP_DIR + File.separator + "conf" + File.separator + "server.properties");
+                        else
+                                propertiesFile = new PropertiesFile(propFile);
+
+
                         if (EasyGServer.propertiesFile.getInt("console.server.port", -1) > -1) {
                                 consoleServer = new ConsoleServer();
                                 consoleServer.start();
                         }
 
                         isWindows = System.getProperty("os.name").toLowerCase().contains("windows") || System.getProperty("os.name").toLowerCase().contains("winnt");
+                        clusteringEnabled = propertiesFile.getBoolean("clustering.enabled", false);
+                        if (System.getProperty("java.security.manager")!=null){
+                                System.setSecurityManager(new EasyGSecurityManager());
+                        } else {
+                                log.info("Skipped setting security manager"); 
+                        }
 
-                        System.setProperty("jcs.auxiliary.DC.attributes.DiskPath", APP_DIR + File.separator + "cache");
-
-                        JCS.setConfigFilename(APP_DIR + File.separator + "conf" + File.separator + "cache.ccf");
-
-                        System.setSecurityManager(new EasyGSecurityManager());
                         System.setProperty("easygsp.version", "@easygsp_version");
 
 //                        log.fine("log fine");
@@ -121,18 +137,18 @@ public class EasyGServer {
                                 autoConfigureLogger();
                         }
 
-                        CacheKeyManager.init();
-
-                        if (propertiesFile.getBoolean("clear.cache.onstart", true)) {
-                                CacheKeyManager.removeAll();
-                                ApplicationCache.getInstance().clear();
-                                SessionCache.getInstance().clear();
+                        if (EasyGServer.propertiesFile.getBoolean("file.monitor.enabled", false)) {
+                                //fm = new FileMonitorThread();
+                                //fm.start();
+                                FileMonitor.apps = applications;
+                                FileMonitor.listen();
                         }
-
 
                         ThreadMonitor.start();
                         sessionMonitor = new SessionMonitor(applications);
                         sessionMonitor.start();
+
+                        EmailService.start();
 
                         LoggerThread loggerThread = new LoggerThread();
                         loggerThread.start();
@@ -143,7 +159,6 @@ public class EasyGServer {
 
                         //executorService = Executors.newCachedThreadPool();
                         serverSocket = new ServerSocket(propertiesFile.getInt("server.port", 4444));
-
                         Thread shutdown = new Thread(new Shutdown(this));
                         shutdown.start();
 
@@ -151,17 +166,41 @@ public class EasyGServer {
 
                         loadDatabaseDrivers();
 
-                        try {
-                                JCS.getInstance("appCache").get("");
-                                JCS.getInstance("sessionCache").get("");
+                        if (clusteringEnabled) {
+                                if (propertiesFile.getString("cluster.config.file") == null)
+                                        jgroupsChannel = new JChannel();
+                                else {
+                                        String path = APP_DIR + File.separator + "conf" + File.separator + propertiesFile.getString("cluster.config.file");
+                                        File filePath = new File(path);
+                                        if (!filePath.exists()) {
+                                                filePath = new File(propertiesFile.getString("cluster.config.file"));
+                                                if (!filePath.exists()) {
+                                                        throw new Exception("Unable to find JGroups config file : " + propertiesFile.getString("cluster.config.file"));
+                                                }
+                                        }
+                                        jgroupsChannel = new JChannel(path);
+                                }
 
-                        } catch (CacheException e) {
-                                log.log(Level.SEVERE, "error initializing cache", e);
+                                jgroupsChannel.setOpt(JChannel.LOCAL, false);
+                                jgroupsChannel.setReceiver(this);
+                                jgroupsChannel.connect(propertiesFile.getString("cluster.name", "EasyGSPCluster"));
+                                jgroupsChannel.getState(null, 10000);
+                                ClassConfigurator.add((short) 1899, AppHeader.class);
+
+                                if (jgroupsChannel.getView().size() > 1 && isSettingState) {
+                                        synchronized (serverSocket) {
+                                                log.fine("Clustering: waiting on cluster state transfer to complete before serverSocket listening");
+                                                serverSocket.wait();
+                                                log.fine("Clustering: state transfer done");
+                                        }
+                                }
                         }
 
                         Socket socket = null;
+                        log.fine("EasyGSP Server accepting connections");
                         while (!stopRequested) {
                                 //executorService.execute(new RequestThread(serverSocket.accept(), applications));
+
                                 try {
                                         socket = serverSocket.accept();
                                         if (isStopped())
@@ -175,45 +214,48 @@ public class EasyGServer {
                                         close(socket);
                                         log.log(Level.FINE, "server socket loop failed");
                                 }
-
                         }
 
                         log.info("shutting down...");
 
+                        FileMonitor.stop();
+                        EmailService.stop();
+                        
                         while (!ThreadMonitor.isEmpty()) {
                                 Thread.sleep(100);
                                 log.fine("thread monitor size:" + ThreadMonitor.size());
                         }
 
-                        loggerThread.stopLogging();
                         ThreadMonitor.stopMonitoring();
 
                         for (ServletContextImpl app : applications.values()) {
                                 app.stopApplication();
                         }
 
-
                         sessionMonitor.stopThread();
                         while (sessionMonitor.isAlive() && loggerThread.messagesInQueue()) {
                                 Thread.sleep(100);
                         }
 
-                        JCS.getInstance("sessionCache").dispose();
-                        JCS.getInstance("appCache").dispose();
-
-                        CompositeCacheManager.getInstance().shutDown();
-
-                        log.info("shutdown complete");
-                        log.fine("stopped");
                         if (consoleServer != null)
                                 consoleServer.stopThread();
+
+                        if (clusteringEnabled) {
+                                jgroupsChannel.close();
+                        }
+
+                        loggerThread.stopLogging();
+                        while (loggerThread.messagesInQueue()) {
+                                Thread.sleep(100);
+                        }
+
+                        log.info("shutdown complete");
 
                         System.exit(0);
                 } catch (Exception e) {
                         log.log(Level.SEVERE, "EasyGSP Server startup failed.", e);
                 }
         }
-
 
         protected ServerSocket getServerSocket() {
                 stopServer();
@@ -240,8 +282,6 @@ public class EasyGServer {
                 } catch (Throwable e) {
                         throw new RuntimeException("Exception in autoConfigureLogger(), logDir=" + logDir, e);
                 }
-
-
         }
 
         private void close(Object socket) {
@@ -331,4 +371,270 @@ public class EasyGServer {
                 return stopRequested;
         }
 
+        // JGroups Stuff
+        public static void sendToChannel(ClusterMessage sessionMessage) {
+                if (!clusteringEnabled || isSettingState)
+                        return;
+                try {
+                        Message msg = new Message(null, null, Util.objectToByteBuffer(sessionMessage));
+                        msg.putHeader("ah", new AppHeader(sessionMessage.getAppId(), sessionMessage.getMethod(), sessionMessage.getAppPath()));
+                        jgroupsChannel.send(msg);
+                } catch (ChannelNotConnectedException e) {
+                        log.log(Level.SEVERE, "JGroups Exception, ChannelNotConnectedException", e);
+                } catch (ChannelClosedException e) {
+                        log.log(Level.SEVERE, "JGroups Exception, ChannelClosedException", e);
+                } catch (Exception e) {
+                        log.log(Level.SEVERE, "sendToChannel() Exception ", e);
+                }
+        }
+        //
+        @Override
+        public void receive(Message msg) {
+                AppHeader appHeader = (AppHeader) msg.getHeader("ah");
+                String[] app = appHeader.appName.split(";");
+                String appName = app[0];
+                String method = app[1];
+                String appPath = app[2];
+
+                ServletContextImpl application = applications.get(appName);
+                SessionImpl session = null;
+                try {
+                        if (method.equals("appStart")) {
+                                try {
+                                        log.fine("clustering: starting application - " + appName + ", path - " + appPath);
+                                        application = loadApplication(appName, appPath);
+                                } catch (ApplicationNotFoundException e) {
+                                        log.severe("Clustering Problem (appStart), ApplicationNotFoundException - application: " + appName + ", application path: " + appPath);
+                                        return;
+                                }
+
+                        } else if (method.equals("session")) {
+
+                                if (application == null) {
+                                        try {
+                                                log.fine("clustering: starting application on session message -  " + appName + ", path - " + appPath);
+                                                application = loadApplication(appName, appPath);
+                                        } catch (ApplicationNotFoundException e) {
+                                                log.severe("Clustering Problem, ApplicationNotFoundException - application: " + appName);
+                                                return;
+                                        }
+                                }
+
+                                ClusterMessage sessionMessage = (ClusterMessage) getClusterMessageFromByteArray(msg.getRawBuffer(), application.getGroovyScriptEngine().getGroovyClassLoader());
+                                session = (SessionImpl) sessionMessage.getParameters()[0];
+                                session.setApplication(application);
+                                application.getSessions().put(session.getId(), session);
+
+                        } else if (method.equals("loadClass")) {
+                                ClusterMessage clusterMessage = (ClusterMessage) getClusterMessageFromByteArray(msg.getRawBuffer(), application.getGroovyScriptEngine().getGroovyClassLoader());
+                                String path = (String) clusterMessage.getParameters()[0];
+
+                                if (application == null) {
+                                        log.fine("clustering: unable to loadClass class - " + path + ", for app: " + appName);
+                                        return;
+                                }
+
+
+                                log.fine("clustering: loading class - " + path + ", for app: " + appName);
+
+                                GSE4 gse = application.getGroovyScriptEngine();
+                                gse.loadScriptByName(path);
+
+
+                        } else {
+//                        session = application.getSessions().get(sessionMessage.getSessionId());
+//
+//                        Class[] c = new Class[sessionMessage.getParameters().length];
+//
+//                        if (sessionMessage.getMethod().equals("remote_setAttribute")) {
+//                                c[0] = String.class;
+//                                c[1] = Object.class;
+//                        } else {
+//                                for (int i = 0; i < c.length; i++) {
+//                                        c[i] = sessionMessage.getParameters()[i].getClass();
+//                                }
+//                        }
+//
+//                        try {
+//                                Method method = session.getClass().getMethod(sessionMessage.getMethod(), c);
+//                                method.invoke(session, sessionMessage.getParameters());
+//                        } catch (NoSuchMethodException e) {
+//                                log.log(Level.SEVERE, "Clustering problem, NoSuchMethodException for : " + e.getMessage(), e);
+//                        } catch (InvocationTargetException e) {
+//                                log.log(Level.SEVERE, "Clustering problem, InvocationTargetException : " + e.getMessage(), e);
+//                        } catch (IllegalAccessException e) {
+//                                log.log(Level.SEVERE, "Clustering problem, IllegalAccessException : " + e.getMessage(), e);
+//                        }
+                        }
+
+                } catch (ScriptException e) {
+                        log.severe("Clustering Exception, ScriptException - application: " + appName + ", application path: " + appPath);
+                } catch (ResourceException e) {
+                        log.severe("Clustering Exception, ResourceException - application: " + appName + ", application path: " + appPath);
+                } catch (ClassNotFoundException e) {
+                        log.log(Level.SEVERE, "Clustering Exception, ClassNotFoundException", e);
+                } catch (IOException e) {
+                        log.log(Level.SEVERE, "Clustering Exception, IOException", e);
+                }
+
+        }
+
+        public static Object getClusterMessageFromByteArray(byte[] data, ClassLoader classLoader) throws IOException, ClassNotFoundException {
+                GroovyObjectInputStream obj = null;
+
+                ByteArrayInputStream ba = new ByteArrayInputStream(data);
+                ba.read();
+                obj = new GroovyObjectInputStream(classLoader, ba);
+
+                Object o = obj.readObject();
+                //ClusterMessage _sessionMessage = (ClusterMessage) msg.getObject();
+
+                obj.close();
+
+                return o;
+        }
+
+
+//        public ClusterMessage getClusterMessage(Message msg, ClassLoader classLoader) throws IOException, ClassNotFoundException {
+//                ObjectInputStream obj = null;
+//
+//                ByteArrayInputStream ba = new ByteArrayInputStream(msg.getRawBuffer(), msg.getOffset(), msg.getLength());
+//                ba.read();
+//                obj = new GroovyObjectInputStream(classLoader, ba);
+//
+//                ClusterMessage sessionMessage = (ClusterMessage) obj.readObject();
+//                //ClusterMessage _sessionMessage = (ClusterMessage) msg.getObject();
+//
+//                obj.close();
+//
+//                return sessionMessage;
+//        }
+
+        @Override
+        public byte[] getState() {
+                Map<AppId, byte[]> apps = new HashMap();
+                log.fine("Clustering: getState() - converting sessions to byte array");
+                for (ServletContextImpl context : applications.values()) {
+                        AppId id = new AppId(context.getAppName(), context.getAppPath());
+                        try {
+                                apps.put(id, Util.objectToByteBuffer(new ArrayList(context.getSessions().values())));
+                        } catch (Exception e) {
+                                log.log(Level.SEVERE, "exception occurred converting sessions to byte array, app: " + id.getAppName(), e);
+                        }
+                }
+
+                log.fine("Clustering: getState() - converting request history to byte array");
+                Map<AppId, byte[]> requests = new HashMap();
+                for (AppId id : EasyGServer.loadedScripts.keySet()) {
+                        try {
+                                requests.put(id, Util.objectToByteBuffer(EasyGServer.loadedScripts.get(id)));
+                        } catch (Exception e) {
+                                log.log(Level.SEVERE, "exception occurred converting request history to byte array, app: " + id.getAppName(), e);
+                        }
+                }
+
+                Map<String, Map> state = new HashMap();
+                state.put("sessions", apps);
+                state.put("requests", requests);
+
+                try {
+                        return Util.objectToByteBuffer(state);
+                } catch (Exception e) {
+                        log.log(Level.SEVERE, "Unable to getState(), " + e.getMessage(), e);
+                }
+
+                log.fine("Clustering: done getting state");
+                return new byte[]{};
+        }
+
+        @Override
+        public void setState(byte[] state) {
+                isSettingState = true;
+                log.fine("Clustering: setting state...");
+                Map data = null;
+                try {
+                        data = (Map) Util.objectFromByteBuffer(state);
+                } catch (Exception e) {
+                        log.log(Level.SEVERE, "unable to setState, Util.objectFromByteBuffer failed", e);
+                        return;
+                }
+
+                Map<AppId, byte[]> requests = (Map) data.get("requests");
+
+                log.fine("Clustering: loading request history...");
+                for (AppId id : requests.keySet()) {
+                        try {
+                                ServletContextImpl app = applications.get(id.getAppName());
+                                if (app == null) {
+                                        app = loadApplication(id.getAppName(), id.getAppPath());
+                                }
+                                Set<String> scripts = (Set) getClusterMessageFromByteArray((byte[]) requests.get(id), app.getGroovyScriptEngine().getGroovyClassLoader());
+                                for (String script : scripts) {
+                                        log.fine("Clustering: loading script - " + script + ", app - " + app.getAppName());
+                                        app.getGroovyScriptEngine().loadScriptByName(script);
+                                }
+                                EasyGServer.loadedScripts.remove(id);
+                                EasyGServer.loadedScripts.put(id, scripts);
+                        } catch (Exception e) {
+                                log.log(Level.SEVERE, e.getMessage(), e);
+                        }
+                }
+
+                Map<AppId, byte[]> apps = (Map) data.get("sessions");
+
+                log.fine("Clustering: loading sessions...");
+                for (AppId id : apps.keySet()) {
+                        try {
+                                String appName = id.getAppName();
+                                String appPath = id.getAppPath();
+
+                                ServletContextImpl app = applications.get(appName);
+                                if (app == null) {
+                                        app = loadApplication(appName, appPath);
+                                }
+
+                                List<SessionImpl> sessions = (List) getClusterMessageFromByteArray(apps.get(id), app.getGroovyScriptEngine().getGroovyClassLoader());
+                                for (SessionImpl session : sessions) {
+                                        session.setApplication(app);
+                                        app.getSessions().put(session.getId(), session);
+                                        log.fine("Clustering: loading session - " + session.getId() + ", app - " + app.getAppName());
+                                }
+                        } catch (Exception e) {
+                                log.log(Level.SEVERE, e.getMessage(), e);
+                        }
+                }
+
+                isSettingState = false;
+
+                synchronized (serverSocket) {
+                        serverSocket.notifyAll();
+                }
+
+                log.fine("Clustering: done setting state");
+        }
+
+        private ServletContextImpl loadApplication(String appName, String appPath) throws ApplicationNotFoundException {
+                ServletContextImpl app = loadApplicationFromFileSystem(applications, appName, appPath);
+                RequestThreadInfo.get().setApplication(app);
+                app.startApplication();
+                return app;
+        }
+
+        @Override
+        public void viewAccepted(View new_view) {
+                System.out.println("** view: " + new_view);
+        }
+
+        public static void addScriptToState(String appName, String appPath, String scriptName) {
+                if (clusteringEnabled) {
+                        AppId id = new AppId(appName, appPath);
+                        if (!loadedScripts.containsKey(id)) {
+                                Set requests = Collections.synchronizedSet(new LinkedHashSet());
+                                loadedScripts.put(id, requests);
+                                loadedScripts.get(id).add(scriptName);
+                        } else {
+                                loadedScripts.get(id).add(scriptName);
+                        }
+                }
+        }
 }

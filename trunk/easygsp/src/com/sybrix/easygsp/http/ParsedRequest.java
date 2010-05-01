@@ -1,5 +1,7 @@
 package com.sybrix.easygsp.http;
 
+import com.sybrix.easygsp.util.StringUtil;
+
 /**
  * ParsedRequest <br/>
  * Description :
@@ -49,6 +51,26 @@ public class ParsedRequest {
         }
 
         public void setRequestFilePath(String requestFilePath) {
-                this.requestFilePath = requestFilePath;
+                this.requestFilePath = StringUtil.capDriveLetter(requestFilePath);
+        }
+
+        public String getControllerClass() {
+                String[] s = requestURI.split("/");
+                if (s.length == 1) {
+                        return StringUtil.capFirstLetter(s[0].substring(0, s[0].lastIndexOf('.')));
+                } else {
+                        StringBuffer path = new StringBuffer();
+                        for (int i = 0; i < s.length; i++) {
+                                if (i == (s.length - 1)) {
+                                        String cls = s[i].substring(0, s[i].lastIndexOf('.'));
+                                        path.append(StringUtil.capFirstLetter(cls));
+                                        return path.toString();
+                                } else {
+                                        path.append(s[i]).append(".");
+                                }
+                        }
+
+                }
+                return null;
         }
 }

@@ -6,7 +6,7 @@
 </head>
 <body>
 
-Custom 404 error page at ${app.appPath}${File.separator}WEB-INF${File.separator}errors${File.separator}error404.gsp
+Custom 404 error page at ${getAppName.appPath}${File.separator}WEB-INF${File.separator}errors${File.separator}error404.gsp
 <br/><br/>
 
 The page you requested <br/><br/>

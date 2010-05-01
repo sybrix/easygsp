@@ -25,11 +25,18 @@ import java.io.*;
 import java.util.Date;
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.sybrix.easygsp.util.StringUtil;
 
 /**
  * A generic servlet for serving (mostly HTML) templates.
@@ -101,13 +108,15 @@ public class TemplateServlet extends AbstractHttpServlet {
          *
          * @author Christian Stein
          */
-        private static class TemplateCacheEntry {
+        public static class TemplateCacheEntry {
 
                 Date date;
                 long hit;
                 long lastModified;
                 long length;
                 Template template;
+                Set children;
+
 
                 public TemplateCacheEntry(File file, Template template) {
                         this(file, template, false); // don't get time millis for sake of speed
@@ -129,6 +138,14 @@ public class TemplateServlet extends AbstractHttpServlet {
                         this.lastModified = file.lastModified();
                         this.length = file.length();
                         this.template = template;
+                        this.children = new HashSet();
+                }
+
+                public Set getChildren() {
+                        return children;
+                }
+                public void setChildren(Set children) {
+                        this.children = children;
                 }
 
                 /**
@@ -164,6 +181,7 @@ public class TemplateServlet extends AbstractHttpServlet {
          * Simple file name to template cache map.
          */
         private final Map cache;
+        private final Map dependencyCache;
 
         /**
          * Underlying template engine used to evaluate template source files.
@@ -179,10 +197,11 @@ public class TemplateServlet extends AbstractHttpServlet {
          * Create new TemplateSerlvet.
          */
         public TemplateServlet(GSE4 groovyScriptEngine) {
-                this.cache = new WeakHashMap();
+                this.cache = Collections.synchronizedMap(new WeakHashMap());
+                this.dependencyCache = Collections.synchronizedMap(new WeakHashMap());
+
                 this.engine = new IncludeTemplateEngine(groovyScriptEngine.getGroovyClassLoader()); // assigned later by init()
                 this.generateBy = true; // may be changed by init()
-
 
         }
 
@@ -226,6 +245,7 @@ public class TemplateServlet extends AbstractHttpServlet {
                                         log("Cached template needs recompiliation!");
                                 }
                         }
+
                 } else {
                         if (verbose) {
                                 log("Cache miss.");
@@ -248,7 +268,7 @@ public class TemplateServlet extends AbstractHttpServlet {
                                 reader = fileEncoding == null ? new FileReader(file) : new InputStreamReader(new FileInputStream(file), fileEncoding);
                                 template = engine.createTemplate(reader);
                         } catch (GroovyRuntimeException e) {
-                                throw e;        
+                                throw e;
                         } catch (Exception e) {
                                 throw new ServletException("Creation of template failed: " + e, e);
                         } finally {
@@ -260,7 +280,16 @@ public class TemplateServlet extends AbstractHttpServlet {
                                         }
                                 }
                         }
-                        cache.put(key, new TemplateCacheEntry(file, template, verbose));
+
+                        TemplateCacheEntry templateCacheEntry = new TemplateCacheEntry(file, template, verbose);
+                        templateCacheEntry.children.addAll(RequestThreadInfo.get().getTemplateInfo().getChildren());
+                        //RequestThreadInfo.get().getTemplateInfo().setCachEntry(templateCacheEntry);
+                        cache.put(key, templateCacheEntry);
+
+                        for (Object o : templateCacheEntry.children) {
+                                dependencyCache.put(o, key);
+                        }
+
                         if (verbose) {
                                 log("Created and added template to cache. [key=" + key + "]");
                         }
@@ -276,6 +305,23 @@ public class TemplateServlet extends AbstractHttpServlet {
                 return template;
 
         }
+
+        public void removeFromCache(String template) {
+                template = StringUtil.capDriveLetter(template);
+                Object key = dependencyCache.remove(template);
+                if (key != null) {
+                        TemplateCacheEntry templateCacheEntry = (TemplateCacheEntry) cache.remove(key);
+                        if (templateCacheEntry != null) {
+                                for (Object o : templateCacheEntry.children) {
+                                        dependencyCache.remove(o);
+                                }
+                        }
+                } else {
+                        cache.remove(template);
+                }
+        }
+
+
 
         /**
          * Initializes the servlet from hints the container passes.
@@ -347,8 +393,8 @@ public class TemplateServlet extends AbstractHttpServlet {
          */
         public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException {
                 if (!RequestThreadInfo.get().errorOccurred())
-                     RequestThreadInfo.get().setTemplateRequest(true);
-                
+                        RequestThreadInfo.get().setTemplateRequest(true);
+
                 if (verbose) {
                         log("Creating/getting cached template...");
                 }
@@ -380,11 +426,11 @@ public class TemplateServlet extends AbstractHttpServlet {
 
                 Template template = getTemplate(file);
                 String templateName = ((IncludeTemplateEngine.SimpleTemplate) template).getScript().getClass().getName();
-                if (!RequestThreadInfo.get().errorOccurred()){
+                if (!RequestThreadInfo.get().errorOccurred()) {
                         RequestThreadInfo.get().setUniqueTemplateScriptName(templateName);
                 }
                 getMillis = System.currentTimeMillis() - getMillis;
-
+                   
                 //
                 // Create new binding for the current request.
                 //

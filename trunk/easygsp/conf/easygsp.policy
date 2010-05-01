@@ -40,7 +40,7 @@ grant codeBase "file:${easygsp.home}/lib/-" {
 grant codeBase "file:/groovy/script" {
         permission java.lang.RuntimePermission "accessDeclaredMembers";
         permission groovy.security.GroovyCodeSourcePermission "/groovy/script";
-        permission java.io.FilePermission "${easygsp.home}/webapps/-", "read,write";
+        permission java.io.FilePermission "${easygsp.home}/webapps/-", "read,write,delete";
 };
 
 grant codeBase "file:/groovy/security/-" {
@@ -71,6 +71,7 @@ grant {
     permission java.util.PropertyPermission "path.separator", "read";
     permission java.util.PropertyPermission "line.separator", "read";
     permission java.util.PropertyPermission "groovy.source.encoding", "read";
+    permission java.util.PropertyPermission "file.encoding", "read";
 
     // JVM properties to allow read access
     permission java.util.PropertyPermission "java.version", "read";
@@ -99,7 +100,8 @@ grant {
         permission java.lang.RuntimePermission "accessDeclaredMembers";
         permission java.lang.RuntimePermission "accessClassInPackage.sun.net.www.protocol.http";
         permission java.lang.RuntimePermission "accessClassInPackage.sun.net.www.protocol.https";
-
+        permission java.lang.RuntimePermission "accessClassInPackage.sun.misc";
+        
         permission java.net.SocketPermission "localhost:3050", "connect";
         permission java.net.SocketPermission "localhost:3306", "connect";
         permission java.net.SocketPermission "*:0-" , "connect,resolve";

@@ -94,6 +94,13 @@ public class CustomServletCategory {
                 binding.setVariable(name, val);
         }
 
+        public static void bind(GroovyObject self, Map<String,Object> values) throws IOException, ServletException {
+                Binding binding = (Binding) self.getProperty("binding");
+                for(String key:values.keySet()){
+                        binding.setVariable(key, values.get(key));
+                }
+        }
+
         public static Cookie getCookie(GroovyObject self, String cookieName) {
                 // ServletContextImpl app = RequestThreadInfo.get().getApplication();
                 Binding binding = (Binding) self.getProperty("binding");

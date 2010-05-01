@@ -234,6 +234,7 @@ public class RequestImpl implements HttpServletRequest {
                 if (session == null && createSession) {
                         session = new SessionImpl(application, EasyGServer.propertiesFile.getInt("session.timeout", 15));
                         servletBinding.setVariable("session", session);
+                        RequestThreadInfo.get().getBinding().setVariable("flash", session.getFlash());
 
                         application.getSessions().put(session.getId(), session);
                         Cookie cookie = new Cookie("GSESSIONID", session.getId());
@@ -249,7 +250,10 @@ public class RequestImpl implements HttpServletRequest {
                         } catch (Exception e) {
                                 log.log(SEVERE, "onSessionStart failed.", e);
                         }
+
                 }
+
+
 
                 return session;
         }
