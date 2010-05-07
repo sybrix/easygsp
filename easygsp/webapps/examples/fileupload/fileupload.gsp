@@ -1,5 +1,5 @@
 <%
-
+              
         import groovy.sql.Sql  
         import org.apache.commons.fileupload.FileItem
 
@@ -11,7 +11,7 @@
                 File uploadedFile = new File(application.appPath + File.separator + item.name);
                 //uploadedFile.mkdirs();
                 item.write(uploadedFile);
-                uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath + ' ' + params.var
+                uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath
 
                 println("file upload" + item);
         }
@@ -28,8 +28,7 @@
                 ${uploadLocation}
                 <form action="fileupload.gsp" method="POST" enctype="multipart/form-data">
                         File: <input type="file" name="file"/><br/>
-                         <input type="hidden" name="var" value="xxx"/>
-                        <input type="submit"/>
+                        <input type="submit" name="submit" value="Upload File"/>
                 </form>
 
         </body>

@@ -132,7 +132,7 @@ public class ThreadMonitor {
                                                         } catch (Exception e) {
 
                                                         }
-                                                        
+
                                                         try {
                                                                 //requestThread.sendError(500, requestThread.getScriptPath(),requestThread.getApplication().getGroovyScriptEngine(),requestThread.getBinding(), new Exception("Thread exceeded maximum timeout."));
 //                                                                requestThread.sendError("Thread exceeded maximum timeout.");

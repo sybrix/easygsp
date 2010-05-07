@@ -27,10 +27,19 @@ public class NumberGuessBean {
 
         int answer
         boolean success
-        String hint
+        String hint = ''
         int numGuesses
 
+        public NumberGuessBean(answer, numGuesses) {
+        println 'here 5'
+                hint = ''
+                this.answer = answer
+                this.numGuesses = numGuesses
+        }
+
         public NumberGuessBean() {
+        println 'here 6'
+                hint = ''
                 reset()
         }
 

@@ -77,8 +77,6 @@ public class RequestThread extends Thread {
         }
 
         public void run() {
-
-                long startTime = System.currentTimeMillis();
                 SessionImpl session = null;
 
                 try {
@@ -127,7 +125,11 @@ public class RequestThread extends Thread {
                         // when false, request will auto forward to view
                         request.setAttribute("_explicitForward", false);
 
-                        session = (SessionImpl) request.getSession(false);
+                        if (application.getAutoStartSessions() && session == null){
+                                session = (SessionImpl) request.getSession(true);
+                        } else {
+                                session = (SessionImpl) request.getSession(false);
+                        }
 
                         binding = new CustomServletBinding(request, response, application, headers);
 
@@ -205,19 +207,17 @@ public class RequestThread extends Thread {
                         } else
                                 log.log(SEVERE, "Unknown throwable exception occurred. message: " + e.getMessage(), e);
                 } finally {
-
                         // send the response to the client
                         response.sendResponse();
-
+                        log.fine("took " + (System.currentTimeMillis() - requestStartTime) + " ms");
                         closeSocket(socket);
                         requestEndTime = System.currentTimeMillis();
-
                 }
 
                 if (session != null)
                         EasyGServer.sendToChannel(new ClusterMessage(application.getAppName(), application.getAppPath(), session.getId(), "session", new Object[]{session}));
 
-                log.fine("took " + (System.currentTimeMillis() - startTime) + " ms");
+
         }
 
         private void expireFlashMessages(SessionImpl session) {

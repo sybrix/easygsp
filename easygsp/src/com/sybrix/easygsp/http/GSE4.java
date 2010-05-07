@@ -560,7 +560,7 @@ public class GSE4 implements ResourceConnector {
                         ScriptCacheEntry depEntry = scriptCache.get(scriptName);
                         long entryChangeTime = depEntry.lastModified + config.getMinimumRecompilationInterval();
                         if (entryChangeTime > time) continue;
-
+                                                                        
                         URLConnection conn = rc.getResourceConnection(scriptName);
                         URL source = conn.getURL();
                         String path = source.getPath().replace('/', File.separatorChar).replace('|', ':');

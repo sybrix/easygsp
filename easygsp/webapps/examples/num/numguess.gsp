@@ -22,14 +22,21 @@
 
 <%
         request.getSession(true)
-        
-        if (session.numberGuessBean == null){
-                session.numberGuessBean = new num.NumberGuessBean()
+
+        def numguess = new num.NumberGuessBean()
+         
+        if (session.numberGuessAnswer == null){
+                session.numberGuessAnswer = numguess.answer
+                session.numGuesses = "0"
+        } else if (toInt(session.numberGuessAnswer) > 0){
+                numguess.answer = toInt(session.numberGuessAnswer)
+                numguess.numGuesses = toInt(session.numGuesses)
         }
 
-        def numguess = session.numberGuessBean
-        if (request.getMethod().equalsIgnoreCase("get")){
+        if (request.getMethod().equalsIgnoreCase("get") && params.guess ){
                 numguess.guess = params.guess
+                session.numberGuessAnswer = numguess.answer
+                session.numGuesses = numguess.numGuesses
         }
 %>
 
@@ -43,7 +50,7 @@
   Congratulations!  You got it.
   And after just <%= numguess.getNumGuesses() %> tries.<p>
 
-  <% numguess.reset(); %>
+  <% session.numberGuessAnswer = null %>
 
   Care to <a href="numguess.gsp">try again</a>?
 

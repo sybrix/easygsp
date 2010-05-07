@@ -22,6 +22,7 @@ import java.net.Socket;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.logging.Handler;
@@ -49,7 +50,7 @@ public class EasyGServer extends ReceiverAdapter {
         public static JChannel jgroupsChannel;
 
         private ServerSocket serverSocket;
-        //private ExecutorService executorService;
+        private ExecutorService executorService;
         private boolean isRunning;
 
         private ConcurrentHashMap<String, ServletContextImpl> applications = new ConcurrentHashMap();
@@ -68,6 +69,7 @@ public class EasyGServer extends ReceiverAdapter {
         private ConsoleServer consoleServer;
         private static Boolean clusteringEnabled = false;
         private static volatile Boolean isSettingState = false;
+        public static String adminApp; 
 
         static {
                 //APP_DIR = System.getProperty("easygsp.home");
@@ -105,6 +107,8 @@ public class EasyGServer extends ReceiverAdapter {
 
                         isWindows = System.getProperty("os.name").toLowerCase().contains("windows") || System.getProperty("os.name").toLowerCase().contains("winnt");
                         clusteringEnabled = propertiesFile.getBoolean("clustering.enabled", false);
+                        adminApp = propertiesFile.getString("admin.app", "admin");
+
                         if (System.getProperty("java.security.manager")!=null){
                                 System.setSecurityManager(new EasyGSecurityManager());
                         } else {
@@ -157,7 +161,7 @@ public class EasyGServer extends ReceiverAdapter {
 
                         //loadApplicationsFromFileSystem();
 
-                        //executorService = Executors.newCachedThreadPool();
+                        executorService = Executors.newCachedThreadPool();
                         serverSocket = new ServerSocket(propertiesFile.getInt("server.port", 4444));
                         Thread shutdown = new Thread(new Shutdown(this));
                         shutdown.start();
@@ -199,16 +203,18 @@ public class EasyGServer extends ReceiverAdapter {
                         Socket socket = null;
                         log.fine("EasyGSP Server accepting connections");
                         while (!stopRequested) {
-                                //executorService.execute(new RequestThread(serverSocket.accept(), applications));
+//
+//                                executorService.execute(new RequestThread(serverSocket.accept(), applications, startTime));
 
                                 try {
-                                        socket = serverSocket.accept();
                                         if (isStopped())
                                                 break;
 
+                                        socket = serverSocket.accept();
                                         RequestThread t = new RequestThread(socket, applications);
                                         ThreadMonitor.add(t);
                                         t.start();
+
 
                                 } catch (Exception e) {
                                         close(socket);

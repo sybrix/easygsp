@@ -11,14 +11,14 @@ public class PropertyFormatException extends RuntimeException{
         }
 
         public PropertyFormatException(String message) {
-                super(message);    //To change body of overridden methods use File | Settings | File Templates.
+                super(message);
         }
 
         public PropertyFormatException(String message, Throwable cause) {
-                super(message, cause);    //To change body of overridden methods use File | Settings | File Templates.
+                super(message, cause);
         }
 
         public PropertyFormatException(Throwable cause) {
-                super(cause);    //To change body of overridden methods use File | Settings | File Templates.
+                super(cause);
         }
 }

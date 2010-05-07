@@ -47,7 +47,7 @@ public class SessionImpl implements HttpSession, Serializable {
         private Long lastAccessedTime;
         private transient ServletContextImpl application;
         private Integer maxInactiveInterval;
-        private Map sessionAttributes;
+        private Map<String, String> sessionAttributes;
         private Map<String, FlashMessage> flash;
 
         public SessionImpl(ServletContextImpl application, int maxInactiveInterval) {
@@ -57,19 +57,13 @@ public class SessionImpl implements HttpSession, Serializable {
                 sessionId = createSessionId();
                 creationTime = System.currentTimeMillis();
                 lastAccessedTime = System.currentTimeMillis();
-                sessionAttributes = new HashMap();
+                sessionAttributes = new HashMap<String,String>();
                 flash = new FlashMap();
         }
 
         public SessionImpl(ServletContextImpl application, String sessionId, int maxInactiveInterval) {
-                this.application = application;
-                this.maxInactiveInterval = maxInactiveInterval;
-
+                this(application, maxInactiveInterval);
                 this.sessionId = sessionId;
-                creationTime = System.currentTimeMillis();
-                lastAccessedTime = System.currentTimeMillis();
-                sessionAttributes = new HashMap();
-                flash = new FlashMap();
         }
 
 
@@ -154,14 +148,17 @@ public class SessionImpl implements HttpSession, Serializable {
         }
 
         public void setAttribute(String key, Object value) {
-                sessionAttributes.put(key, value);
+                if (value != null)
+                        sessionAttributes.put(key, value.toString());
+                else
+                        sessionAttributes.put(key, null);
 
 //                SessionMessage sessionMessage = new SessionMessage(application.getAppName(), application.getAppPath(), sessionId, "remote_setAttribute", new Object[]{key, value});
 //                EasyGServer.sendToChannel(sessionMessage);
         }
 
         public void remote_setAttribute(String key, Object value) {
-                sessionAttributes.put(key, value);
+                sessionAttributes.put(key, value.toString());
         }
 
         public void putValue(String s, Object o) {
