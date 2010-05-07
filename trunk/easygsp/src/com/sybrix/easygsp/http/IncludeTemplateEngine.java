@@ -315,7 +315,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                                 file = new File(RequestThreadInfo.get().getApplication().getAppPath() + path.replaceAll("/", "\\\\"));
                                         }
                                 } else {
-                                       f = new File(RequestThreadInfo.get().getParsedRequest().getRequestFilePath()).getParentFile();
+                                        f = new File(RequestThreadInfo.get().getParsedRequest().getRequestFilePath()).getParentFile();
 
                                         if (File.separator.equals("/")) {
                                                 file = new File(f.getAbsolutePath() + File.separator + path.trim());
@@ -325,14 +325,14 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                 }
 
                                 RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(file.getCanonicalFile().getParent());
-                                
+
                                 processChildTemplate(reader, inheritedTemplateInfo.mergedContents, file.getName(), inheritedTemplateInfo);
 
                         }
                 }
 
                 private String processChildTemplate(Reader reader, StringWriter sw, String parentFile, InheritedTemplateInfo inheritedTemplateInfo) throws InheritedTemplateException, ParentTemplateException {
-                        Map blocks = new HashMap();
+                        Map<String, BlockContents> blocks = new HashMap();
 
                         try {
                                 if (!reader.markSupported()) {
@@ -353,7 +353,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                                         if (c == '@') {
                                                                 Directive d = parseDirective(reader);
                                                                 if (d.isStartBlock()) {
-                                                                        parseChildBlock(reader, d.getBlockName(), blocks);
+                                                                        parseChildBlock(reader, d.getBlockName(), d, blocks);
                                                                         continue;
                                                                 }
                                                         }
@@ -368,7 +368,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         return mergeContentsWithParentTemplate(sw, blocks, parentFile, inheritedTemplateInfo);
                 }
 
-                public String mergeContentsWithParentTemplate(StringWriter sw, Map blocks, String parentFile, InheritedTemplateInfo inheritedTemplateInfo) throws ParentTemplateException {
+                public String mergeContentsWithParentTemplate(StringWriter sw, Map<String, BlockContents> blocks, String parentFile, InheritedTemplateInfo inheritedTemplateInfo) throws ParentTemplateException {
                         String fileEncoding = System.getProperty("groovy.source.encoding");
 
                         Reader reader = null;
@@ -416,7 +416,13 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                                         if (c == '@') {
                                                                 Directive d = parseDirective(reader);
                                                                 if (d.isStartBlock()) {
-                                                                        parseParentBlock(sw, reader, d.getBlockName(), d.passThruParentContent(), blocks, inheritedTemplateInfo);
+//                                                                        for (String s : d.parts) {
+//                                                                                System.out.println("parts:" + s);
+//                                                                        }
+//                                                                        System.out.println("blocks name:" + d.getBlockName());
+//                                                                        System.out.println("blocks passThruParentContent = " + blocks.get(d.getBlockName()).getDirective().passThruParentContent());
+
+                                                                        parseParentBlock(sw, reader, d.getBlockName(), blocks.get(d.getBlockName()).getDirective().passThruParentContent(), blocks, inheritedTemplateInfo);
                                                                         continue;
                                                                 } else {
                                                                         sw.write(d.directive);
@@ -432,7 +438,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
 
                                         sw.write(c);
                                 }
-
+                                //System.out.println(sw.toString());
                                 return sw.toString();
                         } catch (IOException e) {
                                 throw new ParentTemplateException(e);
@@ -441,7 +447,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         }
                 }
 
-                private void parseParentBlock(StringWriter contents, Reader reader, String blockName, boolean passThruParentContent, Map<String, String> blocks, InheritedTemplateInfo inheritedTemplateInfo) throws ParentTemplateException {
+                private void parseParentBlock(StringWriter contents, Reader reader, String blockName, boolean passThruParentContent, Map<String, BlockContents> blocks, InheritedTemplateInfo inheritedTemplateInfo) throws ParentTemplateException {
 
                         int c;
                         try {
@@ -462,7 +468,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
 
                                                                 if (directive.isEndBlock()) {
                                                                         if (blocks.containsKey(blockName)) {
-                                                                                contents.write(blocks.get(blockName));
+                                                                                contents.write(blocks.get(blockName).getContents());
                                                                         }
                                                                         break;
                                                                 } else {
@@ -489,7 +495,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                 }
 
 
-                private void parseChildBlock(Reader reader, String blockName, Map blocks) throws IOException {
+                private void parseChildBlock(Reader reader, String blockName, Directive startDirective, Map<String, BlockContents> blocks) throws IOException {
                         int c;
                         StringWriter contents = new StringWriter();
                         while ((c = reader.read()) != -1) {
@@ -505,7 +511,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                                                 if (c == '@') {
                                                         Directive directive = parseDirective(reader);
                                                         if (directive.isEndBlock()) {
-                                                                blocks.put(blockName, contents.toString());
+                                                                blocks.put(blockName, new BlockContents(startDirective, contents.toString()));
                                                                 break;
                                                         } else {
                                                                 contents.write(directive.directive);
@@ -555,10 +561,10 @@ public class IncludeTemplateEngine extends TemplateEngine {
                 private String trimQuotes(String s) {
                         String val = s.trim();
 
-                        if (val.charAt(0) == '\'' && val.charAt(val.length()-1) == '\''){
-                              return val.substring(1,val.charAt(val.length()-1));
-                        } else if (val.charAt(0) == '\"' && val.charAt(val.length()-1) == '\"'){
-                              return val.substring(1,val.charAt(val.length()-1));
+                        if (val.charAt(0) == '\'' && val.charAt(val.length() - 1) == '\'') {
+                                return val.substring(1, val.charAt(val.length() - 1));
+                        } else if (val.charAt(0) == '\"' && val.charAt(val.length() - 1) == '\"') {
+                                return val.substring(1, val.charAt(val.length() - 1));
                         }
 
                         return s;
@@ -601,7 +607,11 @@ public class IncludeTemplateEngine extends TemplateEngine {
 
                         String[] sc = new String[sections.size()];
                         sections.toArray(sc);
-
+//                        for (String x : sc) {
+//                                System.out.println("sections: " + x);
+//                        }
+//
+//                        System.out.println("");
                         return sc;
                 }
 
@@ -762,14 +772,48 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         public String getParentTemplate() {
                                 return parentTemplate;
                         }
+
                         public void setParentTemplate(String parentTemplate) {
                                 this.parentTemplate = parentTemplate;
                         }
+
                         public String getChildTemplate() {
                                 return childTemplate;
                         }
+
                         public void setChildTemplate(String childTemplate) {
                                 this.childTemplate = childTemplate;
+                        }
+                }
+
+                private class BlockContents {
+                        Directive directive;
+                        String contents;
+
+                        BlockContents(Directive directive, String contents) {
+                                this.directive = directive;
+                                this.contents = contents;
+                        }
+
+                        public Directive getDirective() {
+                                return directive;
+                        }
+
+                        public void setDirective(Directive directive) {
+                                this.directive = directive;
+                        }
+
+                        public String getContents() {
+                                return contents;
+                        }
+
+                        public void setContents(String contents) {
+                                this.contents = contents;
+                        }
+
+                        @Override
+                        public String toString() {
+                                return contents;
                         }
                 }
 
@@ -809,9 +853,9 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         }
 
                         public boolean passThruParentContent() {
-                                if (parts.length > 3)
+                                if (parts.length > 3) {
                                         return parts[3].equalsIgnoreCase("add");
-                                else
+                                } else
                                         return false;
 
                         }

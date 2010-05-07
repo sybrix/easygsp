@@ -8,9 +8,11 @@ import java.util.HashMap;
  * @author David Lee
  */
 public class FlashMap extends HashMap {
+        private static final long serialVersionUID = 1L;
+        
         @Override
         public Object put(Object key, Object value) {
-                return super.put(key, new FlashMessage(value.toString()));    //To change body of overridden methods use File | Settings | File Templates.
+                return super.put(key, new FlashMessage(value.toString()));
         }
 
         @Override

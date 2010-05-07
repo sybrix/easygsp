@@ -152,7 +152,7 @@
                 <td width="30%"><a href="viewsource.gsp?p=<%= encode('redirect/redirect.gsp') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a>
                         <a href="viewsource.gsp?p=<%= encode('redirect/redirect.gsp') %>" target="_blank">Source</a></td>
         </tr>
-        <tr valign=TOP>
+        <tr valign=TOP> 
                 <td>Cookies</td>
                 <td valign=TOP width="30%"><a href="cookies/cookies.gsp"><img src="images/execute.gif" hspace=4 border=0 align=top></a><a href="cookies/cookies.gsp">Execute</a></td>
 
@@ -179,6 +179,13 @@
 
                 <td width="30%"><a href="viewsource.gsp?p=<%= encode('mvc/mvc.gspx') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a>
                         <a href="viewsource.gsp?p=<%= encode('mvc/mvc.gspx') %>" target="_blank">mvc.gspx</a>, <a href="viewsource.gsp?p=<%= encode('mvc/mvc.groovy') %>" target="_blank">mvc.groovy</a></td></td>
+        </tr>
+        <tr valign=TOP>
+                <td>Template Inheritance</td>
+                <td valign=TOP width="30%"><a href="templateInheritance/index.gspx"><img src="images/execute.gif" hspace=4 border=0 align=top></a><a href="templateInheritance/index.gspx">Execute</a></td>
+
+                <td width="30%"><a href="viewsource.gsp?p=<%= encode('templateInheritance/index.gspx') %>"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a>
+                        <a href="viewsource.gsp?p=<%= encode('templateInheritance/index.gspx') %>" target="_blank">index.gspx</a>, <a href="viewsource.gsp?p=<%= encode('templateInheritance/parent.gspx') %>" target="_blank">parent.gspx</a></td></td>
         </tr>
 </table>
 

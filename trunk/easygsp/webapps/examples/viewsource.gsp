@@ -1,7 +1,7 @@
 <%
 
         def url = params.p.replace("/",File.separator)
-        def path = getAppName.appPath + File.separator + url
+        def path = app.appPath + File.separator + url
 
         def f = new File(path)
         def fileContent = htmlEncode(new String(f.readBytes()))

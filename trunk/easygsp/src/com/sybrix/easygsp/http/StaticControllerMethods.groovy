@@ -14,6 +14,8 @@ import com.sybrix.easygsp.email.EmailService
 import com.sybrix.easygsp.logging.LogMessage
 import com.sybrix.easygsp.logging.EasyGSPLogger
 import java.text.SimpleDateFormat
+import com.google.gson.Gson
+import java.lang.reflect.Type
 
 
 public class StaticControllerMethods {
@@ -50,6 +52,8 @@ public class StaticControllerMethods {
                 addFormatMoneyDouble(clazz)
                 addProperties(clazz)
                 addSendEmail(clazz)
+                addToJson(clazz)
+                addFromJson(clazz)
         }
 
         private static def addLogMethod(java.lang.Class clazz) {
@@ -308,6 +312,22 @@ public class StaticControllerMethods {
                                 String key = en.nextElement()
                                 app[key] = propFile.get(key)
                         }
+                }
+        }
+
+        private static def addToJson(java.lang.Class clazz) {
+                clazz.metaClass.static.toJson = {obj ->
+                        return new Gson().toJson(obj)
+                }
+        }
+
+        private static def addFromJson(java.lang.Class clazz) {
+                clazz.metaClass.static.fromJson = {Object obj, Class cls->
+                        return new Gson().fromJson(obj, cls)
+                }
+
+                clazz.metaClass.static.fromJson = {Object obj, Type t->
+                        return new Gson().fromJson(obj, t)
                 }
         }
 

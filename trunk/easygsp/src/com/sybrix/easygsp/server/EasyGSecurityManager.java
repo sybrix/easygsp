@@ -21,6 +21,7 @@ import com.sybrix.easygsp.util.StringUtil;
 
 import java.io.FileDescriptor;
 import java.io.IOException;
+import java.security.Permission;
 
 /**
  * SCGISecurityManager <br/>
@@ -31,6 +32,7 @@ public class EasyGSecurityManager extends SecurityManager {
         private static boolean allowSwing;
 
         static {
+                
                 allowAWT = EasyGServer.propertiesFile.getBoolean("allow.awt", false);
                 allowSwing = EasyGServer.propertiesFile.getBoolean("allow.swing", false);
         }
@@ -51,21 +53,23 @@ public class EasyGSecurityManager extends SecurityManager {
                 if (file.contains("AppId"))
                         return;
 
-                ServletContextImpl path = RequestThreadInfo.get().getApplication();
-                if (path == null) {
+                ServletContextImpl app = RequestThreadInfo.get().getApplication();
+                if (app == null) {
                         super.checkRead(file);
                 } else {
                         //boolean b = file.startsWith(path.getAppPath());
 
                         
                         try {
-                                boolean b = false;
-                                if (file.indexOf("..") > -1)
-                                        b = new java.io.File(StringUtil.capDriveLetter(file)).getCanonicalPath().startsWith(path.getAppPath()); // this is slow
+                                boolean allowAccess = false;
+                                if (app.getAppName().equals(EasyGServer.adminApp))
+                                        allowAccess = true;
+                                else if (file.indexOf("..") > -1)
+                                        allowAccess = new java.io.File(StringUtil.capDriveLetter(file)).getCanonicalPath().startsWith(app.getAppPath()); // this is slow
                                 else
-                                        b = StringUtil.capDriveLetter(file).startsWith(path.getAppPath());
+                                        allowAccess = StringUtil.capDriveLetter(file).startsWith(app.getAppPath());
 
-                                if (b) {
+                                if (allowAccess) {
                                         return;
                                 } else {
                                         super.checkRead(file);
@@ -116,5 +120,19 @@ public class EasyGSecurityManager extends SecurityManager {
                         }
                 }
                 super.checkPackageAccess(pkg);
+        }
+
+        @Override
+        public void checkExec(String cmd) {
+                ServletContextImpl app = RequestThreadInfo.get().getApplication();
+                if (app == null) {
+                        super.checkExec(cmd);
+                } else {
+                        if (!app.getAppName().equals(EasyGServer.adminApp)){
+                                super.checkExec(cmd);
+                        }
+                }
+
+
         }
 }

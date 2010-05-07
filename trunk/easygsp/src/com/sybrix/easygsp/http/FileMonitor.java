@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.io.File;
 
+import com.sybrix.easygsp.util.StringUtil;
 import net.contentobjects.jnotify.JNotifyListener;
 import net.contentobjects.jnotify.JNotify;
 import net.contentobjects.jnotify.JNotifyException;
@@ -28,6 +29,7 @@ public class FileMonitor {
         private static int watchId = 0;
         private static FileMonitorThread fileMonitorThread;
         private static boolean manualMonitor = EasyGServer.propertiesFile.getBoolean("use.manual.file.monitor", true);
+        private static boolean monitorGroovyFiles = EasyGServer.propertiesFile.getBoolean("file.monitor.groovy.files", false);
 
         public static void listen() throws JNotifyException {
                 if (!manualMonitor) {
@@ -74,12 +76,11 @@ public class FileMonitor {
                         log.finest("fileDeleted: " + s1);
 
                         if (s1.endsWith(".gsp") || s1.endsWith(".gspx")) {
-                                removeFromTemplateCache(s1);
+                                removeFromTemplateCache(s, s1);
                         }
                 }
 
                 public void fileModified(int i, String s, String s1) {
-                        log.finest(" fileModified: " + s1);
 
                         Long lastTime = fileTime.get(s1);
                         if (lastTime == null) {
@@ -90,12 +91,13 @@ public class FileMonitor {
                                 fileTime.put(s1, System.currentTimeMillis());
                         }
 
-
                         try {
-                                if (s1.endsWith(".groovy")) {
+                                if (s1.endsWith(".groovy")&& monitorGroovyFiles) {
                                         String p[] = s1.split(File.separatorChar == '/' ? File.separator : (File.separator + File.separator));
                                         if (p.length > 1) {
-                                                if (p[1].equals("WEB-INF") && !s1.equals("web.groovy")) {
+                                                log.finest(" file monitor path: " + s + ", fileModified: " + s1);
+
+                                                if (p[1].equals("WEB-INF") && !p[p.length - 1].equals("web.groovy")) {
 
                                                         ServletContextImpl app = apps.get(p[0]);
                                                         if (app == null)
@@ -108,21 +110,25 @@ public class FileMonitor {
                                                 }
                                         }
                                 } else if (s1.endsWith(".gsp") || s1.endsWith(".gspx")) {
-                                        removeFromTemplateCache(s1);
-
+                                        removeFromTemplateCache(s, s1);
                                 }
                         } catch (Throwable e) {
                                 log.log(Level.SEVERE, e.getMessage(), e);
                         }
                 }
 
-                private void removeFromTemplateCache(String s1) {
+                private void removeFromTemplateCache(String s, String s1) {
+                        log.finest(" template file path: " + s + ", template Modified: " + s1);
+                        String modifiedPath = EasyGServer.isWindows ? StringUtil.capDriveLetter(s.replaceAll("/", "\\\\")) : s;
+
                         String p[] = s1.split(File.separatorChar == '/' ? File.separator : (File.separator + File.separator));
+
                         if (p.length > 1) {
-                                if (new File(EasyGServer.APP_DIR + File.separator + "webapps" + File.separator + p[0] + File.separator + "WEB-INF").exists()) {
+                                String path = modifiedPath + File.separator + p[0] + File.separator + "WEB-INF";
+                                if (new File(path).exists()) {
                                         ServletContextImpl app = apps.get(p[0]);
                                         if (app != null) {
-                                                app.getTemplateServlet().removeFromCache(EasyGServer.APP_DIR + File.separator + "webapps" + File.separator + s1);
+                                                app.getTemplateServlet().removeFromCache(modifiedPath + File.separator + s1);
                                                 log.fine("removing template cache entry: " + s1);
                                         }
                                 }
