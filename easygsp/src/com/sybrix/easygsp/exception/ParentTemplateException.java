@@ -7,15 +7,15 @@ package com.sybrix.easygsp.exception;
  */
 public class ParentTemplateException extends Exception {
         public ParentTemplateException() {
-                super();    //To change body of overridden methods use File | Settings | File Templates.
+                super();    
         }
         public ParentTemplateException(String message) {
-                super(message);    //To change body of overridden methods use File | Settings | File Templates.
+                super(message);
         }
         public ParentTemplateException(String message, Throwable cause) {
-                super(message, cause);    //To change body of overridden methods use File | Settings | File Templates.
+                super(message, cause);
         }
         public ParentTemplateException(Throwable cause) {
-                super(cause);    //To change body of overridden methods use File | Settings | File Templates.
+                super(cause);
         }
 }

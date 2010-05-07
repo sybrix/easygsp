@@ -5,7 +5,7 @@
 
 
         <property name="jdk" value="${env.JAVA_HOME}"/>
-        <property name="buildNumber" value="0.4.1"/>
+        <property name="buildNumber" value="0.4.2"/>
         <property name="easyGSPDir" value="easygsp-${buildNumber}"/>
         <property name="lib" value="lib"/>
         <property name="src" value="src"/>
@@ -25,6 +25,7 @@
                 <file name="jnotify-0.93.jar"/>
                 <file name="asm-3.2.jar"/>
                 <file name="asm-commons-3.2.jar"/>
+                <file name="gson-1.3.jar"/>
                 <file name="mail.jar"/>
         </filelist>
 
@@ -153,11 +154,14 @@
 
                 <zip destfile="deploy/easygsp-${buildNumber}.zip" basedir="deploy"/>
 
-                <tar destfile="deploy/${easyGSPDir}.tar" basedir="deploy">
+                <!--tar destfile="deploy/${easyGSPDir}.tar" basedir="deploy">
                         <exclude name="**/*.zip"/>
                 </tar>
 
-                <gzip src="deploy/${easyGSPDir}.tar" destfile="deploy/${easyGSPDir}.tar.gz"/>
+                <gzip src="deploy/${easyGSPDir}.tar" destfile="deploy/${easyGSPDir}.tar.gz"/-->
 
+        </target>
+        <target name="buildAndCopy" depends="jar">
+                <copy tofile="c:/easygsp/bin/easygsp.jar" file="${build}/easygsp.jar"/>
         </target>
 </project>
