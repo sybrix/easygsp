@@ -1,0 +1,6 @@
+#summary Security
+
+= Security =
+
+EasyGSP server process has been designed with hosting in mind.  Sharing a JVM among many users requires that each shared application is isolated within its own sandbox.  It's would be a problem if application1 could access the files of application2.  It would also be a problem if application1 could run System.exit().  EasyGSP uses a custom security manager and custom classloaders to deal with these and other security concerns.
+
