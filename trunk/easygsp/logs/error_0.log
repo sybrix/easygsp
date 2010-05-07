@@ -1,8 +1,7 @@
-04/26/10 21:40.01 [FINE] - FileMonitor watching path: C:\projects\easygsp\easygsp\webapps
-04/26/10 21:40.01 [INFO] - Thread monitor started  (timeout: 300)
-04/26/10 21:40.01 [INFO] - SessionMonitor started.
-04/26/10 21:40.01 [FINE] - EmailService thread started
-04/26/10 21:40.01 [FINE] - Logger thread started
-04/26/10 21:40.01 [FINE] - loading database driver:org.firebirdsql.jdbc.FBDriver
-04/26/10 21:40.01 [FINE] - loading database driver:com.mysql.jdbc.Driver
-04/26/10 21:40.01 [FINE] - easygsp server accepting connections
+05/05/10 00:26.41 [INFO] - Thread monitor started  (timeout: 300)
+05/05/10 00:26.41 [INFO] - SessionMonitor started.
+05/05/10 00:26.41 [FINE] - EmailService thread started
+05/05/10 00:26.41 [FINE] - Logger thread started
+05/05/10 00:26.41 [FINE] - loading database driver:org.firebirdsql.jdbc.FBDriver
+05/05/10 00:26.42 [FINE] - loading database driver:com.mysql.jdbc.Driver
+05/05/10 00:26.42 [FINE] - EasyGSP Server accepting connections
