@@ -18,7 +18,18 @@ EasyOM only works with Firebird and MySQL database.  However, since it's just 1 
 To use, extract the zip, findEasyOM.groovy, add it to your project.  Either put it in a "util" package or change the package name in the groovy file.
 
 
-Use the following 2 methods to configure EasyOM.
+Use the following methods to configure EasyOM.
+
+==== public static void init(java.lang.Properties propertiesFile, ServletContext app) ===
+=
+  This method will call the init(Properties) method and the injectMethods(java.lang.Class) method for each class in the package specified by the "model.package" key in the properties files.
+{{{
+         def onApplicationStart(app) {  
+                def propFile = loadPropertiesFile('db.properties')
+                EasyOM.init(propFile, app)
+        } 
+}}}
+
 
 ==== public static void init(java.lang.Properties propFile) ====  
   Initializes the internal properties and datbase properties used for database operations
@@ -38,6 +49,11 @@ To initialize EasyOM and to add the persistence methods to an application's enti
        EasyOM.injectMethods(model.EntityObject3.class)
    }
 }}}
+
+or 
+
+
+
 
 The properties file expected by EasyOM.init() must have the follow name value pairs
 || *Property*|| *Description*||
