@@ -20,9 +20,8 @@ To use, extract the zip, findEasyOM.groovy, add it to your project.  Either put 
 
 Use the following methods to configure EasyOM.
 
-==== public static void init(java.lang.Properties propertiesFile, ServletContext app) ===
-=
-  This method will call the init(Properties) method and the injectMethods(java.lang.Class) method for each class in the package specified by the "model.package" key in the properties files.
+==== public static void init(java.lang.Properties propertiesFile, ServletContext app) ====
+  This method will call the init(Properties) method and the injectMethod (java.lang.Class) method for each class in the package specified by the "model.package" key in the properties files.
 {{{
          def onApplicationStart(app) {  
                 def propFile = loadPropertiesFile('db.properties')
