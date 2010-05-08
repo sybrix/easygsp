@@ -3,7 +3,7 @@
 = Creating an Application=
 
 
-To create an application in EasyGSP
+A folder in the webapps directory represents in application in EasyGSP.  To create an application in EasyGSP
 
   * Create a folder in the %EASYGSP_HOME%/webapps directory
   * Add a gsp file
