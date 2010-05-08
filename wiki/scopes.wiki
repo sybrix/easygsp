@@ -34,7 +34,7 @@ The above variables will be available for the next request by the current user b
 
 == Request, Session and Application Scope ==
 ||application || allows you to share state across the entire web application|| 
-||session || allows associating state with a given user and typically uses cookies to associate a session with a client||
+||session || allows associating state with a given user and requires cookies||
 ||request || allows the storage of objects for the current request only||
 
 
