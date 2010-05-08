@@ -74,8 +74,10 @@ Groovy has this thing call a Binding object.  As such every EasyGSP request has 
 
 
 
+===Request vs Bind===
+
 Let's say there's a User object with username, firstname and lastname properties.
-Request vs Bind
+
 
 {{{
      
