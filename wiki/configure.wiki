@@ -35,6 +35,7 @@ EasyGSP's configuration file is located @ $EASYGSP_HOME/conf/server.properties
 || file.monitor.interval || 5 || The interval at while the file system is checked. Only used when use.manual.file.monitor is true ||
 || file.monitor.path || webapps || || 
 || file.monitor.groovy.files|| || ||
+|| file.monitor.gsp.files || || ||
 || use.manual.file.monitor || false || When false, easygsp will use JNotify library to monitor file changes(it's not supported on all platforms). When true, an internal thread process monitors the file changes.  This manual option should only be used if Jnotify does work with the platform.||
 || admin.app || || ||
 || session.autostart || || ||
