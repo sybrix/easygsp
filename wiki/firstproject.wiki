@@ -22,7 +22,7 @@ To create an application in EasyGSP
 }}}
 
 
-
+Your application will start and EasyGSP will create a WEB-INF folder containing a web.groovy file.  Every application must have this folder and file, if they don't exist they wil be created on the first request for an application. 
 
 
 *web.groovy*
