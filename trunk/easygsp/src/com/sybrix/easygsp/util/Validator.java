@@ -19,9 +19,9 @@ public class Validator {
         private static final String localPart = atom + "(" + dotAtom + ")*"; //one atom followed by 0 or more dotAtoms.
 
         //RFC 1035 tokens for domain names:
-        private static final String letter = "[a-zA-Z]";
-        private static final String letDig = "[a-zA-Z0-9]";
-        private static final String letDigHyp = "[a-zA-Z0-9-]";
+        private static final String letter = "[a-zA-Z]+$";
+        private static final String letDig = "[a-zA-Z0-9]+$";
+        private static final String letDigHyp = "[a-zA-Z0-9-]+$";
         private static final String digit = "[0-9]";
 
         public static final String rfcLabel = letDig + letDigHyp + "{0,61}" + letDig;

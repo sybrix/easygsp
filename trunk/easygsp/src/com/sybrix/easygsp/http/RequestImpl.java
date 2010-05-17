@@ -79,6 +79,7 @@ public class RequestImpl implements HttpServletRequest {
         private static int uploadThresholdSize;
         private Map uploads;
         protected boolean isMulitpart = false;
+        private StringBuffer requestURL;
 
         static {
                 templateExtension = EasyGServer.propertiesFile.getString("template.extension", ".gsp");
@@ -200,7 +201,24 @@ public class RequestImpl implements HttpServletRequest {
         }
 
         public StringBuffer getRequestURL() {
-                return null;
+                if (requestURL == null) {
+                        requestURL = new StringBuffer();
+                        String uri = headers.get(RequestHeaders.REQUEST_URI);
+
+                        int end = uri.indexOf('?');
+                        int start = uri.lastIndexOf('/')+1;
+
+                        if (end < 0 )
+                                end = uri.length();
+
+                        if (start<0)
+                                start = 0;
+
+                        requestURL.append(uri.substring(start, end));
+
+                }
+
+                return requestURL;
         }
 
         public String getServletPath() {
@@ -589,7 +607,7 @@ public class RequestImpl implements HttpServletRequest {
                         }
 
                         setAttribute("_explicitForward", false);
-                        RequestThread.processScriptRequest(file, application.getGroovyScriptEngine(), servletBinding);
+                        RequestThread.processController(file, application.getGroovyScriptEngine(), servletBinding);
                 }
         }
 

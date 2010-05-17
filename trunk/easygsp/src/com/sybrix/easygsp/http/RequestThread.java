@@ -30,6 +30,7 @@ import javax.servlet.ServletException;
  * Description :
  */
 public class RequestThread extends Thread {
+
         private static final Logger log = Logger.getLogger(RequestThread.class.getName());
 
         protected static String altExtension;
@@ -124,6 +125,10 @@ public class RequestThread extends Thread {
 
                         // when false, request will auto forward to view
                         request.setAttribute("_explicitForward", false);
+                        request.setServletBinding(binding);
+                        binding = new CustomServletBinding(request, response, application, headers);
+                        RequestThreadInfo.get().setBinding(binding);
+
 
                         if (application.getAutoStartSessions() && session == null){
                                 session = (SessionImpl) request.getSession(true);
@@ -131,16 +136,11 @@ public class RequestThread extends Thread {
                                 session = (SessionImpl) request.getSession(false);
                         }
 
-                        binding = new CustomServletBinding(request, response, application, headers);
-
                         if (session != null){
                                 session.updateLastAccessedTime();
                                 expireFlashMessages(session);
                                 binding.setVariable("flash", session.getFlash());
                         }
-
-                        request.setServletBinding(binding);
-                        RequestThreadInfo.get().setBinding(binding);
 
                         if (EasyGServer.propertiesFile.getString("logging.level", "SEVERE").equals("FINEST")) {
                                 StringBuffer s = new StringBuffer();
@@ -191,12 +191,12 @@ public class RequestThread extends Thread {
                         if (parsedRequest.getRequestURI().endsWith(templateExtension)) {
                                 processTemplateRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         } else {
-                                processScriptRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
+                                processController(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         }
 
 
                 } catch (ApplicationNotFoundException e) {
-                        sendError(404, scriptPath, application.getGroovyScriptEngine(), binding, e);
+                        send404Error(response);
                 } catch (IOException e) {
                         log.log(SEVERE, "SCGIParsing failed", e);
                 } catch (SecurityException e) {
@@ -218,6 +218,12 @@ public class RequestThread extends Thread {
                         EasyGServer.sendToChannel(new ClusterMessage(application.getAppName(), application.getAppPath(), session.getId(), "session", new Object[]{session}));
 
 
+        }
+
+        private void send404Error(ResponseImpl response) {
+                String content = getErrorFileContent(404);
+                response.setStatus(404);
+                response.out(content);
         }
 
         private void expireFlashMessages(SessionImpl session) {
@@ -357,7 +363,7 @@ public class RequestThread extends Thread {
                 this.requestStartTime = requestStartTime;
         }
 
-        public static void processScriptRequest(final String requestURI, final GSE4 gse, final CustomServletBinding binding) {
+        public static void processController(final String requestURI, final GSE4 gse, final CustomServletBinding binding) {
                 final ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 
                 ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
@@ -400,7 +406,11 @@ public class RequestThread extends Thread {
 
                                         } catch (ResourceException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
-                                                sendError(500, requestURI, gse, binding, e);
+                                                if (e.getMessage().contains("Cannot open")){
+                                                        sendError(404, requestURI, gse, binding, e);
+                                                } else {
+                                                        sendError(500, requestURI, gse, binding, e);
+                                                }
 
                                         } catch (ScriptException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
@@ -668,7 +678,6 @@ public class RequestThread extends Thread {
 
                         String path = RequestThreadInfo.get().getCurrentFile().replace(appPath, "").replace(appPath2, "");
                         if (stackTraceElement != null) {
-//
 //                                if (RequestThreadInfo.get().isTemplateRequest()) {
 //                                        path = path.replace(appPath, "");
 //                                }
@@ -761,11 +770,11 @@ public class RequestThread extends Thread {
         private static String getErrorFileContent(int errorCode) {
                 StringWriter sw = null;
                 try {
-                        File errorFile = new File(EasyGServer.APP_DIR + File.separator + "conf" + File.separator + "errors" + File.separator + errorCode + ".html");
+                        File errorFile = new File(EasyGServer.APP_DIR + File.separator + "conf" + File.separator + "errors" + File.separator + "error" + errorCode + ".html");
                         FileReader fr = new FileReader(errorFile);
                         sw = new StringWriter((int) errorFile.length());
 
-                        char ch[] = new char[2048];
+                        char ch[] = new char[4096];
                         int c = 0;
                         while ((c = fr.read(ch, 0, ch.length)) != -1) {
                                 sw.write(ch, 0, c);

@@ -153,9 +153,11 @@ public class ResponseImpl implements HttpServletResponse {
                         if (EasyGServer.propertiesFile.getBoolean("virtual.hosting", false)) {
                                 if (s.startsWith("/"))
                                         url = (secure ? "https://" : "http://") + server + serverPort + s;
-                                else
-                                        url = (secure ? "https://" : "http://") + server + serverPort + "/" + s;
+                                else {
+                                        url = (secure ? "https://" : "http://") + server + serverPort + scriptPath + "/" + s;
+                                }
 
+                                log.finest("redirect: " + url);
                         } else {
                                 if (s.startsWith("/"))
                                         url = (secure ? "https://" : "http://") + server + serverPort + scriptPath + s;

@@ -299,6 +299,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
                                         "\t        def onApplicationEnd(app){\n" +
                                         "\t        }\n\n" +
 
+                                        "\t        def onSessionStart(app){\n" +
                                         "\t        }\n\n" +
 
                                         "\t        def onSessionEnd(session){\n" +

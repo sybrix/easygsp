@@ -3,20 +3,20 @@ package com.sybrix.easygsp.http;
 import com.sybrix.easygsp.http.Worker;
 import com.sybrix.easygsp.server.EasyGServer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
-import java.util.Stack;
 
 public class WorkerPool {
 
-        private List<Worker> workers = Collections.synchronizedList(new Stack<Worker>());
+        private List<Worker> workers = Collections.synchronizedList(new ArrayList<Worker>());
         private int min_threads;
         private int max_threads;
         private static WorkerPool _instance;
 
         public static WorkerPool getInstance() {
                 if (_instance == null)
-                        _instance = new WorkerPool(EasyGServer.propertiesFile.getInt("threadpool.min",5), EasyGServer.propertiesFile.getInt("threadpool.max",100));
+                        _instance = new WorkerPool(EasyGServer.propertiesFile.getInt("threadpool.min",5), EasyGServer.propertiesFile.getInt("threadpool.max",10));
 
                 return _instance;
         }
@@ -26,21 +26,28 @@ public class WorkerPool {
                 this.max_threads = max_threads;
 
                 for (int x = 0; x < min_threads; x++) {
-                        createNewWorker();
+                        addNewWorkerToQueue();
                 }
         }
 
 
-        private void createNewWorker() {
-                Worker xp = new Worker(this, null);
+        private void addNewWorkerToQueue() {
+                Worker xp = new Worker(this);
                 addWorker(xp);
                 xp.start();
+        }
+
+        private Worker createNewWorkerToQueue() {
+                Worker xp = new Worker(this);
+                xp.start();
+
+                return xp;
         }
 
         public void addWorker(Worker m) {
                 workers.add(m);
                 synchronized (workers) {
-                        workers.notify();
+                        workers.notifyAll();
                 }
         }
 
@@ -53,7 +60,11 @@ public class WorkerPool {
         }
 
         public Worker getWorker() {
-                return workers.remove(0);
+                Worker w  = workers.remove(0);
+                if (w == null)
+                        w = createNewWorkerToQueue();
+
+                return w;
         }
 
         public int getMinWorkerCount() {
