@@ -8,32 +8,26 @@ import java.net.Socket;
 public class Worker extends Thread {
         private static final Logger log = Logger.getLogger(Worker.class.getName());
         private static long ctr = 0;
+        private long id = ++ctr;
+
         private volatile boolean stopRequested = false;
 
         private WorkerPool workerPool;
-        private Map applications;
-        private Socket socket;
+        private RequestThread requestThread;
 
-        public Worker(WorkerPool mgr, Map applications) {
-                super("Worker Thread-" + ctr);
+        public Worker(WorkerPool mgr) {
+                super("Worker Thread - " + ctr);
                 this.workerPool = mgr;
-                this.applications = applications;
         }
 
-        public void processRequest() {
-                this.notify();
+        public synchronized void processRequest(RequestThread requestThread) {
+                this.requestThread = requestThread;
+                this.notifyAll();
         }
 
-        public Socket getSocket() {
-                return socket;
-        }
-
-        public void setSocket(Socket socket) {
-                this.socket = socket;
-        }
 
         public synchronized void run() {
-                log.fine("worker " + ctr + " ready");
+                log.fine("worker " + id + " ready");
 
                 while (!stopRequested) {
                         try {
@@ -45,28 +39,30 @@ public class Worker extends Thread {
                                                 break;
                                 }
 
-                                log.finer("worker " + ctr + " awake");
+                                log.finer("worker " + id + " awake");
 
                                 processClientRequest();
 
                                 // return worker to pool
                                 if (workerPool.getWorkerCount() < workerPool.getMaxWorkerCount()) {
                                         log.finest("adding working back to pool");
-                                        socket = null;
+
                                         workerPool.addWorker(this);
+                                        this.notify();
                                         log.finest(workerPool.getWorkerCount() + " workers in pool");
                                 }
 
                         } catch (Exception e) {
-
+                                      e.printStackTrace();
                         }
                 }
 
-                log.finer("worker " + ctr + " thread stopped");
+                log.finer("worker " + id + " thread stopped");
                 log.finer(workerPool.getWorkerCount() + " workers in pool");
         }
 
         private void processClientRequest() {
+             //   requestThread.runIt();
         }
 
 

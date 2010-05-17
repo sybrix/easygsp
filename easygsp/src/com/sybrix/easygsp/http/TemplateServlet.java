@@ -22,13 +22,7 @@ import groovy.text.TemplateEngine;
 import groovy.lang.GroovyRuntimeException;
 
 import java.io.*;
-import java.util.Date;
-import java.util.Map;
-import java.util.WeakHashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Collections;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.ServletConfig;
@@ -197,8 +191,8 @@ public class TemplateServlet extends AbstractHttpServlet {
          * Create new TemplateSerlvet.
          */
         public TemplateServlet(GSE4 groovyScriptEngine) {
-                this.cache = Collections.synchronizedMap(new WeakHashMap());
-                this.dependencyCache = Collections.synchronizedMap(new WeakHashMap());
+                this.cache = Collections.synchronizedMap(new HashMap());
+                this.dependencyCache = Collections.synchronizedMap(new HashMap());
 
                 this.engine = new IncludeTemplateEngine(groovyScriptEngine.getGroovyClassLoader()); // assigned later by init()
                 this.generateBy = true; // may be changed by init()
@@ -230,9 +224,9 @@ public class TemplateServlet extends AbstractHttpServlet {
                 /*
                 * Test cache for a valid template bound to the key.
                 */
-                if (verbose) {
-                        log("Looking for cached template by key \"" + key + "\"");
-                }
+//                if (verbose) {
+//                        System.out.println("Looking for cached template by key \"" + key + "\"");
+//                }
                 TemplateCacheEntry entry = (TemplateCacheEntry) cache.get(key);
                 if (entry != null) {
                         if (entry.validate(file)) {
@@ -247,9 +241,9 @@ public class TemplateServlet extends AbstractHttpServlet {
                         }
 
                 } else {
-                        if (verbose) {
-                                log("Cache miss.");
-                        }
+                       // if (verbose) {
+                               // System.out.println("Cache miss.");
+                        //}
                 }
 
                 //

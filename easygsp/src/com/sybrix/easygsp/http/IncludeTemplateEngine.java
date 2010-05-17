@@ -78,7 +78,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
 //                return null;
 //        }
 
-        public Template createTemplate(Reader reader) throws CompilationFailedException, IOException {
+        public  Template createTemplate(Reader reader) throws CompilationFailedException, IOException {
                 SimpleTemplate template = new SimpleTemplate();
                 SimpleTemplate.InheritedTemplateInfo inheritedTemplate = new SimpleTemplate.InheritedTemplateInfo();
                 try {
@@ -97,7 +97,11 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         if (!RequestThreadInfo.get().errorOccurred())
                                 RequestThreadInfo.get().setUniqueTemplateScriptName(uniqueScriptName);
 
-                        template.script = groovyShell.parse(script, uniqueScriptName);
+                        synchronized(groovyShell) {
+                                template.script = groovyShell.parse(script, uniqueScriptName);
+                                groovyShell.notifyAll();
+                        }
+
                         //template.script = groovyScriptEngine.createScript(script,requestedUrl, uniqueScriptName, binding);
                         StaticControllerMethods.addMethods(template.script.getClass());
                 } catch (Exception e) {

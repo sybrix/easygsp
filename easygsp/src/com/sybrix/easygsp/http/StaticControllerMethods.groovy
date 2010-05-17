@@ -16,6 +16,7 @@ import com.sybrix.easygsp.logging.EasyGSPLogger
 import java.text.SimpleDateFormat
 import com.google.gson.Gson
 import java.lang.reflect.Type
+import com.sybrix.easygsp.util.FileUtil
 
 
 public class StaticControllerMethods {
@@ -36,7 +37,7 @@ public class StaticControllerMethods {
                 addToInt(clazz)
                 addToLong(clazz)
                 addIsEmailValid(clazz)
-                addIsAlphaNumberic(clazz)
+                addIsAlphaNumeric(clazz)
                 addIsEmailValid(clazz)
                 addIsPhoneValid(clazz)
                 addIsZipCodeValid(clazz)
@@ -54,6 +55,8 @@ public class StaticControllerMethods {
                 addSendEmail(clazz)
                 addToJson(clazz)
                 addFromJson(clazz)
+                addCopy(clazz)
+                addDelete(clazz)
         }
 
         private static def addLogMethod(java.lang.Class clazz) {
@@ -211,8 +214,8 @@ public class StaticControllerMethods {
                 }
         }
 
-        private static def addIsAlphaNumberic(java.lang.Class clazz) {
-                clazz.metaClass.static.isAlphaNumberic = {String val ->
+        private static def addIsAlphaNumeric(java.lang.Class clazz) {
+                clazz.metaClass.static.isAlphaNumeric = {String val ->
                         return Validator.isAlphaNumeric(val);
                 }
         }
@@ -432,5 +435,17 @@ public class StaticControllerMethods {
                         }
                 }
                 return encodedString.toString();
+        }
+
+        private static def addCopy(java.lang.Class clazz) {
+                clazz.metaClass.static.copy = {src, dest ->
+                                FileUtil.copy(src,dest)
+                }
+        }
+
+        private static def addDelete(java.lang.Class clazz) {
+                clazz.metaClass.static.delete = {String dir ->
+                                FileUtil.deleteDirectory(dir)
+                }
         }
 }

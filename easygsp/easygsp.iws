@@ -3,32 +3,24 @@
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="7b391f42-fdfd-44c2-ad2a-af40b8f715d7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticControllerMethods.groovy" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticControllerMethods.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ThreadMonitor.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ThreadMonitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/exception/PropertyFormatException.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/exception/PropertyFormatException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/exception/ParentTemplateException.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/exception/ParentTemplateException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapps/examples/WEB-INF/errors/error404.gsp" afterPath="$PROJECT_DIR$/webapps/examples/WEB-INF/errors/error404.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/Worker.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/Worker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/WorkerPool.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/WorkerPool.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestImpl.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/error_0.log" afterPath="$PROJECT_DIR$/logs/error_0.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conf/errors/error404.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ResponseImpl.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ResponseImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/easygsp.iws" afterPath="$PROJECT_DIR$/easygsp.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestDispatcherImpl.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestDispatcherImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ServletContextImpl.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ServletContextImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/GSE4.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/GSE4.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/util/Validator.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/util/Validator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/easygsp.policy" afterPath="$PROJECT_DIR$/conf/easygsp.policy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGSecurityManager.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGSecurityManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/util/CaseInsensitiveMap.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/util/CaseInsensitiveMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapps/examples/num/numguess.gsp" afterPath="$PROJECT_DIR$/webapps/examples/num/numguess.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/FileMonitor.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/FileMonitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapps/examples/fileupload/fileupload.gsp" afterPath="$PROJECT_DIR$/webapps/examples/fileupload/fileupload.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/FlashMap.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/FlashMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapps/examples/index.gsp" afterPath="$PROJECT_DIR$/webapps/examples/index.gsp" />
-      <change type="DELETED" beforePath="C:\projects\easygsp\easygsp\webapps\examples\100_1175.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapps/examples/viewsource.gsp" afterPath="$PROJECT_DIR$/webapps/examples/viewsource.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/FlashMessage.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/FlashMessage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapps/examples/WEB-INF/num/NumberGuessBean.groovy" afterPath="$PROJECT_DIR$/webapps/examples/WEB-INF/num/NumberGuessBean.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/easygsp.iml" afterPath="$PROJECT_DIR$/easygsp.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/SessionImpl.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/SessionImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$" afterPath="$PROJECT_DIR$" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/util/FileUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/server.properties" afterPath="$PROJECT_DIR$/conf/server.properties" />
     </list>
     <ignored path="easygsp.iws" />
@@ -88,46 +80,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="200" class="com.sybrix.easygsp.http.RequestThread" package="com.sybrix.easygsp.http">
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="202" class="com.sybrix.easygsp.http.RequestThread" package="com.sybrix.easygsp.http">
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="198" class="com.sybrix.easygsp.http.RequestThread" package="com.sybrix.easygsp.http">
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java" line="129" class="com.sybrix.easygsp.http.IncludeTemplateEngine" package="com.sybrix.easygsp.http">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java" line="133" class="com.sybrix.easygsp.http.IncludeTemplateEngine" package="com.sybrix.easygsp.http">
         <option name="ENABLED" value="false" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -140,7 +93,7 @@
         <option name="CONDITION" value="scriptName.equals(&quot;index.gspx&quot;)" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java" line="434" class="com.sybrix.easygsp.server.EasyGServer" package="com.sybrix.easygsp.server">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java" line="441" class="com.sybrix.easygsp.server.EasyGServer" package="com.sybrix.easygsp.server">
         <option name="ENABLED" value="false" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -218,7 +171,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java" line="553" class="com.sybrix.easygsp.http.IncludeTemplateEngine.SimpleTemplate" package="com.sybrix.easygsp.http">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java" line="557" class="com.sybrix.easygsp.http.IncludeTemplateEngine.SimpleTemplate" package="com.sybrix.easygsp.http">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -231,7 +184,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java" line="247" class="com.sybrix.easygsp.http.TemplateServlet" package="com.sybrix.easygsp.http">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java" line="241" class="com.sybrix.easygsp.http.TemplateServlet" package="com.sybrix.easygsp.http">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -257,46 +210,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/ServletContextImpl.java" line="455" class="com.sybrix.easygsp.http.ServletContextImpl$1" package="com.sybrix.easygsp.http">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="182" class="com.sybrix.easygsp.http.RequestThread" package="com.sybrix.easygsp.http">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="185" class="com.sybrix.easygsp.http.RequestThread" package="com.sybrix.easygsp.http">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/FileMonitor.java" line="123" class="com.sybrix.easygsp.http.FileMonitor.ListenerImpl" package="com.sybrix.easygsp.http">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/ServletContextImpl.java" line="456" class="com.sybrix.easygsp.http.ServletContextImpl$1" package="com.sybrix.easygsp.http">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -322,20 +236,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/GSE4.java" line="198" class="com.sybrix.easygsp.http.GSE4.ScriptClassLoader" package="com.sybrix.easygsp.http">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="entryName.equals(&quot;/C:/easygsp/vhost/www.davesgamestore.com/index.groovy&quot;)" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/GSE4.java" line="195" class="com.sybrix.easygsp.http.GSE4.ScriptClassLoader" package="com.sybrix.easygsp.http">
+      <breakpoint url="file://$PROJECT_DIR$/test/GsonTest.java" line="23" class="GsonTest" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -348,7 +249,72 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/test/GsonTest.java" line="23" class="GsonTest" package="">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="432" class="com.sybrix.easygsp.http.RequestThread$1" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="202" class="com.sybrix.easygsp.http.RequestThread" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="196" class="com.sybrix.easygsp.http.RequestThread" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java" line="225" class="com.sybrix.easygsp.server.EasyGServer" package="com.sybrix.easygsp.server">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="408" class="com.sybrix.easygsp.http.RequestThread$1" package="com.sybrix.easygsp.http">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="399" class="com.sybrix.easygsp.http.RequestThread$1" package="com.sybrix.easygsp.http">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -409,8 +375,8 @@
       <property name="field_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByClasses" value="true" />
       <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="field_breakpoints_viewId" value="TABLE" />
+      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByMethods" value="false" />
     </ui_properties>
   </component>
@@ -429,38 +395,69 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="easygsp.policy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/conf/easygsp.policy">
+      <file leaf-file-name="RequestThread.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="4" selection-start="4177" selection-end="4177" vertical-scroll-proportion="0.0">
+            <state line="36" column="68" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServletContextImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/ServletContextImpl.java">
+      <file leaf-file-name="EasyGServer.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="320" column="16" selection-start="10968" selection-end="10968" vertical-scroll-proportion="0.0">
+            <state line="45" column="13" selection-start="1459" selection-end="1459" vertical-scroll-proportion="0.33333334">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ThreadPoolExecutor.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://C:/jdk1.6.0_16/src.zip!/java/util/concurrent/ThreadPoolExecutor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="491" column="11" selection-start="20110" selection-end="20110" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SessionImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/SessionImpl.java">
+      <file leaf-file-name="error404.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conf/errors/error404.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="159" column="55" selection-start="5450" selection-end="5450" vertical-scroll-proportion="0.0">
+            <state line="9" column="37" selection-start="241" selection-end="241" vertical-scroll-proportion="-6.375">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.properties" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/conf/server.properties">
+      <file leaf-file-name="ThreadMonitor.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/ThreadMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="87" column="25" selection-start="2857" selection-end="2857" vertical-scroll-proportion="0.7201365">
+            <state line="49" column="16" selection-start="1670" selection-end="1670" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GSE4.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/GSE4.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="72" column="71" selection-start="2725" selection-end="2725" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TemplateServlet.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="262" column="60" selection-start="9802" selection-end="9802" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -468,52 +465,25 @@
       <file leaf-file-name="IncludeTemplateEngine.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="13" selection-start="1646" selection-end="1646" vertical-scroll-proportion="0.0">
+            <state line="94" column="85" selection-start="3837" selection-end="3837" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapps/examples/index.gsp">
+      <file leaf-file-name="GroovyClassLoader.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://C:/groovy-1.7.2/src/groovy-1.7.2/src/main/groovy/lang/GroovyClassLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="107" selection-start="856" selection-end="856" vertical-scroll-proportion="0.0">
+            <state line="59" column="41" selection-start="2245" selection-end="2245" vertical-scroll-proportion="-0.68">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EasyGServer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java">
+      <file leaf-file-name="error404.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapps/examples/WEB-INF/errors/error404.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="24" selection-start="4360" selection-end="4360" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="server2.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/conf/server2.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EasyGSecurityManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGSecurityManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="137" column="32" selection-start="5053" selection-end="5053" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GsonTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/GsonTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="18" selection-start="522" selection-end="522" vertical-scroll-proportion="0.0">
+            <state line="8" column="30" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -534,22 +504,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestImpl.java" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticControllerMethods.groovy" />
-        <option value="$PROJECT_DIR$/build.xml" />
-        <option value="$PROJECT_DIR$/webapps/examples/fileupload/fileupload.gsp" />
-        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/GSE4.java" />
-        <option value="$PROJECT_DIR$/test/SimpleTemplateImportTest.groovy" />
-        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/FileMonitor.java" />
-        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java" />
-        <option value="$PROJECT_DIR$/test/GsonTest.java" />
-        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGSecurityManager.java" />
-        <option value="$PROJECT_DIR$/conf/easygsp.policy" />
-        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ServletContextImpl.java" />
-        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/SessionImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/util/Validator.java" />
+        <option value="$PROJECT_DIR$/webapps/examples/db/db2.gsp" />
+        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ResponseImpl.java" />
+        <option value="$PROJECT_DIR$/conf/errors/error404.html" />
+        <option value="$PROJECT_DIR$/webapps/examples/WEB-INF/errors/error404.gsp" />
         <option value="$PROJECT_DIR$/conf/server.properties" />
+        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/WorkerPool.java" />
+        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/Worker.java" />
+        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java" />
+        <option value="C:/groovy-1.7.2/src/groovy-1.7.2/src/main/groovy/lang/GroovyClassLoader.java" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java" />
-        <option value="$PROJECT_DIR$/webapps/examples/index.gsp" />
+        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ThreadMonitor.java" />
+        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java" />
+        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" />
       </list>
     </option>
   </component>
@@ -859,16 +829,16 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Problems" />
-      </pane>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="easygsp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -923,28 +893,126 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="http" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="conf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="errors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope">
+        <subPane subId="Problems" />
       </pane>
       <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="195" />
-    <property name="project.structure.last.edited" value="Modules" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="157" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="34" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="184" />
     <property name="OverrideImplement.combined" value="true" />
-    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="184" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
+    <property name="options.splitter.main.proportions" value="0.3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
-    <property name="RunManagerConfig.showSettingsBeforeRunnig" value="false" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
+    <property name="RunManagerConfig.showSettingsBeforeRunnig" value="false" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
     <property name="recentsLimit" value="5" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="158" />
@@ -961,21 +1029,21 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="185" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="819" />
     <property name="GoToClass.includeLibraries" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="819" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
     <property name="options.lastSelected" value="fileTemplates" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.searchVisible" value="true" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -990,119 +1058,7 @@
       <recent name="com.sybrix.easygsp.http" />
     </key>
   </component>
-  <component name="RestoreUpdateTree">
-    <UpdateInfo date="5/7/10 2:02 AM" ActionInfo="_Update">
-      <UpdatedFiles>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated from server" />
-          <option name="myStatusName" value="Changed on server" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CHANGED_ON_SERVER" />
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Updated" />
-            <option name="myStatusName" value="Changed" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="UPDATED" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Created" />
-            <option name="myStatusName" value="Created" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="CREATED" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Deleted" />
-            <option name="myStatusName" value="Deleted" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="true" />
-            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Restored" />
-            <option name="myStatusName" value="Will be restored" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="RESTORED" />
-          </FILE-GROUP>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Modified" />
-          <option name="myStatusName" value="Modified" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MODIFIED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Skipped" />
-          <option name="myStatusName" value="Skipped" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SKIPPED" />
-          <PATH vcs="svn" revision="811">C:\projects\easygsp\easygsp</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with conflicts" />
-          <option name="myStatusName" value="Will be merged with conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_CONFLICTS" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged" />
-          <option name="myStatusName" value="Will be merged" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Not in repository" />
-          <option name="myStatusName" value="Not in repository" />
-          <option name="mySupportsDeletion" value="true" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UNKNOWN" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally added" />
-          <option name="myStatusName" value="Locally added" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_ADDED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally removed" />
-          <option name="myStatusName" value="Locally removed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_REMOVED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Switched" />
-          <option name="myStatusName" value="Switched" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SWITCHED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with property conflicts" />
-          <option name="myStatusName" value="Will be merged with property conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with tree conflicts" />
-          <option name="myStatusName" value="Will be merged with tree conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-        </FILE-GROUP>
-      </UpdatedFiles>
-    </UpdateInfo>
-  </component>
-  <component name="RunManager" selected="JUnit.Unnamed1">
+  <component name="RunManager" selected="Application.EasyGServer">
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
       <module name="" />
       <setting name="vmparams" value="" />
@@ -1485,7 +1441,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SimpleTemplateImportTest" />
+      <option name="MAIN_CLASS_NAME" value="ScriptTest" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="" />
@@ -1623,21 +1579,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1680" height="1036" extended-state="0" />
+    <frame x="-8" y="-8" width="1696" height="1036" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2987872" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3782267" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12458655" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1589363" sideWeight="0.69349504" order="8" side_tool="false" content_ui="tabs" x="1361" y="154" width="296" height="210" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16141002" sideWeight="0.64148813" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.10349051" sideWeight="0.7949283" order="11" side_tool="false" content_ui="tabs" x="1064" y="64" width="539" height="907" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21150278" sideWeight="0.69349504" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35778782" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28282827" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15492958" sideWeight="0.6328556" order="8" side_tool="false" content_ui="tabs" x="1361" y="154" width="296" height="210" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3815937" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38919514" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.384785" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35942668" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12458655" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16411513" sideWeight="0.6328556" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.10349051" sideWeight="0.7949283" order="11" side_tool="false" content_ui="tabs" x="1064" y="64" width="539" height="907" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20820576" sideWeight="0.6328556" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28282827" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Runner Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32919955" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Aspects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1648,17 +1605,16 @@
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45454547" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1349353" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.09107579" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Archetypes" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33435395" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.09107579" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5701459" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46464646" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Web Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25427872" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1723,87 +1679,117 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/FileMonitor.java">
+    <entry file="file://$PROJECT_DIR$/conf/server.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="126" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.0" />
+        <state line="16" column="19" selection-start="467" selection-end="467" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestError.java">
+    <entry file="file://$PROJECT_DIR$/webapps/examples/WEB-INF/errors/error404.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0" />
+        <state line="8" column="30" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/server/ShutdownHook.java">
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/ResponseImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="109" selection-end="109" vertical-scroll-proportion="0.0" />
+        <state line="362" column="23" selection-start="12918" selection-end="12918" vertical-scroll-proportion="0.33386838">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapps/examples/propertiesFile.gsp">
+    <entry file="file://C:/groovy-1.7.2/src/groovy-1.7.2/src/main/org/codehaus/groovy/control/CompilationUnit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="461" column="16" selection-start="16293" selection-end="16293" vertical-scroll-proportion="0.11235955">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapps/examples/example.properties">
+    <entry file="jar://$PROJECT_DIR$/lib/servlet-api-2.5-6.1.11.jar!/javax/servlet/GenericServlet.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="28" column="20" selection-start="1332" selection-end="1332" vertical-scroll-proportion="0.64526486">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapps/examples/test.groovy">
+    <entry file="file://C:/groovy-1.7.2/src/groovy-1.7.2/src/main/groovy/lang/GroovyClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="59" column="41" selection-start="2245" selection-end="2245" vertical-scroll-proportion="-0.68">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/easygsp.policy">
+    <entry file="file://C:/groovy-1.7.2/src/groovy-1.7.2/src/main/groovy/text/TemplateEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="4" selection-start="4177" selection-end="4177" vertical-scroll-proportion="0.0" />
+        <state line="34" column="29" selection-start="1169" selection-end="1169" vertical-scroll-proportion="0.30016053">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/ServletContextImpl.java">
+    <entry file="file://C:/groovy-1.7.2/src/groovy-1.7.2/src/main/groovy/lang/GroovyShell.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="320" column="16" selection-start="10968" selection-end="10968" vertical-scroll-proportion="0.0" />
+        <state line="759" column="18" selection-start="30064" selection-end="30064" vertical-scroll-proportion="0.33226323">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/SessionImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="55" selection-start="5450" selection-end="5450" vertical-scroll-proportion="0.0" />
+        <state line="262" column="60" selection-start="9802" selection-end="9802" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="13" selection-start="1646" selection-end="1646" vertical-scroll-proportion="0.0" />
+        <state line="94" column="85" selection-start="3837" selection-end="3837" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapps/examples/index.gsp">
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/GSE4.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="107" selection-start="856" selection-end="856" vertical-scroll-proportion="0.0">
+        <state line="72" column="71" selection-start="2725" selection-end="2725" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/jdk1.6.0_16/src.zip!/java/util/concurrent/ThreadPoolExecutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="491" column="11" selection-start="20110" selection-end="20110" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/errors/error404.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="37" selection-start="241" selection-end="241" vertical-scroll-proportion="-6.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="68" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/ThreadMonitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="16" selection-start="1670" selection-end="1670" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="24" selection-start="4360" selection-end="4360" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf/server2.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGSecurityManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="137" column="32" selection-start="5053" selection-end="5053" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/GsonTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="18" selection-start="522" selection-end="522" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf/server.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="25" selection-start="2857" selection-end="2857" vertical-scroll-proportion="0.7201365">
-          <folding />
+        <state line="45" column="13" selection-start="1459" selection-end="1459" vertical-scroll-proportion="0.33333334">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

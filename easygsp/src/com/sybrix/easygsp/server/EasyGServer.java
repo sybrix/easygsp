@@ -19,10 +19,8 @@ package com.sybrix.easygsp.server;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.*;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.logging.Handler;
@@ -69,7 +67,7 @@ public class EasyGServer extends ReceiverAdapter {
         private ConsoleServer consoleServer;
         private static Boolean clusteringEnabled = false;
         private static volatile Boolean isSettingState = false;
-        public static String adminApp; 
+        public static String adminApp;
 
         static {
                 //APP_DIR = System.getProperty("easygsp.home");
@@ -109,10 +107,10 @@ public class EasyGServer extends ReceiverAdapter {
                         clusteringEnabled = propertiesFile.getBoolean("clustering.enabled", false);
                         adminApp = propertiesFile.getString("admin.app", "admin");
 
-                        if (System.getProperty("java.security.manager")!=null){
+                        if (System.getProperty("java.security.manager") != null) {
                                 System.setSecurityManager(new EasyGSecurityManager());
                         } else {
-                                log.info("Skipped setting security manager"); 
+                                log.info("Skipped setting security manager");
                         }
 
                         System.setProperty("easygsp.version", "@easygsp_version");
@@ -132,6 +130,7 @@ public class EasyGServer extends ReceiverAdapter {
                                         "\nWORKING_DIR: " + APP_DIR +
                                         "\nGroovy Script Server Started. Listening on port " + propertiesFile.getInt("server.port", 4444) +
                                         "\n");
+
 
                         if (EasyGServer.propertiesFile.getBoolean("virtual.hosting", false) == true && EasyGServer.propertiesFile.getString("default.host", "").equals("")) {
                                 throw new RuntimeException("When virtual.hosting == true, a default.host value is required.");
@@ -202,22 +201,28 @@ public class EasyGServer extends ReceiverAdapter {
 
                         Socket socket = null;
                         log.fine("EasyGSP Server accepting connections");
+
+                        int poolSize = 5;
+                        int maxPoolSize = 10;
+                        long keepAliveTime = 10;
+                        final ArrayBlockingQueue<Runnable> queue = new ArrayBlockingQueue<Runnable>(500);
+
+                        executorService = new ThreadPoolExecutor(poolSize, maxPoolSize, keepAliveTime, TimeUnit.SECONDS, queue);
+
                         while (!stopRequested) {
 //
-//                                executorService.execute(new RequestThread(serverSocket.accept(), applications, startTime));
 
                                 try {
                                         if (isStopped())
                                                 break;
-
+                                        //executorService.execute(new RequestThread(serverSocket.accept(), applications));
                                         socket = serverSocket.accept();
                                         RequestThread t = new RequestThread(socket, applications);
+
                                         ThreadMonitor.add(t);
                                         t.start();
-
-
                                 } catch (Exception e) {
-                                        close(socket);
+
                                         log.log(Level.FINE, "server socket loop failed");
                                 }
                         }
@@ -226,7 +231,7 @@ public class EasyGServer extends ReceiverAdapter {
 
                         FileMonitor.stop();
                         EmailService.stop();
-                        
+
                         while (!ThreadMonitor.isEmpty()) {
                                 Thread.sleep(100);
                                 log.fine("thread monitor size:" + ThreadMonitor.size());
@@ -393,6 +398,7 @@ public class EasyGServer extends ReceiverAdapter {
                         log.log(Level.SEVERE, "sendToChannel() Exception ", e);
                 }
         }
+
         //
         @Override
         public void receive(Message msg) {
