@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager" verified="true">
-    <list default="true" readonly="true" id="7b391f42-fdfd-44c2-ad2a-af40b8f715d7" name="Default" comment="">
+    <list default="true" readonly="true" id="7b391f42-fdfd-44c2-ad2a-af40b8f715d7" name="Default" comment="0.4.3  5/16/2010&#10;- added - serves 404 when app not found&#10;- modified IncludeTemplateEngine to  synchronized(groovyShell)  when parsing&#10;- modified to serve 404 when gspx page not found, even if groovy file exists&#10;- auto generated web.groovy corrected&#10;- added - copy and delete directory implicity methods&#10;- corrected Validator regex&#10;&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticControllerMethods.groovy" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticControllerMethods.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapps/examples/WEB-INF/errors/error404.gsp" afterPath="$PROJECT_DIR$/webapps/examples/WEB-INF/errors/error404.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/Worker.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/Worker.java" />
@@ -404,13 +404,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EasyGServer.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="EasyGServer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="13" selection-start="1459" selection-end="1459" vertical-scroll-proportion="0.33333334">
+            <state line="45" column="13" selection-start="1459" selection-end="1459" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.properties" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conf/server.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="17" selection-start="128" selection-end="128" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/SessionImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="151" column="56" selection-start="5047" selection-end="5047" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestImpl.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="55" column="13" selection-start="1812" selection-end="1812" vertical-scroll-proportion="0.29651162">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -451,39 +478,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TemplateServlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="262" column="60" selection-start="9802" selection-end="9802" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="IncludeTemplateEngine.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="94" column="85" selection-start="3837" selection-end="3837" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GroovyClassLoader.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://C:/groovy-1.7.2/src/groovy-1.7.2/src/main/groovy/lang/GroovyClassLoader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="41" selection-start="2245" selection-end="2245" vertical-scroll-proportion="-0.68">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="error404.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapps/examples/WEB-INF/errors/error404.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="30" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -511,7 +509,6 @@
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ResponseImpl.java" />
         <option value="$PROJECT_DIR$/conf/errors/error404.html" />
         <option value="$PROJECT_DIR$/webapps/examples/WEB-INF/errors/error404.gsp" />
-        <option value="$PROJECT_DIR$/conf/server.properties" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/WorkerPool.java" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/Worker.java" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java" />
@@ -520,6 +517,7 @@
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ThreadMonitor.java" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" />
+        <option value="$PROJECT_DIR$/conf/server.properties" />
       </list>
     </option>
   </component>
@@ -1033,7 +1031,7 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="819" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="options.lastSelected" value="fileTemplates" />
+    <property name="options.lastSelected" value="preferences.sourceCode" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
@@ -1631,7 +1629,7 @@
     <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
     <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.4.2  5/7/2010&#10;- Modified session and app scope to only accept strings&#10;- corrected problems with template reloading&#10;- added admin app support&#10;- updated examples" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.4.3  5/16/2010&#10;- added - serves 404 when app not found&#10;- modified IncludeTemplateEngine to  synchronized(groovyShell)  when parsing&#10;- modified to serve 404 when gspx page not found, even if groovy file exists&#10;- auto generated web.groovy corrected&#10;- added - copy and delete directory implicity methods&#10;- corrected Validator regex&#10;&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1656,6 +1654,7 @@
     <MESSAGE value="0.3.3  2/22/10&#10;- added ConsoleServer for socket IDE support&#10;- added format methods to StaticControllerMethods&#10;- webapp  classloader excludes jcs package" />
     <MESSAGE value="0.4.1  5/1/2010&#10;- Clustering support via JGroups&#10;- EasyOM Transactions support&#10;- email support via implicit sendEmail method&#10;- Class reloading via JNotify file monitoring&#10;- added bind(Map values)&#10;- added Template Inheritance&#10;-added file.encoding property access" />
     <MESSAGE value="0.4.2  5/7/2010&#10;- Modified session and app scope to only accept strings&#10;- corrected problems with template reloading&#10;- added admin app support&#10;- updated examples" />
+    <MESSAGE value="0.4.3  5/16/2010&#10;- added - serves 404 when app not found&#10;- modified IncludeTemplateEngine to  synchronized(groovyShell)  when parsing&#10;- modified to serve 404 when gspx page not found, even if groovy file exists&#10;- auto generated web.groovy corrected&#10;- added - copy and delete directory implicity methods&#10;- corrected Validator regex&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1679,25 +1678,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/conf/server.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="19" selection-start="467" selection-end="467" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapps/examples/WEB-INF/errors/error404.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="30" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/ResponseImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="362" column="23" selection-start="12918" selection-end="12918" vertical-scroll-proportion="0.33386838">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/groovy-1.7.2/src/groovy-1.7.2/src/main/org/codehaus/groovy/control/CompilationUnit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="461" column="16" selection-start="16293" selection-end="16293" vertical-scroll-proportion="0.11235955">
@@ -1735,7 +1715,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/TemplateServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="262" column="60" selection-start="9802" selection-end="9802" vertical-scroll-proportion="0.0">
+        <state line="262" column="60" selection-start="9804" selection-end="9804" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1786,10 +1766,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="13" selection-start="1459" selection-end="1459" vertical-scroll-proportion="0.33333334">
+        <state line="45" column="13" selection-start="1459" selection-end="1459" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/server.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="17" selection-start="128" selection-end="128" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/SessionImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="151" column="56" selection-start="5047" selection-end="5047" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="13" selection-start="1812" selection-end="1812" vertical-scroll-proportion="0.29651162">
+          <folding />
         </state>
       </provider>
     </entry>
