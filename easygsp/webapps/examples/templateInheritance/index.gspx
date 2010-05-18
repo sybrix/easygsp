@@ -1,0 +1,13 @@
+<%@ extends 'parent.gspx' %>
+
+<%@ block center %>
+        index.gspx extends parent template 'parent.gspx'
+        <br/>
+        Center content. Today is <%= new Date() %>
+<%@ endblock %>
+
+
+<%@ block column1 add %> 
+
+        <br/><br/><br/>This content was added to the existing Column1 content in the parent template.
+<%@ endblock %>
