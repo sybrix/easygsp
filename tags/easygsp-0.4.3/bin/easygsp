@@ -1,0 +1,58 @@
+#!/bin/sh
+#
+# EasyGSP     Startup script for EasyGSP
+#
+# chkconfig: - 85 15
+# description: EasyGSP SCGI Server
+#
+# processname: java
+# config: /usr/local/easygsp/conf/server.properties
+
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+
+prog="gss"
+gss="/usr/local/easygsp/start.sh"
+gssstop="/usr/local/easygsp/stop.sh"
+RETVAL=0
+
+start() {
+	echo -n $"Starting $prog: "
+	daemon $gss
+	
+	touch /var/lock/subsys/$prog
+	return 
+}
+
+stop() {
+	echo -n $"Stopping $prog: "
+	$gssstop
+	
+        rm -f /var/lock/subsys/$prog
+	return 
+}
+
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+		start
+		;;
+	status)
+		status $gss
+		RETVAL=$?
+		;;
+	*)
+		echo $"Usage: $0 {start|stop|restart|status}"
+		RETVAL=1
+esac
+
+exit $RETVAL
