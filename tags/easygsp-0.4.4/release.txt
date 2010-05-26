@@ -1,0 +1,56 @@
+0.1.1     10/28/2009
+- Fixed bug that prevented script name and bound(bind) key name from being the same
+- Corrected error rhandling to better ensure errors are written to screen
+- added Windows service bat/exe files
+
+
+0.1.2     10/22/2009
+- Fixed null pointer exception in sendError
+- Reverted back to singe GroovyScriptEngine for scripts and templates
+
+
+0.2  11/11/2009
+- Changed implicit cout() method to console()
+- Fix bug in log() method
+- added implicit methods to event calls in web.groovy
+
+
+0.2.1  11/23/2009
+- fix the problem related to differences in Apache vs LightTPD scgi headers
+- Removed the need for easygsp to have to have a property that indicated where the docroot for the http server is
+
+0.2.2  11/26/2009
+- changed defaults in properties file
+- modified to allow errorPages to GSPs instead of static and groovy files
+- fixed ThreadDeath errors to use normal error handling
+
+0.3 1/24/2010
+ - Fixed forward() method, now can forward to controller or template 
+ - println no longer writes to response.out, render does
+ - Class loader prevents access to com.sybrix.easygsp packages from webapps
+ - added "app" var to binding as shortcut for "application"
+ - added setCookie(Map) method
+ - added Clustering (not good implementation, will redo)
+ - removed non-working examples
+ 
+0.3.2  2/8/10
+- improved 500 error page
+- more Apache index page fixes
+- changed default return value for params.get to return String not null, per api spec
+- added md5 and sha1 implicit methods
+- fixed GSE4 potential deadlock
+- improved thread killer process
+
+0.3.3  2/22/10
+- added ConsoleServer for socket IDE support
+- added format methods to StaticControllerMethods
+- webapp  classloader excludes jcs package
+
+0.4   4/27/10
+- Clustering support via JGroups
+- EasyOM Transactions support
+- email support via implicit sendEmail method
+- Class reloading via JNotify file monitoring
+- added bind(Map values)
+- added Template Inheritance
+

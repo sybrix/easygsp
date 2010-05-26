@@ -1,0 +1,32 @@
+05/16/10 18:55.59 [FINE] - FileMonitor watching path: C:\projects\easygsp\easygsp\webapps
+05/16/10 18:55.59 [INFO] - Thread monitor started  (timeout: 300)
+05/16/10 18:55.59 [INFO] - SessionMonitor started.
+05/16/10 18:55.59 [FINE] - EmailService thread started
+05/16/10 18:55.59 [FINE] - Logger thread started
+05/16/10 18:55.59 [FINE] - loading database driver:org.firebirdsql.jdbc.FBDriver
+05/16/10 18:56.00 [FINE] - loading database driver:com.mysql.jdbc.Driver
+05/16/10 18:56.00 [FINE] - EasyGSP Server accepting connections
+05/16/10 18:56.04 [FINE] - adding thread id:18 from running map
+05/16/10 18:56.04 [FINE] - parsed AppName: examples
+05/16/10 18:56.04 [FINE] - parsed AppDir: c:/easygsp/webapps/examples
+05/16/10 18:56.04 [FINE] - parsed RequestURIPath: c:/easygsp/webapps/examples/templateinheritance/index.gspx
+05/16/10 18:56.04 [FINE] - parsed RequestURI: templateInheritance/index.gspx
+05/16/10 18:56.04 [FINE] - loading application: c:\easygsp\webapps\examples
+05/16/10 18:56.04 [FINE] - starting application: C:\easygsp\webapps\examples
+05/16/10 18:56.05 [FINE] - invoking onApplicationStart for examples
+05/16/10 18:56.07 [FINE] - onApplicationStart successful for examples
+05/16/10 18:56.07 [FINE] com.sybrix.easygsp.http.RequestThread$1.call() - Cannot open URL: file:/C:/easygsp/webapps/examples/WEB-INF/templateInheritance/index.groovy
+groovy.util.ResourceException: Cannot open URL: file:/C:/easygsp/webapps/examples/WEB-INF/templateInheritance/index.groovy
+	at com.sybrix.easygsp.http.GSE4(getResourceConnection:311)
+	at com.sybrix.easygsp.http.GSE4(loadScriptByName:421)
+	at com.sybrix.easygsp.http.GSE4(createScript:548)
+	at com.sybrix.easygsp.http.GSE4(run:530)
+	at com.sybrix.easygsp.http.RequestThread$1(call:381)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(use:93)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(access$200:61)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport(use:201)
+	at com.sybrix.easygsp.http.RequestThread(processController:443)
+	at com.sybrix.easygsp.http.RequestThread(run:194)
+
+
+05/16/10 18:56.12 [FINE] - took 7134 ms

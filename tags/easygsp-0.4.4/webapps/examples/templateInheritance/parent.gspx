@@ -1,0 +1,29 @@
+<html>
+        <heaD>
+                <title>Template Inheritance</title>
+        </heaD>
+        <body>
+                <table border="1" width="90%" align="center">
+                        <tr>
+                                <td colspan="3">Header</td>
+                        </tr>
+                        <tr>
+                                <td style="height:500px" width="20%">
+                                        <%@ block column1 %>
+                                                Parent Content in column 1
+                                        <%@ endblock %>
+                                </td>
+                                <td  align="center">
+                                <%@ block center %>                                         
+                                <%@ endblock %>
+                                </td>
+                                <td  width="20%">Column 3</td>
+                        </tr>
+                        <tr>
+                                <td colspan="3">Footer</td>
+                        </tr>
+                </table>
+
+        </body>
+</html>  
+        
