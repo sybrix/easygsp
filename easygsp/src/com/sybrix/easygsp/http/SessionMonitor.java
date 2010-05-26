@@ -31,7 +31,7 @@ public class SessionMonitor extends Thread {
                                         long diff = System.currentTimeMillis() - session.getLastAccessedTime();
                                         if (diff >= timeOut) {
                                                 log.fine("stopping session: " + session.getId() + ", app: " + app.getAppName());
-
+                                                RequestThreadInfo.get().setApplication(app);
                                                 try {
                                                         // threaded ?
                                                         if (app.groovyWebFileExists())
