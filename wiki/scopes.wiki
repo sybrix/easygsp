@@ -2,7 +2,7 @@
 
 = Scope =
 
-There are 4 primary scopes in EasyGSP:  Flash, Request, Session and Application.  If your backgroup is java web development each of these work as you would expect with one major exception.  Only strings can be stored in Session and Application scope. User defined objects can not be stored in Session or Application scope.  This restriction simplifies the objective of operatiing in as stateless a manner possible, and also makes classreloading signficantly simplier and less resource intensive.
+There are 4 primary scopes in EasyGSP:  Flash, Request, Session and Application.  If your background is java web development each of these work as you would expect with one major exception.  Only strings can be stored in Session and Application scope. User defined objects can not be stored in Session or Application scope.  This restriction simplifies the objective of operatiing in as stateless a manner possible, and also makes classreloading signficantly simplier and less resource intensive.
 
 
 == Flash ==
