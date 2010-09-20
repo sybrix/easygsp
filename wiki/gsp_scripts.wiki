@@ -138,7 +138,7 @@ Here's the structure for each piece of the MVC model, where the name of the appl
         bind 'user', user
 }}}
 
-
+Avoid naming classes or pages the same as implicit objects. Naming a class request, response, session, application or context has the potential produce runtime errors with every little useful stacktrace information.
 
 [implicit_methods bind() method explanation ]
   
