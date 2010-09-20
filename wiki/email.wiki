@@ -41,7 +41,7 @@ web.groovy
      def onApplicationStart(app){
           app['smtp.host'] = 'server1.gmail.com'
           app['smtp.port'] =  465
-          app['smtp.username'] = 'dsmith03'
+          app['smtp.username'] = 'easygsp'
           app['smtp.password'] =  'password'
           app['smtp.authentication.required'] = true
      }
