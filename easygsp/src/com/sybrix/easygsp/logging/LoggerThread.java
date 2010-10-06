@@ -21,7 +21,7 @@ public class LoggerThread extends Thread{
 
         @Override
         public void run() {
-                log.fine("Logger thread started");
+                log.info("Logger thread started");
                 while(!stopped){
                         try {
                                Thread.sleep(checkInterval);
@@ -32,7 +32,7 @@ public class LoggerThread extends Thread{
                         EasyGSPLogger.getInstance().logMessagesInQueue();
                 }
 
-                log.fine("Logger thread stopped");
+                log.info("Logger thread stopped");
         }
 
         public boolean messagesInQueue(){

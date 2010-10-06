@@ -82,7 +82,7 @@ public class ResponseImpl implements HttpServletResponse {
                 // this.request = request;
                 this.outputStream = new ServletOutputStreamImpl(outputStream);
                 characterEncoding = EasyGServer.propertiesFile.getString("default.charset");
-                headers.put(ResponseHeaders.CONTENT_TYPE, "text/html; charset=" + characterEncoding);
+                //headers.put(ResponseHeaders.CONTENT_TYPE, "text/html; charset=" + characterEncoding);
                 bufferSize = EasyGServer.propertiesFile.getInt("output.buffer.size");
                 // bufferedOutputStream = new BufferedOutputStream(outputStream);
         }

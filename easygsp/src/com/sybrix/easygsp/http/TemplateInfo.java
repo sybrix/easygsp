@@ -13,7 +13,8 @@ import java.util.HashSet;
 public class TemplateInfo {
         private String templateRoot;
         private Boolean sourceNewer = false;
-        TemplateServlet.TemplateCacheEntry cachEntry;
+        private TemplateCacheEntry cachEntry;
+
         private Set children;
 
         public TemplateInfo() {
@@ -40,7 +41,7 @@ public class TemplateInfo {
                 this.sourceNewer = sourceNewer;
         }
         
-        public Set getChildren() {
+        public Set<String> getChildren() {
                 return children;
         }
         public void setChildren(Set children) {

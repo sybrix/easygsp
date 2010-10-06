@@ -48,7 +48,7 @@ public class EasyGServer extends ReceiverAdapter {
         public static JChannel jgroupsChannel;
 
         private ServerSocket serverSocket;
-        private ExecutorService executorService;
+        //private ExecutorService executorService;
         private boolean isRunning;
 
         private ConcurrentHashMap<String, ServletContextImpl> applications = new ConcurrentHashMap();
@@ -115,13 +115,6 @@ public class EasyGServer extends ReceiverAdapter {
 
                         System.setProperty("easygsp.version", "@easygsp_version");
 
-//                        log.fine("log fine");
-//                        log.finer("log finer");
-//                        log.finest("log finest");
-//                        log.warning("log warn");
-//                        log.info("log info");
-//                        log.severe("log severe");
-
                         log.info(
                                 "\nEASYGSP_VERSION: " + System.getProperty("easygsp.version") +
                                         "\nJRE_HOME: " + System.getProperty("java.home") +
@@ -160,7 +153,7 @@ public class EasyGServer extends ReceiverAdapter {
 
                         //loadApplicationsFromFileSystem();
 
-                        executorService = Executors.newCachedThreadPool();
+                        //executorService = Executors.newCachedThreadPool();
                         serverSocket = new ServerSocket(propertiesFile.getInt("server.port", 4444));
                         Thread shutdown = new Thread(new Shutdown(this));
                         shutdown.start();
@@ -200,14 +193,14 @@ public class EasyGServer extends ReceiverAdapter {
                         }
 
                         Socket socket = null;
-                        log.fine("EasyGSP Server accepting connections");
+                        log.info("EasyGSP Server accepting connections");
 
                         int poolSize = 5;
                         int maxPoolSize = 10;
                         long keepAliveTime = 10;
                         final ArrayBlockingQueue<Runnable> queue = new ArrayBlockingQueue<Runnable>(500);
 
-                        executorService = new ThreadPoolExecutor(poolSize, maxPoolSize, keepAliveTime, TimeUnit.SECONDS, queue);
+                        //executorService = new ThreadPoolExecutor(poolSize, maxPoolSize, keepAliveTime, TimeUnit.SECONDS, queue);
 
                         while (!stopRequested) {
 //
@@ -222,7 +215,6 @@ public class EasyGServer extends ReceiverAdapter {
                                         ThreadMonitor.add(t);
                                         t.start();
                                 } catch (Exception e) {
-
                                         log.log(Level.FINE, "server socket loop failed");
                                 }
                         }
@@ -352,7 +344,7 @@ public class EasyGServer extends ReceiverAdapter {
                         throw new ApplicationNotFoundException(" application: " + appName + " not found");
                 }
 
-                log.fine("loading application: " + file.getAbsoluteFile());
+                log.info("loading application: " + file.getAbsoluteFile());
                 applications.put(appName, new ServletContextImpl(file));
 
 
@@ -413,7 +405,7 @@ public class EasyGServer extends ReceiverAdapter {
                 try {
                         if (method.equals("appStart")) {
                                 try {
-                                        log.fine("clustering: starting application - " + appName + ", path - " + appPath);
+                                        log.info("clustering: starting application - " + appName + ", path - " + appPath);
                                         application = loadApplication(appName, appPath);
                                 } catch (ApplicationNotFoundException e) {
                                         log.severe("Clustering Problem (appStart), ApplicationNotFoundException - application: " + appName + ", application path: " + appPath);
@@ -424,7 +416,7 @@ public class EasyGServer extends ReceiverAdapter {
 
                                 if (application == null) {
                                         try {
-                                                log.fine("clustering: starting application on session message -  " + appName + ", path - " + appPath);
+                                                log.info("clustering: starting application on session message -  " + appName + ", path - " + appPath);
                                                 application = loadApplication(appName, appPath);
                                         } catch (ApplicationNotFoundException e) {
                                                 log.severe("Clustering Problem, ApplicationNotFoundException - application: " + appName);
@@ -449,7 +441,7 @@ public class EasyGServer extends ReceiverAdapter {
 
                                 log.fine("clustering: loading class - " + path + ", for app: " + appName);
 
-                                GSE4 gse = application.getGroovyScriptEngine();
+                                GSE5 gse = application.getGroovyScriptEngine();
                                 gse.loadScriptByName(path);
 
 

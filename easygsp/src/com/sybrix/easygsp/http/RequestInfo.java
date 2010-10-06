@@ -8,17 +8,19 @@ package com.sybrix.easygsp.http;
 public class RequestInfo {
         private String currentFile;
         private ServletContextImpl application;
-        private boolean templateRequest;
-        private boolean scriptProcessed;
+        private Boolean templateRequest=false;
+        private Boolean scriptProcessed=false;
         private String uniqueTemplateScriptName;
         private String realScriptName;
         private TemplateInfo templateInfo;
         private ParsedRequest parsedRequest;
-        private boolean errorOccurred = false;
+        private Boolean errorOccurred = false;
         private CustomServletBinding binding;
-        private boolean codeBehindChanged=false;
-        private int forwardCount=0;
-       private RequestError requestError;
+        private Boolean codeBehindChanged = false;
+        private Integer forwardCount = 0;
+        private RequestError requestError;
+        private RequestImpl requestImpl;
+
 
         public RequestInfo() {
                 templateInfo = new TemplateInfo();
@@ -123,18 +125,45 @@ public class RequestInfo {
                 this.codeBehindChanged = codeBehindChanged;
         }
 
-        public void increaseForwardCount(){
+        public void increaseForwardCount() {
                 forwardCount++;
         }
 
-        public int getForwardCount(){
+        public int getForwardCount() {
                 return forwardCount;
         }
 
         public RequestError getRequestError() {
                 return requestError;
         }
+
         public void setRequestError(RequestError requestError) {
                 this.requestError = requestError;
         }
+
+        public RequestImpl getRequestImpl() {
+                return requestImpl;
+        }
+
+        public void setRequestImpl(RequestImpl requestImpl) {
+                this.requestImpl = requestImpl;
+        }
+
+        protected void clear() {
+                currentFile = null;
+                application = null;
+                templateRequest = null;
+                scriptProcessed = null;
+                uniqueTemplateScriptName = null;
+                realScriptName = null;
+                templateInfo = null;
+                parsedRequest = null;
+                errorOccurred = null;
+                binding = null;
+                codeBehindChanged = null;
+                forwardCount = null;
+                requestError = null;
+                requestImpl = null;
+        }
+
 }

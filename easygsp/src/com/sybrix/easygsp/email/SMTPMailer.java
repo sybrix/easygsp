@@ -1,7 +1,5 @@
 package com.sybrix.easygsp.email;       
 
-
-import com.sybrix.easygsp.email.Email;
 import com.sybrix.easygsp.exception.SMTPMailerException;
 import com.sybrix.easygsp.exception.SendEmailException;
 import com.sybrix.easygsp.http.StaticControllerMethods;

@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.io.File;
 
 import com.sybrix.easygsp.util.StringUtil;
+import groovy.lang.ExpandoMetaClass;
 import net.contentobjects.jnotify.JNotifyListener;
 import net.contentobjects.jnotify.JNotify;
 import net.contentobjects.jnotify.JNotifyException;
@@ -44,9 +45,10 @@ public class FileMonitor {
                                 watchId = JNotify.addWatch(path, mask, watchSubtree, new ListenerImpl());
                         }
 
-                        log.fine("FileMonitor watching path: " + path);
+                        log.info("Manual FileMonitor watching path: " + path);
                 } else {
                         fileMonitorThread = new FileMonitorThread();
+
                         fileMonitorThread.start();
                 }
         }
@@ -83,16 +85,19 @@ public class FileMonitor {
                 public void fileModified(int i, String s, String s1) {
 
                         Long lastTime = fileTime.get(s1);
+                        Long now = System.currentTimeMillis();
                         if (lastTime == null) {
-                                fileTime.put(s1, System.currentTimeMillis());
-                        } else if ((System.currentTimeMillis() - lastTime) < 1000) {
+                                fileTime.put(s1, now);
+                        } else if ((now - lastTime) < 3000) {
+                                //System.out.println("skipped " + s1);
                                 return;
                         } else {
                                 fileTime.put(s1, System.currentTimeMillis());
                         }
-
+                        //System.out.println(s1);
+                        //System.out.println(lastTime == null ? now : "diff " + (now - lastTime));
                         try {
-                                if (s1.endsWith(".groovy")&& monitorGroovyFiles) {
+                                if (s1.endsWith(".groovy") && monitorGroovyFiles) {
                                         String p[] = s1.split(File.separatorChar == '/' ? File.separator : (File.separator + File.separator));
                                         if (p.length > 1) {
                                                 log.finest(" file monitor path: " + s + ", fileModified: " + s1);
@@ -104,8 +109,18 @@ public class FileMonitor {
                                                                 return;
 
                                                         if (app.isStarted()) {
-                                                                log.fine("reloading classloader: " + p[0]);
-                                                                app.restart();
+                                                                // log.fine("reloading classloader: " + p[0]);
+                                                                // app.getGroovyScriptEngine().removeScriptCacheEntry("");
+                                                                // app.getGroovyScriptEngine().getGroovyClassLoader().clearCache();
+                                                                // Class c = app.getGroovyScriptEngine().loadScriptByName("reload.groovy");
+                                                                //log.fine("reloading classloader: " + p[0]);
+                                                                RequestThreadInfo.get().setApplication(app);
+                                                                String modifiedFile  = s + File.separator + s1;
+                                                                //RequestThreadInfo.get().getApplication().getGroovyScriptEngine().removeScriptCacheEntry("/" + modifiedFile.replaceAll("\\\\","/"));
+                                                                if (app.hasOnChangedMethod()){
+                                                                        app.invokeWebMethod("onChanged", new Object[]{app, modifiedFile});
+                                                                }
+                                                                //app.restart();
                                                         }
                                                 }
                                         }
@@ -118,7 +133,7 @@ public class FileMonitor {
                 }
 
                 private void removeFromTemplateCache(String s, String s1) {
-                        log.finest(" template file path: " + s + ", template Modified: " + s1);
+                        log.fine(" template file path: " + s + ", template Modified: " + s1);
                         String modifiedPath = EasyGServer.isWindows ? StringUtil.capDriveLetter(s.replaceAll("/", "\\\\")) : s;
 
                         String p[] = s1.split(File.separatorChar == '/' ? File.separator : (File.separator + File.separator));

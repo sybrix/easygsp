@@ -17,11 +17,16 @@ import java.text.SimpleDateFormat
 import com.google.gson.Gson
 import java.lang.reflect.Type
 import com.sybrix.easygsp.util.FileUtil
+import java.sql.Timestamp
 
 
 public class StaticControllerMethods {
         static SimpleDateFormat sdf_short = new SimpleDateFormat("MM/dd/yyyy")
         static SimpleDateFormat sdf_long = new SimpleDateFormat("EEEE, MMMM dd, yyyy")
+
+        static {
+
+        }
 
         public static addMethods(Class clazz) {
                 addLogMethod(clazz)
@@ -50,13 +55,19 @@ public class StaticControllerMethods {
                 addFormatDate(clazz)
                 addFormatDouble(clazz)
                 addFormatMoney(clazz)
-                addFormatMoneyDouble(clazz)
                 addProperties(clazz)
                 addSendEmail(clazz)
                 addToJson(clazz)
                 addFromJson(clazz)
                 addCopy(clazz)
                 addDelete(clazz)
+                addNow(clazz)
+        }
+
+        private static def addNow(java.lang.Class clazz) {
+                 clazz.metaClass.'static'.now = {
+                         return new Timestamp(System.currentTimeMillis());
+                 }
         }
 
         private static def addLogMethod(java.lang.Class clazz) {
@@ -280,30 +291,39 @@ public class StaticControllerMethods {
         }
 
         private static def addFormatMoney(java.lang.Class clazz) {
-                clazz.metaClass.static.formatMoney = {java.math.BigDecimal val ->
+                clazz.metaClass.static.formatMoney = {Object val ->
                         DecimalFormat moneyFormatter = DecimalFormat.getCurrencyInstance()
-                        return moneyFormatter.format(val.toDouble())
-                }
-        }
-
-        private static def addFormatMoneyDouble(java.lang.Class clazz) {
-                clazz.metaClass.static.formatMoney = {java.lang.Double val ->
-                        DecimalFormat moneyFormatter = DecimalFormat.getCurrencyInstance()
-                        return moneyFormatter.format(val)
+                        if (val instanceof BigDecimal)
+                                return moneyFormatter.format(val.toDouble())
+                        else if (val instanceof Double)
+                                return moneyFormatter.format(val)
+                        else if (val instanceof String)
+                                return moneyFormatter.format(new Double(val))
                 }
         }
 
         private static def addFormatDate(java.lang.Class clazz) {
-                clazz.metaClass.static.formatDate = {java.util.Date val, Object format ->
+                clazz.metaClass.static.formatDate = {Object val, Object format ->
+                        def dt
+                        if (val instanceof java.sql.Date){
+                               dt = new java.util.Date(val.getTime())
+                        } else if (val instanceof java.util.Date){
+                               dt = val
+                        } else if (val == null){
+                               return "";               
+                        } else {
+                                throw new RuntimeException("formatDate requires java.util.Date or java.sql.Date")
+                        }
+
                         if (format == null){
-                                return sdf_short.format(val)
+                                return sdf_short.format(dt)
                         } else if (format.toString().equalsIgnoreCase("short")){
-                                return sdf_short.format(val)
+                                return sdf_short.format(dt)
                         } else if (format.toString().equalsIgnoreCase("long")){
-                                return sdf_long.format(val)
+                                return sdf_long.format(dt)
                         } else {
                                 SimpleDateFormat sdf = new SimpleDateFormat(format.toString())
-                                return sdf.format(val);
+                                return sdf.format(dt);
                         }
                 }
         }

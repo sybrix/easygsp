@@ -35,7 +35,7 @@ public class SessionMonitor extends Thread {
                                                 try {
                                                         // threaded ?
                                                         if (app.groovyWebFileExists())
-                                                                app.invokeWebMethod("onSessionEnd", session);
+                                                                app.invokeWebMethod("onSessionEnd", new Object[]{session});
 
                                                 } catch (Exception e) {
                                                        log.fine("onSessionStart failed for session:" + session.getId() + ", app:" + app.getAppName());

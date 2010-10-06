@@ -96,7 +96,7 @@
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
     <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticControllerMethods.groovy" charset="UTF-8" />
   </component>
   <component name="EntryPointsManager">
@@ -301,7 +301,53 @@
                   </entry>
                   <entry key="https://easygsp.googlecode.com/svn/tags">
                     <value>
-                      <list />
+                      <list>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1274870453866" />
+                          <option name="revision" value="847" />
+                          <option name="url" value="https://easygsp.googlecode.com/svn/tags/easygsp-0.4.4" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1274142346510" />
+                          <option name="revision" value="845" />
+                          <option name="url" value="https://easygsp.googlecode.com/svn/tags/easygsp-0.4.3" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1272723349698" />
+                          <option name="revision" value="811" />
+                          <option name="url" value="https://easygsp.googlecode.com/svn/tags/easygsp-0.4.1" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1267120682543" />
+                          <option name="revision" value="715" />
+                          <option name="url" value="https://easygsp.googlecode.com/svn/tags/easygsp-0.3.3" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1265610123824" />
+                          <option name="revision" value="710" />
+                          <option name="url" value="https://easygsp.googlecode.com/svn/tags/easygsp-0.3.2" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1264659008204" />
+                          <option name="revision" value="694" />
+                          <option name="url" value="https://easygsp.googlecode.com/svn/tags/easygsp-0.3" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1259214680690" />
+                          <option name="revision" value="314" />
+                          <option name="url" value="https://easygsp.googlecode.com/svn/tags/easygsp-0.2.1" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1257960627753" />
+                          <option name="revision" value="191" />
+                          <option name="url" value="https://easygsp.googlecode.com/svn/tags/easygsp-0.2" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1257023257991" />
+                          <option name="revision" value="84" />
+                          <option name="url" value="https://easygsp.googlecode.com/svn/tags/easygsp-0.1.3" />
+                        </SvnBranchItem>
+                      </list>
                     </value>
                   </entry>
                 </map>

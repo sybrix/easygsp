@@ -39,6 +39,7 @@ import java.io.InputStreamReader;
 import java.io.InputStream;
 import java.io.File;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static java.util.logging.Level.*;
@@ -250,8 +251,10 @@ public class RequestImpl implements HttpServletRequest {
                         return session;
 
                 if (session == null && createSession) {
+                        log.log(Level.FINE, "creating session...");
                         session = new SessionImpl(application, EasyGServer.propertiesFile.getInt("session.timeout", 15));
                         servletBinding.setVariable("session", session);
+
                         RequestThreadInfo.get().getBinding().setVariable("flash", session.getFlash());
 
                         application.getSessions().put(session.getId(), session);
@@ -261,17 +264,17 @@ public class RequestImpl implements HttpServletRequest {
                         cookie.setPath("/");
 
                         response.addCookie(cookie);
+
                         try {
                                 if (application.groovyWebFileExists()) {
-                                        application.invokeWebMethod("onSessionStart", session);
+                                        application.invokeWebMethod("onSessionStart", new Object[]{session});
                                 }
+
+                                log.log(Level.FINE, "session \"" + session.getId() + "\" created");
                         } catch (Exception e) {
                                 log.log(SEVERE, "onSessionStart failed.", e);
                         }
-
                 }
-
-
 
                 return session;
         }
@@ -676,6 +679,10 @@ public class RequestImpl implements HttpServletRequest {
         public List<FileItem> parseFileUploads() throws FileUploadException {
 
                 return parseFileUploads(uploadThresholdSize, maxUploadSize);
+        }
+
+        protected void nullSession(){
+                session = null;
         }
 
         //        public int size() {

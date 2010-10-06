@@ -96,6 +96,7 @@ public class RequestThread extends Thread {
                         // set the appId as soon as possible, even at the cost of having to repeat this line
                         RequestThreadInfo.get().setApplication(application);
 
+
                         // if null, no app. Start app and then set it
                         if (application == null) {
                                 application = EasyGServer.loadApplicationFromFileSystem(applications, parsedRequest.getAppName(), parsedRequest.getAppPath());
@@ -122,7 +123,7 @@ public class RequestThread extends Thread {
 
                         RequestImpl request = new RequestImpl(inputStream, headers, application, response);
                         response.setHttpServletRequest(request);
-
+                        RequestThreadInfo.get().setRequestImpl(request);
                         // when false, request will auto forward to view
                         request.setAttribute("_explicitForward", false);
                         request.setServletBinding(binding);
@@ -130,13 +131,13 @@ public class RequestThread extends Thread {
                         RequestThreadInfo.get().setBinding(binding);
 
 
-                        if (application.getAutoStartSessions() && session == null){
+                        if (application.getAutoStartSessions() && session == null) {
                                 session = (SessionImpl) request.getSession(true);
                         } else {
                                 session = (SessionImpl) request.getSession(false);
                         }
 
-                        if (session != null){
+                        if (session != null) {
                                 session.updateLastAccessedTime();
                                 expireFlashMessages(session);
                                 binding.setVariable("flash", session.getFlash());
@@ -187,6 +188,7 @@ public class RequestThread extends Thread {
 //                                        e.printStackTrace();
 //                                }
 //                        }
+
                         //process the request
                         if (parsedRequest.getRequestURI().endsWith(templateExtension)) {
                                 processTemplateRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
@@ -217,7 +219,8 @@ public class RequestThread extends Thread {
                 if (session != null)
                         EasyGServer.sendToChannel(new ClusterMessage(application.getAppName(), application.getAppPath(), session.getId(), "session", new Object[]{session}));
 
-
+                RequestThreadInfo.get().clear();
+                RequestThreadInfo.set(null);
         }
 
         private void send404Error(ResponseImpl response) {
@@ -229,9 +232,9 @@ public class RequestThread extends Thread {
         private void expireFlashMessages(SessionImpl session) {
                 Map<String, FlashMessage> flash = session.getFlash();
                 Iterator i = flash.keySet().iterator();
-                while(i.hasNext()){
-                       String key = (String)i.next();
-                       FlashMessage msg = flash.get(key);
+                while (i.hasNext()) {
+                        String key = (String) i.next();
+                        FlashMessage msg = flash.get(key);
                         if (msg.isExpired())
                                 flash.remove(key);
                         else
@@ -363,10 +366,10 @@ public class RequestThread extends Thread {
                 this.requestStartTime = requestStartTime;
         }
 
-        public static void processController(final String requestURI, final GSE4 gse, final CustomServletBinding binding) {
+        public static void processController(final String requestURI, final GSE5 gse, final CustomServletBinding binding) {
                 final ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 
-                ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
+                // ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
 
                 try {
                         Closure closure = new Closure(gse) {
@@ -374,11 +377,11 @@ public class RequestThread extends Thread {
                                 public Object call() {
                                         try {
                                                 RequestImpl request = (RequestImpl) binding.getVariable("request");
-                                                ResponseImpl response = (ResponseImpl) binding.getVariable("response");
+                                                //ResponseImpl response = (ResponseImpl) binding.getVariable("response");
                                                 String groovyFileName = requestURI.replace(altExtension, groovyExtension);
                                                 RequestThreadInfo.get().setCurrentFile((RequestThreadInfo.get().getApplication().getAppPath() + File.separator + groovyFileName).replace("/", File.separator));
 
-                                                ((GSE4) getDelegate()).run(groovyFileName, binding);
+                                                ((GSE5) getDelegate()).run(groovyFileName, binding);
 
                                                 Boolean alreadyForwarded = (Boolean) request.getAttribute("_explicitForward");
 
@@ -399,6 +402,9 @@ public class RequestThread extends Thread {
                                         } catch (MissingPropertyException e) {
                                                 response.clearBuffer();
                                                 log.log(Level.FINE, e.getMessage(), e);
+
+                                                doNameCheckWarning(requestURI);
+
                                                 sendError(500, requestURI, gse, binding, e);
                                         } catch (MissingMethodException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
@@ -406,7 +412,7 @@ public class RequestThread extends Thread {
 
                                         } catch (ResourceException e) {
                                                 log.log(Level.FINE, e.getMessage(), e);
-                                                if (e.getMessage().contains("Cannot open")){
+                                                if (e.getMessage().contains("Cannot open")) {
                                                         sendError(404, requestURI, gse, binding, e);
                                                 } else {
                                                         sendError(500, requestURI, gse, binding, e);
@@ -460,8 +466,40 @@ public class RequestThread extends Thread {
                 }
         }
 
+        private static void doNameCheckWarning(String requestURI) {
+                if (requestURI.endsWith("session.gspx")
+                        || requestURI.endsWith("app.gspx")
+                        || requestURI.endsWith("response.gspx")
+                        || requestURI.endsWith("request.gspx")
+                        || requestURI.endsWith("context.gspx")
+                        || requestURI.endsWith("application.gspx")) {
 
-        public static void processTemplateRequest(final String scriptPath, final GSE4 gse, final CustomServletBinding binding) {
+                        log.fine("warning - pages(" + requestURI + ") named the same as implicit objects could produce errors");
+                }
+        }
+
+        public static void processScript(final String requestURI, final GSE5 gse, ServletContextImpl app) {
+                final CustomServletBinding binding = new CustomServletBinding(null, null, app, null);
+
+                Closure closure = new Closure(gse) {
+
+                        public Object call() {
+
+                                String groovyFileName = requestURI.replace(altExtension, groovyExtension);
+                                try {
+                                        ((GSE5) getDelegate()).run(groovyFileName, binding);
+                                } catch (Exception e) {
+                                        throw new RuntimeException(e);
+                                }
+
+                                return null;
+                        }
+
+                };
+                GroovyCategorySupport.use(CustomServletCategory.class, closure);
+        }
+
+        public static void processTemplateRequest(final String scriptPath, final GSE5 gse, final CustomServletBinding binding) {
                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 
                 try {
@@ -480,7 +518,7 @@ public class RequestThread extends Thread {
                                                 //application.getTemplateServlet().service(scriptPath, request, response, binding);
                                                 application.getTemplateServlet().service(request, response);
 //
-//                                                ((GSE4) getDelegate()).run(scriptPath.replace(altExtension, groovyExtension), binding);
+//                                                ((GSE5) getDelegate()).run(scriptPath.replace(altExtension, groovyExtension), binding);
 //
 //                                                Boolean alreadyForwarded = (Boolean) request.getAttribute("_explicitForward");
 //                                                long bufferSize = response.getBufferContentSize() == null ? 0 : response.getBufferContentSize();
@@ -559,7 +597,7 @@ public class RequestThread extends Thread {
                 }
         }
 
-//        public static void processTemplateRequest(final String scriptPath, final GSE4 gse, final CustomServletBinding binding) {
+//        public static void processTemplateRequest(final String scriptPath, final GSE5 gse, final CustomServletBinding binding) {
 //                ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 //
 //                Application application = (Application) binding.getVariable("application");
@@ -617,7 +655,7 @@ public class RequestThread extends Thread {
 //                }
 //        }
 
-        protected static void sendError(int errorCode, String scriptPath, GSE4 gse, CustomServletBinding binding, Throwable e) {
+        protected static void sendError(int errorCode, String scriptPath, GSE5 gse, CustomServletBinding binding, Throwable e) {
                 if (RequestThreadInfo.get().errorOccurred()) {
                         return;
                 }

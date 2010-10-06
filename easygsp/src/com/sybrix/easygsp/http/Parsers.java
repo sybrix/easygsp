@@ -177,7 +177,6 @@ public class Parsers {
 //                                }
 //                        }
 
-
                         parsedRequest.setAppName(appName);
                         parsedRequest.setAppPath(webAppDir);
                         parsedRequest.setRequestURI(requestURI);
@@ -188,9 +187,10 @@ public class Parsers {
                         log.fine("parsed RequestURIPath: " + requestURIPath);
                         log.fine("parsed RequestURI: " + requestURI);
 
-
                         return parsedRequest;
                 }
         }
+
+
 
 }

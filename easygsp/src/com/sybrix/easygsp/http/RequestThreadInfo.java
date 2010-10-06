@@ -12,7 +12,7 @@ public class RequestThreadInfo {
                 }
         };
 
-        public static RequestInfo get(){
+        public static RequestInfo get(){                       
                 return _id.get();
         }
         protected static void set(RequestInfo id){

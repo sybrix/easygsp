@@ -1,7 +1,5 @@
 package com.sybrix.easygsp.email;
 
-
-import com.sybrix.easygsp.email.SMTPMailer;
 import com.sybrix.easygsp.exception.SMTPMailerException;
 
 import java.util.logging.Logger;
@@ -12,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  * LoggerThread <br/>
- *
+ *                                                                
  * @author David Lee
  */
 public class EmailService {
@@ -23,7 +21,6 @@ public class EmailService {
         public static void start() {
                 emailThread = new EmailThread();
                 emailThread.start();
-
         }
 
         public static void addEmail(Email email) {
@@ -34,35 +31,37 @@ public class EmailService {
                 emailThread.stopThread();
         }
 
-
         private static class EmailThread extends Thread {
-
 
                 private volatile boolean stopped = false;
                 private List<Email> emails = Collections.synchronizedList(new ArrayList());
 
                 @Override
                 public void run() {
-                        log.fine("EmailService thread started");
+                        log.info("EmailService thread started");
                         while (true) {
-                                synchronized (emails) {
-                                        try {
-                                                emails.wait();
-                                        } catch (InterruptedException e) {
+                                if (emails.size() == 0){
+                                        synchronized (emails) {
+                                                try {
+                                                        emails.wait();
+                                                } catch (InterruptedException e) {
 
+                                                }
                                         }
                                 }
-                                if (stopped && emails.size()==0)
-                                       break;
+                                
+                                if (stopped && emails.size() == 0)
+                                        break;
 
                                 sendEmail(emails.remove(0));
                         }
 
-                        log.fine("Logger thread stopped");
+                        log.info("EmailService thread stopped");
                 }
 
                 public void sendEmail(Email email) {
                         try {
+                                log.fine("sending email: " + email);
                                 SMTPMailer.send(email);
                         } catch (SMTPMailerException e) {
                                 log.log(Level.SEVERE, e.getMessage(), e);
