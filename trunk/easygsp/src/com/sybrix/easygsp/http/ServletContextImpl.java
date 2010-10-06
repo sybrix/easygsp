@@ -16,6 +16,7 @@
 package com.sybrix.easygsp.http;
 
 import com.sybrix.easygsp.util.StringUtil;
+import groovy.lang.MissingMethodException;
 import groovy.util.ScriptException;
 import groovy.util.ResourceException;
 
@@ -39,6 +40,7 @@ import com.sybrix.easygsp.exception.NotImplementedException;
 import com.sybrix.easygsp.util.Hash;
 import com.sybrix.easygsp.http.TemplateServlet;
 import com.sybrix.easygsp.server.EasyGServer;
+import org.codehaus.groovy.control.CompilerConfiguration;
 import org.codehaus.groovy.runtime.GroovyCategorySupport;
 
 /**
@@ -49,10 +51,11 @@ public class ServletContextImpl implements ServletContext, Serializable {
         private static final Logger log = Logger.getLogger(ServletContextImpl.class.getName());
 
         private String appPath;
-        private transient GSE4 groovyScriptEngine;
+        private transient GSE5 groovyScriptEngine;
 
         private transient TemplateServlet templateServlet;
         private boolean hasWebGroovy = false;
+
         private String appId;
         private volatile boolean started;
         private Map<String, SessionImpl> sessions;
@@ -63,13 +66,15 @@ public class ServletContextImpl implements ServletContext, Serializable {
         private ConcurrentHashMap resourceBundles;
         private List<String> errorFiles;
         //private Set attributeNames;
-        private Map<String,String> appAttributes;
+        private Map<String, String> appAttributes;
         private long startTime;
         private long lastFileCheck;
         private long lastRestartTime;
         private boolean hasOnScriptStart = true;
         private boolean hasOnScriptEnd = true;
+        private boolean hasOnChanged = true;
         private boolean autoStartSessions = false;
+        private Map<String, List<String>> dependencyCache;
 
         public ServletContextImpl(File dir) {
                 //this.appId = MD5.hash(dir);
@@ -93,14 +98,13 @@ public class ServletContextImpl implements ServletContext, Serializable {
 
                 appName = dir.getName();
 
-
                 errorFiles = new ArrayList();
-                appAttributes = new HashMap<String,String>();
+                appAttributes = new HashMap<String, String>();
 //                if (EasyGServer.propertiesFile.getBoolean("file.monitor.enabled", false)) {
 //                        FileMonitorThread.addApp(this);
 //                }
                 lastFileCheck = System.currentTimeMillis();
-                autoStartSessions = EasyGServer.propertiesFile.getBoolean("session.autostart",false);
+                autoStartSessions = EasyGServer.propertiesFile.getBoolean("session.autostart", false);
         }
 
         protected File getAppFile() {
@@ -127,7 +131,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 this.appName = appName;
         }
 
-        public GSE4 getGroovyScriptEngine() {
+        public GSE5 getGroovyScriptEngine() {
                 return groovyScriptEngine;
         }
 
@@ -259,6 +263,9 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 return hasOnScriptEnd;
         }
 
+        public boolean hasOnChangedMethod() {
+                return hasOnChanged;
+        }
 
         public void setHasOnScriptStart(boolean hasOnScriptStart) {
                 this.hasOnScriptStart = hasOnScriptStart;
@@ -303,6 +310,9 @@ public class ServletContextImpl implements ServletContext, Serializable {
                                         "\t        }\n\n" +
 
                                         "\t        def onSessionEnd(session){\n" +
+                                        "\t       }\n" +
+
+                                        "\t        def onChanged(app,path){\n" +
                                         "\t       }\n" +
                                         "}";
 
@@ -353,20 +363,39 @@ public class ServletContextImpl implements ServletContext, Serializable {
 
                         parentClassLoader.setAllowThreads(EasyGServer.propertiesFile.getBoolean("allow.threads", false));
 
-                        groovyScriptEngine = new GSE4(new String[]{appPath, appPath + File.separator + "WEB-INF"}, parentClassLoader);
+                        groovyScriptEngine = new GSE5(new String[]{appPath, appPath + File.separator + "WEB-INF"}, parentClassLoader);
+
+                        Properties myProperties = new Properties(System.getProperties());
+                        myProperties.setProperty("groovy.recompile.minimumIntervall", "100");
+                        myProperties.setProperty("groovy.output.verbose", "true");
+                        groovyScriptEngine.setConfig(new CompilerConfiguration(myProperties));
 
                         templateServlet = new TemplateServlet(groovyScriptEngine);
                         log.fine("invoking onApplicationStart for " + appName);
                         //groovyScriptEngine = new GroovyScriptEngine(new String[]{appPath, appPath + System.getProperty("file.separator") + "WEB-INF"});
 
+                        checkForOnCompiledMethod();
+
                         if (hasWebGroovy) {
-                                invokeWebMethod("onApplicationStart", this);
+                                invokeWebMethod("onApplicationStart", new Object[]{this});
                         }
 
                         started = true;
                         log.fine("onApplicationStart successful for " + appName);
                 } catch (Exception e) {
                         log.log(Level.FINE, "onApplicationStart failed.", e);
+                }
+        }
+
+        private void checkForOnCompiledMethod() {
+                try {
+                        Class clazz = groovyScriptEngine.loadScriptByName("web.groovy");
+                        Object method = clazz.getMethod("onChanged", new Class[]{Object.class, Object.class});
+                        hasOnChanged = true;
+                } catch (MissingMethodException e) {
+                        hasOnChanged = false;
+                } catch (Exception e) {
+
                 }
         }
 
@@ -378,7 +407,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
                                 sessions.clear();
                                 RequestThreadInfo.get().setApplication(this);
                                 started = false;
-
+                                checkForOnCompiledMethod();
                                 startApplication();
                                 GroovyObjectInputStream gois = new GroovyObjectInputStream(groovyScriptEngine.getGroovyClassLoader(), new FileInputStream(f));
                                 sessions = (Map) gois.readObject();
@@ -440,7 +469,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
 
         }
 
-        protected synchronized void invokeWebMethod(final String method, final Object... param) throws ClassNotFoundException,
+        protected synchronized void invokeWebMethod(final String method, final Object[] param) throws ClassNotFoundException,
                 InstantiationException, IllegalAccessException, ScriptException, ResourceException {
 
                 Closure closure = new Closure(groovyScriptEngine) {
@@ -448,10 +477,12 @@ public class ServletContextImpl implements ServletContext, Serializable {
                         public Object call() {
                                 synchronized (groovyScriptEngine) {
                                         try {
+                                                //if (webGroovyObject == null) {
                                                 Class clazz = groovyScriptEngine.loadScriptByName("web.groovy");
-
-                                                GroovyObject o = (GroovyObject) clazz.newInstance();
-                                                o.invokeMethod(method, param);
+                                                GroovyObject webGroovyObject = (GroovyObject) clazz.newInstance();
+                                                //}
+                                                //System.out.println(method);
+                                                webGroovyObject.invokeMethod(method, param);
 
                                         } catch (Throwable e) {
                                                 log.log(Level.SEVERE, e.getMessage(), e);
@@ -470,6 +501,31 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 //                GroovyObject go = (GroovyObject)cls.newInstance();
                 //                go.invokeMethod(method, param);
         }
+
+//        protected synchronized void invokeOnCompileMethod(Class clazz, ServletContextImpl app) {
+//
+//                if (webGroovyObject != null && hasOnCompileMethod) {
+//                        synchronized (groovyScriptEngine) {
+//                                try {
+//                                        while(compiledClazzes.size()>0){
+//                                                webGroovyObject.invokeMethod("onCompiled", new Object[]{compiledClazzes.remove(0), app});
+//                                        }
+//
+//                                        webGroovyObject.invokeMethod("onCompiled", new Object[]{clazz, app});
+//                                        hasOnCompileMethod = true;
+//                                } catch (MissingMethodException e) {
+//                                        hasOnCompileMethod = false;
+//                                } catch (Exception e) {
+//                                        throw new RuntimeException(e.getMessage(), e);
+//                                } finally {
+//                                        groovyScriptEngine.notifyAll();
+//                                }
+//                        }
+//                } else if (webGroovyObject == null && hasOnCompileMethod) {
+//                        compiledClazzes.add(clazz);
+//                }
+//        }
+
 
         protected void killApp() {
 //                for (String attributeName : attributeNames) {
@@ -494,10 +550,11 @@ public class ServletContextImpl implements ServletContext, Serializable {
         }
 
         // should this hidden >
+
         public void stopApplication() {
                 try {
                         if (hasWebGroovy) {
-                                invokeWebMethod("onApplicationEnd", this);
+                                invokeWebMethod("onApplicationEnd", new Object[]{this});
                         }
                         started = false;
                 } catch (Exception e) {
@@ -520,6 +577,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
         public Class classForName(String name) {
                 try {
                         ServletContextImpl app = RequestThreadInfo.get().getApplication();
+                        //return app.getGroovyScriptEngine().getGroovyClassLoader().parseClass(new File(appPath + File.separator + "WEB-INF" + File.separator + name));
                         return app.getGroovyScriptEngine().loadScriptByName(name);
                 } catch (Exception e) {
                         throw new RuntimeException("Unable to load classFor: " + name, e);
@@ -589,11 +647,20 @@ public class ServletContextImpl implements ServletContext, Serializable {
         public long getStartTime() {
                 return startTime;
         }
+
         public void updateLastFileCheck() {
                 lastFileCheck = System.currentTimeMillis();
         }
 
         public long getLastRestartTime() {
                 return lastRestartTime;
+        }
+
+        public Map<String, List<String>> getDependencyCache() {
+                return dependencyCache;
+        }
+
+        public void setDependencyCache(Map<String, List<String>> dependencyCache) {
+                this.dependencyCache = dependencyCache;
         }
 }

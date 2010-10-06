@@ -94,6 +94,7 @@ public class CustomServletBinding extends Binding {
                 * Bind the HTTP session object - if there is one.
                 * Note: we don't create one here!
                 */
+                if (request != null) {
                 binding.setVariable("session", request.getSession(false));
 
                 /*
@@ -102,7 +103,7 @@ public class CustomServletBinding extends Binding {
                 * If there are multiple, they are passed as an array.
                 */
                 populateParameters(request);
-
+                }
 
 
                 /*

@@ -54,3 +54,16 @@
 - added bind(Map values)
 - added Template Inheritance
 
+0.4.5 10/05/2010
+- Addeed custom toString to Email class
+- Modified use of log.info for logging throughout app
+- Fixed NullPointerException in CustomServletBinding
+- Fixed FileMonitor & FileMonitorThread class, it's working again
+- All objects in ThreadLocal RequestInfo are nulled out
+- Added warning when classes are named the same as implicit objects
+- Fixed Content Type bug, defaults after determining if value exists, not before
+- Added onChanged call for web.groovy
+- Session.invalidate() now calls web.groovy onSessionEnd()
+- added now property to call compiled classes
+- Fixed formatMoney and formatDate
+- Updated to Groovy 1.7.4

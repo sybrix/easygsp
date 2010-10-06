@@ -102,7 +102,7 @@ public class Validator {
          * @param value value to measure
          * @param min   - Minimum string length(must be greater than)
          * @param max   - Maximum string length (cannot be greater than)
-         * @return
+         * @return -1 if too short, 1 if too long, else 0 if ok
          */
         public static int lengthMinMax(String value, int min, int max) {
                 if (null == value) {

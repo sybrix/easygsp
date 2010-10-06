@@ -28,7 +28,6 @@ import java.util.logging.Logger;
 
 import org.codehaus.groovy.control.CompilationFailedException;
 import org.codehaus.groovy.runtime.InvokerHelper;
-import com.sybrix.easygsp.http.StaticControllerMethods;
 import com.sybrix.easygsp.exception.InheritedTemplateException;
 import com.sybrix.easygsp.exception.ParentTemplateException;
 
@@ -48,13 +47,13 @@ public class IncludeTemplateEngine extends TemplateEngine {
         private static long counter = 1;
         private GroovyShell groovyShell;
 
-        //private GSE4 groovyScriptEngine;
+        //private GSE5 groovyScriptEngine;
 
 //        public IncludeTemplateEngine() {
 //                this(GroovyShell.class.getClassLoader());
 //        }
 
-        public IncludeTemplateEngine(GSE4 groovyScriptEngine) {
+        public IncludeTemplateEngine(GSE5 groovyScriptEngine) {
                 this(groovyScriptEngine.getGroovyClassLoader());
                 //this.groovyScriptEngine = groovyScriptEngine;
         }

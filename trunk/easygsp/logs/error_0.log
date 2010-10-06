@@ -1,32 +1,133 @@
-05/16/10 18:55.59 [FINE] - FileMonitor watching path: C:\projects\easygsp\easygsp\webapps
-05/16/10 18:55.59 [INFO] - Thread monitor started  (timeout: 300)
-05/16/10 18:55.59 [INFO] - SessionMonitor started.
-05/16/10 18:55.59 [FINE] - EmailService thread started
-05/16/10 18:55.59 [FINE] - Logger thread started
-05/16/10 18:55.59 [FINE] - loading database driver:org.firebirdsql.jdbc.FBDriver
-05/16/10 18:56.00 [FINE] - loading database driver:com.mysql.jdbc.Driver
-05/16/10 18:56.00 [FINE] - EasyGSP Server accepting connections
-05/16/10 18:56.04 [FINE] - adding thread id:18 from running map
-05/16/10 18:56.04 [FINE] - parsed AppName: examples
-05/16/10 18:56.04 [FINE] - parsed AppDir: c:/easygsp/webapps/examples
-05/16/10 18:56.04 [FINE] - parsed RequestURIPath: c:/easygsp/webapps/examples/templateinheritance/index.gspx
-05/16/10 18:56.04 [FINE] - parsed RequestURI: templateInheritance/index.gspx
-05/16/10 18:56.04 [FINE] - loading application: c:\easygsp\webapps\examples
-05/16/10 18:56.04 [FINE] - starting application: C:\easygsp\webapps\examples
-05/16/10 18:56.05 [FINE] - invoking onApplicationStart for examples
-05/16/10 18:56.07 [FINE] - onApplicationStart successful for examples
-05/16/10 18:56.07 [FINE] com.sybrix.easygsp.http.RequestThread$1.call() - Cannot open URL: file:/C:/easygsp/webapps/examples/WEB-INF/templateInheritance/index.groovy
-groovy.util.ResourceException: Cannot open URL: file:/C:/easygsp/webapps/examples/WEB-INF/templateInheritance/index.groovy
-	at com.sybrix.easygsp.http.GSE4(getResourceConnection:311)
-	at com.sybrix.easygsp.http.GSE4(loadScriptByName:421)
-	at com.sybrix.easygsp.http.GSE4(createScript:548)
-	at com.sybrix.easygsp.http.GSE4(run:530)
-	at com.sybrix.easygsp.http.RequestThread$1(call:381)
-	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(use:93)
-	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo(access$200:61)
-	at org.codehaus.groovy.runtime.GroovyCategorySupport(use:201)
-	at com.sybrix.easygsp.http.RequestThread(processController:443)
-	at com.sybrix.easygsp.http.RequestThread(run:194)
-
-
-05/16/10 18:56.12 [FINE] - took 7134 ms
+10/05/10 21:47.57 [INFO] - Manual FileMonitor watching path: C:/easygsp/vhost
+10/05/10 21:47.57 [INFO] - Thread monitor started  (timeout: 330)
+10/05/10 21:47.57 [INFO] - SessionMonitor started.
+10/05/10 21:47.57 [INFO] - EmailService thread started
+10/05/10 21:47.57 [INFO] - Logger thread started
+10/05/10 21:47.57 [FINE] - loading database driver:org.firebirdsql.jdbc.FBDriver
+10/05/10 21:47.57 [FINE] - loading database driver:com.mysql.jdbc.Driver
+10/05/10 21:47.57 [INFO] - EasyGSP Server accepting connections
+10/05/10 21:48.04 [FINE] - adding thread id:18 from running map
+10/05/10 21:48.04 [FINE] - parsed AppName: www.davesgamestore.com
+10/05/10 21:48.04 [FINE] - parsed AppDir: c:/easygsp/vhost/www.davesgamestore.com
+10/05/10 21:48.04 [FINE] - parsed RequestURIPath: c:/easygsp/vhost/www.davesgamestore.com/index.gspx
+10/05/10 21:48.04 [FINE] - parsed RequestURI: index.gspx
+10/05/10 21:48.04 [INFO] - loading application: c:\easygsp\vhost\www.davesgamestore.com
+10/05/10 21:48.04 [FINE] - starting application: C:\easygsp\vhost\www.davesgamestore.com
+10/05/10 21:48.04 [FINE] - invoking onApplicationStart for www.davesgamestore.com
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.Game
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameCartItem
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameComment
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameCondition
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameCustomer
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameCustomerAddress
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameEsrbRating
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameGenre
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameInvoiceStatus
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GamePaymentType
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameReview
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameState
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameSystem
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameTitle
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameTradeInvoice
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameTradeInvoiceX
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.GameVendorInventory
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.VwAllGames
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.VwGameCartItem
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.VwGameCustomerAddress
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.VwGamerInventory
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.VwGameSystemPivot
+10/05/10 21:48.11 [INFO] - EasyOM loaded class:model.VwTradeInvoice
+10/05/10 21:48.12 [INFO] - EasyOM loaded class:model.VwTradeOrder
+10/05/10 21:48.12 [FINE] - onApplicationStart successful for www.davesgamestore.com
+10/05/10 21:48.12 [FINE] - creating session...
+10/05/10 21:48.12 [FINE] - session "RM6P4XDJS9GG78GWOHFATL" created
+10/05/10 21:48.14 [INFO] - SELECT game_title_id as gameTitleId, game_title as gameTitle, game_genre_id as gameGenreId, title_description as titleDescription, developer as developer, esrb_rating as esrbRating, publisher as publisher, game_genre as gameGenre, game_id as gameId, game_system_id as gameSystemId, small_image_url as smallImageUrl, large_image_url as largeImageUrl, medium_image_url as mediumImageUrl, quantity_in_stock as quantityInStock, weight as weight, trade_for_credit_price as tradeForCreditPrice, trade_for_cash_price as tradeForCashPrice, cost as cost, retail_price as retailPrice, active as active, upc_code as upcCode, accepting_trades as acceptingTrades, game_system_code as gameSystemCode, game_system as gameSystem, game_count as gameCount FROM vw_all_games WHERE accepting_trades = ?  
+10/05/10 21:48.14 [INFO] - SELECT game_system_id as gameSystemId, game_system_code as gameSystemCode, game_system as gameSystem FROM game_system ORDER BY game_system
+10/05/10 21:48.14 [INFO] - SELECT game_genre_id as gameGenreId, description as description, parent_id as parentId FROM game_genre WHERE parent_id = ?  ORDER BY description
+10/05/10 21:48.14 [FINE] - took 10240 ms
+10/05/10 21:48.17 [FINE] - adding thread id:20 from running map
+10/05/10 21:48.17 [FINE] - parsed AppName: www.davesgamestore.com
+10/05/10 21:48.17 [FINE] - parsed AppDir: c:/easygsp/vhost/www.davesgamestore.com
+10/05/10 21:48.17 [FINE] - parsed RequestURIPath: c:/easygsp/vhost/www.davesgamestore.com/index.gspx
+10/05/10 21:48.17 [FINE] - parsed RequestURI: index.gspx
+10/05/10 21:48.18 [INFO] - SELECT game_id FROM game_cart_item WHERE game_id = ? and session_id = ?
+10/05/10 21:48.18 [INFO] - INSERT INTO game_cart_item (game_id, session_id, payment_type_id) VALUES (?,?,?)
+10/05/10 21:48.18 [INFO] - SELECT cart_item_id as cartItemId, game_id as gameId, trade_for_cash_price as tradeForCashPrice, trade_for_credit_price as tradeForCreditPrice, game_title as gameTitle, game_system_code as gameSystemCode, small_image_url as smallImageUrl, session_id as sessionId, payment_type_id as paymentTypeId FROM vw_game_cart_item WHERE session_id = ?  ORDER BY game_title,game_system_code
+10/05/10 21:48.18 [INFO] - SELECT cart_item_id as cartItemId, game_id as gameId, trade_for_cash_price as tradeForCashPrice, trade_for_credit_price as tradeForCreditPrice, game_title as gameTitle, game_system_code as gameSystemCode, small_image_url as smallImageUrl, session_id as sessionId, payment_type_id as paymentTypeId FROM vw_game_cart_item WHERE game_id = ?  
+10/05/10 21:48.18 [FINE] - took 1196 ms
+10/05/10 21:48.18 [FINE] - adding thread id:21 from running map
+10/05/10 21:48.18 [FINE] - parsed AppName: www.davesgamestore.com
+10/05/10 21:48.18 [FINE] - parsed AppDir: c:/easygsp/vhost/www.davesgamestore.com
+10/05/10 21:48.18 [FINE] - parsed RequestURIPath: c:/easygsp/vhost/www.davesgamestore.com/trades.gspx
+10/05/10 21:48.18 [FINE] - parsed RequestURI: trades.gspx
+10/05/10 21:48.18 [INFO] - SELECT cart_item_id as cartItemId, game_id as gameId, trade_for_cash_price as tradeForCashPrice, trade_for_credit_price as tradeForCreditPrice, game_title as gameTitle, game_system_code as gameSystemCode, small_image_url as smallImageUrl, session_id as sessionId, payment_type_id as paymentTypeId FROM vw_game_cart_item WHERE session_id = ?  ORDER BY game_title,game_system_code
+10/05/10 21:48.18 [INFO] - SELECT cart_item_id as cartItemId, game_id as gameId, trade_for_cash_price as tradeForCashPrice, trade_for_credit_price as tradeForCreditPrice, game_title as gameTitle, game_system_code as gameSystemCode, small_image_url as smallImageUrl, session_id as sessionId, payment_type_id as paymentTypeId FROM vw_game_cart_item WHERE game_id = ?  
+10/05/10 21:48.18 [INFO] - SELECT payment_type_id as paymentTypeId, payment_type as paymentType, sort_order as sortOrder FROM game_payment_type ORDER BY sort_order
+10/05/10 21:48.18 [INFO] - SELECT game_genre_id as gameGenreId, description as description, parent_id as parentId FROM game_genre WHERE parent_id = ?  ORDER BY description
+10/05/10 21:48.18 [INFO] - SELECT cart_item_id as cartItemId, game_id as gameId, trade_for_cash_price as tradeForCashPrice, trade_for_credit_price as tradeForCreditPrice, game_title as gameTitle, game_system_code as gameSystemCode, small_image_url as smallImageUrl, session_id as sessionId, payment_type_id as paymentTypeId FROM vw_game_cart_item WHERE game_id = ?  
+10/05/10 21:48.19 [FINE] - took 417 ms
+10/05/10 21:48.23 [FINE] - adding thread id:22 from running map
+10/05/10 21:48.23 [FINE] - parsed AppName: www.davesgamestore.com
+10/05/10 21:48.23 [FINE] - parsed AppDir: c:/easygsp/vhost/www.davesgamestore.com
+10/05/10 21:48.23 [FINE] - parsed RequestURIPath: c:/easygsp/vhost/www.davesgamestore.com/loginregister.gspx
+10/05/10 21:48.23 [FINE] - parsed RequestURI: loginregister.gspx
+10/05/10 21:48.23 [INFO] - SELECT game_genre_id as gameGenreId, description as description, parent_id as parentId FROM game_genre WHERE parent_id = ?  ORDER BY description
+10/05/10 21:48.23 [INFO] - SELECT state_abrv as stateAbrv, state as state FROM game_state ORDER BY state
+10/05/10 21:48.23 [FINE] - took 637 ms
+10/05/10 21:48.27 [FINE] - adding thread id:23 from running map
+10/05/10 21:48.27 [FINE] - parsed AppName: www.davesgamestore.com
+10/05/10 21:48.27 [FINE] - parsed AppDir: c:/easygsp/vhost/www.davesgamestore.com
+10/05/10 21:48.27 [FINE] - parsed RequestURIPath: c:/easygsp/vhost/www.davesgamestore.com/loginregister.gspx
+10/05/10 21:48.27 [FINE] - parsed RequestURI: loginregister.gspx
+10/05/10 21:48.27 [INFO] - SELECT customer_id as customerId, last_name as lastName, first_name as firstName, email as email, password as password, password_reset_code as passwordResetCode, paypal_email as paypalEmail, screen_name as screenName FROM game_customer WHERE email = ?  
+10/05/10 21:48.27 [FINE] - took 151 ms
+10/05/10 21:48.27 [FINE] - adding thread id:24 from running map
+10/05/10 21:48.27 [FINE] - parsed AppName: www.davesgamestore.com
+10/05/10 21:48.27 [FINE] - parsed AppDir: c:/easygsp/vhost/www.davesgamestore.com
+10/05/10 21:48.27 [FINE] - parsed RequestURIPath: c:/easygsp/vhost/www.davesgamestore.com/index.gspx
+10/05/10 21:48.27 [FINE] - parsed RequestURI: index.gspx
+10/05/10 21:48.28 [INFO] - SELECT game_title_id as gameTitleId, game_title as gameTitle, game_genre_id as gameGenreId, title_description as titleDescription, developer as developer, esrb_rating as esrbRating, publisher as publisher, game_genre as gameGenre, game_id as gameId, game_system_id as gameSystemId, small_image_url as smallImageUrl, large_image_url as largeImageUrl, medium_image_url as mediumImageUrl, quantity_in_stock as quantityInStock, weight as weight, trade_for_credit_price as tradeForCreditPrice, trade_for_cash_price as tradeForCashPrice, cost as cost, retail_price as retailPrice, active as active, upc_code as upcCode, accepting_trades as acceptingTrades, game_system_code as gameSystemCode, game_system as gameSystem, game_count as gameCount FROM vw_all_games WHERE accepting_trades = ?  
+10/05/10 21:48.28 [INFO] - SELECT game_system_id as gameSystemId, game_system_code as gameSystemCode, game_system as gameSystem FROM game_system ORDER BY game_system
+10/05/10 21:48.28 [INFO] - SELECT game_genre_id as gameGenreId, description as description, parent_id as parentId FROM game_genre WHERE parent_id = ?  ORDER BY description
+10/05/10 21:48.28 [FINE] - took 1065 ms
+10/05/10 21:48.34 [FINE] - adding thread id:25 from running map
+10/05/10 21:48.34 [FINE] - parsed AppName: www.davesgamestore.com
+10/05/10 21:48.34 [FINE] - parsed AppDir: c:/easygsp/vhost/www.davesgamestore.com
+10/05/10 21:48.34 [FINE] - parsed RequestURIPath: c:/easygsp/vhost/www.davesgamestore.com/logout.gsp
+10/05/10 21:48.34 [FINE] - parsed RequestURI: logout.gsp
+10/05/10 21:48.35 [FINE] - took 991 ms
+10/05/10 21:48.35 [FINE] - adding thread id:26 from running map
+10/05/10 21:48.35 [FINE] - parsed AppName: www.davesgamestore.com
+10/05/10 21:48.35 [FINE] - parsed AppDir: c:/easygsp/vhost/www.davesgamestore.com
+10/05/10 21:48.35 [FINE] - parsed RequestURIPath: c:/easygsp/vhost/www.davesgamestore.com/index.gspx
+10/05/10 21:48.35 [FINE] - parsed RequestURI: index.gspx
+10/05/10 21:48.35 [FINE] - creating session...
+10/05/10 21:48.36 [FINE] - session "NB2U0EFJSWIUWB3BLXSRJS" created
+10/05/10 21:48.37 [INFO] - SELECT game_title_id as gameTitleId, game_title as gameTitle, game_genre_id as gameGenreId, title_description as titleDescription, developer as developer, esrb_rating as esrbRating, publisher as publisher, game_genre as gameGenre, game_id as gameId, game_system_id as gameSystemId, small_image_url as smallImageUrl, large_image_url as largeImageUrl, medium_image_url as mediumImageUrl, quantity_in_stock as quantityInStock, weight as weight, trade_for_credit_price as tradeForCreditPrice, trade_for_cash_price as tradeForCashPrice, cost as cost, retail_price as retailPrice, active as active, upc_code as upcCode, accepting_trades as acceptingTrades, game_system_code as gameSystemCode, game_system as gameSystem, game_count as gameCount FROM vw_all_games WHERE accepting_trades = ?  
+10/05/10 21:48.37 [INFO] - SELECT game_system_id as gameSystemId, game_system_code as gameSystemCode, game_system as gameSystem FROM game_system ORDER BY game_system
+10/05/10 21:48.37 [INFO] - SELECT game_genre_id as gameGenreId, description as description, parent_id as parentId FROM game_genre WHERE parent_id = ?  ORDER BY description
+10/05/10 21:48.37 [FINE] - took 1783 ms
+10/05/10 21:51.16 [INFO] - EasyOM loaded class:model.Game
+10/05/10 21:51.16 [INFO] - EasyOM loaded class:model.GameCartItem
+10/05/10 21:51.16 [INFO] - EasyOM loaded class:model.GameComment
+10/05/10 21:51.16 [INFO] - EasyOM loaded class:model.GameCondition
+10/05/10 21:51.16 [INFO] - EasyOM loaded class:model.GameCustomer
+10/05/10 21:51.16 [INFO] - EasyOM loaded class:model.GameCustomerAddress
+10/05/10 21:51.16 [INFO] - EasyOM loaded class:model.GameEsrbRating
+10/05/10 21:51.16 [INFO] - EasyOM loaded class:model.GameGenre
+10/05/10 21:51.16 [INFO] - EasyOM loaded class:model.GameInvoiceStatus
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.GamePaymentType
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.GameReview
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.GameState
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.GameSystem
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.GameTitle
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.GameTradeInvoice
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.GameTradeInvoiceX
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.GameVendorInventory
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.VwAllGames
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.VwGameCartItem
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.VwGameCustomerAddress
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.VwGamerInventory
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.VwGameSystemPivot
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.VwTradeInvoice
+10/05/10 21:51.17 [INFO] - EasyOM loaded class:model.VwTradeOrder

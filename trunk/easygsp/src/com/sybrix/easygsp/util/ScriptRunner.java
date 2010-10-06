@@ -1,7 +1,7 @@
 package com.sybrix.easygsp.util;
 
 import groovy.lang.Script;
-import com.sybrix.easygsp.http.GSE4;
+import com.sybrix.easygsp.http.GSE5;
 
 /**
  * ScriptRunner <br/>
@@ -10,7 +10,7 @@ import com.sybrix.easygsp.http.GSE4;
  */
 public class ScriptRunner extends Script {
         private Class controllerClass;
-        public ScriptRunner(GSE4 gse, String clazz){
+        public ScriptRunner(GSE5 gse, String clazz){
                 try {
                         controllerClass = gse.getGroovyClassLoader().loadClass(clazz);
                 } catch (ClassNotFoundException e) {

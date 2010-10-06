@@ -134,4 +134,25 @@ public class Email {
         public void setApp(ServletContextImpl app) {
                 this.app = app;     
         }
+
+        @Override
+        public String toString() {
+                return "Email{" +
+                        "host='" + host + '\'' +
+                        ", port=" + port +
+                        ", from='" + from + '\'' +
+                        ", recipients=" + recipients +
+                        ", bcc=" + bcc +
+                        ", cc=" + cc +
+                        ", contextType='" + contextType + '\'' +
+                        ", body='" + body + '\'' +
+                        ", htmlBody='" + htmlBody + '\'' +
+                        ", subject='" + subject + '\'' +
+                        ", username='" + username + '\''+ 
+                        ", password='" + password + '\'' +
+                        ", authenticationRequired=" + authenticationRequired +
+                        ", secure=" + secure +
+                        ", attachments=" + attachments +
+                        '}';
+        }
 }

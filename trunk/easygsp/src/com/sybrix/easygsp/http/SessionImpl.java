@@ -47,7 +47,7 @@ public class SessionImpl implements HttpSession, Serializable {
         private Long lastAccessedTime;
         private transient ServletContextImpl application;
         private Integer maxInactiveInterval;
-        private Map<String, String> sessionAttributes;
+        private Map<String, Object> sessionAttributes;
         private Map<String, FlashMessage> flash;
 
         public SessionImpl(ServletContextImpl application, int maxInactiveInterval) {
@@ -57,7 +57,7 @@ public class SessionImpl implements HttpSession, Serializable {
                 sessionId = createSessionId();
                 creationTime = System.currentTimeMillis();
                 lastAccessedTime = System.currentTimeMillis();
-                sessionAttributes = new HashMap<String,String>();
+                sessionAttributes = new HashMap<String, Object>();
                 flash = new FlashMap();
         }
 
@@ -95,8 +95,6 @@ public class SessionImpl implements HttpSession, Serializable {
         public void setLastAccessTime(Long lastAccessTime) {
                 if (lastAccessTime > this.lastAccessedTime)
                         this.lastAccessedTime = lastAccessTime;
-
-
         }
 
         public void updateLastAccessedTime() {
@@ -148,9 +146,12 @@ public class SessionImpl implements HttpSession, Serializable {
         }
 
         public void setAttribute(String key, Object value) {
-                if (value != null)
-                        sessionAttributes.put(key, value.toString());
-                else
+                if (value != null) {
+                        if (value instanceof Number || value instanceof Boolean)
+                                sessionAttributes.put(key, value);
+                        else
+                                sessionAttributes.put(key, value.toString());
+                } else
                         sessionAttributes.put(key, null);
 
 //                SessionMessage sessionMessage = new SessionMessage(application.getAppName(), application.getAppPath(), sessionId, "remote_setAttribute", new Object[]{key, value});
@@ -180,8 +181,21 @@ public class SessionImpl implements HttpSession, Serializable {
         }
 
         public synchronized void invalidate() {
+
+                try {
+                        if (RequestThreadInfo.get().getApplication().groovyWebFileExists())
+                                RequestThreadInfo.get().getApplication().invokeWebMethod("onSessionEnd", new Object[]{this});
+                } catch (Exception e) {
+                        //e.printStackTrace();                                                                                                        
+                }
+
                 sessionAttributes.clear();
                 application.getSessions().remove(sessionId);
+                sessionId = null;
+
+                if (RequestThreadInfo.get() != null)
+                        if (RequestThreadInfo.get().getRequestImpl() != null)
+                                RequestThreadInfo.get().getRequestImpl().nullSession();
 
                 ClusterMessage sessionMessage = new ClusterMessage(application.getAppName(), application.getAppPath(), sessionId, "remote_invalidate", new Object[]{});
                 EasyGServer.sendToChannel(sessionMessage);
@@ -203,7 +217,7 @@ public class SessionImpl implements HttpSession, Serializable {
         public void invokeSessionStartScript() {
                 try {
                         if (application.groovyWebFileExists()) {
-                                GSE4 gse = application.getGroovyScriptEngine();
+                                GSE5 gse = application.getGroovyScriptEngine();
                                 Class clazz = gse.loadScriptByName("WEB-INF.web");
                                 GroovyObject o = (GroovyObject) clazz.newInstance();
                                 o.invokeMethod("onSessionStart", new Object[]{null});
@@ -225,6 +239,11 @@ public class SessionImpl implements HttpSession, Serializable {
 
         public void setFlash(Map<String, FlashMessage> flash) {
                 this.flash = flash;
+        }
+
+        @Override
+        public String toString() {
+                return "sessionid=" + sessionId + ", " + super.toString();
         }
 
         //        public void invokeSessionStopScript() {

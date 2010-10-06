@@ -23,7 +23,6 @@ import groovy.lang.GroovyRuntimeException;
 
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -96,86 +95,12 @@ import com.sybrix.easygsp.util.StringUtil;
  */
 public class TemplateServlet extends AbstractHttpServlet {
 
-        /**
-         * Simple cache entry that validates against last modified and length
-         * attributes of the specified file.
-         *
-         * @author Christian Stein
-         */
-        public static class TemplateCacheEntry {
-
-                Date date;
-                long hit;
-                long lastModified;
-                long length;
-                Template template;
-                Set children;
-
-
-                public TemplateCacheEntry(File file, Template template) {
-                        this(file, template, false); // don't get time millis for sake of speed
-                }
-
-                public TemplateCacheEntry(File file, Template template, boolean timestamp) {
-                        if (file == null) {
-                                throw new NullPointerException("file");
-                        }
-                        if (template == null) {
-                                throw new NullPointerException("template");
-                        }
-                        if (timestamp) {
-                                this.date = new Date(System.currentTimeMillis());
-                        } else {
-                                this.date = null;
-                        }
-                        this.hit = 0;
-                        this.lastModified = file.lastModified();
-                        this.length = file.length();
-                        this.template = template;
-                        this.children = new HashSet();
-                }
-
-                public Set getChildren() {
-                        return children;
-                }
-                public void setChildren(Set children) {
-                        this.children = children;
-                }
-
-                /**
-                 * Checks the passed file attributes against those cached ones.
-                 *
-                 * @param file Other file handle to compare to the cached values.
-                 * @return <code>true</code> if all measured values match, else <code>false</code>
-                 */
-                public boolean validate(File file) {
-                        if (file == null) {
-                                throw new NullPointerException("file");
-                        }
-                        if (file.lastModified() != this.lastModified) {
-                                return false;
-                        }
-                        if (file.length() != this.length) {
-                                return false;
-                        }
-                        hit++;
-                        return true;
-                }
-
-                public String toString() {
-                        if (date == null) {
-                                return "Hit #" + hit;
-                        }
-                        return "Hit #" + hit + " since " + date;
-                }
-
-        }
 
         /**
          * Simple file name to template cache map.
          */
         private final Map cache;
-        private final Map dependencyCache;
+        private final Map<String, List<String>> dependencyCache;
 
         /**
          * Underlying template engine used to evaluate template source files.
@@ -190,9 +115,9 @@ public class TemplateServlet extends AbstractHttpServlet {
         /**
          * Create new TemplateSerlvet.
          */
-        public TemplateServlet(GSE4 groovyScriptEngine) {
+        public TemplateServlet(GSE5 groovyScriptEngine) {
                 this.cache = Collections.synchronizedMap(new HashMap());
-                this.dependencyCache = Collections.synchronizedMap(new HashMap());
+                this.dependencyCache = Collections.synchronizedMap(new DependencyCache());
 
                 this.engine = new IncludeTemplateEngine(groovyScriptEngine.getGroovyClassLoader()); // assigned later by init()
                 this.generateBy = true; // may be changed by init()
@@ -241,8 +166,8 @@ public class TemplateServlet extends AbstractHttpServlet {
                         }
 
                 } else {
-                       // if (verbose) {
-                               // System.out.println("Cache miss.");
+                        // if (verbose) {
+                        // System.out.println("Cache miss.");
                         //}
                 }
 
@@ -276,13 +201,13 @@ public class TemplateServlet extends AbstractHttpServlet {
                         }
 
                         TemplateCacheEntry templateCacheEntry = new TemplateCacheEntry(file, template, verbose);
-                        templateCacheEntry.children.addAll(RequestThreadInfo.get().getTemplateInfo().getChildren());
-                        //RequestThreadInfo.get().getTemplateInfo().setCachEntry(templateCacheEntry);
+                        Set<String> children = RequestThreadInfo.get().getTemplateInfo().getChildren();
+                        for (String child : children) {
+                                dependencyCache.get(child).add(key);
+                        }
+
                         cache.put(key, templateCacheEntry);
 
-                        for (Object o : templateCacheEntry.children) {
-                                dependencyCache.put(o, key);
-                        }
 
                         if (verbose) {
                                 log("Created and added template to cache. [key=" + key + "]");
@@ -302,19 +227,15 @@ public class TemplateServlet extends AbstractHttpServlet {
 
         public void removeFromCache(String template) {
                 template = StringUtil.capDriveLetter(template);
-                Object key = dependencyCache.remove(template);
-                if (key != null) {
-                        TemplateCacheEntry templateCacheEntry = (TemplateCacheEntry) cache.remove(key);
-                        if (templateCacheEntry != null) {
-                                for (Object o : templateCacheEntry.children) {
-                                        dependencyCache.remove(o);
-                                }
+                List<String> dependencies = dependencyCache.remove(template);
+                if (dependencies != null) {
+                        for (String key : dependencies) {
+                                TemplateCacheEntry templateCacheEntry = (TemplateCacheEntry) cache.remove(key);
                         }
-                } else {
-                        cache.remove(template);
                 }
-        }
+                cache.remove(template);
 
+        }
 
 
         /**
@@ -424,7 +345,7 @@ public class TemplateServlet extends AbstractHttpServlet {
                         RequestThreadInfo.get().setUniqueTemplateScriptName(templateName);
                 }
                 getMillis = System.currentTimeMillis() - getMillis;
-                   
+
                 //
                 // Create new binding for the current request.
                 //
@@ -436,7 +357,8 @@ public class TemplateServlet extends AbstractHttpServlet {
                 // Prepare the response buffer content type _before_ getting the writer.
                 // and set status code to ok
                 //
-                response.setContentType(CONTENT_TYPE_TEXT_HTML + "; charset=" + encoding);
+
+
                 //response.setStatus(HttpServletResponse.SC_OK);
 
                 //
@@ -458,6 +380,9 @@ public class TemplateServlet extends AbstractHttpServlet {
                 long makeMillis = System.currentTimeMillis();
                 template.make(binding.getVariables()).writeTo(out);
                 makeMillis = System.currentTimeMillis() - makeMillis;
+
+                if (response.getContentType() == null)
+                        response.setContentType(CONTENT_TYPE_TEXT_HTML + "; charset=" + encoding);
 
 //        if (generateBy) {
 //            StringBuffer sb = new StringBuffer(100);

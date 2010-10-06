@@ -29,9 +29,9 @@ db = Sql.newInstance(prop.getString("database.url"),
         prop.getString("database.username"),
         prop.getString("database.password"),
         prop.getString("database.driver"))
-        
+
         def modelPackage = prop.getString("model.package")
-	
+
 
 println args
 
@@ -88,17 +88,17 @@ class Table {
         def primaryKeys = []
 	def dir
 	def modelDir
-	def modelPackage 
+	def modelPackage
         Table(db, tableName, dir,modelPackage ) {
-        	this.modelPackage = modelPackage 
+        	this.modelPackage = modelPackage
                 this.tableName = tableName
                 this.dir = dir
                 beanName = parseBeanName()
                 this.db = db
                 packageName = parsePackageName()
                 this.tableName = parseTableName()
-                
-                
+
+                load()
         }
 
         def load() {
@@ -116,20 +116,20 @@ class Table {
 
         def parsePackageName() {
                 //PropertiesFile p = new PropertiesFile("c:/projects/bumblezee/website/webdata/bumblezee/config.properties")
-                def packageName = modelPackage 
-                
+                def packageName = modelPackage
+
 //                if (tableName.indexOf(".") == -1) {
-//                        packageName = modelPackage 
+//                        packageName = modelPackage
 //                } else {
 //                        packageName = tableName.substring(0, tableName.lastIndexOf("."))
 //                }
-		
+
 		println packageName + modelPackage
-		
+
 		modelDir = System.getProperty("user.dir") + File.separator + "WEB-INF" + File.separator + packageName.replace('.', File.separator)
-		
+
 		println "modelDir: " + modelDir
-		
+
                 return packageName
         }
 
@@ -202,7 +202,7 @@ class Table {
                         case ['INTEGER','INT', 'SMALLINT', 'MEDIUMINT', 'TINYINT']:
                                 return 'Integer'
                         case ['BIGINT']:
-                                return 'Long'                        
+                                return 'Long'
                         case 'FLOAT':
                                 return 'Float'
                         case 'DOUBLE':
@@ -420,7 +420,7 @@ class Table {
         }
 
         def writeGroovyBean() {
-        	def dir = modelDir + File.separator	
+        	def dir = modelDir + File.separator
         	new File(dir).mkdirs()
                 def camelCaseBeanName = convertColumnNameToPropertyName(beanName)
                 def f = new FileOutputStream(dir + camelCaseBeanName + '.groovy')
