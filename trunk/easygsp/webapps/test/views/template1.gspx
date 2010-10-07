@@ -1,0 +1,7 @@
+<%@ extends 'tempTemplate.gsp' %>           
+
+<%@ block title %>${pageTitle}<%@ endblock %>
+
+<%@ block body %>
+       ${content}
+<%@ endblock %>
