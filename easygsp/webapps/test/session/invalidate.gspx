@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+        <sessionId1>${sessionId1}</sessionId1>
+        <sessionId2>${sessionId2}</sessionId2>
+        <sessionId3>${sessionId3}</sessionId3>
+</root>

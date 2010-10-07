@@ -1,0 +1,2 @@
+
+response.contentType = 'text/xml'
