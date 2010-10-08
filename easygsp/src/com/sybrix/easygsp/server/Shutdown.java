@@ -12,6 +12,7 @@ import java.io.File;
  * Description :
  */
 public class Shutdown implements Runnable {
+
         public Shutdown() {
         }
 
@@ -67,12 +68,14 @@ public class Shutdown implements Runnable {
                 try {
                         ServerSocket ss = new ServerSocket(port);
 
+
                         Socket s = ss.accept();
                         server.stopServer();
 
+
                         //
-                        Socket stopSocket = new Socket("localhost", EasyGServer.propertiesFile.getInt("server.port", 4444));
-                        stopSocket.close();
+//                        Socket stopSocket = new Socket("localhost", EasyGServer.propertiesFile.getInt("server.port", 4444));
+//                        stopSocket.close();
 
                 } catch (Exception e) {
                         e.printStackTrace();
