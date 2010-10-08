@@ -69,7 +69,6 @@ public class ThreadMonitor {
 
         public static void stopMonitoring() {
                 synchronized (monitor) {
-
                         monitor.monitoring = false;
                         monitor.interrupt();
                         log.fine("ThreadMonitor stop requested...");
@@ -78,14 +77,14 @@ public class ThreadMonitor {
 
         static class Monitor extends Thread {
 
-                public boolean monitoring = true;
-                private List<RequestThread> pendingList;
+                public volatile boolean monitoring = true;
+                private volatile List<RequestThread> pendingList;
 
 
                 /**
                  * contains threads to be stopped, on accessed by "this" thread, no need to synchronize on it
                  */
-                private List<RequestThread> stopList;
+                private volatile List<RequestThread> stopList;
 
                 public Monitor() {
                         this.stopList = new ArrayList();
