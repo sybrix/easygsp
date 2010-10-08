@@ -195,16 +195,9 @@ public class EasyGServer extends ReceiverAdapter {
                         Socket socket = null;
                         log.info("EasyGSP Server accepting connections");
 
-                        int poolSize = 5;
-                        int maxPoolSize = 10;
-                        long keepAliveTime = 10;
                         final ArrayBlockingQueue<Runnable> queue = new ArrayBlockingQueue<Runnable>(500);
 
-                        //executorService = new ThreadPoolExecutor(poolSize, maxPoolSize, keepAliveTime, TimeUnit.SECONDS, queue);
-
                         while (!stopRequested) {
-//
-
                                 try {
                                         if (isStopped())
                                                 break;
@@ -253,7 +246,6 @@ public class EasyGServer extends ReceiverAdapter {
                         }
 
                         log.info("shutdown complete");
-
                         System.exit(0);
                 } catch (Exception e) {
                         log.log(Level.SEVERE, "EasyGSP Server startup failed.", e);
@@ -366,8 +358,16 @@ public class EasyGServer extends ReceiverAdapter {
                 EasyGServer.serverDir = serverDir;
         }
 
-        protected void stopServer() {
+        void stopServer() {
+                if (stopRequested)
+                        return;
+
                 stopRequested = true;
+                try {
+                        serverSocket.close();
+                } catch (Exception e) {
+
+                }
         }
 
         public static boolean isStopped() {
@@ -405,7 +405,7 @@ public class EasyGServer extends ReceiverAdapter {
                 try {
                         if (method.equals("appStart")) {
                                 try {
-                                        log.info("clustering: starting application - " + appName + ", path - " + appPath);
+                                        log.fine("clustering: starting application - " + appName + ", path - " + appPath);
                                         application = loadApplication(appName, appPath);
                                 } catch (ApplicationNotFoundException e) {
                                         log.severe("Clustering Problem (appStart), ApplicationNotFoundException - application: " + appName + ", application path: " + appPath);
@@ -416,7 +416,7 @@ public class EasyGServer extends ReceiverAdapter {
 
                                 if (application == null) {
                                         try {
-                                                log.info("clustering: starting application on session message -  " + appName + ", path - " + appPath);
+                                                log.fine("clustering: starting application on session message -  " + appName + ", path - " + appPath);
                                                 application = loadApplication(appName, appPath);
                                         } catch (ApplicationNotFoundException e) {
                                                 log.severe("Clustering Problem, ApplicationNotFoundException - application: " + appName);
