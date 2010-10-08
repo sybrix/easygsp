@@ -56,7 +56,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
         private transient TemplateServlet templateServlet;
         private boolean hasWebGroovy = false;
 
-        private String appId;
+        //private String appId;
         private volatile boolean started;
         private Map<String, SessionImpl> sessions;
         private String groovyFilePath;
@@ -66,7 +66,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
         private ConcurrentHashMap resourceBundles;
         private List<String> errorFiles;
         //private Set attributeNames;
-        private Map<String, String> appAttributes;
+        private Map<String, Object> appAttributes;
         private long startTime;
         private long lastFileCheck;
         private long lastRestartTime;
@@ -79,7 +79,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
         public ServletContextImpl(File dir) {
                 //this.appId = MD5.hash(dir);
                 this.appFile = dir;
-                this.appId = Hash.MD5(dir.getAbsolutePath());
+                //this.appId = Hash.MD5(dir.getAbsolutePath());
                 this.appPath = StringUtil.capDriveLetter(dir.getAbsolutePath());
 
                 groovyFilePath = appPath + System.getProperty("file.separator") + "WEB-INF" + System.getProperty("file.separator") + "web.groovy";
@@ -99,7 +99,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 appName = dir.getName();
 
                 errorFiles = new ArrayList();
-                appAttributes = new HashMap<String, String>();
+                appAttributes = new HashMap<String, Object>();
 //                if (EasyGServer.propertiesFile.getBoolean("file.monitor.enabled", false)) {
 //                        FileMonitorThread.addApp(this);
 //                }
@@ -330,11 +330,9 @@ public class ServletContextImpl implements ServletContext, Serializable {
         public void setAttribute(String key, Object value) {
 //                attributeNames.add(key);
                 if (value != null)
-                        appAttributes.put(key, value.toString());
+                        appAttributes.put(key, value);
                 else
                         appAttributes.put(key, null);
-
-
 //                ApplicationCache.getInstance().put(appId, key, value);
 //                CacheKeyManager.setAppKey(appName, key);
         }
