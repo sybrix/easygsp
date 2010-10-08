@@ -210,7 +210,8 @@ public class RequestThread extends Thread {
                                 log.log(SEVERE, "Unknown throwable exception occurred. message: " + e.getMessage(), e);
                 } finally {
                         // send the response to the client
-                        response.sendResponse();
+                        if (response != null)
+                                response.sendResponse();
                         log.fine("took " + (System.currentTimeMillis() - requestStartTime) + " ms");
                         closeSocket(socket);
                         requestEndTime = System.currentTimeMillis();
