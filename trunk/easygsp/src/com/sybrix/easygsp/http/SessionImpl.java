@@ -66,7 +66,6 @@ public class SessionImpl implements HttpSession, Serializable {
                 this.sessionId = sessionId;
         }
 
-
         private String createSessionId() {
                 StringBuffer sb = new StringBuffer();
                 int c = 0;
@@ -147,10 +146,8 @@ public class SessionImpl implements HttpSession, Serializable {
 
         public void setAttribute(String key, Object value) {
                 if (value != null) {
-                        if (value instanceof Number || value instanceof Boolean)
-                                sessionAttributes.put(key, value);
-                        else
-                                sessionAttributes.put(key, value.toString());
+                        sessionAttributes.put(key, value);
+
                 } else
                         sessionAttributes.put(key, null);
 
@@ -168,8 +165,6 @@ public class SessionImpl implements HttpSession, Serializable {
 
         public void removeAttribute(String key) {
                 sessionAttributes.remove(key);
-//                SessionCache.getInstance().remove(application.getAppName(), sessionId, key);
-//                attributeNames.remove(key);
         }
 
         public final void setApplication(ServletContextImpl application) {
