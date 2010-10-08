@@ -65,7 +65,7 @@ public class StaticControllerMethods {
         }
 
         private static def addNow(java.lang.Class clazz) {
-                 clazz.metaClass.'static'.now = {
+                 clazz.metaClass.getNow = {
                          return new Timestamp(System.currentTimeMillis());
                  }
         }
@@ -310,7 +310,7 @@ public class StaticControllerMethods {
                         } else if (val instanceof java.util.Date){
                                dt = val
                         } else if (val == null){
-                               return "";               
+                               return "";
                         } else {
                                 throw new RuntimeException("formatDate requires java.util.Date or java.sql.Date")
                         }
