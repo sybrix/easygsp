@@ -148,11 +148,6 @@ restart LightTPD
 
 ==Configuring Apache==
 
-<font color="firebrick">This configuration fragment does not address the trailing slash problem.  There seems to be no way to tell apache to only allow the scgi server to process .gspx and .gsp files. So, this config attempts to exclude folders from scgi for images, css, js and some other file types. This is all less than ideal because you're forced into a certain convention. I highly suggest using LightTPD if you're not an Apache whiz.  
-
-If anyone can send me a config that allows only gspx and gsp files to be processed by the scgi server, and lets apache process all other file types, I would greatly appreciate it.  
-</font>
-
 Modify httpd.conf to include the following:
 
 {{{
