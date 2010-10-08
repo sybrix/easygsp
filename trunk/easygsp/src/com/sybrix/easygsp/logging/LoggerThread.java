@@ -14,9 +14,9 @@ public class LoggerThread extends Thread{
         private static final Logger log = Logger.getLogger(LoggerThread.class.getName());
         private static int checkInterval;
         private volatile boolean stopped = false;
+        
         static {
                 checkInterval = EasyGServer.propertiesFile.getInt("logger.checkInterval.seconds",5) * 1000;
-                
         }
 
         @Override
