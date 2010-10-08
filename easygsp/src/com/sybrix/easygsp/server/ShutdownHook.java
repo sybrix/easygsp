@@ -1,11 +1,14 @@
 package com.sybrix.easygsp.server;
 
+import java.util.logging.Logger;
+
 /**
  * ShutdownHookThread <br/>
  *
  * @author David Lee
  */
 public class ShutdownHook extends Thread {
+        private static final Logger log = Logger.getLogger(ShutdownHook.class.getName());
         private EasyGServer server;
 
         public ShutdownHook(EasyGServer server) {
@@ -16,8 +19,9 @@ public class ShutdownHook extends Thread {
         @Override
         public void run() {
                 try {
-                        server.getServerSocket().close();
-                        Thread.sleep(5000);
+                        log.info("ShutdownHook invoked...");
+                        server.stopServer();
+                        //Thread.sleep(5000);
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
