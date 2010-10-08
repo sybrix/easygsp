@@ -2,18 +2,24 @@
 <!-- Set Paths-->
 <project basedir="." default="package" name="easyGSP">
         <property environment="env"/>
-
-
         <property name="jdk" value="${env.JAVA_HOME}"/>
-        <property name="buildNumber" value="0.4.4"/>
+        <property name="buildNumber" value="0.4.5"/>
         <property name="easyGSPDir" value="easygsp-${buildNumber}"/>
 
         <path id="classpath">
                 <fileset dir="lib" includes="**/*.jar"/>
         </path>
+
+        <path id="classpath.test">
+                <fileset dir="lib-test/" includes="**/*.jar"/>
+                <fileset dir="build" includes="easygsp-test.jar"/>
+                <path refid="classpath"/>
+        </path>
+
         <path id="easygsp.classPath">
                 <pathelement location="build/easygsp.jar"/>
         </path>
+
         <path id="jdk.lib">
                 <pathelement location="${jdk}/lib/tools.jar"/>
                 <pathelement location="${jdk}/jre/lib/rt.jar"/>
@@ -47,12 +53,32 @@
         <target name="compile" depends="copy.files">
                 <groovyc classpathref="classpath" srcdir="build/src" destdir="build/java/classes">
                         <javac deprecation="false" nowarn="false"
-                               target="1.5" debug="true"  classpathref="classpath" >
+                               target="1.5" debug="true" classpathref="classpath">
                                 <include name="**/*.java"/>
                                 <include name="**/*.groovy"/>
                                 <include name="**/*.properties"/>
                         </javac>
                 </groovyc>
+        </target>
+        <target name="compile-test">
+                <delete dir="build/java/tests"/>
+                <delete dir="build/src/test"/>
+                <mkdir dir="build/java/tests"/>
+
+                <copy todir="build/test">
+                        <fileset dir="test">
+                                <include name="**/*.*"/>
+                        </fileset>
+                </copy>
+                <groovyc classpathref="classpath.test" srcdir="build/test" destdir="build/java/tests">
+                        <javac target="1.5" deprecation="false" nowarn="false">
+                                <include name="**/*.java"/>
+                                <include name="**/*.groovy"/>
+                                <include name="**/*.properties"/>
+                        </javac>
+                </groovyc>
+
+                <jar destfile="build/easygsp-test.jar" basedir="build/java/tests"/>
         </target>
 
         <target name="jar" depends="compile">
@@ -65,6 +91,8 @@
 
                 <copy tofile="bin/easygsp.jar" file="build/easygsp.jar"/>
         </target>
+
+
 
         <target name="javadoc">
                 <javadoc sourcepath="src" destdir="deploy/${easyGSPDir}/javadocs" classpathref="classpath"/>
@@ -158,7 +186,7 @@
                                 <include name="**/*.properties"/>
                         </javac>
                 </groovyc>
-     
+
                 <copy todir="build/transformations/target/META-INF">
                         <fileset dir="transformations/META-INF">
                                 <include name="**/*.*"/>
@@ -167,5 +195,15 @@
 
 
                 <jar destfile="build/transformations/transformations.jar" basedir="build/transformations/target"/>
+        </target>
+        <target name="test" depends="compile-test">
+
+                <junit printsummary="true" >
+                        <classpath refid="classpath.test"/>
+                        <formatter type="brief" usefile="false"/>
+                        <batchtest>
+                                <fileset dir="build/java/tests" includes="**/*Test.class"/>
+                        </batchtest>
+                </junit>
         </target>
 </project>
