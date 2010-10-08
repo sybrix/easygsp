@@ -92,7 +92,7 @@ public class FileMonitorThread extends Thread {
         }
 
         public void stopThread() {
-                this.stopThread = stopThread;
+                this.stopThread = true;
                 log.fine("FileMonitor thread stop requested...");
                 this.interrupt();
         }
