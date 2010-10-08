@@ -26,8 +26,8 @@ public class EasyGSPLogger {
 
         private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(EasyGSPLogger.class.getName());
 
-        private List<LogMessage> incomingMessages = Collections.synchronizedList(new ArrayList<LogMessage>());
-        private List<LogMessage> messageQueue = new ArrayList<LogMessage>();
+        private volatile List<LogMessage> incomingMessages = Collections.synchronizedList(new ArrayList<LogMessage>());
+        private volatile List<LogMessage> messageQueue = new ArrayList<LogMessage>();
         private SimpleDateFormat fileNameSDF = new SimpleDateFormat("MM_dd_yyyy");
          
 
