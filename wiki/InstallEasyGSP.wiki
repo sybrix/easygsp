@@ -16,7 +16,7 @@ There are a ton of tutorials on how to install all of the required software for 
 
 * Installing EasyGSP *
   * cd /opt
-  * Download the latest version of EasyGSP from http://code.google.com/p/easygsp/downloads/list
+  * Download the latest version of EasyGSP-  wget http://easygsp.googlecode.com/files/easygsp-0.4.5.tar.gz
   * tar -xvf easygsp-`[version`].tar.gz
   * rm easygsp-`[version`].tar.gz
   * ln -s easygsp-`[version`] easygsp
