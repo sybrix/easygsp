@@ -33,13 +33,14 @@ Open the startup and stop scripts and correct the JAVA_HOME and EASYGSP_HOME pat
   * vi stop.sh
   * vi start.sh
 
-
-Modify LightTPD so that the "documentroot" points to $EASYGSP_HOME/webapps 
+* Download Lighty Config *
+  * wget http://easygsp.googlecode.com/files/lighttpd.conf
+  * restart lighttpd
 
 
 * Start EasyGSP *
 
-  * $ cd /usr/local/easygsp/bin
+  * $ cd /opt/easygsp/bin
   * $ ./start.sh
 
 
