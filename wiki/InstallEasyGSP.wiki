@@ -15,7 +15,7 @@ There are a ton of tutorials on how to install all of the required software for 
   * See Configure LightTPD and Apache sections below.
 
 * Installing EasyGSP *
-  * cd /usr/local
+  * cd /opt
   * Download the latest version of EasyGSP from http://code.google.com/p/easygsp/downloads/list
   * tar -xvf easygsp-`[version`].tar.gz
   * rm easygsp-`[version`].tar.gz
