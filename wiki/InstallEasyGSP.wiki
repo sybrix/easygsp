@@ -15,8 +15,6 @@ There are a ton of tutorials on how to install all of the required software for 
   $ sudo apt-get install lighttpd
   }}}
 
-* Configure HTTP Server* 
-  * See Configure LightTPD and Apache sections below.
 
 * Installing EasyGSP *
   * cd /opt
