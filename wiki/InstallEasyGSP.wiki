@@ -37,12 +37,12 @@ There are a ton of tutorials on how to install all of the required software for 
 
 * Download EasyGSP Lighty Config *
 {{{
-wget http://easygsp.googlecode.com/files/lighttpd.conf
+$ wget http://easygsp.googlecode.com/files/lighttpd.conf
 }}}
   
-*  Rename of lighttpd conf *
+*  Replace original lighttpd config file with downloaded one  *
 {{{
-mv /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf_old 
+$ mv /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf_old 
 }}}
 
 *  Restart lighttpd *
