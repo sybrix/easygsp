@@ -28,7 +28,7 @@ There are a ton of tutorials on how to install all of the required software for 
   * cdmod +x stop.sh
 
 * Create Environment Variables *
-  add the following to the /etc/profile
+  add the following lines to /etc/profile
 
   **EASYGSP_HOME=/opt/easygsp-0.4.5
   **JAVA_HOME=/opt/java/jdk1.6.0_21
