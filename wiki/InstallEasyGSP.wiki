@@ -36,7 +36,7 @@ There are a ton of tutorials on how to install all of the required software for 
 
    Logout and log back in or try 
    {{{
-   $source /etc/profile
+   $ source /etc/profile
    }}}
 
    Test that env variables are working
