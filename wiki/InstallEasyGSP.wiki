@@ -13,9 +13,6 @@ There are a ton of tutorials on how to install all of the required software for 
 
 * Configure HTTP Server* 
   * See Configure LightTPD and Apache sections below.
-* Set environment variables *
-  * Create a JAVA_HOME variable that points to your JDK install
-  * Create a EASYGSP_HOME variable that points to /opt/easygsp
 
 * Installing EasyGSP *
   * cd /opt
