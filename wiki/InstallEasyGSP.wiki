@@ -6,15 +6,14 @@ EasyGSP requires Java 1.6 or greater and an HTTP server such as LightTPD or Apac
 ==Linux==
 
 There are a ton of tutorials on how to install all of the required software for EasyGSP.  Simply google installation instructions for installing the following for your distro:
-* Ubuntu/Debian * 
+  * Install Sun's latest JDK
+  * Install LightTPD  (If you decide to build from source make sure you build with: --with-mysql ,--with-openssl) or Apache HTTP Server
+
+* Installing Lighttpd on Ubuntu/Debian *  
+
   {{{
   $ sudo apt-get install lighttpd
   }}}
-
-  * Install Sun's latest JDK
-  * Install LightTPD  (If you decide to build from source make sure you build with: --with-mysql ,--with-openssl) or Apache HTTP Server
-  
-
 
 * Configure HTTP Server* 
   * See Configure LightTPD and Apache sections below.
