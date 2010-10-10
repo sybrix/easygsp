@@ -39,6 +39,12 @@ There are a ton of tutorials on how to install all of the required software for 
    $source /etc/profile
    }}}
 
+   Test that env variables are working
+   {{{
+   $ echo $JAVA_HOME
+   $ echo $EASY_HOME
+   }}}
+
 * Download EasyGSP Lighty Config *
 {{{
 $ wget http://easygsp.googlecode.com/files/lighttpd.conf
