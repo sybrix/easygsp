@@ -52,9 +52,10 @@ $ /etc/init.d/lighttpd restart
 
 
 * Start EasyGSP *
-
-  * $ cd /opt/easygsp/bin
-  * $ ./start.sh
+{{{
+$ cd /opt/easygsp/bin
+$ ./start.sh
+}}}
 
 
 If all is well, you should see something like this:
