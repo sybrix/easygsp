@@ -29,13 +29,13 @@ There are a ton of tutorials on how to install all of the required software for 
 
 * Create Environment Variables *
   add the following lines to /etc/profile
-
- """EASYGSP_HOME=/opt/easygsp-0.4.5
+  {{{
+  EASYGSP_HOME=/opt/easygsp-0.4.5
   JAVA_HOME=/opt/java/jdk1.6.0_21
 
   export JAVA_HOME
-  export PATH=$PATH:$JAVA_HOME/bin"""
-
+  export PATH=$PATH:$JAVA_HOME/bin
+   }}}
 Open the startup and stop scripts and correct the JAVA_HOME and EASYGSP_HOME paths
 
   * vi stop.sh
