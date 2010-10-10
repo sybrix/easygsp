@@ -32,6 +32,7 @@ There are a ton of tutorials on how to install all of the required software for 
   EASYGSP_HOME=/opt/easygsp-0.4.5
   JAVA_HOME=/opt/java/jdk1.6.0_21
 
+  export EASYGSP_HOME
   export JAVA_HOME
   export PATH=$PATH:$JAVA_HOME/bin
    }}}
