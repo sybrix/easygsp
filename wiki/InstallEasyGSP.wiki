@@ -57,6 +57,7 @@ $ wget http://easygsp.googlecode.com/files/lighttpd.conf
 *  Replace original lighttpd config file with downloaded one  *
 {{{
 $ mv /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf_old 
+$ mv lighttpd.conf /etc/lighttpd/lighttpd.conf
 }}}
 
 *  Restart lighttpd *
