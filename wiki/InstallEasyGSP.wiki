@@ -36,10 +36,7 @@ There are a ton of tutorials on how to install all of the required software for 
   export JAVA_HOME
   export PATH=$PATH:$JAVA_HOME/bin
    }}}
-Open the startup and stop scripts and correct the JAVA_HOME and EASYGSP_HOME paths
 
-  * vi stop.sh
-  * vi start.sh
 
 * Download Lighty Config *
   * wget http://easygsp.googlecode.com/files/lighttpd.conf
