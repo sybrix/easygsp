@@ -77,13 +77,14 @@ $ ./start.sh
 $ sudo -E ./start.sh 
 }}}
 
+* Open browser, goto   *
+  http://localhost:8085/examples
 
 If all is well, you should see something like this:
 http://easygsp.googlecode.com/files/startup-linux.png
 
 
-Open browser, goto   
-  http://localhost:8085/examples
+
 
 
 
