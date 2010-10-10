@@ -41,10 +41,14 @@ wget http://easygsp.googlecode.com/files/lighttpd.conf
    }}}
   
    Rename of lighttpd conf
-   {{{mv /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf_old}}}
+   {{{
+mv /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf_old 
+}}}
 
    Restart lighttpd
-   {{{/etc/init.d/lighttpd restart }}}
+   {{{
+/etc/init.d/lighttpd restart 
+}}}
 
 
 * Start EasyGSP *
