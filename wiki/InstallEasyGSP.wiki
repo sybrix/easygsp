@@ -34,6 +34,10 @@ There are a ton of tutorials on how to install all of the required software for 
   export PATH=$PATH:$JAVA_HOME/bin
    }}}
 
+   Logout and log back in or try 
+   {{{
+   $source /etc/profile
+   }}}
 
 * Download EasyGSP Lighty Config *
 {{{
