@@ -4,6 +4,7 @@
 
 ==Install Java==
 
+==Install LightTPD==
 * Ubuntu/Debian *  
 
   {{{
