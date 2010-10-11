@@ -1,7 +1,7 @@
 #summary EasyGSP Windows Installation
 
 
-  * *Install Java*
+==Install Java==
     # Download the latest jdk from http://www.oracle.com/technetwork/java/javase/downloads/index.html
     # Install
     # Create JAVA_HOME environment variable
