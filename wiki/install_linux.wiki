@@ -2,9 +2,7 @@
 
 [install_windows Windows] | [install_linux Linux]
 
-= Install Latest JDK =
-
-== Install LightTPD ==
+==Install Java==
 
 * Ubuntu/Debian *  
 
@@ -20,7 +18,7 @@ or
 
 follow this link for more Lighttpd install options http://redmine.lighttpd.net/projects/1/wiki/GetLighttpd
 
-== Installing EasyGSP ==
+==Installing EasyGSP==
 {{{
   $ cd /opt
   $ wget http://easygsp.googlecode.com/files/easygsp-0.4.5.tar.gz
