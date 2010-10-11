@@ -15,14 +15,17 @@
    
 
 ==Install LightTPD==
-    # Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
-    # Download the latest and greatest w/OpenSSL support
-    # Install to c:\LightTPD
+  # Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
+  # Download the latest and greatest w/OpenSSL support
+  # Install to c:\LightTPD
 
 == Configure LightTPD ==
-  * or Install Apache
-    # The Apache HTTP server is available for Windows from [http://httpd.apache.org   apache.org]
-    # Or you could download an all in one solution like [http://www.apachefriends.org/en/index.html Apache Friends] windows install.
+  # Download config file from: http://easygsp.googlecode.com/files/lighttpd-inc.conf
+  # Replace the current config file @ c:\LightTPD\conf\lighttpd-inc.conf (rename it) with the downloaded one    
+  # Restart LightTPD
+
+
+
 
 
      
