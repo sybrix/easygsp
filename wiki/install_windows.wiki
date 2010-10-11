@@ -24,7 +24,14 @@
   # Replace the current config file @ c:\LightTPD\conf\lighttpd-inc.conf (rename it) with the downloaded one    
   # Restart LightTPD
 
+==Installing EasyGSP==
+  # Download EasyGSP @ http://code.google.com/p/easygsp/downloads/list 
+  # Unzip to c:\ 
+  # Rename dir c:\easygsp-[VERSION] to c:\easygsp 
+  # Create EASYGSP_HOME environment variable that points to c:\easygsp 
 
+==Start EasyGSP==
+  #  c:\easygsp\EasyGSP.bat
 
 
 
