@@ -6,7 +6,7 @@
     # Install
     # Create JAVA_HOME environment variable
 
-  * *Install LightTPD(Preferred)*
+==Install LightTPD==
     # Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
     # Download the latest and greatest w/OpenSSL support
     # Install to c:\LightTPD
