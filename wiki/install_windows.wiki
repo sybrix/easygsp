@@ -1,5 +1,6 @@
 #summary EasyGSP Windows Installation
 
+Windows | [install_linux Linux]
 
 ==Install Java==
   # Download the latest jdk from http://www.oracle.com/technetwork/java/javase/downloads/index.html
