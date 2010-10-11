@@ -16,4 +16,10 @@
     # The Apache HTTP server is available for Windows from [http://httpd.apache.org   apache.org]
     # Or you could download an all in one solution like [http://www.apachefriends.org/en/index.html Apache Friends] windows install.
 
+To view or change environment variables: Right-click My Computer, and then click Properties.
+  # Click the Advanced tab
+  # Click Environment variables.
+  # Click one the following options, for either a user or a system variable:Click New to add a new variable name and value.
+    # Click an existing variable, and then click Edit to change its name or value.
+    # Click an existing variable, and then click Delete to remove it
      
