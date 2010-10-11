@@ -31,8 +31,8 @@
   # Create EASYGSP_HOME environment variable that points to c:\easygsp 
 
 ==Start EasyGSP==
-  #  c:\easygsp\EasyGSP.bat
+  *  c:\easygsp\EasyGSP.bat
 
-
-
+==Test Install==
+  *  Open  browser to http://localhost:8085/examples
      
