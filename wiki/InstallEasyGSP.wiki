@@ -54,22 +54,6 @@ follow this link for more Lighttpd install options http://redmine.lighttpd.net/p
    $ echo $EASY_HOME
    }}}
 
-* Download EasyGSP Lighty Config *
-{{{
-$ wget http://easygsp.googlecode.com/files/lighttpd.conf
-}}}
-  
-*  Replace original lighttpd config file with downloaded one  *
-{{{
-$ mv /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf_old 
-$ mv /opt/lighttpd.conf /etc/lighttpd/lighttpd.conf
-}}}
-
-*  Restart lighttpd *
-{{{
-$ /etc/init.d/lighttpd restart 
-}}}
-
 
 * Start EasyGSP *
 {{{
