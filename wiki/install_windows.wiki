@@ -1,25 +1,18 @@
 #summary EasyGSP Windows Installation
 
 
-Windows
-Install Java 
-Download the latest jdk from http://java.sun.com 
-Install 
-Create JAVA_HOME environment variable 
-Install LightTPD(Preferred) 
-Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
-Download the latest and greatest w/OpenSSL support 
-Install to c:\LightTPD 
-or Install Apache 
-The Apache HTTP server is available for Windows from apache.org 
-Or you could download an all in one solution like Apache Friends windows install. 
+  * *Install Java*
+    # Download the latest jdk from http://java.sun.com
+    # Install
+    # Create JAVA_HOME environment variable
 
-Configure HTTP Server 
-See Configure LightTPD and Apache sections below. 
-Installing EasyGSP 
-Download EasyGSP @ http://code.google.com/p/easygsp/downloads/list 
-Unzip to c:\ 
-Rename dir c:\easygsp-[VERSION] to c:\easygsp 
-Create EASYGSP_HOME environment variable that points to c:\easygsp 
-Start EasyGSP 
-c:\easygsp\EasyGSP.bat
+  * *Install LightTPD(Preferred)*
+    # Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
+    # Download the latest and greatest w/OpenSSL support
+    # Install to c:\LightTPD
+
+  * or Install Apache
+    # The Apache HTTP server is available for Windows from [http://httpd.apache.org   apache.org]
+    # Or you could download an all in one solution like [http://www.apachefriends.org/en/index.html Apache Friends] windows install.
+
+     
