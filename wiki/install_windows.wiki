@@ -5,7 +5,7 @@
   # Download the latest jdk from http://www.oracle.com/technetwork/java/javase/downloads/index.html
   # Install
   # Create JAVA_HOME environment variable
-  = To view or change environment variables:=
+  ==== To view or change environment variables:====
       # Right-click My Computer, and then click Properties.
       # Click the Advanced tab
       # Click Environment variables.
