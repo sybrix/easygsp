@@ -19,7 +19,7 @@
   # Download the latest and greatest w/OpenSSL support
   # Install to c:\LightTPD
 
-== Configure LightTPD ==
+==Configure LightTPD==
   # Download config file from: http://easygsp.googlecode.com/files/lighttpd-inc.conf
   # Replace the current config file @ c:\LightTPD\conf\lighttpd-inc.conf (rename it) with the downloaded one    
   # Restart LightTPD
