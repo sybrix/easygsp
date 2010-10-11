@@ -1,6 +1,6 @@
 #summary Installing  EasyGSP on Linux
 
-[install_windows Windows] | [Linux]
+[install_windows Windows] | Linux
 
 ==Install Java==
 
