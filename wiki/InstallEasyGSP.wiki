@@ -1,6 +1,8 @@
 #summary Installing  EasyGSP
 = Installing EasyGSP =
 
+Windows | [install_linux Linux]
+
 EasyGSP requires Java 1.6 or greater and an HTTP server such as LightTPD or Apache.
 
 = Install Latest JDK =
