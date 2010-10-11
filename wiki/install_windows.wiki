@@ -1,0 +1,229 @@
+#summary EasyGSP Windows Installation
+
+
+EasyGSP requires Java 1.6 or greater 
+HTTP server such as LightTPD or Apache.
+
+= Install Latest JDK =
+
+== Install LightTPD ==
+
+* Ubuntu/Debian *  
+
+  {{{
+  $ sudo apt-get install lighttpd
+  }}}
+* CentOS/Fedora *
+  {{{
+  $ sudo yum install lighttpd
+  }}}
+
+or 
+
+follow this link for more Lighttpd install options http://redmine.lighttpd.net/projects/1/wiki/GetLighttpd
+
+== Installing EasyGSP ==
+{{{
+  $ cd /opt
+  $ wget http://easygsp.googlecode.com/files/easygsp-0.4.5.tar.gz
+  $ tar -xvf easygsp-0.4.5.tar.gz
+  $ rm easygsp-0.4.5.tar.gz
+  $ ln -s easygsp-0.4.5 easygsp
+  $ cd easygsp/bin
+  $ chmod +x start.sh
+  $ cdmod +x stop.sh
+}}}
+* Create Environment Variables *
+  add the following lines to /etc/profile
+  {{{
+  EASYGSP_HOME=/opt/easygsp-0.4.5
+  JAVA_HOME=/opt/java/jdk1.6.0_21
+
+  export EASYGSP_HOME
+  export JAVA_HOME
+  export PATH=$PATH:$JAVA_HOME/bin
+   }}}
+
+   Logout and log back in or try 
+   {{{
+   $ source /etc/profile
+   }}}
+
+   Test that env variables are working
+   {{{
+   $ echo $JAVA_HOME
+   $ echo $EASY_HOME
+   }}}
+
+
+* Start EasyGSP *
+{{{
+$ cd /opt/easygsp/bin
+$ ./start.sh
+}}}
+
+* on Ubuntu *
+{{{
+$ sudo -E ./start.sh 
+}}}
+
+* Open browser, goto   *
+  http://localhost:8085/examples
+
+If all is well, you should see something like this:
+http://easygsp.googlecode.com/files/startup-linux.png
+
+
+
+
+
+
+
+----
+
+==Windows==
+  * *Install Java*
+    # Download the latest jdk from http://java.sun.com
+    # Install
+    # Create JAVA_HOME environment variable
+
+  * *Install LightTPD(Preferred)*
+    # Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
+    # Download the latest and greatest w/OpenSSL support
+    # Install to c:\LightTPD
+
+  * or Install Apache
+    # The Apache HTTP server is available for Windows from [http://httpd.apache.org   apache.org]
+    # Or you could download an all in one solution like [http://www.apachefriends.org/en/index.html Apache Friends] windows install.
+
+     
+  * *Configure HTTP Server*
+    # See Configure LightTPD and Apache sections below.
+    
+
+  * *Installing EasyGSP*
+    # Download EasyGSP @ http://code.google.com/p/easygsp/downloads/list
+    # Unzip to c:\
+    # Rename dir c:\easygsp-`[VERSION`] to c:\easygsp
+    # Create EASYGSP_HOME environment variable that points to c:\easygsp
+
+  * *Start EasyGSP*
+    # c:\easygsp\EasyGSP.bat
+----
+
+==Configuring LightTPD==
+If you're don't know anything about LightTPD use the preconfigured config file
+   * Download EasyGSP Lighty Config *
+   {{{
+   $ wget http://easygsp.googlecode.com/files/lighttpd.conf
+   }}}
+  
+   *  Replace original lighttpd config file with downloaded one  *
+  {{{
+  $ mv /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf_old 
+  $ mv /opt/lighttpd.conf /etc/lighttpd/lighttpd.conf
+   }}}
+
+  *  Restart lighttpd *
+  {{{
+  $ /etc/init.d/lighttpd restart 
+  }}}
+
+
+Or manually update your existing config file.
+
+Current file locations:
+     # Linux  - /etc/lighttpd/lighttpd.conf
+     # Windows - c:/LightTPD/lighttpd-inc.conf 
+
+Download config file from:
+  Linux
+    # http://easygsp.googlecode.com/files/lighttpd.conf
+  Windows(WLMP)
+    # http://easygsp.googlecode.com/files/lighttpd-inc.conf
+
+
+*Or manually update config file:*
+
+Basically, you enable mod_scgi, setup up the scgi_server and extensions, prevent the groovy, gsp and gpsx pages from being served by Lighttpd and add the EasyGSP pages to the welcome/index pages list
+
+LightTPD htdoc should point to $EASYGSP_HOME/webapps 
+
+
+{{{
+     
+    server.modules              = (
+                                "mod_scgi",
+                                "... all of the other mods"
+                                ) 
+ 
+      url.access-deny             	= ( "~", ".inc", "WEB-INF")
+      static-file.exclude-extensions 	= (  ".gsp", ".gspx", ".groovy")
+      index-file.names            	= (  "index.gspx", "index.gsp", "index.html", "index.htm", "default.htm", "index`")
+      scgi.server  = (
+                ".gspx" =>
+			( "localhost" =>
+				(
+					"host" => "127.0.0.1",
+					"port" =>  4444,
+                                        "check-local" => "disable"  
+				)
+			),
+		".gsp" =>
+			( "localhost" =>
+				(
+					"host" => "127.0.0.1",
+					"port" =>  4444,
+                                        "check-local" => "disable"
+				)
+			)			
+			
+		)											
+
+}}}
+ 
+
+
+
+
+----
+
+==Configuring Apache==
+
+Modify httpd.conf to include the following:
+
+{{{
+         LoadModule scgi_module modules/mod_scgi.so
+         SCGIMount / 127.0.0.1:4444
+ 
+         <locationmatch (\.js|\.gif|\.jpg|\.ico|\.css|\.swf|\.png|\.tiff|\.jpeg|\.json|\.zip|\.tar\.gz|\.mp3|\.doc)+$>
+	     SCGIHandler Off
+         </locationmatch>
+         <locationmatch "/images|css|js|docs/">
+	     SCGIHandler Off
+         </locationmatch>
+
+         <IfModule dir_module>
+             DirectoryIndex index.gspx index.gsp index.html
+         </IfModule>
+
+         # point to $EASYGSP_HOME/webapps
+         DocumentRoot "C:/easygsp/webapps"
+
+         # point to $EASYGSP_HOME/webapps         
+         <Directory "C:/easygsp/webapps">
+           Options FollowSymLinks
+
+           AllowOverride None
+
+           Order allow,deny
+           Allow from all
+         </Directory>
+
+}}}
+
+mod_scgi can be downloaded [http://bigonez.googlepages.com/ here] for windows users 
+
+Create EASYGSP_HOME and JAVA_HOME environment variables that point to the installation directories.
+
+restart Apache
