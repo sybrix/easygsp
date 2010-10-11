@@ -111,8 +111,25 @@ http://easygsp.googlecode.com/files/startup-linux.png
 ----
 
 ==Configuring LightTPD==
+If you're don't know anything about LightTPD use the preconfigured config file
+   * Download EasyGSP Lighty Config *
+   {{{
+   $ wget http://easygsp.googlecode.com/files/lighttpd.conf
+   }}}
+  
+   *  Replace original lighttpd config file with downloaded one  *
+  {{{
+  $ mv /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf_old 
+  $ mv /opt/lighttpd.conf /etc/lighttpd/lighttpd.conf
+   }}}
 
-Download one of the minimal config files or manually update your existing config file.
+  *  Restart lighttpd *
+  {{{
+  $ /etc/init.d/lighttpd restart 
+  }}}
+
+
+Or manually update your existing config file.
 
 Current file locations:
      # Linux  - /etc/lighttpd/lighttpd.conf
@@ -166,10 +183,6 @@ LightTPD htdoc should point to $EASYGSP_HOME/webapps
  
 
 
-
-
-
-restart LightTPD
 
 
 ----
