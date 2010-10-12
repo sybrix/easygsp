@@ -17,9 +17,14 @@
       export PATH=$PATH:$JAVA_HOME/bin
       }}}
   # Logout and log back in or try 
-      {{{
-      $ source /etc/profile
-      }}}
+  {{{
+    $ source /etc/profile
+  }}}
+  # Test variable
+  {{{
+    $ echo $JAVA_HOME
+  }}}
+  you should see the proper path
 
      
 
