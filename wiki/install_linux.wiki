@@ -45,21 +45,21 @@ follow this link for more Lighttpd install options http://redmine.lighttpd.net/p
 
 ==Configuring LightTPD==
 
-   * Download EasyGSP Lighty Config *
-   {{{
-   $ cd /opt
-   $ wget http://easygsp.googlecode.com/files/lighttpd.conf
-   }}}
-  
-   *  Replace original lighttpd config file with downloaded one  *
+Download EasyGSP Lighty Config
   {{{
-  $ mv /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf_old 
-  $ mv lighttpd.conf /etc/lighttpd/lighttpd.conf
+    $ cd /opt
+    $ wget http://easygsp.googlecode.com/files/lighttpd.conf
+  }}}
+  
+*Replace original lighttpd config file with downloaded one*
+  {{{
+    $ mv /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf_old 
+    $ mv lighttpd.conf /etc/lighttpd/lighttpd.conf
    }}}
 
-  *  Restart lighttpd *
+*Restart lighttpd*
   {{{
-  $ /etc/init.d/lighttpd restart 
+    $ /etc/init.d/lighttpd restart 
   }}}
 
 
