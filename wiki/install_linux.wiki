@@ -3,6 +3,26 @@
 [install_windows Windows] | Linux
 
 ==Install Java==
+  # Download the latest(non-rpm) jdk from http://www.oracle.com/technetwork/java/javase/downloads/
+  # Create directory /opt/java
+  # Move download to /opt/java
+  # chmod a+x jdk-[version].bin
+  # extract bin file sudo ./jdk-[version].bin
+  # Create JAVA_HOME environment variable
+      add the following lines to /etc/profile
+      {{{
+      JAVA_HOME=/opt/java/jdk1.6.0_21
+
+      export JAVA_HOME
+      export PATH=$PATH:$JAVA_HOME/bin
+      }}}
+
+      Logout and log back in or try 
+      {{{
+      $ source /etc/profile
+      }}}
+
+     
 
 ==Install LightTPD==
 * Ubuntu/Debian *  
