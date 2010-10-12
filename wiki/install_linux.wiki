@@ -64,16 +64,6 @@ follow this link for more Lighttpd install options http://redmine.lighttpd.net/p
 
 
 
-Current file locations:
-     # Linux  - /etc/lighttpd/lighttpd.conf
-     # Windows - c:/LightTPD/lighttpd-inc.conf 
-
-Download config file from:
-  Linux
-    # http://easygsp.googlecode.com/files/lighttpd.conf
-  Windows(WLMP)
-    # http://easygsp.googlecode.com/files/lighttpd-inc.conf
-
 ==Installing EasyGSP==
 {{{
   $ cd /opt
@@ -104,5 +94,3 @@ $ sudo -E ./start.sh
 
 If all is well, you should see something like this:
 http://easygsp.googlecode.com/files/startup-linux.png
-
-
