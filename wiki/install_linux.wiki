@@ -17,7 +17,7 @@
       export PATH=$PATH:$JAVA_HOME/bin
       }}}
 
-      Logout and log back in or try 
+  #  Logout and log back in or try 
       {{{
       $ source /etc/profile
       }}}
