@@ -43,6 +43,37 @@ or
 
 follow this link for more Lighttpd install options http://redmine.lighttpd.net/projects/1/wiki/GetLighttpd
 
+==Configuring LightTPD==
+If you're don't know anything about LightTPD use the preconfigured config file
+   * Download EasyGSP Lighty Config *
+   {{{
+   $ wget http://easygsp.googlecode.com/files/lighttpd.conf
+   }}}
+  
+   *  Replace original lighttpd config file with downloaded one  *
+  {{{
+  $ mv /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf_old 
+  $ mv /opt/lighttpd.conf /etc/lighttpd/lighttpd.conf
+   }}}
+
+  *  Restart lighttpd *
+  {{{
+  $ /etc/init.d/lighttpd restart 
+  }}}
+
+
+Or manually update your existing config file.
+
+Current file locations:
+     # Linux  - /etc/lighttpd/lighttpd.conf
+     # Windows - c:/LightTPD/lighttpd-inc.conf 
+
+Download config file from:
+  Linux
+    # http://easygsp.googlecode.com/files/lighttpd.conf
+  Windows(WLMP)
+    # http://easygsp.googlecode.com/files/lighttpd-inc.conf
+
 ==Installing EasyGSP==
 {{{
   $ cd /opt
@@ -73,8 +104,6 @@ $ sudo -E ./start.sh
 
 If all is well, you should see something like this:
 http://easygsp.googlecode.com/files/startup-linux.png
-
-
 
 
 
