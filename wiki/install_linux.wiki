@@ -13,19 +13,19 @@
   $ ./jdk-6u22-linux-i586.bin
   }}}
   # Create JAVA_HOME environment variable by adding the following lines to /etc/profile
-    {{{
-    JAVA_HOME=/opt/java/jdk1.6.0_21
+  {{{
+  JAVA_HOME=/opt/java/jdk1.6.0_21
 
-    export JAVA_HOME
-    export PATH=$PATH:$JAVA_HOME/bin
-    }}}
+  export JAVA_HOME
+  export PATH=$PATH:$JAVA_HOME/bin
+  }}}
   # Logout and log back in or try 
   {{{
   $ source /etc/profile
   }}}
   # Test variable
   {{{
-    $ echo $JAVA_HOME
+  $ echo $JAVA_HOME
   }}}
   you should see the proper path
 
