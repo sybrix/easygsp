@@ -21,7 +21,7 @@
     }}}
   # Logout and log back in or try 
   {{{
-    $ source /etc/profile
+  $ source /etc/profile
   }}}
   # Test variable
   {{{
