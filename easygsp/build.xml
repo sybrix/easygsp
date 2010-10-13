@@ -155,11 +155,11 @@
 
                 <zip destfile="deploy/easygsp-${buildNumber}.zip" basedir="deploy"/>
 
-                <!--tar destfile="deploy/${easyGSPDir}.tar" basedir="deploy">
+                <tar destfile="deploy/${easyGSPDir}.tar" basedir="deploy">
                         <exclude name="**/*.zip"/>
                 </tar>
 
-                <gzip src="deploy/${easyGSPDir}.tar" destfile="deploy/${easyGSPDir}.tar.gz"/-->
+                <gzip src="deploy/${easyGSPDir}.tar" destfile="deploy/${easyGSPDir}.tar.gz"/>
 
         </target>
         <target name="buildAndCopy" depends="jar">
