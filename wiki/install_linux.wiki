@@ -47,7 +47,7 @@ or
 follow this link for more Lighttpd install options http://redmine.lighttpd.net/projects/1/wiki/GetLighttpd
 
 ==Configuring LightTPD==
-If you have an existing lighttpd install, skip this section and go here [config_http Configuring LightTDP]
+If you have an existing lighttpd install, skip this section and go here [config_http Configuring Existing LightTDP install]
 
 *Download EasyGSP Lighty Config*
   {{{
