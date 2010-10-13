@@ -27,7 +27,7 @@ You may have to "sudo" for each of these commands
   }}}
   # Test variable
   {{{
-  $ echo $JAVA_HOME
+  $ java -version
   }}}
   you should see the proper path
 
