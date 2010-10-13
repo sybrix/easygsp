@@ -4,7 +4,7 @@
 
 ==Install Java==
   # Download the latest(non-rpm) jdk from http://www.oracle.com/technetwork/java/javase/downloads/
-  # Open terminal window cd to downloaded jdk, move to install location & install
+  # Opena terminal window, cd to downloaded jdk, move to install location, install
   {{{
   $ mkdir /opt/java
   $ mv jdk-6u22-linux-i586.bin /opt/java/
