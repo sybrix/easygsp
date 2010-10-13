@@ -14,6 +14,14 @@ Windows | [install_linux Linux]
         # Click an existing variable, and then click Edit to change its name or value.
         # Click an existing variable, and then click Delete to remove it
    
+==Installing EasyGSP==
+  # Download EasyGSP @ http://code.google.com/p/easygsp/downloads/list 
+  # Unzip to c:\ 
+  # Rename dir c:\easygsp-[VERSION] to c:\easygsp 
+  # Create EASYGSP_HOME environment variable that points to c:\easygsp 
+
+==Start EasyGSP==
+  *  c:\easygsp\EasyGSP.bat
 
 ==Install LightTPD==
   # Goto the WMLP Project Site http://en.wlmp-project.net/downloads.php 
@@ -24,15 +32,6 @@ Windows | [install_linux Linux]
   # Download config file from: http://easygsp.googlecode.com/files/lighttpd-inc.conf
   # Replace the current config file @ c:\LightTPD\conf\lighttpd-inc.conf (rename it) with the downloaded one    
   # Restart LightTPD
-
-==Installing EasyGSP==
-  # Download EasyGSP @ http://code.google.com/p/easygsp/downloads/list 
-  # Unzip to c:\ 
-  # Rename dir c:\easygsp-[VERSION] to c:\easygsp 
-  # Create EASYGSP_HOME environment variable that points to c:\easygsp 
-
-==Start EasyGSP==
-  *  c:\easygsp\EasyGSP.bat
 
 ==Test Install==
   *  Open  browser to http://localhost:8085/examples
