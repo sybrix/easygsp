@@ -4,10 +4,15 @@
 
 ==Install Java==
   # Download the latest(non-rpm) jdk from http://www.oracle.com/technetwork/java/javase/downloads/
-  # Create directory /opt/java
-  # Move download to /opt/java
-  # chmod a+x jdk-[version].bin
-  # extract bin file sudo ./jdk-[version].bin
+  # Move to install location & install
+  {{{
+  $ mkdir /opt/java
+  $ mv jdk-6u22-linux-i586.bin /opt/java/
+  $ cd /opt/java
+  $ chmod a+x jdk-6u22-linux-i586.bin
+  $ ./jdk-6u22-linux-i586.bin
+  }}}
+
   # Create JAVA_HOME environment variable
       add the following lines to /etc/profile
       {{{
