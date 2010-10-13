@@ -2,6 +2,8 @@
 
 [install_windows Windows] | Linux
 
+You may have to "sudo" for each of these commands
+
 ==Install Java==
   # Download the latest(non-rpm) jdk from http://www.oracle.com/technetwork/java/javase/downloads/
   # Opena terminal window, cd to downloaded jdk, move to install location, install
