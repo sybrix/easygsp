@@ -12,8 +12,7 @@
   $ chmod a+x jdk-6u22-linux-i586.bin
   $ ./jdk-6u22-linux-i586.bin
   }}}
-  # Create JAVA_HOME environment variable
-    Add the following lines to /etc/profile
+  # Create JAVA_HOME environment variable by adding the following lines to /etc/profile
     {{{
     JAVA_HOME=/opt/java/jdk1.6.0_21
 
