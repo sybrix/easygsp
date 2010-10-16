@@ -55,11 +55,11 @@ To Remove Service
 To start from the command line
 {{{
   c:\ cd %EASYGSP_HOME%\bin
-  c:\%EASYGSP_HOME%\bin EasyGSP.bat
+  >EasyGSP.bat
 }}}
 
 To Stop
 {{{
-   c:\ cd %EASYGSP_HOME%\bin
-   c:\%EASYGSP_HOME%\bin stop.bat
+   c:\cd %EASYGSP_HOME%\bin
+   >stop.bat
 }}}
