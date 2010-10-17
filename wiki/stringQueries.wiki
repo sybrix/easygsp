@@ -45,7 +45,7 @@ executeQuery() with parameter. One or parameters can be specified as arguments f
     String lastName = 'Smith'
     def users
 
-    users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= ?".executeQuery(lastNameParameter)
+    users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= ${lastName}".executeQuery()
   
     // equivalent to above
     users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name='$lastNameParameter'".executeQuery()
@@ -60,7 +60,7 @@ executeQuery() with parameter and result type.  When both are specified, result 
 
 {{{
     String lastName = 'Smith'
-    def users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= ?".executeQuery(User.class, lastNameParameter)  
+    def users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= ${lastName}".executeQuery(User.class)  
 
 }}}
 
