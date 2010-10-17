@@ -47,8 +47,6 @@ executeQuery() with parameter. One or parameters can be specified as arguments f
 
     users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name= ${lastName}".executeQuery()
   
-    // equivalent to above
-    users = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name='$lastNameParameter'".executeQuery()
 
     users.each {user ->
        println "username: $user.username, real name:  $user.lastName, $user.firstName"
