@@ -70,7 +70,6 @@ To specify paging, the query must have an ORDER BY clause, the parameter list mu
 || page || The page being requested. Required. ||
 || pageSize || The number of records per page. Required.|| 
 || resultClass || The type of object in the results list. Optional.||
-|| parameters || A list of the query parameter values. Optional. ||
 
 When paging is specified, the return object is a map.  The map contains 4 attributes w/values:  
 
@@ -98,8 +97,8 @@ Another example with paging and result type specified.
 
 Another example with paging, result type specified and query parameter values
 {{{
-    def params = ['Smith']
-    def pagedResults = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name = ? ORDER BY last_name".executeQuery([page: 2, pageSize: 10, resultClass: User.class, parameters: params])
+    def param1 = 'Smith'
+    def pagedResults = "SELECT username, first_name firstName, last_name lastName FROM tblUser WHERE last_name = ${param1} ORDER BY last_name".executeQuery([page: 2, pageSize: 10, resultClass: User.class])
 
 }}}
 
@@ -108,10 +107,7 @@ Another example with paging, result type specified and query parameter values
 Executes an INSERT, UPDATE or DELETE query.
  {{{
     def createNewUser(username, lastName, firstName){
-       "INSERT INTO tbluser (username, first_name, last_name) VALUES('$username','$lastName', '$firstName')".executeUpdate()
-
-       // same as 
-       "INSERT INTO tbluser (username, first_name, last_name) VALUES(?,?,?)".executeUpdate([username, lastName, firstName])
+       "INSERT INTO tbluser (username, first_name, last_name) VALUES($username,$lastName, $firstName)".executeUpdate()
     
     }
  }}}
@@ -120,7 +116,7 @@ Another executeUpdate example
 
  {{{
     def deleteUser(username){
-       "DELETE FROM tbluser WHERE username = ? ".executeUpdate([username])
+       "DELETE FROM tbluser WHERE username = ${username}".executeUpdate()
     }
  }}}
 
