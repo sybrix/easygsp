@@ -7,6 +7,7 @@
 				
 The following are accessible to every class, template and controller.
 || *Object* || *Description* ||
+|| render(String content) || Writes text directory to the output stream.  When render is invoked from a controller, it will not auto forward to the template.   ||
 || println(Object object) || Writes object.toString() to the console window.  ||
 || log(String s)|| Writes message to application's log file.  Log file located @ WEB-INF/logs. Messages are written to the log file at a specified interval, not immediately. ||
 || log(Throwable t)|| Writes exception to application's log file.  Log file located @ WEB-INF/logs ||
