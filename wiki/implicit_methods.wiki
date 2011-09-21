@@ -31,9 +31,9 @@ The following are accessible to every class, template and controller.
 == Database ==
 || [howto_newSqlInstance Sql newSqlInstance(String dataSourceName)] || Returns groovy.sql.Sql object.  Database parameters must be supplied as application attributes ||
 
-|| Object ifNull(Object obj, Object defaultValue)|| Returns defaultValue when obj is null||
 
 == Validation ==
+|| Object ifNull(Object obj, Object defaultValue)|| Returns defaultValue when obj is null||
 || boolean isAlphaNumeric(String s) || Returns true, when s contains only numbers and/or letters, false otherwise. regex:  `[a-zA-Z0-9]`||
 || boolean isZipCode(String zipCode) || Returns true when zipCode is valid US zip code, false otherwise. regex: `\\d{5}(-\\d{4}`) ||
 || boolean isEmpty(Object obj) || Returns true when obj is null or obj.toString() is an empty string, false otherwise.|| 
