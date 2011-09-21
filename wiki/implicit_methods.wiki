@@ -16,9 +16,11 @@ The following are accessible to every class, template and controller.
 == Date Functions ==
 || parseDate(String date, String format) ||  ||
 || formatDate(Date date,String pattern) ||  ||
+
 == Number Functions ==
 || format(Number,String pattern) ||  ||
 || formatMoney(Number number, [Locale locale]) ||  ||
+
 == Logging ===
 || println(Object object) || Writes object.toString() to the console window.  ||
 || log(String s)|| Writes message to application's log file.  Log file located @ WEB-INF/logs. Messages are written to the log file at a specified interval, not immediately. ||
@@ -32,6 +34,8 @@ The following are accessible to every class, template and controller.
 || [howto_newSqlInstance Sql newSqlInstance(String dataSourceName)] || Returns groovy.sql.Sql object.  Database parameters must be supplied as application attributes ||
 || [howto_prop_file Properties loadPropertiesFile(String fileName)] || Returns a properties file ||
 || Object ifNull(Object obj, Object defaultValue)|| Returns defaultValue when obj is null||
+
+== Validation ==
 || boolean isAlphaNumeric(String s) || Returns true, when s contains only numbers and/or letters, false otherwise. regex:  `[a-zA-Z0-9]`||
 || boolean isZipCode(String zipCode) || Returns true when zipCode is valid US zip code, false otherwise. regex: `\\d{5}(-\\d{4}`) ||
 || boolean isEmpty(Object obj) || Returns true when obj is null or obj.toString() is an empty string, false otherwise.|| 
