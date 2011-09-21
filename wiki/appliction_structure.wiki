@@ -1,6 +1,6 @@
-#summary One-sentence summary of this page.
+#summary Application Folder Structure
 
-= Application Structure =
+= Application Folder Structure =
 
 {{{
 
