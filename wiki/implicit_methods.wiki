@@ -7,8 +7,6 @@
 				
 The following are accessible to every class, template and controller.
 || *Object* || *Description* ||
-|| copy(sourcePath, destinationPath) ||  ||
-|| delete(path) ||  ||
 || format(Number,String pattern) ||  ||
 || formatDate(Date date,String pattern) ||  ||
 || formatMoney(Number number, [Locale locale]) ||  ||
@@ -41,6 +39,7 @@ The following are accessible to every class, template and controller.
 ||void copy(String source, String destination) || Copies a directory or file to the specified destination||
 ||void delete(String source) || deletes a directory or file ||
 ||Timestamp now|| Now is a property that returns the current time. use getNow() or now  ||
+
 The following are only access to the templates and controllers 
 || *Object* || *Description* ||
 || redirect(String url) || Sends redirect command to browser.||
