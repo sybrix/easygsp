@@ -39,13 +39,11 @@ EasyGSP's configuration file is located @ $EASYGSP_HOME/conf/server.properties
 || use.manual.file.monitor || false || When false, easygsp will use JNotify library to monitor file changes(it's not supported on all platforms). When true, an internal thread process monitors the file changes.  This manual option should only be used if Jnotify does work with the platform.||
 || admin.app || || ||
 || session.autostart || || ||
-
-
-
-
 || smtp.host ||  || SMPT server host name.  Use hostname instead of IP for gmail servers.||
 || smtp.port ||  || SMTP server port number||
 || smtp.username ||  || SMTP server username||
 || smtp.password ||  || SMPT user password ||
 || smtp.authentication.required || false || True if authentication credentials are required,  false otherwise||
 || smtp.secure|| false || Not used yet||
+||restart.onchange|| false || ||
+||gzip.compression.enabled|| false || ||
