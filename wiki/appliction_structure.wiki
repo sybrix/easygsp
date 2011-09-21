@@ -5,7 +5,7 @@
 {{{
 
 easygsp
-├───bin
+├───bin                 - contains EasyGSP executables
 ├───cache
 ├───conf
 │   └───errors
@@ -14,7 +14,7 @@ easygsp
 ├───logs
 ├───ssl
 ├───temp
-├───work
+└───work
 
 }}}
 = Details =
