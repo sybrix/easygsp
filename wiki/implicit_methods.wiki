@@ -58,7 +58,6 @@ The following are accessible to every class, template and controller.
 
 == Misc == 
 || [howto_prop_file Properties loadPropertiesFile(String fileName)] || Returns a properties file ||
-|| render(String content) || Writes text directory to the output stream.  When render is invoked from a controller, it will not auto forward to a template.   ||
 
 
 The following are only access to the templates and controllers 
