@@ -31,7 +31,8 @@ The following are accessible to every class, template and controller.
 || boolean isEmpty(Object obj) || Returns true when obj is null or obj.toString() is an empty string, false otherwise.|| 
 || boolean isEmailValid(String emailAddress)|| Returns return when emailAddress is a valid email address, false otherwise. regex: ||
 || boolean isNumeric(String val)||Returns true when val contains only numeric values, false otherwise. regex: `(\d+?)` ||
-|| boolean isPhoneValid(String val) ||Return true when val is a valid us phone number, false otherwise. regex: `(\d-)?(\d{3}-)?\d{3}-\d{4}`||
+
+|| boolean isPhone(String val) ||Return true when val is a valid us phone number, false otherwise. regex: `(\d-)?(\d{3}-)?\d{3}-\d{4}`||
 ||String MD5(String val) || ||
 ||String SHA1(String val) || ||
 ||String formatMoney(Double double) || ||
