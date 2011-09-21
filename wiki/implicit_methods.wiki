@@ -5,17 +5,16 @@
 				
 The following are accessible to every class, template and controller.
 || *Object* || *Description* ||
-|| byte[] decodeBase64(String)|| ||
-|| byte[] decodeBase64(byte[])|| ||
-|| String decode(String s)|| Decodes a URL encoded string.  Returns a string. ||
-|| String htmlEncode(String s) || HTML encodes a string. Return a string. || 
+
 || Integer toInt(String val, [Integer defaulValue]) || Returns an Integer object for a string. ||
 || Long toLong(String val,[Long defaulValue]) || Returns a Long object for a string. ||
 || Double toDbl(String val,[Double defaulValue]) || Return a Double object for a string. ||
 
 == Date Functions ==
 || parseDate(String date, String format) ||  ||
-|| formatDate(Date date,String pattern) ||  ||
+|| formatDate(Date date, [String pattern]) ||  ||
+||Timestamp now|| Now is a property that returns the current time. use getNow() or now  ||
+
 
 == Number Functions ==
 || format(Number,String pattern) ||  ||
@@ -28,11 +27,10 @@ The following are accessible to every class, template and controller.
 || log(String logMessage, Throwable t) || Writes message and exception to log file. Log file located @ WEB-INF/logs ||
 || String encode(String s)|| Encodes string as  URL encoded string.  Returns a string. ||
 
-|| render(String content) || Writes text directory to the output stream.  When render is invoked from a controller, it will not auto forward to a template.   ||
 
 == Database ==
 || [howto_newSqlInstance Sql newSqlInstance(String dataSourceName)] || Returns groovy.sql.Sql object.  Database parameters must be supplied as application attributes ||
-|| [howto_prop_file Properties loadPropertiesFile(String fileName)] || Returns a properties file ||
+
 || Object ifNull(Object obj, Object defaultValue)|| Returns defaultValue when obj is null||
 
 == Validation ==
@@ -42,15 +40,26 @@ The following are accessible to every class, template and controller.
 || boolean isEmailValid(String emailAddress)|| Returns return when emailAddress is a valid email address, false otherwise. regex: ||
 || boolean isNumeric(String val)||Returns true when val contains only numeric values, false otherwise. regex: `(\d+?)` ||
 || boolean isPhone(String val) ||Return true when val is a valid us phone number, false otherwise. regex: `(\d-)?(\d{3}-)?\d{3}-\d{4}`||
+
+== Data Encoding ==
 ||String MD5(String val) || ||
 ||String SHA1(String val) || ||
-||String formatMoney(Double double) || ||
-||String formatMoney(BigDecimal double) || ||
-||String formatDate(Object date) || ||
+||byte[] decodeBase64(String)|| ||
+||byte[] decodeBase64(byte[])|| ||
+||String decode(String s)|| Decodes a URL encoded string.  Returns a string. ||
+||String htmlEncode(String s) || HTML encodes a string. Return a string. || 
+
+== Email ==
 ||String sendEmail(Map properties) || ||
+
+== File ==
 ||void copy(String source, String destination) || Copies a directory or file to the specified destination||
 ||void delete(String source) || deletes a directory or file ||
-||Timestamp now|| Now is a property that returns the current time. use getNow() or now  ||
+
+== Misc == 
+|| [howto_prop_file Properties loadPropertiesFile(String fileName)] || Returns a properties file ||
+|| render(String content) || Writes text directory to the output stream.  When render is invoked from a controller, it will not auto forward to a template.   ||
+
 
 The following are only access to the templates and controllers 
 || *Object* || *Description* ||
