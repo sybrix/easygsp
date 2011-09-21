@@ -13,6 +13,7 @@ Getting Started
 Reference
   * [lifecycle EasyGSP Page LifeCycle]
   * [servletapi Servlet API]
+  * [appliction_structure  Application Structure]
   * [scopes Scope - Flash/Request/Session/App]
   * [controllers Controllers]
   * [gsp_scripts Templates/Views]
