@@ -3,16 +3,18 @@
 = Application Structure =
 
 {{{
-+-- $EASYGSP_HOME
-       |
-       +-- webapps
-            |
-            +-- MyApp
-                 | 
-                 |-- index.gsp
-                 +-- WEB-INF
-                      |
-                      |-- web.groovy
+
+easygsp
+├───bin
+├───cache
+├───conf
+│   └───errors
+├───lib
+│   └───native
+├───logs
+├───ssl
+├───temp
+├───work
 
 }}}
 = Details =
