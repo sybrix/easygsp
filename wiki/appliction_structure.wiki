@@ -2,9 +2,19 @@
 
 = Application Structure =
 
-Add your content here.
+{{{
++-- $EASYGSP_HOME
+       |
+       +-- webapps
+            |
+            +-- MyApp
+                 | 
+                 |-- index.gsp
+                 +-- WEB-INF
+                      |
+                      |-- web.groovy
 
-
+}}}
 = Details =
 
 Add your content here.  Format your content with:
