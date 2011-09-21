@@ -2,28 +2,33 @@
 
 = EasyGSP Implicit Methods =
 
-
-
 				
 The following are accessible to every class, template and controller.
 || *Object* || *Description* ||
 || byte[] decodeBase64(String)|| ||
 || byte[] decodeBase64(byte[])|| ||
+|| String decode(String s)|| Decodes a URL encoded string.  Returns a string. ||
+|| String htmlEncode(String s) || HTML encodes a string. Return a string. || 
+|| Integer toInt(String val, [Integer defaulValue]) || Returns an Integer object for a string. ||
+|| Long toLong(String val,[Long defaulValue]) || Returns a Long object for a string. ||
+|| Double toDbl(String val,[Double defaulValue]) || Return a Double object for a string. ||
+
+== Date Functions ==
 || parseDate(String date, String format) ||  ||
-|| format(Number,String pattern) ||  ||
 || formatDate(Date date,String pattern) ||  ||
+== Number Functions ==
+|| format(Number,String pattern) ||  ||
 || formatMoney(Number number, [Locale locale]) ||  ||
-|| render(String content) || Writes text directory to the output stream.  When render is invoked from a controller, it will not auto forward to a template.   ||
+== Logging ===
 || println(Object object) || Writes object.toString() to the console window.  ||
 || log(String s)|| Writes message to application's log file.  Log file located @ WEB-INF/logs. Messages are written to the log file at a specified interval, not immediately. ||
 || log(Throwable t)|| Writes exception to application's log file.  Log file located @ WEB-INF/logs ||
 || log(String logMessage, Throwable t) || Writes message and exception to log file. Log file located @ WEB-INF/logs ||
 || String encode(String s)|| Encodes string as  URL encoded string.  Returns a string. ||
-|| String decode(String s)|| Decodes a URL encoded string.  Returns a string. ||
-|| String htmlEncode(String s) || HTML encodes a string. Return a string. || 
-|| Integer toInt(String val) || Returns an Integer object for a string. ||
-|| Long toLong(String val) || Returns a Long object for a string. ||
-|| Double toDbl(String val) || Return a Double object for a string. ||
+
+|| render(String content) || Writes text directory to the output stream.  When render is invoked from a controller, it will not auto forward to a template.   ||
+
+== Database ==
 || [howto_newSqlInstance Sql newSqlInstance(String dataSourceName)] || Returns groovy.sql.Sql object.  Database parameters must be supplied as application attributes ||
 || [howto_prop_file Properties loadPropertiesFile(String fileName)] || Returns a properties file ||
 || Object ifNull(Object obj, Object defaultValue)|| Returns defaultValue when obj is null||
