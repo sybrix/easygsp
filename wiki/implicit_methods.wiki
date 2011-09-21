@@ -7,6 +7,7 @@
 				
 The following are accessible to every class, template and controller.
 || *Object* || *Description* ||
+|| parseDate(String date, String format) ||  ||
 || format(Number,String pattern) ||  ||
 || formatDate(Date date,String pattern) ||  ||
 || formatMoney(Number number, [Locale locale]) ||  ||
