@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * Description :
  */
 public class ConsoleServer extends Thread {
-        private static final Logger log = Logger.getLogger(ConsoleServer.class.getName());
+        private static final Logger logger = Logger.getLogger(ConsoleServer.class.getName());
         private volatile boolean stopRequested = false;
         private ServerSocket serverSocket;
         private List<OutputStream> outputStreams;
@@ -28,7 +28,7 @@ public class ConsoleServer extends Thread {
                 try {
                         serverSocket = new ServerSocket(EasyGServer.propertiesFile.getInt("console.server.port", 4447));
                 } catch (IOException e) {
-                        log.severe("IOException instantiating serverSocket in ConsoleServer.  " + e.getMessage());
+                        logger.severe("IOException instantiating serverSocket in ConsoleServer.  " + e.getMessage());
                 }
                 outputStreams = new ArrayList();
                 consoleOutPrintStream = System.out;

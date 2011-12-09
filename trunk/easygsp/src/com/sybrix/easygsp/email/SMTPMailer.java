@@ -2,7 +2,11 @@ package com.sybrix.easygsp.email;
 
 import com.sybrix.easygsp.exception.SMTPMailerException;
 import com.sybrix.easygsp.exception.SendEmailException;
-import com.sybrix.easygsp.http.StaticControllerMethods;
+import com.sybrix.easygsp.http.StaticMethods;
+import com.sybrix.easygsp.http.ServletContextImpl;
+import com.sybrix.easygsp.logging.EasyGSPLogger;
+import com.sybrix.easygsp.logging.LogMessage;
+import com.sybrix.easygsp.server.EasyGServer;
 import easygsp.ByteArrayDataSource;
 
 import javax.activation.DataHandler;
@@ -16,7 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SMTPMailer {
-        private static final Logger log = Logger.getLogger(SMTPMailer.class.getName());
+        private static final Logger logger = Logger.getLogger(SMTPMailer.class.getName());
 
         public static void send(final Email email) throws SMTPMailerException {
                 Transport transport = null;
@@ -117,11 +121,11 @@ public class SMTPMailer {
 
 
                 } catch (SendEmailException e) {
-                        log.log(Level.SEVERE, e.getMessage(), e);
-                        StaticControllerMethods.addLogAppThrowableAndMessageMethod(email.getApp(), e.getMessage(), e);
+                        logger.log(Level.SEVERE, e.getMessage(), e);
+                        StaticMethods.logAppThrowableAndMessageMethod(email.getApp(), e.getMessage(), e);
                         throw e;
                 } catch (Throwable e) {
-                        StaticControllerMethods.addLogAppThrowableAndMessageMethod(email.getApp(), e.getMessage(), e);
+                        StaticMethods.logAppThrowableAndMessageMethod(email.getApp(), e.getMessage(), e);
                         throw new SendEmailException(e);
                 } finally {
                         try {
@@ -199,5 +203,7 @@ public class SMTPMailer {
                 return rec;
         }
 
+
+//
 
 }
