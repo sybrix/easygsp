@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author David Lee
  */
 public class EmailService {
-        private static final Logger log = Logger.getLogger(EmailThread.class.getName());
+        private static final Logger logger = Logger.getLogger(EmailThread.class.getName());
 
         private static EmailThread emailThread;
 
@@ -38,7 +38,7 @@ public class EmailService {
 
                 @Override
                 public void run() {
-                        log.info("EmailService thread started");
+                        logger.info("EmailService thread started");
                         while (true) {
                                 if (emails.size() == 0){
                                         synchronized (emails) {
@@ -56,15 +56,15 @@ public class EmailService {
                                 sendEmail(emails.remove(0));
                         }
 
-                        log.info("EmailService thread stopped");
+                        logger.info("EmailService thread stopped");
                 }
 
                 public void sendEmail(Email email) {
                         try {
-                                log.fine("sending email: " + email);
+                                logger.fine("sending email: " + email);
                                 SMTPMailer.send(email);
                         } catch (SMTPMailerException e) {
-                                log.log(Level.SEVERE, e.getMessage(), e);
+                                logger.log(Level.SEVERE, e.getMessage(), e);
                         }
                 }
 
@@ -81,7 +81,7 @@ public class EmailService {
 
                 public void stopThread() {
                         this.stopped = true;
-                        log.fine("EmailService thread stop requested...");
+                        logger.fine("EmailService thread stop requested...");
                         this.interrupt();
                 }
         }
