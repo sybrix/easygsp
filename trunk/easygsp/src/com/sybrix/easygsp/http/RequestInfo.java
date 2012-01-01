@@ -5,7 +5,7 @@ package com.sybrix.easygsp.http;
  *
  * @author David Lee
  */
-public class RequestInfo {
+public class RequestInfo {         
         private String currentFile;
         private ServletContextImpl application;
         private Boolean templateRequest=false;

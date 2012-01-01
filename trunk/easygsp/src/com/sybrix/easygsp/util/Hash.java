@@ -25,6 +25,7 @@ import java.io.UnsupportedEncodingException;
  */
 public class Hash {
         public static String convertToHex(byte[] data) {
+
                 StringBuffer buf = new StringBuffer();
                 for (int i = 0; i < data.length; i++) {
                         int halfbyte = (data[i] >>> 4) & 0x0F;

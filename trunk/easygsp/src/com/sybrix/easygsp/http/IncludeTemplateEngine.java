@@ -26,7 +26,9 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import groovy.util.GroovyScriptEngine;
 import org.codehaus.groovy.control.CompilationFailedException;
+import org.codehaus.groovy.control.CompilerConfiguration;
 import org.codehaus.groovy.runtime.InvokerHelper;
 import com.sybrix.easygsp.exception.InheritedTemplateException;
 import com.sybrix.easygsp.exception.ParentTemplateException;
@@ -42,18 +44,18 @@ import com.sybrix.easygsp.exception.ParentTemplateException;
  * @author Paul King
  */
 public class IncludeTemplateEngine extends TemplateEngine {
-        private static final Logger log = Logger.getLogger(IncludeTemplateEngine.class.getName());
+        private static final Logger logger = Logger.getLogger(IncludeTemplateEngine.class.getName());
         private boolean verbose;
         private static long counter = 1;
         private GroovyShell groovyShell;
 
-        //private GSE5 groovyScriptEngine;
+        //private GroovyScriptEngine groovyScriptEngine;
 
 //        public IncludeTemplateEngine() {
 //                this(GroovyShell.class.getClassLoader());
 //        }
 
-        public IncludeTemplateEngine(GSE5 groovyScriptEngine) {
+        public IncludeTemplateEngine(GroovyScriptEngine groovyScriptEngine) {
                 this(groovyScriptEngine.getGroovyClassLoader());
                 //this.groovyScriptEngine = groovyScriptEngine;
         }
@@ -63,8 +65,13 @@ public class IncludeTemplateEngine extends TemplateEngine {
                 setVerbose(verbose);
         }
 
+        public IncludeTemplateEngine(ClassLoader parentLoader, CompilerConfiguration config) {
+                this(new GroovyShell(parentLoader, new Binding(), config));
+
+        }
+
         public IncludeTemplateEngine(ClassLoader parentLoader) {
-                this(new GroovyShell(parentLoader));
+                this(new GroovyShell(parentLoader, new Binding()));
 
         }
 
@@ -77,7 +84,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
 //                return null;
 //        }
 
-        public  Template createTemplate(Reader reader) throws CompilationFailedException, IOException {
+        public Template createTemplate(Reader reader) throws CompilationFailedException, IOException {
                 SimpleTemplate template = new SimpleTemplate();
                 SimpleTemplate.InheritedTemplateInfo inheritedTemplate = new SimpleTemplate.InheritedTemplateInfo();
                 try {
@@ -96,13 +103,13 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         if (!RequestThreadInfo.get().errorOccurred())
                                 RequestThreadInfo.get().setUniqueTemplateScriptName(uniqueScriptName);
 
-                        synchronized(groovyShell) {
+                        synchronized (groovyShell) {
                                 template.script = groovyShell.parse(script, uniqueScriptName);
                                 groovyShell.notifyAll();
                         }
 
                         //template.script = groovyScriptEngine.createScript(script,requestedUrl, uniqueScriptName, binding);
-                        StaticControllerMethods.addMethods(template.script.getClass());
+                        //StaticControllerMethods.addMethods(template.script.getClass());
                 } catch (Exception e) {
                         throw new GroovyRuntimeException("Failed to parse template script (your template may contain an error or be trying to use expressions not currently supported): " + e.getMessage());
                 }
@@ -132,7 +139,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         //RequestThreadInfo.get().getRequestError().setTemplatePath(requestedUrl);
                         template.script = groovyShell.parse(script, uniqueScriptName);
                         //template.script = groovyScriptEngine.createScript(script,requestedUrl, uniqueScriptName, binding);
-                        StaticControllerMethods.addMethods(template.script.getClass());
+                        //StaticControllerMethods.addMethods(template.script.getClass());
                 } catch (Exception e) {
                         throw new GroovyRuntimeException("Failed to parse template script (your template may contain an error or be trying to use expressions not currently supported): " + e.getMessage());
                 }

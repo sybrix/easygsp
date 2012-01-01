@@ -68,6 +68,7 @@ public class CustomServletCategory {
 
                 try {
                         response.getWriter().write(s.toString());
+                        response.getWriter().flush();
                 } catch (IOException e) {
                         throw new RuntimeException("render() failed", e);
                 }

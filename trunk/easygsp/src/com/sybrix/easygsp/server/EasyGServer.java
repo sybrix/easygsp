@@ -16,6 +16,7 @@
 
 package com.sybrix.easygsp.server;
 
+import java.math.BigDecimal;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -36,6 +37,7 @@ import com.sybrix.easygsp.logging.LoggerThread;
 import com.sybrix.easygsp.util.PropertiesFile;
 import com.sybrix.easygsp.util.CustomLogFormatter;
 import com.sybrix.easygsp.exception.ApplicationNotFoundException;
+import groovy.util.GroovyScriptEngine;
 import org.jgroups.*;
 import org.jgroups.conf.ClassConfigurator;
 import org.jgroups.util.Util;
@@ -44,7 +46,9 @@ import groovy.util.ResourceException;
 
 
 public class EasyGServer extends ReceiverAdapter {
-        private static final Logger log = Logger.getLogger(EasyGServer.class.getName());
+        private static final Logger logger = Logger.getLogger(EasyGServer.class.getName());
+        public final static List<Class> categoryList = new ArrayList();
+
         public static JChannel jgroupsChannel;
 
         private ServerSocket serverSocket;
@@ -68,9 +72,14 @@ public class EasyGServer extends ReceiverAdapter {
         private static Boolean clusteringEnabled = false;
         private static volatile Boolean isSettingState = false;
         public static String adminApp;
+        private FileMonitor fileMonitor;
+        public static boolean gzipCompressionEnabled = false;
+
+        public static Boolean restartOnChange;
 
         static {
                 //APP_DIR = System.getProperty("easygsp.home");
+                categoryList.add(CustomServletCategory.class);
         }
 
         public EasyGServer() {
@@ -106,16 +115,18 @@ public class EasyGServer extends ReceiverAdapter {
                         isWindows = System.getProperty("os.name").toLowerCase().contains("windows") || System.getProperty("os.name").toLowerCase().contains("winnt");
                         clusteringEnabled = propertiesFile.getBoolean("clustering.enabled", false);
                         adminApp = propertiesFile.getString("admin.app", "admin");
+                        restartOnChange = propertiesFile.getBoolean("restart.onchange", false);
+                        gzipCompressionEnabled = propertiesFile.getBoolean("gzip.compression.enabled",true);
 
                         if (System.getProperty("java.security.manager") != null) {
                                 System.setSecurityManager(new EasyGSecurityManager());
                         } else {
-                                log.info("Skipped setting security manager");
+                                logger.info("Skipped setting security manager");
                         }
 
                         System.setProperty("easygsp.version", "@easygsp_version");
 
-                        log.info(
+                        logger.info(
                                 "\nEASYGSP_VERSION: " + System.getProperty("easygsp.version") +
                                         "\nJRE_HOME: " + System.getProperty("java.home") +
                                         "\nJAVA_VERSION: " + System.getProperty("java.version") +
@@ -136,8 +147,8 @@ public class EasyGServer extends ReceiverAdapter {
                         if (EasyGServer.propertiesFile.getBoolean("file.monitor.enabled", false)) {
                                 //fm = new FileMonitorThread();
                                 //fm.start();
-                                FileMonitor.apps = applications;
-                                FileMonitor.listen();
+                                fileMonitor = new FileMonitor(applications);
+                                fileMonitor.listen();
                         }
 
                         ThreadMonitor.start();
@@ -153,7 +164,7 @@ public class EasyGServer extends ReceiverAdapter {
 
                         //loadApplicationsFromFileSystem();
 
-                        //executorService = Executors.newCachedThreadPool();
+                       // executorService = Executors.newCachedThreadPool();
                         serverSocket = new ServerSocket(propertiesFile.getInt("server.port", 4444));
                         Thread shutdown = new Thread(new Shutdown(this));
                         shutdown.start();
@@ -185,41 +196,46 @@ public class EasyGServer extends ReceiverAdapter {
 
                                 if (jgroupsChannel.getView().size() > 1 && isSettingState) {
                                         synchronized (serverSocket) {
-                                                log.fine("Clustering: waiting on cluster state transfer to complete before serverSocket listening");
+                                                logger.fine("Clustering: waiting on cluster state transfer to complete before serverSocket listening");
                                                 serverSocket.wait();
-                                                log.fine("Clustering: state transfer done");
+                                                logger.fine("Clustering: state transfer done");
                                         }
                                 }
                         }
 
                         Socket socket = null;
-                        log.info("EasyGSP Server accepting connections");
+                        logger.info("EasyGSP Server accepting connections");
 
-                        final ArrayBlockingQueue<Runnable> queue = new ArrayBlockingQueue<Runnable>(500);
+                        //final ArrayBlockingQueue<Runnable> queue = new ArrayBlockingQueue<Runnable>(500);
+                       // WorkerThread workerThread = new WorkerThread();
+                       // workerThread.start();
 
                         while (!stopRequested) {
                                 try {
                                         if (isStopped())
                                                 break;
-                                        //executorService.execute(new RequestThread(serverSocket.accept(), applications));
-                                        socket = serverSocket.accept();
-                                        RequestThread t = new RequestThread(socket, applications);
+  //                                      executorService.execute(new RequestThread2(serverSocket.accept(), applications));
+
+                                        RequestThread t = new RequestThread(serverSocket.accept(), applications);
+
+//                                        workerThread.setRequestThread(t);
+//                                        workerThread.process();
 
                                         ThreadMonitor.add(t);
                                         t.start();
                                 } catch (Exception e) {
-                                        log.log(Level.FINE, "server socket loop failed");
+                                        logger.log(Level.FINE, "server socket loop failed");
                                 }
                         }
 
-                        log.info("shutting down...");
+                        logger.info("shutting down...");
 
-                        FileMonitor.stop();
+                        fileMonitor.stop();
                         EmailService.stop();
 
                         while (!ThreadMonitor.isEmpty()) {
                                 Thread.sleep(100);
-                                log.fine("thread monitor size:" + ThreadMonitor.size());
+                                logger.fine("thread monitor size:" + ThreadMonitor.size());
                         }
 
                         ThreadMonitor.stopMonitoring();
@@ -245,10 +261,10 @@ public class EasyGServer extends ReceiverAdapter {
                                 Thread.sleep(100);
                         }
 
-                        log.info("shutdown complete");
+                        logger.info("shutdown complete");
                         System.exit(0);
                 } catch (Exception e) {
-                        log.log(Level.SEVERE, "EasyGSP Server startup failed.", e);
+                        logger.log(Level.SEVERE, "EasyGSP Server startup failed.", e);
                 }
         }
 
@@ -297,10 +313,10 @@ public class EasyGServer extends ReceiverAdapter {
                         try {
 
                                 driver = propertiesFile.getString("database.driver." + index++);
-                                log.fine("loading database driver:" + driver);
+                                logger.fine("loading database driver:" + driver);
                                 Class.forName(driver);
                         } catch (ClassNotFoundException e) {
-                                log.severe("Unable to load database driver: " + driver);
+                                logger.severe("Unable to load database driver: " + driver);
                         }
                 }
         }
@@ -336,7 +352,7 @@ public class EasyGServer extends ReceiverAdapter {
                         throw new ApplicationNotFoundException(" application: " + appName + " not found");
                 }
 
-                log.info("loading application: " + file.getAbsoluteFile());
+                logger.info("loading application: " + file.getAbsoluteFile());
                 applications.put(appName, new ServletContextImpl(file));
 
 
@@ -383,15 +399,14 @@ public class EasyGServer extends ReceiverAdapter {
                         msg.putHeader("ah", new AppHeader(sessionMessage.getAppId(), sessionMessage.getMethod(), sessionMessage.getAppPath()));
                         jgroupsChannel.send(msg);
                 } catch (ChannelNotConnectedException e) {
-                        log.log(Level.SEVERE, "JGroups Exception, ChannelNotConnectedException", e);
+                        logger.log(Level.SEVERE, "JGroups Exception, ChannelNotConnectedException", e);
                 } catch (ChannelClosedException e) {
-                        log.log(Level.SEVERE, "JGroups Exception, ChannelClosedException", e);
+                        logger.log(Level.SEVERE, "JGroups Exception, ChannelClosedException", e);
                 } catch (Exception e) {
-                        log.log(Level.SEVERE, "sendToChannel() Exception ", e);
+                        logger.log(Level.SEVERE, "sendToChannel() Exception ", e);
                 }
         }
 
-        //
         @Override
         public void receive(Message msg) {
                 AppHeader appHeader = (AppHeader) msg.getHeader("ah");
@@ -405,10 +420,10 @@ public class EasyGServer extends ReceiverAdapter {
                 try {
                         if (method.equals("appStart")) {
                                 try {
-                                        log.fine("clustering: starting application - " + appName + ", path - " + appPath);
+                                        logger.fine("clustering: starting application - " + appName + ", path - " + appPath);
                                         application = loadApplication(appName, appPath);
                                 } catch (ApplicationNotFoundException e) {
-                                        log.severe("Clustering Problem (appStart), ApplicationNotFoundException - application: " + appName + ", application path: " + appPath);
+                                        logger.severe("Clustering Problem (appStart), ApplicationNotFoundException - application: " + appName + ", application path: " + appPath);
                                         return;
                                 }
 
@@ -416,10 +431,10 @@ public class EasyGServer extends ReceiverAdapter {
 
                                 if (application == null) {
                                         try {
-                                                log.fine("clustering: starting application on session message -  " + appName + ", path - " + appPath);
+                                                logger.fine("clustering: starting application on session message -  " + appName + ", path - " + appPath);
                                                 application = loadApplication(appName, appPath);
                                         } catch (ApplicationNotFoundException e) {
-                                                log.severe("Clustering Problem, ApplicationNotFoundException - application: " + appName);
+                                                logger.severe("Clustering Problem, ApplicationNotFoundException - application: " + appName);
                                                 return;
                                         }
                                 }
@@ -434,14 +449,14 @@ public class EasyGServer extends ReceiverAdapter {
                                 String path = (String) clusterMessage.getParameters()[0];
 
                                 if (application == null) {
-                                        log.fine("clustering: unable to loadClass class - " + path + ", for app: " + appName);
+                                        logger.fine("clustering: unable to loadClass class - " + path + ", for app: " + appName);
                                         return;
                                 }
 
 
-                                log.fine("clustering: loading class - " + path + ", for app: " + appName);
+                                logger.fine("clustering: loading class - " + path + ", for app: " + appName);
 
-                                GSE5 gse = application.getGroovyScriptEngine();
+                                GroovyScriptEngine gse = application.getGroovyScriptEngine();
                                 gse.loadScriptByName(path);
 
 
@@ -472,13 +487,13 @@ public class EasyGServer extends ReceiverAdapter {
                         }
 
                 } catch (ScriptException e) {
-                        log.severe("Clustering Exception, ScriptException - application: " + appName + ", application path: " + appPath);
+                        logger.severe("Clustering Exception, ScriptException - application: " + appName + ", application path: " + appPath);
                 } catch (ResourceException e) {
-                        log.severe("Clustering Exception, ResourceException - application: " + appName + ", application path: " + appPath);
+                        logger.severe("Clustering Exception, ResourceException - application: " + appName + ", application path: " + appPath);
                 } catch (ClassNotFoundException e) {
-                        log.log(Level.SEVERE, "Clustering Exception, ClassNotFoundException", e);
+                        logger.log(Level.SEVERE, "Clustering Exception, ClassNotFoundException", e);
                 } catch (IOException e) {
-                        log.log(Level.SEVERE, "Clustering Exception, IOException", e);
+                        logger.log(Level.SEVERE, "Clustering Exception, IOException", e);
                 }
 
         }
@@ -517,23 +532,23 @@ public class EasyGServer extends ReceiverAdapter {
         @Override
         public byte[] getState() {
                 Map<AppId, byte[]> apps = new HashMap();
-                log.fine("Clustering: getState() - converting sessions to byte array");
+                logger.fine("Clustering: getState() - converting sessions to byte array");
                 for (ServletContextImpl context : applications.values()) {
                         AppId id = new AppId(context.getAppName(), context.getAppPath());
                         try {
                                 apps.put(id, Util.objectToByteBuffer(new ArrayList(context.getSessions().values())));
                         } catch (Exception e) {
-                                log.log(Level.SEVERE, "exception occurred converting sessions to byte array, app: " + id.getAppName(), e);
+                                logger.log(Level.SEVERE, "exception occurred converting sessions to byte array, app: " + id.getAppName(), e);
                         }
                 }
 
-                log.fine("Clustering: getState() - converting request history to byte array");
+                logger.fine("Clustering: getState() - converting request history to byte array");
                 Map<AppId, byte[]> requests = new HashMap();
                 for (AppId id : EasyGServer.loadedScripts.keySet()) {
                         try {
                                 requests.put(id, Util.objectToByteBuffer(EasyGServer.loadedScripts.get(id)));
                         } catch (Exception e) {
-                                log.log(Level.SEVERE, "exception occurred converting request history to byte array, app: " + id.getAppName(), e);
+                                logger.log(Level.SEVERE, "exception occurred converting request history to byte array, app: " + id.getAppName(), e);
                         }
                 }
 
@@ -544,28 +559,28 @@ public class EasyGServer extends ReceiverAdapter {
                 try {
                         return Util.objectToByteBuffer(state);
                 } catch (Exception e) {
-                        log.log(Level.SEVERE, "Unable to getState(), " + e.getMessage(), e);
+                        logger.log(Level.SEVERE, "Unable to getState(), " + e.getMessage(), e);
                 }
 
-                log.fine("Clustering: done getting state");
+                logger.fine("Clustering: done getting state");
                 return new byte[]{};
         }
 
         @Override
         public void setState(byte[] state) {
                 isSettingState = true;
-                log.fine("Clustering: setting state...");
+                logger.fine("Clustering: setting state...");
                 Map data = null;
                 try {
                         data = (Map) Util.objectFromByteBuffer(state);
                 } catch (Exception e) {
-                        log.log(Level.SEVERE, "unable to setState, Util.objectFromByteBuffer failed", e);
+                        logger.log(Level.SEVERE, "unable to setState, Util.objectFromByteBuffer failed", e);
                         return;
                 }
 
                 Map<AppId, byte[]> requests = (Map) data.get("requests");
 
-                log.fine("Clustering: loading request history...");
+                logger.fine("Clustering: loading request history...");
                 for (AppId id : requests.keySet()) {
                         try {
                                 ServletContextImpl app = applications.get(id.getAppName());
@@ -574,19 +589,19 @@ public class EasyGServer extends ReceiverAdapter {
                                 }
                                 Set<String> scripts = (Set) getClusterMessageFromByteArray((byte[]) requests.get(id), app.getGroovyScriptEngine().getGroovyClassLoader());
                                 for (String script : scripts) {
-                                        log.fine("Clustering: loading script - " + script + ", app - " + app.getAppName());
+                                        logger.fine("Clustering: loading script - " + script + ", app - " + app.getAppName());
                                         app.getGroovyScriptEngine().loadScriptByName(script);
                                 }
                                 EasyGServer.loadedScripts.remove(id);
                                 EasyGServer.loadedScripts.put(id, scripts);
                         } catch (Exception e) {
-                                log.log(Level.SEVERE, e.getMessage(), e);
+                                logger.log(Level.SEVERE, e.getMessage(), e);
                         }
                 }
 
                 Map<AppId, byte[]> apps = (Map) data.get("sessions");
 
-                log.fine("Clustering: loading sessions...");
+                logger.fine("Clustering: loading sessions...");
                 for (AppId id : apps.keySet()) {
                         try {
                                 String appName = id.getAppName();
@@ -601,10 +616,10 @@ public class EasyGServer extends ReceiverAdapter {
                                 for (SessionImpl session : sessions) {
                                         session.setApplication(app);
                                         app.getSessions().put(session.getId(), session);
-                                        log.fine("Clustering: loading session - " + session.getId() + ", app - " + app.getAppName());
+                                        logger.fine("Clustering: loading session - " + session.getId() + ", app - " + app.getAppName());
                                 }
                         } catch (Exception e) {
-                                log.log(Level.SEVERE, e.getMessage(), e);
+                                logger.log(Level.SEVERE, e.getMessage(), e);
                         }
                 }
 
@@ -614,7 +629,7 @@ public class EasyGServer extends ReceiverAdapter {
                         serverSocket.notifyAll();
                 }
 
-                log.fine("Clustering: done setting state");
+                logger.fine("Clustering: done setting state");
         }
 
         private ServletContextImpl loadApplication(String appName, String appPath) throws ApplicationNotFoundException {
@@ -641,4 +656,5 @@ public class EasyGServer extends ReceiverAdapter {
                         }
                 }
         }
+
 }

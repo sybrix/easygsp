@@ -13,48 +13,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.sybrix.easygsp.http;
 
-import com.sybrix.easygsp.util.StringUtil;
-import groovy.lang.MissingMethodException;
-import groovy.util.ScriptException;
-import groovy.util.ResourceException;
-
-import groovy.lang.GroovyObject;
-import groovy.lang.Closure;
-
-
-import javax.servlet.ServletContext;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
-import java.util.logging.Level;
-import java.net.URL;
-import java.net.MalformedURLException;
-import java.io.*;
-
 import com.sybrix.easygsp.exception.NotImplementedException;
-import com.sybrix.easygsp.util.Hash;
-import com.sybrix.easygsp.http.TemplateServlet;
+import com.sybrix.easygsp.logging.LoggingLevel;
 import com.sybrix.easygsp.server.EasyGServer;
+import com.sybrix.easygsp.util.ResourceMap;
+import com.sybrix.easygsp.util.StringUtil;
+import groovy.lang.Closure;
+import groovy.lang.GroovyObject;
+import groovy.lang.MissingMethodException;
+import groovy.util.GroovyScriptEngine;
+import groovy.util.ResourceException;
+import groovy.util.ScriptException;
+import groovy.util.XmlParser;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import org.codehaus.groovy.runtime.GroovyCategorySupport;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static java.util.logging.Level.FINE;
 
 /**
  * Application (aka ServletContext) <br/>
  * Description : EasyGSP ServletContext implementation.
  */
 public class ServletContextImpl implements ServletContext, Serializable {
-        private static final Logger log = Logger.getLogger(ServletContextImpl.class.getName());
+        private static final Logger logger = Logger.getLogger(ServletContextImpl.class.getName());
 
         private String appPath;
-        private transient GSE5 groovyScriptEngine;
+        private transient GroovyScriptEngine groovyScriptEngine;
 
         private transient TemplateServlet templateServlet;
         private boolean hasWebGroovy = false;
+
+
+
+        private boolean classControllers = false;
+
+
 
         //private String appId;
         private volatile boolean started;
@@ -63,7 +71,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
         private File appFile;
         private String appName;
         private long webGroovyLastModified;
-        private ConcurrentHashMap resourceBundles;
+        private Map<String, ResourceMap> resourceBundles;
         private List<String> errorFiles;
         //private Set attributeNames;
         private Map<String, Object> appAttributes;
@@ -75,6 +83,8 @@ public class ServletContextImpl implements ServletContext, Serializable {
         private boolean hasOnChanged = true;
         private boolean autoStartSessions = false;
         private Map<String, List<String>> dependencyCache;
+        private LoggingLevel loggingLevel = LoggingLevel.DEBUG;
+        private boolean hasI18nDir = false;
 
         public ServletContextImpl(File dir) {
                 //this.appId = MD5.hash(dir);
@@ -94,7 +104,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 }
 
                 sessions = new ConcurrentHashMap();
-                resourceBundles = new ConcurrentHashMap();
+                resourceBundles = new HashMap();
 
                 appName = dir.getName();
 
@@ -131,7 +141,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 this.appName = appName;
         }
 
-        public GSE5 getGroovyScriptEngine() {
+        public GroovyScriptEngine getGroovyScriptEngine() {
                 return groovyScriptEngine;
         }
 
@@ -247,11 +257,11 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 return started;
         }
 
-        public ConcurrentHashMap getResourceBundles() {
+        public Map<String, ResourceMap> getResourceBundles() {
                 return resourceBundles;
         }
 
-        public void setResourceBundles(ConcurrentHashMap resourceBundles) {
+        public void setResourceBundles(Map<String, ResourceMap> resourceBundles) {
                 this.resourceBundles = resourceBundles;
         }
 
@@ -293,9 +303,9 @@ public class ServletContextImpl implements ServletContext, Serializable {
 
         protected void createWebGroovyFile(File f) {
                 try {
-                        log.fine("creating web.groovy @ " + f.getAbsolutePath());
+                        logger.fine("creating web.groovy @ " + f.getAbsolutePath());
 
-                        log.fine("making dir " + f.getParentFile().getAbsolutePath());
+                        logger.fine("making dir " + f.getParentFile().getAbsolutePath());
                         f.getParentFile().mkdir();
 
                         String webGroovy =
@@ -323,8 +333,19 @@ public class ServletContextImpl implements ServletContext, Serializable {
 
                         webGroovyLastModified = f.lastModified();
                 } catch (IOException e) {
-                        log.log(Level.SEVERE, "Unable to create web.groovy @ " + f.getAbsolutePath(), e);
+                        logger.log(Level.SEVERE, "Unable to create web.groovy @ " + f.getAbsolutePath(), e);
                 }
+        }
+
+        public LoggingLevel getLoggingLevel() {
+                if (loggingLevel == null)
+                        return LoggingLevel.DEBUG;
+
+                return loggingLevel;
+        }
+
+        public void setLoggingLevel(LoggingLevel loggingLevel) {
+                this.loggingLevel = loggingLevel;
         }
 
         public void setAttribute(String key, Object value) {
@@ -357,33 +378,49 @@ public class ServletContextImpl implements ServletContext, Serializable {
                         lastRestartTime = System.currentTimeMillis();
 
                         loadErrorFiles();
-                        AppClassLoader parentClassLoader = new AppClassLoader(new URL[]{});
+
+                        CompilerConfiguration c = new CompilerConfiguration(CompilerConfiguration.DEFAULT);
+                        //c.setTargetDirectory("c:/temp");
+                        //c.setMinimumRecompilationInterval(0);
+                        //c.setRecompileGroovySource(true);
+                        //c.setClasspath("c:\\temp");
+                        //c.setTargetDirectory("c:\\temp\\test");
+
+                        AppClassLoader parentClassLoader = new AppClassLoader(getClass().getClassLoader(),c);
 
                         parentClassLoader.setAllowThreads(EasyGServer.propertiesFile.getBoolean("allow.threads", false));
 
-                        groovyScriptEngine = new GSE5(new String[]{appPath, appPath + File.separator + "WEB-INF"}, parentClassLoader);
+                        groovyScriptEngine = new GroovyScriptEngine(new String[]{appPath, appPath + File.separator + "WEB-INF/i18n",
+                                appPath + File.separator + "WEB-INF"}, parentClassLoader);
 
-                        Properties myProperties = new Properties(System.getProperties());
-                        myProperties.setProperty("groovy.recompile.minimumIntervall", "100");
-                        myProperties.setProperty("groovy.output.verbose", "true");
-                        groovyScriptEngine.setConfig(new CompilerConfiguration(myProperties));
+//                        Properties myProperties = new Properties(System.getProperties());
+//                        myProperties.setProperty("groovy.recompile.minimumIntervall", "0");
+//                        myProperties.setProperty("groovy.recompile", "false");
+//                        myProperties.setProperty("groovy.output.verbose", "true");                    
+//                        myProperties.setProperty("groovy.target.directory", "c:/temp");
+//
+
+
+                        //c.setDebug(false);
 
                         templateServlet = new TemplateServlet(groovyScriptEngine);
-                        log.fine("invoking onApplicationStart for " + appName);
+                        logger.fine("invoking onApplicationStart for " + appName);
                         //groovyScriptEngine = new GroovyScriptEngine(new String[]{appPath, appPath + System.getProperty("file.separator") + "WEB-INF"});
 
-                        checkForOnCompiledMethod();
+                        //checkForOnCompiledMethod();
+                         hasI18nDir = new File(appPath + File.separator + "WEB-INF/i18n").exists();
 
                         if (hasWebGroovy) {
                                 invokeWebMethod("onApplicationStart", new Object[]{this});
                         }
 
                         started = true;
-                        log.fine("onApplicationStart successful for " + appName);
-                } catch (Exception e) {
-                        log.log(Level.FINE, "onApplicationStart failed.", e);
+                        logger.fine("onApplicationStart successful for " + appName);
+                } catch (Throwable e) {
+                        logger.log(Level.FINE, "onApplicationStart failed.", e);
                 }
         }
+
 
         private void checkForOnCompiledMethod() {
                 try {
@@ -400,7 +437,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
         public synchronized void restart() {
                 try {
                         synchronized (groovyScriptEngine) {
-                                log.fine("restarting application...");
+                                logger.fine("restarting application...");
                                 File f = saveSessionsToDisk();
                                 sessions.clear();
                                 RequestThreadInfo.get().setApplication(this);
@@ -483,7 +520,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
                                                 webGroovyObject.invokeMethod(method, param);
 
                                         } catch (Throwable e) {
-                                                log.log(Level.SEVERE, e.getMessage(), e);
+                                                logger.log(Level.SEVERE, e.getMessage(), e);
                                         }
 
                                         groovyScriptEngine.notifyAll();
@@ -492,7 +529,8 @@ public class ServletContextImpl implements ServletContext, Serializable {
                         }
 
                 };
-                GroovyCategorySupport.use(CustomServletCategory.class, closure);
+
+                GroovyCategorySupport.use(EasyGServer.categoryList, closure);
 
 
                 //                Class cls = groovyClassLoader.loadClass("web");
@@ -556,7 +594,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
                         }
                         started = false;
                 } catch (Exception e) {
-                        log.log(Level.FINE, "onApplicationEnd failed.", e);
+                        logger.log(Level.FINE, "onApplicationEnd failed.", e);
                 }
         }
 
@@ -660,5 +698,16 @@ public class ServletContextImpl implements ServletContext, Serializable {
 
         public void setDependencyCache(Map<String, List<String>> dependencyCache) {
                 this.dependencyCache = dependencyCache;
+        }
+
+        public boolean i18nExits(){
+                return hasI18nDir;
+        }
+        public boolean isClassControllers() {
+                return classControllers;
+        }
+
+        public void setClassControllers(boolean classControllers) {
+                this.classControllers = classControllers;
         }
 }

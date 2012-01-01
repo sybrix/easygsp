@@ -1,7 +1,5 @@
 package com.sybrix.easygsp.logging;
 
-import com.sybrix.easygsp.logging.LogMessage;
-
 import java.util.*;
 import java.util.logging.Level;
 import java.io.FileWriter;
@@ -24,14 +22,14 @@ public class EasyGSPLogger {
                 return _instance;
         }
 
-        private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(EasyGSPLogger.class.getName());
+        private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EasyGSPLogger.class.getName());
 
         private volatile List<LogMessage> incomingMessages = Collections.synchronizedList(new ArrayList<LogMessage>());
         private volatile List<LogMessage> messageQueue = new ArrayList<LogMessage>();
         private SimpleDateFormat fileNameSDF = new SimpleDateFormat("MM_dd_yyyy");
          
 
-        public void log(LogMessage message) {
+        public void logMessage(LogMessage message) {
                 incomingMessages.add(message);
         }
 
@@ -44,7 +42,7 @@ public class EasyGSPLogger {
                 if (numberOfMessages ==0)
                         return;
 
-                log.fine("logging " + numberOfMessages + " message(s) in log queue");
+                logger.fine("logging " + numberOfMessages + " message(s) in log queue");
                 synchronized (incomingMessages) {
                         for (int i = 0; i < numberOfMessages; i++) {
                                 messageQueue.add(incomingMessages.remove(0));
@@ -70,6 +68,9 @@ public class EasyGSPLogger {
                 File logFile = null;
                 FileWriter fileWriter = null;
 
+                if (message.getApplication().getLoggingLevel().ordinal() > message.getLevel().ordinal())
+                        return;
+
                 try {
                         logFile = new File(message.getApplication().getAppPath() + File.separator + "WEB-INF" + File.separator + "logs" + File.separator + "app_" + fileNameSDF.format(new Date()) + ".log");
                         logFile.getParentFile().mkdirs();
@@ -79,7 +80,7 @@ public class EasyGSPLogger {
                         fileWriter.write(message.toString());
 
                 } catch (IOException e) {
-                        log.log(Level.SEVERE, "Logger.writeToFile() failed. message:" + e.getMessage() + ", application: " + message.getApplication().getAppPath(), e);
+                        logger.log(Level.SEVERE, "Logger.writeToFile() failed. message:" + e.getMessage() + ", application: " + message.getApplication().getAppPath(), e);
                 } finally {
                         try {
                                 fileWriter.close();

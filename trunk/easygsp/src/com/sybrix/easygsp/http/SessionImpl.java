@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 
 import static java.util.logging.Level.SEVERE;
 
+import groovy.util.GroovyScriptEngine;
 import groovy.util.ScriptException;
 import groovy.util.ResourceException;
 import groovy.lang.GroovyObject;
@@ -39,7 +40,7 @@ public class SessionImpl implements HttpSession, Serializable {
 
         private static final long serialVersionUID = 1L;
 
-        private static final Logger log = Logger.getLogger(SessionImpl.class.getName());
+        private static final Logger logger = Logger.getLogger(SessionImpl.class.getName());
         private static Random random = new Random(System.currentTimeMillis());
 
         private String sessionId;
@@ -106,6 +107,14 @@ public class SessionImpl implements HttpSession, Serializable {
 
         public long getLastAccessedTime() {
                 return lastAccessedTime;
+        }
+
+        public ServletContext getApp() {
+                return application;
+        }
+
+        public void setApp(ServletContext o) {
+
         }
 
         public ServletContext getServletContext() {
@@ -212,19 +221,19 @@ public class SessionImpl implements HttpSession, Serializable {
         public void invokeSessionStartScript() {
                 try {
                         if (application.groovyWebFileExists()) {
-                                GSE5 gse = application.getGroovyScriptEngine();
+                                GroovyScriptEngine gse = application.getGroovyScriptEngine();
                                 Class clazz = gse.loadScriptByName("WEB-INF.web");
                                 GroovyObject o = (GroovyObject) clazz.newInstance();
                                 o.invokeMethod("onSessionStart", new Object[]{null});
                         }
                 } catch (ScriptException e) {
-                        log.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
+                        logger.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
                 } catch (ResourceException e) {
-                        log.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
+                        logger.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
                 } catch (IllegalAccessException e) {
-                        log.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
+                        logger.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
                 } catch (InstantiationException e) {
-                        log.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
+                        logger.log(SEVERE, "Session.invokeSessionStartScript() failed. message:" + e.getMessage(), e);
                 }
         }
 

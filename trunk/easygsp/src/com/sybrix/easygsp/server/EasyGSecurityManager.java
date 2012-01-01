@@ -32,13 +32,13 @@ public class EasyGSecurityManager extends SecurityManager {
         private static boolean allowSwing;
 
         static {
-                
+
                 allowAWT = EasyGServer.propertiesFile.getBoolean("allow.awt", false);
                 allowSwing = EasyGServer.propertiesFile.getBoolean("allow.swing", false);
         }
 
         public void checkDelete(String file) {
-               doCheckReadOrWrite(file);
+                doCheckReadOrWrite(file);
         }
 
         public void checkRead(FileDescriptor fd) {
@@ -59,7 +59,6 @@ public class EasyGSecurityManager extends SecurityManager {
                 } else {
                         //boolean b = file.startsWith(path.getAppPath());
 
-                        
                         try {
                                 boolean allowAccess = false;
                                 if (app.getAppName().equals(EasyGServer.adminApp))
@@ -113,12 +112,15 @@ public class EasyGSecurityManager extends SecurityManager {
         }
 
         public void checkPackageAccess(String pkg) {
-                ServletContextImpl path = RequestThreadInfo.get().getApplication();
-                if (path != null) {
-                        if ((pkg.equals("javax.swing") && !allowSwing) || (pkg.equals("java.awt") && allowAWT)) {
-                                throw new SecurityException("Access denied for package: " + pkg);
+               // if (RequestThreadInfo.get() != null) {
+                        ServletContextImpl path = RequestThreadInfo.get().getApplication();
+                        if (path != null) {
+                                if ((pkg.equals("javax.swing") && !allowSwing) || (pkg.equals("java.awt") && allowAWT)) {
+                                        throw new SecurityException("Access denied for package: " + pkg);
+                                }
                         }
-                }
+                //}
+                
                 super.checkPackageAccess(pkg);
         }
 
@@ -128,7 +130,7 @@ public class EasyGSecurityManager extends SecurityManager {
                 if (app == null) {
                         super.checkExec(cmd);
                 } else {
-                        if (!app.getAppName().equals(EasyGServer.adminApp)){
+                        if (!app.getAppName().equals(EasyGServer.adminApp)) {
                                 super.checkExec(cmd);
                         }
                 }

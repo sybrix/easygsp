@@ -8,7 +8,7 @@ import java.util.logging.Logger;
  * @author David Lee
  */
 public class ShutdownHook extends Thread {
-        private static final Logger log = Logger.getLogger(ShutdownHook.class.getName());
+        private static final Logger logger = Logger.getLogger(ShutdownHook.class.getName());
         private EasyGServer server;
 
         public ShutdownHook(EasyGServer server) {
@@ -19,7 +19,7 @@ public class ShutdownHook extends Thread {
         @Override
         public void run() {
                 try {
-                        log.info("ShutdownHook invoked...");
+                        logger.info("ShutdownHook invoked...");
                         server.stopServer();
                         //Thread.sleep(5000);
                 } catch (Exception e) {

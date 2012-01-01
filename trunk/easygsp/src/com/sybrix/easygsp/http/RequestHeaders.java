@@ -21,6 +21,7 @@ package com.sybrix.easygsp.http;
  */
 public class RequestHeaders {
         public static final String REQUEST_METHOD = "REQUEST-METHOD";
+        public static final String ACCEPT_ENCODING = "ACCEPT-ENCODING";
         public static final String QUERY_STRING = "QUERY-STRING";
         public static final String REQUEST_URI = "REQUEST-URI";
         public static final String CONTENT_LENGTH = "CONTENT-LENGTH";

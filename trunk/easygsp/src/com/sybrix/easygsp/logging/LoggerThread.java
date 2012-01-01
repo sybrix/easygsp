@@ -1,6 +1,5 @@
 package com.sybrix.easygsp.logging;
 
-import com.sybrix.easygsp.logging.EasyGSPLogger;
 import com.sybrix.easygsp.server.EasyGServer;
 
 import java.util.logging.Logger;
@@ -11,7 +10,7 @@ import java.util.logging.Logger;
  * @author David Lee
  */
 public class LoggerThread extends Thread{
-        private static final Logger log = Logger.getLogger(LoggerThread.class.getName());
+        private static final Logger logger = Logger.getLogger(LoggerThread.class.getName());
         private static int checkInterval;
         private volatile boolean stopped = false;
         
@@ -21,7 +20,7 @@ public class LoggerThread extends Thread{
 
         @Override
         public void run() {
-                log.info("Logger thread started");
+                logger.info("Logger thread started");
                 while(!stopped){
                         try {
                                Thread.sleep(checkInterval);
@@ -32,7 +31,7 @@ public class LoggerThread extends Thread{
                         EasyGSPLogger.getInstance().logMessagesInQueue();
                 }
 
-                log.info("Logger thread stopped");
+                logger.info("Logger thread stopped");
         }
 
         public boolean messagesInQueue(){
@@ -41,7 +40,7 @@ public class LoggerThread extends Thread{
 
         public void stopLogging() {
                 this.stopped = true;
-                log.fine("Logger thread stop requested...");
+                logger.fine("Logger thread stop requested...");
                 this.interrupt();
         }
 }
