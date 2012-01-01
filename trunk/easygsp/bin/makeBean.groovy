@@ -505,7 +505,7 @@ public class PropertiesFile {
                         }
 
                 } catch (Exception e) {
-                        log.log(Level.FINEST, "PropertiesFile.load() failed. message:" + e.getMessage(), e);
+                        log.logMessage(Level.FINEST, "PropertiesFile.load() failed. message:" + e.getMessage(), e);
                 } finally {
                         try {
                                 fis.close();
@@ -522,7 +522,7 @@ public class PropertiesFile {
                 try {
                         return Integer.parseInt(getString(key));
                 } catch (Exception e) {
-                        log.log(Level.FINEST, "PropertiesFile.getInt() failed for key: " + key, e);
+                        log.logMessage(Level.FINEST, "PropertiesFile.getInt() failed for key: " + key, e);
                 }
 
                 return null;
