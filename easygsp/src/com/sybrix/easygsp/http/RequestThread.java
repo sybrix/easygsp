@@ -14,7 +14,6 @@ import groovy.util.ScriptException;
 import org.codehaus.groovy.control.CompilationFailedException;
 import org.codehaus.groovy.control.MultipleCompilationErrorsException;
 import org.codehaus.groovy.runtime.GroovyCategorySupport;
-import sun.misc.Request;
 
 import javax.servlet.ServletException;
 import java.io.*;

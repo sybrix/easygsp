@@ -22,18 +22,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="7b391f42-fdfd-44c2-ad2a-af40b8f715d7" name="Default" comment="modified build and startup scripts">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/transformations/META-INF/services" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/transformations/META-INF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/transformations/com/sybrix/easygsp/transformations" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/transformations/com/sybrix/easygsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/transformations/com/sybrix" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/transformations/com" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/transformations" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/webapps/test/staticMethods" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build-local.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/db/DBMapper.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/db/Model.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/transformations/META-INF/services/org.codehaus.groovy.transform.ASTTransformation" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/transformations/com/sybrix/easygsp/transformations/EntityTransformation.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/transformations/com/sybrix/easygsp/transformations/StaticASTTransformation.groovy" />
+      <change type="DELETED" beforePath="C:\projects\easygsp\easygsp\groovy-1.7-changes.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/wrapper.conf" afterPath="$PROJECT_DIR$/conf/wrapper.conf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/easygsp.policy" afterPath="$PROJECT_DIR$/conf/easygsp.policy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/logging.properties" afterPath="$PROJECT_DIR$/conf/logging.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/scgi_dev.policy" afterPath="$PROJECT_DIR$/conf/scgi_dev.policy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/server.properties" afterPath="$PROJECT_DIR$/conf/server.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/easygsp.iml" afterPath="$PROJECT_DIR$/easygsp.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/easygsp.ipr" afterPath="$PROJECT_DIR$/easygsp.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/easygsp.iws" afterPath="$PROJECT_DIR$/easygsp.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/error_0.log" afterPath="$PROJECT_DIR$/logs/error_0.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapps/easygsp/index.gsp" afterPath="$PROJECT_DIR$/webapps/easygsp/index.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release.txt" afterPath="$PROJECT_DIR$/release.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticMethods.java" afterPath="$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticMethods.java" />
     </list>
     <ignored path="$USER_HOME$/.grails/" />
     <ignored path="$USER_HOME$/.griffon/" />
@@ -120,7 +135,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="215" class="com.sybrix.easygsp.http.RequestThread" package="com.sybrix.easygsp.http">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="214" class="com.sybrix.easygsp.http.RequestThread" package="com.sybrix.easygsp.http">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -133,7 +148,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticMethods.java" line="191" class="com.sybrix.easygsp.http.StaticMethods" package="com.sybrix.easygsp.http">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticMethods.java" line="193" class="com.sybrix.easygsp.http.StaticMethods" package="com.sybrix.easygsp.http">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -198,7 +213,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="419" class="com.sybrix.easygsp.http.RequestThread$1" package="com.sybrix.easygsp.http">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" line="418" class="com.sybrix.easygsp.http.RequestThread$1" package="com.sybrix.easygsp.http">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -304,82 +319,91 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="IncludeTemplateEngine.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/IncludeTemplateEngine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="647" column="30" selection-start="36188" selection-end="36188" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SMTPMailer.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SMTPMailer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/email/SMTPMailer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="22" selection-start="1920" selection-end="1920" vertical-scroll-proportion="0.5681818">
+            <state line="42" column="22" selection-start="1920" selection-end="1920" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomServletBinding.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/CustomServletBinding.java">
+      <file leaf-file-name="release.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/release.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="13" selection-start="1957" selection-end="1957" vertical-scroll-proportion="0.0">
+            <state line="52" column="109" selection-start="1878" selection-end="1878" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RequestError.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestError.java">
+      <file leaf-file-name="groovy-LICENSE.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/groovy-LICENSE.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="13" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmailService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/email/EmailService.java">
+      <file leaf-file-name="easygsp.ipr" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/easygsp.ipr">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="54" selection-start="2034" selection-end="2068" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="license.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/license.txt">
+      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="42" selection-start="578" selection-end="578" vertical-scroll-proportion="0.0">
+            <state line="64" column="91" selection-start="2631" selection-end="2631" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Framework.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/util/Framework.groovy">
+      <file leaf-file-name="RequestThread.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="32" selection-start="1173" selection-end="1173" vertical-scroll-proportion="0.0">
+            <state line="14" column="84" selection-start="658" selection-end="658" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServletContextImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/ServletContextImpl.java">
+      <file leaf-file-name="StaticMethods.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticMethods.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="608" column="86" selection-start="23819" selection-end="23819" vertical-scroll-proportion="0.0">
+            <state line="30" column="31" selection-start="1027" selection-end="1027" vertical-scroll-proportion="-20.4">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GroovyScriptEngine.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://C:/Java/groovy/groovy-1.8.1/groovy-1.8.1/src/main/groovy/util/GroovyScriptEngine.java">
+      <file leaf-file-name="DBMapper.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/db/DBMapper.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="563" column="0" selection-start="23346" selection-end="23346" vertical-scroll-proportion="0.0">
+            <state line="1030" column="15" selection-start="44406" selection-end="44406" vertical-scroll-proportion="-6.68">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Model.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/db/Model.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="13" selection-start="489" selection-end="489" vertical-scroll-proportion="0.31716418">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build-local.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build-local.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="176" column="30" selection-start="7525" selection-end="7525" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -402,21 +426,21 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/SessionImpl.java" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/util/Rounding.java" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/server/EasyGServer.java" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/util/RoundingMixin.groovy" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/util/Mixins.groovy" />
-        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/db/Model.groovy" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/util/Framework.groovy" />
         <option value="$PROJECT_DIR$/test/easygsp/DBSchema.groovy" />
         <option value="$PROJECT_DIR$/test/easygsp/ReloadTest.groovy" />
         <option value="$PROJECT_DIR$/test/easygsp/staticMethods/StaticMethodsTest.groovy" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/util/Validator.java" />
-        <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/util/ScriptRunner.java" />
-        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/ResponseImpl.java" />
+        <option value="$PROJECT_DIR$/build.xml" />
+        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java" />
+        <option value="$PROJECT_DIR$/release.txt" />
+        <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/db/Model.groovy" />
         <option value="$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticMethods.java" />
       </list>
     </option>
@@ -750,10 +774,6 @@
               <option name="myItemId" value="easygsp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -761,29 +781,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="groovy-1.8.1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
               <option name="myItemId" value="easygsp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="groovy-1.8.1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="groovy-1.8.1.jar" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -793,19 +791,51 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="groovy-1.8.1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="groovy-1.8.1.jar" />
+              <option name="myItemId" value="easygsp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="groovy" />
+              <option name="myItemId" value="transformations" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="META-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="transformations" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easygsp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -815,36 +845,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; 1.6 &gt;" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
               <option name="myItemId" value="easygsp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; 1.6 &gt;" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rt.jar" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="easygsp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="easygsp" />
@@ -913,6 +919,7 @@
       <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\projects\easygsp\easygsp" />
       <recent name="C:\projects\easygsp\easygsp\lib" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
@@ -1748,17 +1755,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="15" width="1936" height="1176" extended-state="0" />
+    <frame x="16" y="109" width="1936" height="973" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2425979" sideWeight="0.99812734" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.75358164" sideWeight="0.99812734" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2862109" sideWeight="0.0" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33032694" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19349681" sideWeight="0.7574021" order="10" side_tool="false" content_ui="tabs" x="1361" y="154" width="296" height="210" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19349681" sideWeight="0.5539637" order="10" side_tool="false" content_ui="tabs" x="1361" y="154" width="296" height="210" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18550107" sideWeight="0.46991405" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2238806" sideWeight="0.7574021" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2238806" sideWeight="0.24641834" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.530086" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" x="72" y="695" width="1633" height="373" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35052532" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28080228" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -1816,7 +1823,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="added gzip support, renamed log to logger, fix manual file monitor, added errors map to binding for all scripts, fixed isNumeric method, finished i18n implementation, added credit card validation support , made headers map case insensitive" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1917,50 +1924,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/deploy/easygsp-0.4.5/webapps/examples/fileupload/fileupload.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="61" selection-start="207" selection-end="207" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="616" column="33" selection-start="23009" selection-end="23022" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="462" column="61" selection-start="23429" selection-end="23429" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/ResponseImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="453" column="58" selection-start="17268" selection-end="17268" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/util/CaseInsensitiveMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="209" selection-end="209" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/CustomServletCategory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="27" selection-start="2100" selection-end="2100" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/util/Framework.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="32" selection-start="1173" selection-end="1173" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/ServletContextImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="608" column="86" selection-start="23819" selection-end="23819" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://C:/Java/groovy/groovy-1.8.1/groovy-1.8.1/src/main/groovy/util/GroovyScriptEngine.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="563" column="0" selection-start="23346" selection-end="23346" vertical-scroll-proportion="0.0" />
@@ -1994,13 +1957,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticMethods.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="504" column="0" selection-start="20443" selection-end="20443" vertical-scroll-proportion="0.35510203">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestError.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="13" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0">
@@ -2010,7 +1966,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/email/SMTPMailer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="22" selection-start="1920" selection-end="1920" vertical-scroll-proportion="0.5681818">
+        <state line="42" column="22" selection-start="1920" selection-end="1920" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/easygsp.ipr">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/groovy-LICENSE.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="91" selection-start="2631" selection-end="2631" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/RequestThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="84" selection-start="658" selection-end="658" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build-local.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="176" column="30" selection-start="7525" selection-end="7525" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="109" selection-start="1878" selection-end="1878" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/db/DBMapper.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1030" column="15" selection-start="44406" selection-end="44406" vertical-scroll-proportion="-6.68">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/http/StaticMethods.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="31" selection-start="1027" selection-end="1027" vertical-scroll-proportion="-20.4">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sybrix/easygsp/db/Model.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="13" selection-start="489" selection-end="489" vertical-scroll-proportion="0.31716418">
           <folding />
         </state>
       </provider>
