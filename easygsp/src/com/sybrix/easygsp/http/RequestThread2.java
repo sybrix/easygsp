@@ -1,35 +1,36 @@
 package com.sybrix.easygsp.http;
 
+import com.sybrix.easygsp.server.EasyGServer;
 import com.sybrix.easygsp.exception.ApplicationNotFoundException;
 import com.sybrix.easygsp.exception.TemplateNotFoundException;
-import com.sybrix.easygsp.server.EasyGServer;
-import com.sybrix.easygsp.util.ResourceMap;
-import groovy.lang.Closure;
-import groovy.lang.GroovyRuntimeException;
-import groovy.lang.MissingMethodException;
-import groovy.lang.MissingPropertyException;
+
+import java.io.*;
+import java.util.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
+import static java.util.logging.Level.*;
+
+import java.net.Socket;
+
 import groovy.util.GroovyScriptEngine;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
-import org.codehaus.groovy.control.CompilationFailedException;
-import org.codehaus.groovy.control.MultipleCompilationErrorsException;
+import groovy.lang.Closure;
+import groovy.lang.MissingPropertyException;
+import groovy.lang.MissingMethodException;
+import groovy.lang.GroovyRuntimeException;
 import org.codehaus.groovy.runtime.GroovyCategorySupport;
-import sun.misc.Request;
+import org.codehaus.groovy.control.MultipleCompilationErrorsException;
+import org.codehaus.groovy.control.CompilationFailedException;
 
 import javax.servlet.ServletException;
-import java.io.*;
-import java.net.Socket;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import static java.util.logging.Level.*;
 
 /**
  * RequestThread <br/>
  * Description :
  */
-public class RequestThread extends Thread {
+public class RequestThread2 implements Runnable{
 
         private static final Logger logger = Logger.getLogger(RequestThread.class.getName());
 
@@ -59,7 +60,6 @@ public class RequestThread extends Thread {
         private CustomServletBinding binding;
         private String scriptPath;
         private ServletContextImpl application;
-        private boolean acceptGZIP = false;
 
         static {
                 threadTimeoutInSeconds = EasyGServer.propertiesFile.getInt("thread.timeout", 30);
@@ -70,8 +70,7 @@ public class RequestThread extends Thread {
                 defaultExtension = EasyGServer.propertiesFile.getString("default.welcome.page.extension");
         }
 
-        public RequestThread(Socket socket, Map applications) {
-                super("EasyGSP Request Thread " + ++id);
+        public RequestThread2(Socket socket, Map applications) {
 
                 requestStartTime = System.currentTimeMillis();
                 stopTime = requestStartTime + (threadTimeoutInSeconds * 1000);
@@ -81,7 +80,7 @@ public class RequestThread extends Thread {
 
         public void run() {
                 SessionImpl session = null;
-
+                RequestThreadInfo.set(new RequestInfo());
                 try {
                         // bufferize the io stream
                         InputStream inputStream = initializeInputStream(socket);
@@ -154,21 +153,8 @@ public class RequestThread extends Thread {
                                 logger.log(FINEST, s.toString());
                         }
 
-                        if (EasyGServer.gzipCompressionEnabled) {
-                                String accepts = headers.get(RequestHeaders.ACCEPT_ENCODING);
-                                for (String acceptEncoding : accepts.split(",")) {
-                                        acceptGZIP = acceptEncoding.equalsIgnoreCase("gzip");
-                                        if (acceptGZIP)
-                                                break;
-                                }
-                        }
-
-                        response.setAcceptsGZip(acceptGZIP);
-
-                        if (application.i18nExits()) {
-                                determineBundle(headers);
-                                loadBundle(application, binding);
-                        }
+                        //determineBundle(headers);
+                        //loadBundle(application, binding);
 
                         // build the script path
                         scriptPath = parsedRequest.getRequestFilePath();
@@ -204,12 +190,11 @@ public class RequestThread extends Thread {
 //                                }
 //                        }
 
-
                         //process the request
                         if (parsedRequest.getRequestURI().endsWith(templateExtension)) {
                                 processTemplateRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         } else {
-                                processScriptController(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
+                                processController(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         }
 
 
@@ -217,7 +202,7 @@ public class RequestThread extends Thread {
                         try {
                                 send404Error(response);
                         } catch (IOException e1) {
-                                logger.log(SEVERE, "send404Error failed IOExeption", e);
+                                logger.log(SEVERE, "send404Error failed, IOException", e);
                         }
                 } catch (IOException e) {
                         logger.log(SEVERE, "SCGIParsing failed", e);
@@ -235,8 +220,6 @@ public class RequestThread extends Thread {
                         logger.fine("took " + (System.currentTimeMillis() - requestStartTime) + " ms");
                         closeSocket(socket);
                         requestEndTime = System.currentTimeMillis();
-
-
                 }
 
                 if (session != null)
@@ -292,27 +275,39 @@ public class RequestThread extends Thread {
 
         private void loadBundle(ServletContextImpl application, CustomServletBinding binding) {
                 Language language = null;
-
                 for (Language selectedLanguage : languages) {
                         if (application.getResourceBundles().containsKey(selectedLanguage.getLanguage())) {
                                 language = selectedLanguage;
-                                binding.setVariable("m", application.getResourceBundles().get(selectedLanguage.getLanguage()));
+                                binding.setVariable("resource", application.getResourceBundles().get(selectedLanguage.getLanguage()));
                                 break;
                         } else {
 
                                 try {
-                                        ResourceBundle bundle = ResourceBundle.getBundle("messages", selectedLanguage.getLocale(),
-                                                application.getGroovyScriptEngine().getGroovyClassLoader());
+                                        //File f = new File(application.getAppPath() + File.separator + "WEB-INF" + File.separator + "i18n" + File.separator + "resources_" + selectedLanguage.getLanguageCode().toLowerCase() + "_" + selectedLanguage.getCountryCode().toUpperCase() + ".properties");
+                                        ResourceBundle bundle = ResourceBundle.getBundle("resources", selectedLanguage.getLocale());
 
-                                        ResourceMap rm = new ResourceMap(bundle);
-                                        application.getResourceBundles().put(selectedLanguage.getLanguage(), rm);
-                                        binding.setVariable("m", rm);
+                                        if (bundle != null) {
 
-                                        language = selectedLanguage;
+                                                // loop thru prop file, and add values to map
+                                                Map map = new HashMap();
+                                                Iterator i = bundle.keySet().iterator();
+                                                while (i.hasNext()) {
+                                                        String key = (String) i.next();
+                                                        try {
+                                                                map.put(key, bundle.getString(key));
+                                                        } catch (Exception e) {
+                                                                e.printStackTrace();
+                                                        }
+                                                }
 
-                                        logger.info("language=" + selectedLanguage.getLanguage());
-                                        break;
-
+                                                Map staticResourceBundle = Collections.unmodifiableMap(map);
+                                                //application.getResourceBundles().put(selectedLanguage.getLanguage(), staticResourceBundle);
+                                                binding.setVariable("resource", staticResourceBundle);
+                                                language = selectedLanguage;
+                                                logger.info("language=" + selectedLanguage.getLanguage());
+                                                break;
+                                        }
+                                        //}
                                 } catch (MissingResourceException e) {
                                         logger.log(FINE, "Resource bundle not found for locale: " + selectedLanguage.getLocale(), e);
                                 }
@@ -377,7 +372,7 @@ public class RequestThread extends Thread {
                 this.requestStartTime = requestStartTime;
         }
 
-        public static void processScriptController(final String requestURI, final GroovyScriptEngine gse, final CustomServletBinding binding) {
+        public static void processController(final String requestURI, final GroovyScriptEngine gse, final CustomServletBinding binding) {
                 final ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 
                 // ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
@@ -396,8 +391,7 @@ public class RequestThread extends Thread {
 
                                                 Boolean alreadyForwarded = (Boolean) request.getAttribute("_explicitForward");
 
-                                                if ((response.getBufferContentSize() == null || response.getBufferContentSize() == 0) && alreadyForwarded ==
-                                                        false && !response.isHeadersFlushed()) {
+                                                if ((response.getBufferContentSize() == null || response.getBufferContentSize() == 0) && alreadyForwarded == false) {
                                                         String templatePath = requestURI.replace(altExtension, viewExtension);
 
                                                         request.forwardToView(templatePath);
@@ -458,7 +452,7 @@ public class RequestThread extends Thread {
                                 }
 
                         };
-                        GroovyCategorySupport.use(EasyGServer.categoryList, closure);
+                        GroovyCategorySupport.use(CustomServletCategory.class, closure);
 
 //                        gse.run(scriptPath, binding);
                         if (response.getStatusCode() == 0)
@@ -477,8 +471,6 @@ public class RequestThread extends Thread {
                         sendError(500, requestURI, gse, binding, e);
                 }
         }
-
-
 
         private static void doNameCheckWarning(String requestURI) {
                 if (requestURI.endsWith("session.gspx")
@@ -510,7 +502,7 @@ public class RequestThread extends Thread {
                         }
 
                 };
-                GroovyCategorySupport.use(EasyGServer.categoryList, closure);
+                GroovyCategorySupport.use(CustomServletCategory.class, closure);
         }
 
         public static void processTemplateRequest(final String scriptPath, final GroovyScriptEngine gse, final CustomServletBinding binding) {
@@ -591,7 +583,7 @@ public class RequestThread extends Thread {
                                 }
 
                         };
-                        GroovyCategorySupport.use(EasyGServer.categoryList, closure);
+                        GroovyCategorySupport.use(CustomServletCategory.class, closure);
 
 //                        gse.run(scriptPath, binding);
                         if (response.getStatusCode() == 0)

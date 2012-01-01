@@ -17,36 +17,27 @@ package com.sybrix.easygsp.http;
 
 import com.sybrix.easygsp.exception.NotImplementedException;
 import com.sybrix.easygsp.server.EasyGServer;
+import com.sybrix.easygsp.util.CaseInsensitiveMap;
+import groovy.servlet.AbstractHttpServlet;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.ServletOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.io.OutputStreamWriter;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-
-import java.util.Locale;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Date;
-import java.util.TimeZone;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.logging.Logger;
-import java.util.logging.Level;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * HttpSession <br/>
  * Description :
  */
 public class ResponseImpl implements HttpServletResponse {
-        private static final Logger log = Logger.getLogger(ResponseImpl.class.getName());
+        private static final Logger logger = Logger.getLogger(ResponseImpl.class.getName());
         private Map<String, Object> headers;
         private int statusCode = 0;
 
@@ -56,20 +47,21 @@ public class ResponseImpl implements HttpServletResponse {
         private ServletOutputStreamImpl outputStream;
         private OutputStream bufferedOutputStream;
 
-        //private ByteArrayOutputStream byteArrayBuffer;
         private ByteArrayOutputStream byteArrayBuffer;
-        private PrintWriter printWriterBuffer;
+        private PrintWriter outputBuffer;
 
         private int bufferSize;
         List<Cookie> cookies;
         private String status;
         private String characterEncoding = "UTF-8";
-        //private Request request;
+
         private boolean headersFlushed;
         private BufferedWriter printWriter;
         private Locale locale;
         private boolean committed;
         private HttpServletRequest request;
+        private boolean acceptsGZip = false;
+        private GZIPOutputStream gzipByteArrayBuffer;
 
         static {
                 cookieDateFormatter.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -77,14 +69,12 @@ public class ResponseImpl implements HttpServletResponse {
         }
 
         public ResponseImpl(OutputStream outputStream) {
-                headers = new HashMap();
+                headers = new CaseInsensitiveMap();
 
-                // this.request = request;
                 this.outputStream = new ServletOutputStreamImpl(outputStream);
                 characterEncoding = EasyGServer.propertiesFile.getString("default.charset");
                 //headers.put(ResponseHeaders.CONTENT_TYPE, "text/html; charset=" + characterEncoding);
                 bufferSize = EasyGServer.propertiesFile.getInt("output.buffer.size");
-                // bufferedOutputStream = new BufferedOutputStream(outputStream);
         }
 
         protected void setHttpServletRequest(HttpServletRequest request) {
@@ -157,7 +147,7 @@ public class ResponseImpl implements HttpServletResponse {
                                         url = (secure ? "https://" : "http://") + server + serverPort + scriptPath + "/" + s;
                                 }
 
-                                log.finest("redirect: " + url);
+                                logger.finest("redirect: " + url);
                         } else {
                                 if (s.startsWith("/"))
                                         url = (secure ? "https://" : "http://") + server + serverPort + scriptPath + s;
@@ -165,7 +155,7 @@ public class ResponseImpl implements HttpServletResponse {
                                         url = (secure ? "https://" : "http://") + server + serverPort + scriptPath + "/" + s;
                         }
 
-                        log.log(Level.FINEST, "url:" + url + ", scriptPath: " + scriptPath);
+                        logger.log(Level.FINEST, "url:" + url + ", scriptPath: " + scriptPath);
                 }
 
                 getByteArrayBuffer().write(("The URL has moved <a href=\"" + url + "\">here</a>").getBytes());
@@ -179,8 +169,19 @@ public class ResponseImpl implements HttpServletResponse {
         }
 
         protected void clearBuffer() {
-                if (byteArrayBuffer != null)
-                        byteArrayBuffer.reset();
+                try {
+                        if (byteArrayBuffer != null) {
+                                byteArrayBuffer.reset();
+
+                                if (acceptsGZip && EasyGServer.gzipCompressionEnabled) {
+                                        gzipByteArrayBuffer = new GZIPOutputStream(byteArrayBuffer);
+                                }
+                                outputBuffer = null;
+                                outputBuffer = getWriter();
+                        }
+                } catch (Exception e) {
+                        logger.log(Level.FINE, e.getMessage(), e);
+                }
         }
 
         protected void flushWriter() {
@@ -196,7 +197,7 @@ public class ResponseImpl implements HttpServletResponse {
                 setHeader(header, dateFormatter.format(date));
         }
 
-        public void out(String s) {
+        public void out(String s) throws IOException {
                 getByteArrayBuffer().write(s.getBytes(), 0, s.getBytes().length);
         }
 
@@ -207,6 +208,13 @@ public class ResponseImpl implements HttpServletResponse {
 
         public void setHeader(String header, String value) {
                 headers.put(header, value);
+        }
+        public void setHeader(String header, Long value) {
+                headers.put(header, String.valueOf(value));
+        }
+
+        public void setHeader(String header, Integer value) {
+                headers.put(header, String.valueOf(value));
         }
 
         public void addHeader(String header, String value) {
@@ -260,16 +268,13 @@ public class ResponseImpl implements HttpServletResponse {
                 return outputStream;
         }
 
-        public OutputStream getBufferedOutputStream() throws IOException {
-                return bufferedOutputStream;
-        }
 
         public PrintWriter getWriter() throws IOException {
-                if (printWriterBuffer == null) {
-                        printWriterBuffer = new PrintWriter(getByteArrayBuffer(), true);
+                if (outputBuffer == null) {
+                        outputBuffer = new PrintWriter(getByteArrayBuffer(), true);
                 }
 
-                return printWriterBuffer;
+                return outputBuffer;
         }
 
         public void setCharacterEncoding(String s) {
@@ -293,11 +298,19 @@ public class ResponseImpl implements HttpServletResponse {
                 }
         }
 
-        private ByteArrayOutputStream getByteArrayBuffer() {
+        private OutputStream getByteArrayBuffer() throws IOException {
                 if (byteArrayBuffer == null) {
                         byteArrayBuffer = new ByteArrayOutputStream(bufferSize);
+                        if (acceptsGZip && EasyGServer.gzipCompressionEnabled) {
+                                gzipByteArrayBuffer = new GZIPOutputStream(byteArrayBuffer);
+                        }
                 }
-                return byteArrayBuffer;
+
+                if (acceptsGZip && EasyGServer.gzipCompressionEnabled) {
+                        return gzipByteArrayBuffer;
+                } else {
+                        return byteArrayBuffer;
+                }
         }
 
         protected Integer getBufferContentSize() {
@@ -339,6 +352,15 @@ public class ResponseImpl implements HttpServletResponse {
                 return locale;
         }
 
+        public void setAcceptsGZip(boolean acceptsGZip) {
+                this.acceptsGZip = acceptsGZip;
+                //this.acceptsGZip = false;
+        }
+
+        public boolean isHeadersFlushed() {
+                return headersFlushed;
+        }
+
         class ServletOutputStreamImpl extends ServletOutputStream {
                 private OutputStream outputStream;
 
@@ -362,31 +384,59 @@ public class ResponseImpl implements HttpServletResponse {
 
         protected void sendResponse() {
                 try {
+
                         if (printWriter == null) {
                                 printWriter = new BufferedWriter(new OutputStreamWriter(outputStream, characterEncoding));
+                                if (acceptsGZip && EasyGServer.gzipCompressionEnabled) {
+                                        bufferedOutputStream = new BufferedOutputStream(outputStream);
+                                }
+                        }
+
+                        if (acceptsGZip && EasyGServer.gzipCompressionEnabled) {
+                                gzipByteArrayBuffer.finish();
                         }
 
                         if (!headersFlushed) {
                                 sendHeaders(printWriter);
                                 headersFlushed = true;
                         }
+
                         if (byteArrayBuffer != null && byteArrayBuffer.size() > 0) {
-                                printWriter.write(getByteArrayBuffer().toString());
+                                if (acceptsGZip && EasyGServer.gzipCompressionEnabled) {
+                                        bufferedOutputStream.write(byteArrayBuffer.toByteArray());
+                                } else {
+                                        printWriter.write(byteArrayBuffer.toString());
+                                }
+
                                 byteArrayBuffer.reset();
-                                printWriter.flush();
+                                if (acceptsGZip && EasyGServer.gzipCompressionEnabled) {
+                                        bufferedOutputStream.flush();
+                                } else {
+                                        printWriter.flush();
+                                }
                         }
                 } catch (UnsupportedEncodingException e) {
-                        log.log(Level.SEVERE, "Unsupported charset: " + characterEncoding, e);
+                        logger.log(Level.SEVERE, "Unsupported charset: " + characterEncoding, e);
                 } catch (IOException e) {
-                        log.log(Level.SEVERE, "sendResponse() failed: ", e);
+                        logger.log(Level.SEVERE, "sendResponse() failed: ", e);
                 } catch (Exception e) {
-                        log.log(Level.SEVERE, "sendResponse() failed: ", e);
+                        logger.log(Level.SEVERE, "sendResponse() failed: ", e);
                 }
         }
 
-        private void sendHeaders(BufferedWriter printWriter) throws IOException {
-                if (getByteArrayBuffer().size() > 0 && !headers.containsKey(ResponseHeaders.CONTENT_LENGTH)) {
-                        setIntHeader(ResponseHeaders.CONTENT_LENGTH, getByteArrayBuffer().size());
+        private void sendHeaders(Writer printWriter) throws IOException {
+                if (byteArrayBuffer != null && byteArrayBuffer.size() > 0 && !headers.containsKey(ResponseHeaders.CONTENT_LENGTH)) {
+                        setIntHeader(ResponseHeaders.CONTENT_LENGTH, byteArrayBuffer.size());
+                }
+
+                if (EasyGServer.gzipCompressionEnabled) {
+                        if (acceptsGZip) {
+                                if (headers.containsKey(ResponseHeaders.CONTENT_ENCODING)) {
+                                        addHeader(ResponseHeaders.CONTENT_ENCODING, "gzip");
+                                } else {
+                                        setHeader(ResponseHeaders.CONTENT_ENCODING, "gzip");
+                                }
+                        }
                 }
 
                 try {
@@ -416,6 +466,10 @@ public class ResponseImpl implements HttpServletResponse {
                         status = "OK";
 
                 headers.put("Status", String.valueOf(statusCode));
+
+                if (getContentType() == null)
+                        setContentType(AbstractHttpServlet.CONTENT_TYPE_TEXT_HTML + "; charset=" + characterEncoding);
+
 
                 //buffer.append(ResponseHeaders.STATUS).append(":HTTP/1.1 ").append(statusCode).append(" ").append(status).append(ResponseHeaders.END_OF_LINE);
                 //buffer.append("HTTP/1.1 ").append(statusCode).append(" ").append(status).append(ResponseHeaders.END_OF_LINE);

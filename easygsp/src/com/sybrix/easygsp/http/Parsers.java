@@ -13,7 +13,7 @@ import java.io.File;
  * Description :
  */
 public class Parsers {
-        private static final Logger log = Logger.getLogger(Parsers.class.getName());
+        private static final Logger logger = Logger.getLogger(Parsers.class.getName());
 
         private static boolean isVirtualHostingEnabled = false;
         private static List defaultVirtualHostList = new ArrayList();
@@ -90,10 +90,10 @@ public class Parsers {
                         parsedRequest.setRequestFilePath(requestURIPath);
                         parsedRequest.setRequestURI(requestURI);
 
-                        log.fine("parsed AppName: " + appName);
-                        log.fine("parsed AppDir: " + parsedRequest.getAppPath());
-                        log.fine("parsed RequestURIPath: " + requestURIPath);
-                        log.fine("parsed RequestURI: " + requestURI);
+                        logger.fine("parsed AppName: " + appName);
+                        logger.fine("parsed AppDir: " + parsedRequest.getAppPath());
+                        logger.fine("parsed RequestURIPath: " + requestURIPath);
+                        logger.fine("parsed RequestURI: " + requestURI);
 
                         return parsedRequest;
                 }
@@ -133,7 +133,7 @@ public class Parsers {
                                 requestURIPath = scriptFileName;
                                 requestURI = scriptFileName.substring(webAppDir.length());
                                 webAppDir = webAppDir.substring(0, webAppDir.length() - 1);
-                        } else if (isVirtualHostingEnabled) {
+                        } else if (isVirtualHostingEnabled) {   // this assumes that the default host has many apps
                                 // simple vhost - server-root + hostname + document-root
                                 int secondSlashIndex = scriptName.substring(1).indexOf('/');
                                 String appFolderName = scriptName.substring(1, secondSlashIndex + 1);
@@ -182,10 +182,10 @@ public class Parsers {
                         parsedRequest.setRequestURI(requestURI);
                         parsedRequest.setRequestFilePath(requestURIPath);
 
-                        log.fine("parsed AppName: " + appName);
-                        log.fine("parsed AppDir: " + parsedRequest.getAppPath());
-                        log.fine("parsed RequestURIPath: " + requestURIPath);
-                        log.fine("parsed RequestURI: " + requestURI);
+                        logger.fine("parsed AppName: " + appName);
+                        logger.fine("parsed AppDir: " + parsedRequest.getAppPath());
+                        logger.fine("parsed RequestURIPath: " + requestURIPath);
+                        logger.fine("parsed RequestURI: " + requestURI);
 
                         return parsedRequest;
                 }

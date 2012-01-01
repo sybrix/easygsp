@@ -28,7 +28,7 @@ public class RequestDispatcherImpl implements RequestDispatcher {
                 CustomServletBinding servletBinding = ((RequestImpl)request).getServletBinding();
                 ServletContextImpl application = (ServletContextImpl)servletBinding.getVariable("application");
 
-                RequestThread.processController(file, application.getGroovyScriptEngine(), servletBinding);
+                RequestThread.processScriptController(file, application.getGroovyScriptEngine(), servletBinding);
 
         }
 

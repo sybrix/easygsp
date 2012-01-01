@@ -1,15 +1,12 @@
 package com.sybrix.easygsp.http;
 
 import com.sybrix.easygsp.server.EasyGServer;
-import groovy.util.ResourceException;
-import groovy.util.ScriptException;
+import groovy.servlet.ServletCategory;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.io.File;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.io.File;
 
 /**
  * FileMonitorThread <br/>
@@ -17,21 +14,23 @@ import java.io.File;
  * @author David Lee
  */
 public class FileMonitorThread extends Thread {
-        private static final Logger log = Logger.getLogger(FileMonitorThread.class.getName());
+        private static final Logger logger = Logger.getLogger(FileMonitorThread.class.getName());
 
-        //public static volatile List<ServletContextImpl> apps;
+        public static volatile Map<String, ServletContextImpl> apps;
         private static volatile boolean stopThread = false;
         private static int interval;
         private static boolean found = false;
 
-        public FileMonitorThread() {
-                //this.apps = Collections.synchronizedList(new ArrayList());
+        public FileMonitorThread(Map apps) {
+                this.apps = apps;//Collections.synchronizedList(new ArrayList());
                 interval = EasyGServer.propertiesFile.getInt("file.monitor.interval", 3) * 1000;
         }
 
         @Override
         public void run() {
-                log.fine("Manual FileMonitor thread started...");
+                logger.fine("Manual FileMonitor thread started...");
+
+                ListenerImpl listener = new ListenerImpl(apps);
 
                 while (!stopThread) {
 
@@ -43,57 +42,57 @@ public class FileMonitorThread extends Thread {
 
                         if (stopThread)
                                 break;
-                        log.finest("iterating filesystem for changes....");
-                        for (ServletContextImpl app : FileMonitor.apps.values()) {
-                                found = false;
+
+
+                        logger.finest("iterating filesystem for changes....");
+                        for (ServletContextImpl app : apps.values()) {
+
                                 File f = new File(app.getAppPath());
-                                StringBuffer path = new StringBuffer();
 
-                                findModifiedFiles(f, app.getLastFileCheck(), app.getAppPath() + File.separator + "WEB-INF", path);
-                                if (found) {
-                                        if (app.isStarted()) {
-                                                RequestThreadInfo.get().setApplication(app);
-                                                if (app.hasOnChangedMethod()) {
-                                                        try {
-                                                                app.invokeWebMethod("onChanged", new Object[]{app, path});
-                                                        } catch (Exception e) {
-                                                                app.log(e.getMessage(), e);
-                                                        }
-                                                }
+                                findModifiedFiles(listener, f, app.getLastFileCheck(), app.getAppPath() + File.separator + "WEB-INF", app);
+//                                if (found != null) {
+//                                        listener.fileModified(listener, 0, found.getAbsolutePath(), found.getName());
+//                                }
 
-                                                app.updateLastFileCheck();
-                                                //app.restart();
-                                        }
-
-                                }
+                                app.updateLastFileCheck();
                         }
-                        
                 }
 
-                log.fine("Manual FileMonitor thread stopped");
+                logger.fine("Manual FileMonitor thread stopped");
         }
 
-        private boolean findModifiedFiles(File f, long lastTime, String appPrefix,StringBuffer path) {
-                for (File o : f.listFiles()) {
-                        if (o.isDirectory()) {
-                                findModifiedFiles(o, lastTime, appPrefix, path);
+        private File findModifiedFiles(ListenerImpl listener, File f, long lastTime, String appPrefix, ServletContextImpl app) {
+
+                for (File file : f.listFiles()) {
+                        if (file.isDirectory()) {
+                                findModifiedFiles(listener, file, lastTime, appPrefix, app);
                         } else {
-                                log.finest("checking - " + o.getAbsolutePath());
-                                if ((o.lastModified() > lastTime) && o.getAbsolutePath().startsWith(appPrefix) && o.getAbsolutePath().endsWith(".groovy")) {
-                                        log.fine("modified file found, " + o.getAbsolutePath());
-                                        path.append(o.getPath());
-                                        found = true;
-                                        break;
+                                logger.finest("checking - " + file.getAbsolutePath() + " file.lastModified=" + file.lastModified() + ", " +
+                                        " lastTime=" + lastTime);
+
+                                if ((file.lastModified() > lastTime) //
+                                        && (file.getAbsolutePath().endsWith(".groovy") || file.getAbsolutePath()
+                                        .endsWith(".gspx") || file.getAbsolutePath().endsWith(".gsp"))) {
+
+                                        logger.finer("modified file found, " + file.getAbsolutePath());
+                                        int lastSlash = app.getAppPath().lastIndexOf(File.separatorChar);
+
+                                        try {
+                                                listener.fileModified(0, file.getAbsolutePath().substring(0, lastSlash), file.getAbsolutePath().substring(lastSlash + 1));
+                                        } catch (Throwable e) {
+                                                logger.log(Level.FINER, " listener.fileModified failed. ", e);
+                                        }
+                                        return file;
                                 }
                         }
                 }
 
-                return found;
+                return null;
         }
 
         public void stopThread() {
                 this.stopThread = true;
-                log.fine("FileMonitor thread stop requested...");
+                logger.fine("FileMonitor thread stop requested...");
                 this.interrupt();
         }
 }

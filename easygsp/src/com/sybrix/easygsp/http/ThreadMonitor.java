@@ -16,7 +16,6 @@
 
 package com.sybrix.easygsp.http;
 
-import com.sybrix.easygsp.http.RequestThread;
 import com.sybrix.easygsp.server.EasyGServer;
 
 import java.util.List;
@@ -32,7 +31,7 @@ import java.util.logging.Logger;
  * Thead.stop() is used to stop running threads.
  */
 public class ThreadMonitor {
-        private static final Logger log = Logger.getLogger(ThreadMonitor.class.getName());
+        private static final Logger logger = Logger.getLogger(ThreadMonitor.class.getName());
         private volatile static Monitor monitor;
 
         private ThreadMonitor() {
@@ -43,11 +42,11 @@ public class ThreadMonitor {
                 monitor.setDaemon(true);
                 monitor.start();
 
-                log.info("Thread monitor started  (timeout: " + EasyGServer.propertiesFile.getInt("thread.timeout") + ")");
+                logger.info("Thread monitor started  (timeout: " + EasyGServer.propertiesFile.getInt("thread.timeout") + ")");
         }
 
         public static void add(RequestThread thread) {
-                log.fine("adding thread id:" + thread.getId() + " from running map");
+                logger.fine("adding thread id:" + thread.getId() + " from running map");
                 monitor.add(thread);
         }
 //
@@ -61,8 +60,8 @@ public class ThreadMonitor {
         }
 
         public static int size() {
-                log.info("pending: " + monitor.pendingList.size());
-                log.info("stopList: " + monitor.stopList.size());
+                logger.info("pending: " + monitor.pendingList.size());
+                logger.info("stopList: " + monitor.stopList.size());
                 return monitor.stopList.size() + monitor.pendingList.size();
 
         }
@@ -71,7 +70,7 @@ public class ThreadMonitor {
                 synchronized (monitor) {
                         monitor.monitoring = false;
                         monitor.interrupt();
-                        log.fine("ThreadMonitor stop requested...");
+                        logger.fine("ThreadMonitor stop requested...");
                 }
         }
 
@@ -107,7 +106,7 @@ public class ThreadMonitor {
                                         }
 
                                 } catch (InterruptedException e) {
-                                        log.fine("monitoring working....");
+                                        logger.fine("monitoring working....");
                                 }
 
 
@@ -122,7 +121,7 @@ public class ThreadMonitor {
 
 
                                                 if (requestThread.isAlive()) {
-                                                        log.fine("trying to stop a thread ....");
+                                                        logger.fine("trying to stop a thread '" + requestThread.getName() + "'....");
 
 
                                                         requestThread.closeSocket();
@@ -138,7 +137,7 @@ public class ThreadMonitor {
 //                                                                requestThread.sleep(500);
 
                                                                 requestThread.stop();
-                                                                log.fine("stopped called on thread ....");
+                                                                logger.fine("stopped called on thread ....");
                                                         } catch (Throwable e) {
                                                                 // do nothing there.  An exception will be throw in the run of RequestThread
                                                                 // catch it and log it there
@@ -153,7 +152,7 @@ public class ThreadMonitor {
                                 }
                         }
 
-                        log.fine("ThreadMonitor stopped");
+                        logger.fine("ThreadMonitor stopped");
                 }
 
                 public void add(RequestThread t) {

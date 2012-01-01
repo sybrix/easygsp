@@ -35,15 +35,13 @@ public class ByteArrayDataSource implements DataSource {
                 this.name = name;
         }
 
-        public ByteArrayInputStream getStream() {
-                return stream;
-        }
 
         public String getContentType() {
                 return contentType;
         }
 
         public InputStream getInputStream() {
+                stream.reset();
                 return stream;
         }
 

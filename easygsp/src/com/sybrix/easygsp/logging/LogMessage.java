@@ -2,8 +2,8 @@ package com.sybrix.easygsp.logging;
 
 import com.sybrix.easygsp.http.ServletContextImpl;
 
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * LogMessage <br/>
@@ -11,24 +11,27 @@ import java.text.SimpleDateFormat;
  * @author David Lee
  */
 public class LogMessage {
-                                        
+
         private String message;
         private Throwable exception;
         private Date timestamp;
         private ServletContextImpl application;
         private String formattedMessage;
         private SimpleDateFormat currentTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a z");
+        private LoggingLevel level;
 
         public LogMessage(Throwable exception, ServletContextImpl application) {
                 this.exception = exception;
                 this.timestamp = new Date(System.currentTimeMillis());
                 this.application = application;
+                level = application.getLoggingLevel();
         }
 
         public LogMessage(String message, ServletContextImpl application) {
                 this.message = message;
                 this.timestamp = new Date(System.currentTimeMillis());
                 this.application = application;
+                level = application.getLoggingLevel();
         }
 
         public LogMessage(String message, Throwable exception, ServletContextImpl application) {
@@ -36,7 +39,25 @@ public class LogMessage {
                 this.exception = exception;
                 this.timestamp = new Date(System.currentTimeMillis());
                 this.application = application;
+                level = application.getLoggingLevel();
         }
+
+
+        public LogMessage(LoggingLevel level, Throwable exception, ServletContextImpl application) {
+                this(exception, application);
+                this.level = level;
+        }
+
+        public LogMessage(LoggingLevel level, String message, ServletContextImpl application) {
+                this(message, application);
+                this.level = level;
+        }
+
+        public LogMessage(LoggingLevel level, String message, Throwable exception, ServletContextImpl application) {
+                this(message, exception, application);
+                this.level = level;
+        }
+
 
         public ServletContextImpl getApplication() {
                 return application;
@@ -86,9 +107,17 @@ public class LogMessage {
                 return formattedMessage;
         }
 
+        public LoggingLevel getLevel() {
+                return level;
+        }
+
+        public void setLevel(LoggingLevel level) {
+                this.level = level;
+        }
+
         protected String formatMessage() {
                 StringBuffer s = new StringBuffer();
-                s.append("[").append(currentTimeFormat.format(getTimestamp())).append("] - ");
+                s.append("[").append(currentTimeFormat.format(getTimestamp())).append("] " + level + " - ");
 
                 if (getMessage() != null) {
                         if (getMessage().trim().length() > 0) {

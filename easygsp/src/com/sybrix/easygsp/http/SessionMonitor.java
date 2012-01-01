@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public class SessionMonitor extends Thread {
-        private static Logger log = Logger.getLogger(SessionMonitor.class.getName());
+        private static Logger logger = Logger.getLogger(SessionMonitor.class.getName());
 
         private Map<String, ServletContextImpl> applications;
         private volatile boolean stopped = false;
@@ -16,7 +16,7 @@ public class SessionMonitor extends Thread {
         }
 
         public void run() {
-                log.info("SessionMonitor started.") ;
+                logger.info("SessionMonitor started.") ;
                 long timeOut = EasyGServer.propertiesFile.getInt("session.timeout", 15) * 1000 * 60;
 
                 while (!stopped) {
@@ -30,7 +30,7 @@ public class SessionMonitor extends Thread {
                                 for (SessionImpl session : app.getSessions().values()) {
                                         long diff = System.currentTimeMillis() - session.getLastAccessedTime();
                                         if (diff >= timeOut) {
-                                                log.fine("stopping session: " + session.getId() + ", app: " + app.getAppName());
+                                                logger.fine("stopping session: " + session.getId() + ", app: " + app.getAppName());
                                                 RequestThreadInfo.get().setApplication(app);
                                                 try {
                                                         // threaded ?
@@ -38,7 +38,7 @@ public class SessionMonitor extends Thread {
                                                                 app.invokeWebMethod("onSessionEnd", new Object[]{session});
 
                                                 } catch (Exception e) {
-                                                       log.fine("onSessionStart failed for session:" + session.getId() + ", app:" + app.getAppName());
+                                                       logger.fine("onSessionStart failed for session:" + session.getId() + ", app:" + app.getAppName());
                                                 }
                                                session.invalidate();
                                         }
@@ -46,7 +46,7 @@ public class SessionMonitor extends Thread {
                         }
                 }
 
-                log.info("Session monitor stopped");
+                logger.info("Session monitor stopped");
         }
 
         public void stopThread() {

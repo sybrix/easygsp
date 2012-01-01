@@ -25,6 +25,6 @@ public class ResponseHeaders {
         public static final String CONTENT_LENGTH = "Content-length";
         public static final String SET_COOKIE = "Set-Cookie";
         public static final String COOKIE = "Cookie";
-
+        public static final String CONTENT_ENCODING = "Content-Encoding";
         public static final String END_OF_LINE = "\r\n";
 }

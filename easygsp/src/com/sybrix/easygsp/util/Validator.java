@@ -43,7 +43,7 @@ public class Validator {
         public static final Pattern ALPHA_NUMERIC_PATTERN = Pattern.compile(letDig);
         public static final Pattern LETTERS_PATTERN = Pattern.compile(letter);
         public static final Pattern DIGIT_PATTERN = Pattern.compile("(\\d+?)");
-
+        public static final Pattern NUMERIC_PATTERN = Pattern.compile("[+-]?\\d*(\\.\\d+)?");
 
         public static boolean isEmpty(Object value) {
                 if (value == null) {
@@ -61,7 +61,7 @@ public class Validator {
         public static boolean isNumeric(String value) {
                 if (value == null)
                         return false;
-                return DIGIT_PATTERN.matcher(value).matches();
+                return NUMERIC_PATTERN.matcher(value).matches();
         }
 
         public static boolean isLettersOnly(String value) {
@@ -136,9 +136,12 @@ public class Validator {
                 }
         }
 
-//        public static boolean isCreditCardValid(Object value) {
-//                return true;
-//        }
+        public static boolean isCreditCardValid(String value) {
+                if (CCUtils.getCardID(value) > -1){
+                        return CCUtils.validCCNumber(value);
+                }
+                return false;
+        }
 //
 //        public static boolean isValidUrlValid(Object value) {
 //                return true;

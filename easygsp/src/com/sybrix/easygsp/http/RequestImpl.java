@@ -55,7 +55,7 @@ import groovy.lang.Binding;
  * Custom implementation of HttpServletRequest <br/>
  */
 public class RequestImpl implements HttpServletRequest {
-        private static final Logger log = Logger.getLogger(RequestImpl.class.getName());
+        private static final Logger logger = Logger.getLogger(RequestImpl.class.getName());
 
         private Map<String, String> headers;
         private Map<String, Object> queryStringParameters;
@@ -251,7 +251,7 @@ public class RequestImpl implements HttpServletRequest {
                         return session;
 
                 if (session == null && createSession) {
-                        log.log(Level.FINE, "creating session...");
+                        logger.log(Level.FINE, "creating session...");
                         session = new SessionImpl(application, EasyGServer.propertiesFile.getInt("session.timeout", 15));
                         servletBinding.setVariable("session", session);
 
@@ -270,9 +270,9 @@ public class RequestImpl implements HttpServletRequest {
                                         application.invokeWebMethod("onSessionStart", new Object[]{session});
                                 }
 
-                                log.log(Level.FINE, "session \"" + session.getId() + "\" created");
+                                logger.log(Level.FINE, "session \"" + session.getId() + "\" created");
                         } catch (Exception e) {
-                                log.log(SEVERE, "onSessionStart failed.", e);
+                                logger.log(SEVERE, "onSessionStart failed.", e);
                         }
                 }
 
@@ -586,7 +586,7 @@ public class RequestImpl implements HttpServletRequest {
 
                 if (file.endsWith(viewExtension) || file.endsWith(templateExtension)) {
                         file = constructForwardPath(file, servletBinding);
-                        log.fine("fowarding to file: " + file);
+                        logger.fine("fowarding to file: " + file);
                         //application.getTemplateServlet().service(file, this, response, servletBinding);
                         if (!RequestThreadInfo.get().getParsedRequest().getRequestURI().equals(file)){
                                 RequestThreadInfo.get().getParsedRequest().setRequestURI(file);
@@ -610,7 +610,7 @@ public class RequestImpl implements HttpServletRequest {
                         }
 
                         setAttribute("_explicitForward", false);
-                        RequestThread.processController(file, application.getGroovyScriptEngine(), servletBinding);
+                        RequestThread.processScriptController(file, application.getGroovyScriptEngine(), servletBinding);
                 }
         }
 

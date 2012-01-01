@@ -1,12 +1,10 @@
 package com.sybrix.easygsp.http;
 
 import java.lang.InterruptedException;
-import java.util.Map;
 import java.util.logging.Logger;
-import java.net.Socket;
 
 public class Worker extends Thread {
-        private static final Logger log = Logger.getLogger(Worker.class.getName());
+        private static final Logger logger = Logger.getLogger(Worker.class.getName());
         private static long ctr = 0;
         private long id = ++ctr;
 
@@ -27,7 +25,7 @@ public class Worker extends Thread {
 
 
         public synchronized void run() {
-                log.fine("worker " + id + " ready");
+                logger.fine("worker " + id + " ready");
 
                 while (!stopRequested) {
                         try {
@@ -39,17 +37,17 @@ public class Worker extends Thread {
                                                 break;
                                 }
 
-                                log.finer("worker " + id + " awake");
+                                logger.finer("worker " + id + " awake");
 
                                 processClientRequest();
 
                                 // return worker to pool
                                 if (workerPool.getWorkerCount() < workerPool.getMaxWorkerCount()) {
-                                        log.finest("adding working back to pool");
+                                        logger.finest("adding working back to pool");
 
                                         workerPool.addWorker(this);
                                         this.notify();
-                                        log.finest(workerPool.getWorkerCount() + " workers in pool");
+                                        logger.finest(workerPool.getWorkerCount() + " workers in pool");
                                 }
 
                         } catch (Exception e) {
@@ -57,8 +55,8 @@ public class Worker extends Thread {
                         }
                 }
 
-                log.finer("worker " + id + " thread stopped");
-                log.finer(workerPool.getWorkerCount() + " workers in pool");
+                logger.finer("worker " + id + " thread stopped");
+                logger.finer(workerPool.getWorkerCount() + " workers in pool");
         }
 
         private void processClientRequest() {
