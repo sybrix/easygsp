@@ -15,6 +15,9 @@
  */
 package com.sybrix.easygsp.http;
 
+import groovy.lang.GroovyClassLoader;
+import org.codehaus.groovy.control.CompilerConfiguration;
+
 import java.net.URLClassLoader;
 import java.net.URL;
 import java.net.URLStreamHandlerFactory;
@@ -29,8 +32,12 @@ import java.util.Enumeration;
  * AppClassLoader <br/>
  * Description :
  */
-public class AppClassLoader extends URLClassLoader {
+public class AppClassLoader extends GroovyClassLoader {
 
+
+        public AppClassLoader(ClassLoader loader, CompilerConfiguration config) {
+                super(loader, config);
+        }
 
         private boolean allowThreads;
 
@@ -42,25 +49,11 @@ public class AppClassLoader extends URLClassLoader {
                 this.allowThreads = allowThreads;
         }
 
-        public AppClassLoader(URL[] urls) {
-                super(urls);
-        }
-
-        public AppClassLoader(URL[] urls, ClassLoader parent) {
-                super(urls, parent);
-        }
-
-        public AppClassLoader(URL[] urls, ClassLoader parent, URLStreamHandlerFactory factory) {
-                super(urls, parent, factory);
-        }
 
         protected PermissionCollection getPermissions(CodeSource codesource) {
                 return super.getPermissions(codesource);
         }
 
-        protected void addURL(URL url) {
-                super.addURL(url);
-        }
 
         protected Package definePackage(String name, Manifest man, URL url) throws IllegalArgumentException {
                 return super.definePackage(name, man, url);
