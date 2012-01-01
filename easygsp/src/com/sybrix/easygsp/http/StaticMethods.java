@@ -27,7 +27,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.sybrix.easygsp.db.CurrentSQLInstance;
 import com.sybrix.easygsp.db.Model;
 
 
