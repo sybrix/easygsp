@@ -59,6 +59,8 @@
 
         <!-- compile application -->
         <target name="compile" depends="copy.files">
+                
+
                 <groovyc classpathref="classpath" srcdir="build/src" destdir="build/java/classes">
                         <javac deprecation="false" nowarn="false"
                                target="1.5" debug="true" classpathref="classpath">
@@ -171,6 +173,9 @@
                 <gzip src="deploy/${easyGSPDir}.tar" destfile="deploy/${easyGSPDir}.tar.gz"/>
 
         </target>
+        <target name="buildAndCopy" depends="jar, transformations">
+                <copy tofile="c:/easygsp/bin/easygsp.jar" file="build/easygsp.jar"/>
+        </target>
         <target name="transformations">
                 <delete dir="build/transformations"/>
                 <delete file="lib/transformations.jar"/>
@@ -203,6 +208,7 @@
 
                 <jar destfile="build/transformations/transformations.jar" basedir="build/transformations/target"/>
                 <copy tofile="lib/transformations.jar" file="build/transformations/transformations.jar"/>
+                <copy tofile="c:/easygsp/lib/transformations.jar" file="build/transformations/transformations.jar"/>
         </target>
         <target name="test" depends="compile-test">
 

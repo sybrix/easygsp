@@ -1,7 +1,5 @@
 package com.sybrix.easygsp.http;
 
-import com.sybrix.easygsp.db.CurrentSQLInstance;
-import com.sybrix.easygsp.db.Model;
 import com.sybrix.easygsp.email.Email;
 import com.sybrix.easygsp.email.EmailService;
 import com.sybrix.easygsp.exception.SendEmailException;
@@ -28,6 +26,10 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import com.sybrix.easygsp.db.CurrentSQLInstance;
+import com.sybrix.easygsp.db.Model;
+
 
 /**
  * @author David Lee
