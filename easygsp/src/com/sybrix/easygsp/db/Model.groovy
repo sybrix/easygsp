@@ -59,7 +59,7 @@ public class Model {
                 parseOrderBy(sql, orderBy, clazz)
 
 //                                           if (isNumeric(limit))
-//                                                sql << " LIMIT $limit"
+                //                                                sql << " LIMIT $limit"
                 //logger.finer sql.toString()
 
                 return doPageSelect(pageSize, page, sql, values, orderBy, tbl, clazz, columns, null)
@@ -101,22 +101,46 @@ public class Model {
 
                 sql << "FROM $tbl WHERE "
                 whereMap.each {
-                        if (hasColumnsProperty && clazz.columns?.containsKey(it.key)) {
-                                columnName = clazz.columns[it.key]
-                        } else {
-                                columnName = unCamelCaseColumn(it.key)
+                        def filterOperator
+                        def key = it.key
+                        if (it.key.toString().endsWith(">")){
+                               key = it.key.toString().substring(0,it.key.toString().length()-2).trim()
+                               filterOperator = ">"
+                        } else if (it.key.toString().endsWith("<")){
+                                key = it.key.toString().substring(0,it.key.toString().length()-2).trim()
+                               filterOperator = "<"
+                        } else if (it.key.toString().endsWith("<=")){
+                                key = it.key.toString().substring(0,it.key.toString().length()-3).trim()
+                                filterOperator = "<="
+                        } else if (it.key.toString().endsWith(">=")){
+                                key = it.key.toString().substring(0,it.key.toString().length()-3).trim()
+                                filterOperator = ">="
+                        } else if (it.key.toString().endsWith("<>")){
+                                key = it.key.toString().substring(0,it.key.toString().length()-3).trim()
+                                filterOperator = "<>"
                         }
 
-                        //console  'columnName:'  + columnName + ' value=' + it.value
+                        if (hasColumnsProperty && clazz.columns?.containsKey(key)) {
+                                columnName = clazz.columns[key]
+                        } else {
+                                columnName = unCamelCaseColumn(key)
+                        }
 
                         if (it.value == null) {
                                 sql << "$columnName IS NULL $operator "
+                        } else if (filterOperator){
+                                sql << "$columnName $filterOperator ?  $operator "
+                                values << getValue(it?.value?.class, it.value)
                         } else {
                                 sql << "$columnName = ?  $operator "
-
                                 values << getValue(it?.value?.class, it.value)
                         }
                 }
+
+
+
+
+
 
                 sql.replace(sql.size() - 4, sql.size(), '')
                 countQuery = "SELECT count(*) " + sql.toString().substring(start)
@@ -153,21 +177,43 @@ public class Model {
                 sql << "FROM $tbl WHERE "
 
                 whereMap.each {
-                        if (hasColumnsProperty && clazz.columns?.containsKey(it.key)) {
-                                columnName = clazz.columns[it.key]
+                        def filterOperator
+                        def key = it.key
+                        if (it.key.toString().endsWith(">")){
+                               key = it.key.toString().substring(0,it.key.toString().length()-2).trim()
+                               filterOperator = ">"
+                        } else if (it.key.toString().endsWith("<")){
+                                key = it.key.toString().substring(0,it.key.toString().length()-2).trim()
+                               filterOperator = "<"
+                        } else if (it.key.toString().endsWith("<=")){
+                                key = it.key.toString().substring(0,it.key.toString().length()-3).trim()
+                                filterOperator = "<="
+                        } else if (it.key.toString().endsWith(">=")){
+                                key = it.key.toString().substring(0,it.key.toString().length()-3).trim()
+                                filterOperator = ">="
+                        } else if (it.key.toString().endsWith("<>")){
+                                key = it.key.toString().substring(0,it.key.toString().length()-3).trim()
+                                filterOperator = "<>"
+                        }
+
+                        if (hasColumnsProperty && clazz.columns?.containsKey(key)) {
+                                columnName = clazz.columns[key]
                         } else {
-                                columnName = unCamelCaseColumn(it.key)
+                                columnName = unCamelCaseColumn(key)
                         }
 
                         if (it.value == null) {
                                 sql << "$columnName IS NULL $operator "
+                        } else if (filterOperator){
+                                sql << "$columnName $filterOperator ?  $operator "
+                                values << getValue(it?.value?.class, it.value)
                         } else {
                                 sql << "$columnName = ?  $operator "
                                 values << getValue(it?.value?.class, it.value)
                         }
 
 //                                sql << "$columnName = ?  $operator "
-//                                values << getValue(it?.value?.class,it?.value)
+                        //                                values << getValue(it?.value?.class,it?.value)
                 }
 
                 sql.replace(sql.size() - 4, sql.size(), '')
@@ -356,6 +402,7 @@ public class Model {
                         properties = this.dynamicProperties
 
                 boolean manualPrimaryKeys
+
                 this.primaryKeys.each {
                         if (this.dynamicProperties.contains(it)) {
                                 manualPrimaryKeys = true
@@ -367,6 +414,11 @@ public class Model {
                 if (!manualPrimaryKeys) {
                         properties.removeAll(this.primaryKeys)
                 }
+
+                if (isProperty(clazz, 'exclude')){
+                        properties.removeAll(this.exclude)
+                }
+
 
                 properties.each {
                         if (hasColumnsProperty && this.columns?.containsKey(it)) {
@@ -402,7 +454,7 @@ public class Model {
                 s.replace(s.size() - 1, s.size(), '')
                 s << ')'
 
-                logger.finer s.toString()
+                //logger.finer s.toString()
 
                 def db = getSqlInstance(this._dataSource)
                 db.executeUpdate(new GStringImpl(values.toArray(), s.toString().trim().split('\\?')))
@@ -513,17 +565,26 @@ public class Model {
         private static def createSelectList(clazz, boolean hasColumnsProperty, sql, Map columns, Object thisObject) {
                 clazz.declaredFields.each {
                         def prop = clazz.metaClass.getMetaProperty(it.name)
-                        if (clazz.metaClass.getMetaProperty(it.name) && !it.name.equals('metaClass') && (prop instanceof MetaBeanProperty)) {
-                                if (!prop.field.isStatic()) {
-                                        if (hasColumnsProperty && thisObject.columns?.containsKey(it.name)) {
-                                                sql << thisObject.columns[it.name] << ' as ' << it.name
-                                                columns[it.name] = thisObject.columns[it.name]
-                                        } else {
-                                                sql << unCamelCaseColumn(it.name) << ' as ' << it.name
-                                                columns[it.name] = unCamelCaseColumn(it.name)
-                                        }
-                                        sql << ', '
+                        def exclude = false;
 
+                        if (isProperty(clazz,'exclude')){
+                                exclude = thisObject.exclude.contains(it.name)
+                        }
+
+                        //logger.fine(it.name + " in exclude = " + exclude)
+                        if (exclude != true) {
+                                if (clazz.metaClass.getMetaProperty(it.name) && !it.name.equals('metaClass') && (prop instanceof MetaBeanProperty)) {
+                                        if (!prop.field.isStatic()) {
+                                                if (hasColumnsProperty && thisObject.columns?.containsKey(it.name)) {
+                                                        sql << thisObject.columns[it.name] << ' as ' << it.name
+                                                        columns[it.name] = thisObject.columns[it.name]
+                                                } else {
+                                                        sql << unCamelCaseColumn(it.name) << ' as ' << it.name
+                                                        columns[it.name] = unCamelCaseColumn(it.name)
+                                                }
+                                                sql << ', '
+
+                                        }
                                 }
                         }
                 }
@@ -549,6 +610,10 @@ public class Model {
                 }
 
                 return newColumn.toString()
+
+
+
+
         }
 
         def static String unCamelCase(String column) {
@@ -568,11 +633,11 @@ public class Model {
         }
 
 //        def static javax.sql.DataSource getDataSource(String dataSourceName) {
-//                // Look up our data source
-//                DataSource ds = (DataSource) envCtx.lookup(dataSourceName)
-//                // Allocate and use a connection from the pool
-//                return ds
-//        }
+        //                // Look up our data source
+        //                DataSource ds = (DataSource) envCtx.lookup(dataSourceName)
+        //                // Allocate and use a connection from the pool
+        //                return ds
+        //        }
 
         def static Sql getSqlInstance(String dataSourceName) {
                 ServletContextImpl app = RequestThreadInfo.get().application
@@ -588,15 +653,15 @@ public class Model {
                 StaticMethods.newSqlInstance(dataSourceName)
 
 //                        return newSqlInstanceMethod.invoke(null, null)
-//        if (newSqlInstanceMethodAvailable) {
-//        } else {
-//                        if (dataSourceName == null || dataSourceName == '') {
-//                                logger.fine 'returning groovy.sql.Sql object, remember to close() when done'
-//                                return Sql.newInstance(app.getAttribute('database.url'), app.getAttribute('database.username'), app.getAttribute('database.password'), app.getAttribute('database.driver'))
-//                        }
-//
-//                        return Sql.newInstance(getDataSource(dataSourceName))
-//                }
+                //        if (newSqlInstanceMethodAvailable) {
+                //        } else {
+                //                        if (dataSourceName == null || dataSourceName == '') {
+                //                                logger.fine 'returning groovy.sql.Sql object, remember to close() when done'
+                //                                return Sql.newInstance(app.getAttribute('database.url'), app.getAttribute('database.username'), app.getAttribute('database.password'), app.getAttribute('database.driver'))
+                //                        }
+                //
+                //                        return Sql.newInstance(getDataSource(dataSourceName))
+                //                }
         }
 
         def static camelCaseColumn(String column) {
@@ -708,18 +773,19 @@ public class Model {
 
                         sql = pagedResults.sql
                 }
-                 try {
-                db.eachRow(new GStringImpl(values.toArray(), sql.toString().trim().split('\\?'))) {rs ->
-                        def row = clazz.newInstance()
-                        columns.each {col ->
-                                row."$col.key" = getSelectValue(getType(clazz, "$col.key"), rs."$col.key")
+
+                try {
+                        db.eachRow(new GStringImpl(values.toArray(), sql.toString().trim().split('\\?'))) {rs ->
+                                def row = clazz.newInstance()
+                                columns.each {col ->
+                                        row."$col.key" = getSelectValue(getType(clazz, "$col.key"), rs."$col.key")
+                                }
+                                row.clearDynamicProperties()
+                                results << row
                         }
-                        row.clearDynamicProperties()
-                        results << row
+                } catch (Exception e) {
+                        e.printStackTrace()
                 }
-                 }catch(Exception e){
-                         e.printStackTrace()
-                 }
 
                 if (page != null && pageSize != null) {
                         pagedResults.results = results
@@ -769,18 +835,17 @@ public class Model {
         static String createRecordCountQuery(def sql) {
                 def newSQL = sql.toString().replaceAll("\n", " ").replaceAll("\t", " ")
 
-                int index = newSQL.indexOf(" FROM ")
-                int orderByIndex = newSQL.toLowerCase().indexOf(" order by ")
+                def index = newSQL.indexOf(" FROM ")
+                def orderByIndex = newSQL.toLowerCase().indexOf(" order by ")
 
                 if (index == -1) {
                         throw new RuntimeException("What?, a paging query must have a \"FROM\" section. The \"FROM\" in the main FROM section must be capitalized.  Don't use all capitals with in other from clauses.")
                 }
 
                 if (orderByIndex == -1) {
-                        throw new RuntimeException("What?, a paging query must have a \"FROM\" section.")
+                        throw new RuntimeException("What?, a paging query must have an \"ORDER BY\" section.")
                         orderByIndex = sql.length()
                 }
-
 
                 return "SELECT COUNT(*) " + newSQL.substring(index, orderByIndex)
 
@@ -830,7 +895,7 @@ public class Model {
                 } else if (obj == java.sql.Date.class) {
                         return new java.util.Date(val.time)
                 } else if (obj == java.lang.Boolean.class || obj == boolean.class) {
-                        def v  = val.toString().toLowerCase().trim()
+                        def v = val.toString().toLowerCase().trim()
 
                         return (v == '1' || v == 1 || v == 'true' || v == 't' || v == 'y') ? true : false
                 } else {
@@ -847,9 +912,9 @@ public class Model {
                         List results
 
 //                        if (sql instanceof String)
-//                                def result = easyom.db.rows(new GStringImpl(values?.toArray() ?: [].toArray(), sql.toString().trim().split('\\?')))
-//                        else
-                                def result = db.rows(delegate)
+                        //                                def result = easyom.db.rows(new GStringImpl(values?.toArray() ?: [].toArray(), sql.toString().trim().split('\\?')))
+                        //                        else
+                        def result = db.rows(delegate)
 
                         if (result.size > 0)
                                 return result[0].getAt(0)
@@ -859,15 +924,15 @@ public class Model {
 
                 String.metaClass.executeScalar = {args ->
 //                        String[] values = new String[0]
-//                        String[] sql = new String[1]
+                        //                        String[] sql = new String[1]
                         def values = []
-                        if (args instanceof List){
-                                args.each{
+                        if (args instanceof List) {
+                                args.each {
                                         values.add(it)
                                 }
                         } else {
                                 if (args != null)
-                                values << args
+                                        values << args
                         }
                         String sql = delegate
 
@@ -910,7 +975,7 @@ public class Model {
                                 sql = pagedResults.sql
                         }
 
-                        logger.finer delegate.toString()
+                        //logger.finer delegate.toString()
 
                         if (clazz == null) {
                                 results = db.rows(sql)
