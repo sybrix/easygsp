@@ -26,6 +26,10 @@ public class Router {
                 routes.add(new Route(method, path, action));
         }
 
+        public List<Route> getRoutes() {
+                return routes;
+        }
+
         public void addRoute(Route route) {
                 routes.add(route);
         }
