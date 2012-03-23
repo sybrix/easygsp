@@ -1,5 +1,7 @@
 package com.sybrix.easygsp.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
 
 /**
@@ -7,7 +9,7 @@ import java.util.regex.Pattern;
  * User: dsmith
  * Date: Apr 27, 2007
  * Time: 6:47:36 PM
- *
+ * <p/>
  * this is not mine
  */
 public class Validator {
@@ -137,7 +139,7 @@ public class Validator {
         }
 
         public static boolean isCreditCardValid(String value) {
-                if (CCUtils.getCardID(value) > -1){
+                if (CCUtils.getCardID(value) > -1) {
                         return CCUtils.validCCNumber(value);
                 }
                 return false;
@@ -147,7 +149,19 @@ public class Validator {
 //                return true;
 //        }
 
-        public static String escapeXML(String s){
+        public static String escapeXML(String s) {
                 return s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+        }
+
+        public static Boolean isDate(String dateString, String format) {
+
+                try {
+                        SimpleDateFormat sdf = new SimpleDateFormat(format);
+                        sdf.setLenient(false);
+                        sdf.parse(dateString);
+                        return true;
+                } catch (Exception e) {
+                        return false;
+                }
         }
 }

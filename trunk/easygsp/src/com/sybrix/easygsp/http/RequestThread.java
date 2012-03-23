@@ -67,6 +67,7 @@ public class RequestThread extends Thread {
                 templateExtension = EasyGServer.propertiesFile.getString("template.extension");
                 viewExtension = EasyGServer.propertiesFile.getString("view.extension");
                 defaultExtension = EasyGServer.propertiesFile.getString("default.welcome.page.extension");
+
         }
 
         public RequestThread(Socket socket, Map applications) {
@@ -119,11 +120,17 @@ public class RequestThread extends Thread {
                                 RequestThreadInfo.get().setApplication(application);
                                 application.startApplication();
                                 EasyGServer.sendToChannel(new ClusterMessage(application.getAppName(), application.getAppPath(), "", "appStart", new Object[]{}));
-
                         }
 
                         RequestImpl request = new RequestImpl(inputStream, headers, application, response);
                         response.setHttpServletRequest(request);
+
+                        if (EasyGServer.routingEnabled) {
+                                application.getRouter().routeRequest(request, parsedRequest);
+                        }
+
+                        parsedRequest.indexCheck();
+
                         RequestThreadInfo.get().setRequestImpl(request);
                         // when false, request will auto forward to view
                         request.setAttribute("_explicitForward", false);
@@ -155,10 +162,12 @@ public class RequestThread extends Thread {
 
                         if (EasyGServer.gzipCompressionEnabled) {
                                 String accepts = headers.get(RequestHeaders.ACCEPT_ENCODING);
-                                for (String acceptEncoding : accepts.split(",")) {
-                                        acceptGZIP = acceptEncoding.equalsIgnoreCase("gzip");
-                                        if (acceptGZIP)
-                                                break;
+                                if (accepts != null) {
+                                        for (String acceptEncoding : accepts.split(",")) {
+                                                acceptGZIP = acceptEncoding.equalsIgnoreCase("gzip");
+                                                if (acceptGZIP)
+                                                        break;
+                                        }
                                 }
                         }
 
@@ -476,7 +485,6 @@ public class RequestThread extends Thread {
                         sendError(500, requestURI, gse, binding, e);
                 }
         }
-
 
 
         private static void doNameCheckWarning(String requestURI) {

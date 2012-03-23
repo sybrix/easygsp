@@ -6,7 +6,7 @@ import java.beans.PropertyDescriptor
 import java.lang.reflect.InvocationTargetException
 import org.codehaus.groovy.runtime.InvokerHelper
 
-class Framework {
+public class Framework {
         static String prefixEventMethods = 'on'
 
         static def processPage(page, List eventObjects) {
@@ -134,7 +134,6 @@ class Framework {
                                                 Class[] params = sourceDescriptors[x].getWriteMethod().getParameterTypes()
 
                                                 //println 'property: ' + property
-
                                                 if (requestParams.get(property) != null || requestParams.get(property + '__frmwk') != null) {
                                                         value = getValue(requestParams, property, params, obj)
                                                         // println 'set property: ' + property + ' value: ' + value
@@ -238,17 +237,13 @@ class Framework {
                 if (checked)
                         cb << ' checked=\"checked\"'
 
-
                 cb << ' ' << params
                 cb << '/>'
 
                 cb << "<input type=\"hidden\" name=\"${nameId}__frmwk\" id=\"${nameId}__frmwk\" value=\"${valueProperty}\"/>"
 
                 return cb.toString()
-
         }
-
-
 
         static def comboBox(nameId, data, valueProperty, labelProperty, selectedId, firstRow, params) {
 
@@ -324,7 +319,7 @@ class Framework {
 
         static def doPagination(thisPage) {
                 def binding = thisPage.binding
-                def (v, q) = getPageParams(thisPage.params)
+                def (v, q) = getPageParams1(thisPage)
 
                 v.each {key, val ->
                         binding."$key" = val
@@ -336,11 +331,10 @@ class Framework {
                         queryString << "&${key}=${val}"
                 }
 
-
                 def currentPage = binding.oldPage
                 def requestedPage = binding.page
                 def pageSize = binding.pageSize
-                def sortColumn = binding.sortColumn
+                def sortColumn = binding?.sortColumn
                 def sortOrder = binding.sortOrder
                 def totalCount = binding.data.totalCount
                 def pageCount = binding.data.pageCount
@@ -403,7 +397,7 @@ class Framework {
 
                 if (pageCount < slideWidth) {
                         start = 1;
-                        rangeEnd = pageCount;
+                        rangeEnd = pageCount==0?1:pageCount;
                         //range = new int[rangeEnd];
                 } else if (rangeEnd > pageCount) {
                         rangeEnd = pageCount;
@@ -438,37 +432,53 @@ class Framework {
                 return range;
         }
 
-        static def column(thisPage, column, columnLabel) {
-                def url = thisPage.request.requestURL
-                def sortOrder = getSortOrder(thisPage.params)
-                """<a href="${url}?sortColumn=${column}&sortOrder=${sortOrder == 'ASC' ? 'DESC' : 'ASC'}">${columnLabel}</a>"""
-        }
 
-        static def getPageParams(params) {
-                def sortColumn = params.sortColumn
+        static def getPageParams1(tp) {
+                def param = tp.params
+                def sortColumn = param.sortColumn
                 def sortOrder = 'ASC'
-                def page = new Integer(params.page ?: '1')
-                def pageSize = new Integer(params.pageSize ?: '20')
-                def oldPage = new Integer(params.p ?: page.toString())
+                def page = new Integer(param.page ?: '1')
+                def pageSize = new Integer(param.pageSize ?: '20')
+                def oldPage = new Integer(param.p ?: page.toString())
 
-                if (params.sortColumn != null) {
-                        sortColumn = params.sortColumn
+                if (param.sortColumn != null) {
+                        sortColumn = param.sortColumn
                         if (oldPage == page) {
-                                sortOrder = params.sortOrder ?: 'DESC';
+                                sortOrder = param.sortOrder ?: 'DESC';
                         } else {
-                                sortOrder = params.sortOrder;
+                                sortOrder = param.sortOrder;
                         }
+                } else {
+                        sortColumn = tp.binding?.sortColumn
+                        sortOrder = tp.binding.sortOrder
                 }
 
-                def p = [sortColumn: sortColumn, sortOrder: sortOrder, page: page, pageSize: pageSize, oldPage: oldPage, p: page]
+                def p = [sortColumn:sortColumn, sortOrder: sortOrder, page: page, pageSize: pageSize, oldPage: oldPage, p: page]
+
                 def queryStringMap = [:]
-                params.each {k, v ->
+                param.each {k, v ->
                         if (!p.containsKey(k)) {
                                 queryStringMap.put(k, v)
                         }
                 }
 
                 [p, queryStringMap]
+        }
+
+
+        static def column(thisPage, col, columnLabel) {
+                def url = thisPage.request.requestURL
+                def sortOrder = getSortOrder(thisPage.params)
+                def queryString=""
+
+                thisPage.params.each {key, val ->
+                        if (!key.equals('sortOrder') && !key.equals('sortColumn')){
+                                queryString += "&${key}=${val}"
+                               // println "&${key}=${val}"
+                        }
+                }
+
+                """<a href="${url}?sortColumn=${col}&sortOrder=${sortOrder == 'ASC' ? 'DESC' : 'ASC'}${queryString}">${columnLabel}</a>"""
         }
 
         static def defaultPageSize = '10'
@@ -519,7 +529,6 @@ class Framework {
                         String property = null
 
                         BeanInfo sourceInfo = Introspector.getBeanInfo(source.class)
-                        println "sourceInfo=$sourceInfo"
 
                         PropertyDescriptor[] sourceDescriptors = sourceInfo.getPropertyDescriptors()
 

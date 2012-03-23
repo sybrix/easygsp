@@ -1,5 +1,6 @@
 package com.sybrix.easygsp.http;
 
+import com.sybrix.easygsp.http.routing.Route;
 import groovy.lang.GroovyObject;
 import groovy.lang.Binding;
 
@@ -119,6 +120,8 @@ public class CustomServletCategory {
 
                 return setCookie(self, cookieName, value, maxAge, path, domain, secure);
         }
+
+
 
         /**
          * @param self

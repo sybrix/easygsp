@@ -17,6 +17,8 @@
 package com.sybrix.easygsp.http;
 
 import com.sybrix.easygsp.exception.NotImplementedException;
+import com.sybrix.easygsp.http.routing.Router;
+import com.sybrix.easygsp.http.routing.RoutingCategory;
 import com.sybrix.easygsp.logging.LoggingLevel;
 import com.sybrix.easygsp.server.EasyGServer;
 import com.sybrix.easygsp.util.ResourceMap;
@@ -59,9 +61,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
         private boolean hasWebGroovy = false;
 
 
-
         private boolean classControllers = false;
-
 
 
         //private String appId;
@@ -85,6 +85,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
         private Map<String, List<String>> dependencyCache;
         private LoggingLevel loggingLevel = LoggingLevel.DEBUG;
         private boolean hasI18nDir = false;
+        private Router router;
 
         public ServletContextImpl(File dir) {
                 //this.appId = MD5.hash(dir);
@@ -115,6 +116,10 @@ public class ServletContextImpl implements ServletContext, Serializable {
 //                }
                 lastFileCheck = System.currentTimeMillis();
                 autoStartSessions = EasyGServer.propertiesFile.getBoolean("session.autostart", false);
+        }
+
+        public Router getRouter() {
+                return router;
         }
 
         protected File getAppFile() {
@@ -386,7 +391,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
                         //c.setClasspath("c:\\temp");
                         //c.setTargetDirectory("c:\\temp\\test");
 
-                        AppClassLoader parentClassLoader = new AppClassLoader(getClass().getClassLoader(),c);
+                        AppClassLoader parentClassLoader = new AppClassLoader(getClass().getClassLoader(), c);
 
                         parentClassLoader.setAllowThreads(EasyGServer.propertiesFile.getBoolean("allow.threads", false));
 
@@ -408,7 +413,7 @@ public class ServletContextImpl implements ServletContext, Serializable {
                         //groovyScriptEngine = new GroovyScriptEngine(new String[]{appPath, appPath + System.getProperty("file.separator") + "WEB-INF"});
 
                         //checkForOnCompiledMethod();
-                         hasI18nDir = new File(appPath + File.separator + "WEB-INF/i18n").exists();
+                        hasI18nDir = new File(appPath + File.separator + "WEB-INF/i18n").exists();
 
                         if (hasWebGroovy) {
                                 invokeWebMethod("onApplicationStart", new Object[]{this});
@@ -416,11 +421,41 @@ public class ServletContextImpl implements ServletContext, Serializable {
 
                         started = true;
                         logger.fine("onApplicationStart successful for " + appName);
+
+                        router = new Router();
+                        loadRoutes();
                 } catch (Throwable e) {
                         logger.log(Level.FINE, "onApplicationStart failed.", e);
                 }
         }
 
+        private void loadRoutes() {
+                final ServletContextImpl context = this;
+                File routesFile = new File(context.getAppPath() + File.separator + "WEB-INF" + File.separator + "routes.groovy");
+                if (!routesFile.exists()) {
+                        logger.finer("No routes.groovy file found @ " + routesFile.getAbsolutePath());
+                        return;
+                }
+
+                Closure closure = new Closure(groovyScriptEngine) {
+                        public Object call() {
+                                synchronized (groovyScriptEngine) {
+                                        CustomServletBinding customServletBinding = new CustomServletBinding(null, null, context, null);
+                                        try {
+
+                                                groovyScriptEngine.run("routes.groovy", customServletBinding);
+                                        } catch (Throwable e) {
+                                                logger.log(Level.SEVERE, e.getMessage(), e);
+                                        }
+
+                                        groovyScriptEngine.notifyAll();
+                                }
+                                return null;
+                        }
+                };
+
+                GroovyCategorySupport.use(RoutingCategory.class, closure);
+        }
 
         private void checkForOnCompiledMethod() {
                 try {
@@ -700,9 +735,10 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 this.dependencyCache = dependencyCache;
         }
 
-        public boolean i18nExits(){
+        public boolean i18nExits() {
                 return hasI18nDir;
         }
+
         public boolean isClassControllers() {
                 return classControllers;
         }
