@@ -1,6 +1,9 @@
 package com.sybrix.easygsp.http;
 
+import com.sybrix.easygsp.server.EasyGServer;
 import com.sybrix.easygsp.util.StringUtil;
+
+import java.io.File;
 
 /**
  * ParsedRequest <br/>
@@ -12,7 +15,15 @@ public class ParsedRequest {
         protected String requestURI;
         protected String requestFilePath;
 
-        public ParsedRequest() {
+        static String ext1;
+        static String ext2;
+        static String ext3;
+        protected boolean extensionFound = false;
+
+        static {
+                ext1 = EasyGServer.propertiesFile.getString("template.extension");
+                ext2 = EasyGServer.propertiesFile.getString("view.extension");
+                ext3 = EasyGServer.propertiesFile.getString("alt.groovy.extension");
         }
 
         public ParsedRequest(String appName, String appPath, String requestFilePath, String requestURI) {
@@ -20,10 +31,43 @@ public class ParsedRequest {
                 this.appPath = appPath;
                 this.requestFilePath = requestFilePath;
                 this.requestURI = requestURI;
+
+                //extensionFound = gspExtensionFound(requestURI);
         }
+
+        public static boolean gspExtensionFound(String requestURI) {
+                if (requestURI.endsWith(ext1) || requestURI.endsWith(ext3) || requestURI.endsWith(ext2)) {
+                        return true;
+                } else {
+                        return false;
+                }
+        }
+
+        public void indexCheck() {
+                if (!gspExtensionFound(requestURI)) {
+                        String files[] = EasyGServer.propertiesFile.getString("index.files", "").split(",");
+                        for (String file : files) {
+                                file = file.trim();
+
+                                File fileObj = new File(this.requestURI.equals("") ?
+                                        appPath + "/" + file :
+                                        appPath + "/" + this.requestURI + "/" + file
+                                );
+
+                                if (fileObj.exists()) {
+                                        String fullPath = fileObj.getAbsolutePath().replaceAll("\\\\","/");
+                                        this.requestURI = fullPath.substring(appPath.length()+1);
+                                        this.requestFilePath = fileObj.getAbsolutePath();
+                                        return;
+                                }
+                        }
+                }
+        }
+
 
         public String getAppName() {
                 return appName;
+
         }
 
         public String getAppPath() {
@@ -54,6 +98,10 @@ public class ParsedRequest {
                 this.requestFilePath = StringUtil.capDriveLetter(requestFilePath);
         }
 
+        public boolean isExtensionFound() {
+                return extensionFound;
+        }
+
         public String getControllerClass() {
                 String[] s = requestURI.split("/");
                 if (s.length == 1) {
@@ -73,4 +121,5 @@ public class ParsedRequest {
                 }
                 return null;
         }
+
 }

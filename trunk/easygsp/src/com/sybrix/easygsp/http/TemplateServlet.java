@@ -335,7 +335,7 @@ public class TemplateServlet extends AbstractHttpServlet {
 //            response.sendError(HttpServletResponse.SC_NOT_FOUND);
 //            return; // throw new IOException(file.getAbsolutePath());
 //        }
-//        if (!file.canRead()) {
+//        if (!file.canRead()) {                 gray_next
 //            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Can not read \"" + name + "\"!");
 //            return; // throw new IOException(file.getAbsolutePath());
 //        }

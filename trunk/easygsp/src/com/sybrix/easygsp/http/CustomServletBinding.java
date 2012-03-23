@@ -89,21 +89,21 @@ public class CustomServletBinding extends Binding {
 //        binding.setVariable("requestAttr", ((RequestImpl)request).getAttributes());
 //        binding.setVariable("appAttr", ((Application)context).getAttributes());
 
-                ((RequestImpl) request).setServletBinding(this);
 
                 /*
                 * Bind the HTTP session object - if there is one.
                 * Note: we don't create one here!
                 */
                 if (request != null) {
-                binding.setVariable("session", request.getSession(false));
+                        ((RequestImpl) request).setServletBinding(this);
+                        binding.setVariable("session", request.getSession(false));
 
-                /*
-                * Bind form parameter key-value hash map.
-                *
-                * If there are multiple, they are passed as an array.
-                */
-                populateParameters(request);
+                        /*
+                        * Bind form parameter key-value hash map.
+                        *
+                        * If there are multiple, they are passed as an array.
+                        */
+                        populateParameters(request);
                 }
 
 
@@ -126,7 +126,7 @@ public class CustomServletBinding extends Binding {
 
         protected Map populateParameters(HttpServletRequest request) {
                 Map params = new HashMap();
-                for (Enumeration names = request.getParameterNames(); names.hasMoreElements();) {
+                for (Enumeration names = request.getParameterNames(); names.hasMoreElements(); ) {
                         String name = (String) names.nextElement();
                         if (!binding.getVariables().containsKey(name)) {
                                 String[] values = request.getParameterValues(name);
@@ -145,16 +145,18 @@ public class CustomServletBinding extends Binding {
 
                 return params;
         }
+
         class NoNullMap extends HashMap {
                 @Override
                 public Object get(Object key) {
-                        if (super.get(key) == null){
+                        if (super.get(key) == null) {
                                 return "";
                         } else {
                                 return super.get(key);
                         }
                 }
         }
+
         public void setVariable(String name, Object value) {
                 /*
                 * Check sanity.
@@ -214,7 +216,7 @@ public class CustomServletBinding extends Binding {
 //                        if ("sout".equals(name)) {
 //                                return response.getOutputStream();
 //                        }
-                        
+
                         if ("html".equals(name)) {
                                 if (html == null) {
                                         html = new MarkupBuilder(response.getWriter());
@@ -229,7 +231,7 @@ public class CustomServletBinding extends Binding {
                 /*
                 * Still here? Delegate to the binding object.
                 */
-                
+
                 return binding.getVariable(name);
         }
 
