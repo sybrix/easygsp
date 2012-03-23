@@ -1,16 +1,6 @@
-/**
- * Created by IntelliJ IDEA.
- * User: dsmith
- * Date: Jan 18, 2008
- * Time: 9:38:49 PM
- * To change this template use File | Settings | File Templates.
- */
 
 
-//database.driver=com.mysql.jdbc.Driver
-//database.url=jdbc:mysql://localhost:3306/mysql
-//database.password=root
-//database.username=root
+
 
 import groovy.sql.Sql
 import java.util.logging.Logger
@@ -339,7 +329,11 @@ class Table {
         def createGroovyBean() {
                 def src = '';
 
-                src = "package $packageName\n\n"
+                src = """package $packageName
+                import groovy.transform.ToString
+
+                @ToString(includeNames = true, includeFields = true)
+                """
                 //src += 'import java.util.Date;\n\n';
 
                 src += 'class ' + convertColumnNameToPropertyName(beanName) + ' {\n';
