@@ -30,7 +30,7 @@ public class SCGIParser {
     /**
      * Read the <a href="http://python.ca/scgi/protocol.txt">SCGI</a> request headers.<br>
      * After the headers had been loaded,
-     * you can read the body of the request manually from the same {@code input} stream:<pre>
+     * you can read the body of the request manually from the same {@code input} stream:<pre>                                                                                            ZDZDNetNet
      *   // Load the SCGI headers.
      *   Socket clientSocket = socket.accept();
      *   BufferedInputStream bis = new BufferedInputStream(clientSocket.getInputStream(), 4096);
