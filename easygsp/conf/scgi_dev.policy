@@ -66,7 +66,7 @@ grant codeBase "file:/C:/projects/easygsp/easygsp/out/-" {
         permission java.io.FilePermission "${java.home}/lib/sunrsasign.jar", "read";
         permission java.io.FilePermission "${java.home}/lib/jsse.jar", "read";
 
-        permission java.util.PropertyPermission "groovy.target.directory", "read";
+        permission java.util.PropertyPermission "groovy.target.directory", "read,write";
         permission java.net.SocketPermission "*:*", "accept,resolve";
 
 };
