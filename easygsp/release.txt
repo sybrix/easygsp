@@ -67,3 +67,15 @@
 - added now property to call compiled classes
 - Fixed formatMoney and formatDate
 - Updated to Groovy 1.7.4
+
+
+0.4.6 1/05/2012
+
+- render
+- exe4j
+- folder EasyOM
+- transformations added insread of categories
+- url routing
+
+
+
