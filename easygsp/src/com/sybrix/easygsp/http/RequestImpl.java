@@ -16,6 +16,7 @@
 package com.sybrix.easygsp.http;
 
 import com.sybrix.easygsp.exception.NotImplementedException;
+import com.sybrix.easygsp.http.routing.UrlParameter;
 import com.sybrix.easygsp.server.EasyGServer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -207,12 +208,12 @@ public class RequestImpl implements HttpServletRequest {
                         String uri = headers.get(RequestHeaders.REQUEST_URI);
 
                         int end = uri.indexOf('?');
-                        int start = uri.lastIndexOf('/')+1;
+                        int start = uri.lastIndexOf('/') + 1;
 
-                        if (end < 0 )
+                        if (end < 0)
                                 end = uri.length();
 
-                        if (start<0)
+                        if (start < 0)
                                 start = 0;
 
                         requestURL.append(uri.substring(start, end));
@@ -566,7 +567,9 @@ public class RequestImpl implements HttpServletRequest {
 
                         for (int i = 0; i < pair.length; i++) {
                                 String val[] = pair[i].split("=");
-                                cookies.put(val[0].trim(), new Cookie(val[0].trim(), val[1]));
+                                if (val.length > 1) {
+                                        cookies.put(val[0].trim(), new Cookie(val[0].trim(), val[1]));
+                                }
                         }
                 }
 
@@ -588,7 +591,7 @@ public class RequestImpl implements HttpServletRequest {
                         file = constructForwardPath(file, servletBinding);
                         logger.fine("fowarding to file: " + file);
                         //application.getTemplateServlet().service(file, this, response, servletBinding);
-                        if (!RequestThreadInfo.get().getParsedRequest().getRequestURI().equals(file)){
+                        if (!RequestThreadInfo.get().getParsedRequest().getRequestURI().equals(file)) {
                                 RequestThreadInfo.get().getParsedRequest().setRequestURI(file);
                                 RequestThreadInfo.get().getParsedRequest().setRequestFilePath(
                                         RequestThreadInfo.get().getParsedRequest().getAppPath() + "/" + file
@@ -600,7 +603,7 @@ public class RequestImpl implements HttpServletRequest {
                 } else if (file.endsWith(".groovy")) {
                         file = constructForwardPath(file, servletBinding).replace(".groovy", ".gspx");
 
-                        if (!RequestThreadInfo.get().getParsedRequest().getRequestURI().equals(file)){
+                        if (!RequestThreadInfo.get().getParsedRequest().getRequestURI().equals(file)) {
                                 RequestThreadInfo.get().getParsedRequest().setRequestURI(file);
                                 RequestThreadInfo.get().getParsedRequest().setRequestFilePath(
                                         RequestThreadInfo.get().getParsedRequest().getAppPath() + "/" + file
@@ -646,13 +649,13 @@ public class RequestImpl implements HttpServletRequest {
                                 if (f.isFormField()) {
                                         allParameters.put(f.getFieldName(), f.getString());
                                 } else {
-                                        if (f.getSize() > 0){
-                                                if (uploads.containsKey(f.getFieldName()))  {
-                                                        Object obj  = uploads.get(f.getFieldName());
-                                                        if (obj instanceof List){
-                                                               ((List)obj).add(f);
+                                        if (f.getSize() > 0) {
+                                                if (uploads.containsKey(f.getFieldName())) {
+                                                        Object obj = uploads.get(f.getFieldName());
+                                                        if (obj instanceof List) {
+                                                                ((List) obj).add(f);
                                                         } else {
-                                                                List newUploads = new ArrayList() ;
+                                                                List newUploads = new ArrayList();
                                                                 newUploads.add(obj);
                                                                 uploads.put(f.getFieldName(), newUploads);
                                                         }
@@ -681,7 +684,7 @@ public class RequestImpl implements HttpServletRequest {
                 return parseFileUploads(uploadThresholdSize, maxUploadSize);
         }
 
-        protected void nullSession(){
+        protected void nullSession() {
                 session = null;
         }
 

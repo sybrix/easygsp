@@ -76,10 +76,12 @@ public class EasyGServer extends ReceiverAdapter {
         public static boolean gzipCompressionEnabled = false;
 
         public static Boolean restartOnChange;
+        public static Boolean routingEnabled;
 
         static {
                 //APP_DIR = System.getProperty("easygsp.home");
                 categoryList.add(CustomServletCategory.class);
+
         }
 
         public EasyGServer() {
@@ -117,6 +119,7 @@ public class EasyGServer extends ReceiverAdapter {
                         adminApp = propertiesFile.getString("admin.app", "admin");
                         restartOnChange = propertiesFile.getBoolean("restart.onchange", false);
                         gzipCompressionEnabled = propertiesFile.getBoolean("gzip.compression.enabled",true);
+                        routingEnabled = propertiesFile.getBoolean("url.routing.enabled", true);
 
                         if (System.getProperty("java.security.manager") != null) {
                                 System.setSecurityManager(new EasyGSecurityManager());
@@ -265,6 +268,7 @@ public class EasyGServer extends ReceiverAdapter {
                         System.exit(0);
                 } catch (Exception e) {
                         logger.log(Level.SEVERE, "EasyGSP Server startup failed.", e);
+                        System.exit(0);
                 }
         }
 

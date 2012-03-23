@@ -1,5 +1,6 @@
 package com.sybrix.easygsp.http;
 
+import com.sybrix.easygsp.db.CurrentSQLInstance;
 import com.sybrix.easygsp.email.Email;
 import com.sybrix.easygsp.email.EmailService;
 import com.sybrix.easygsp.exception.SendEmailException;
@@ -14,9 +15,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.codehaus.groovy.runtime.GStringImpl;
 
 import javax.sql.DataSource;
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -28,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.sybrix.easygsp.db.Model;
+import sun.util.calendar.Gregorian;
 
 
 /**
@@ -389,7 +389,7 @@ public class StaticMethods {
         }
 
         public static Boolean isNumeric(Object val) {
-                if (val == null) {
+                if (isEmpty(val)) {
                         return false;
                 }
                 return Validator.isNumeric(val.toString());
@@ -408,6 +408,18 @@ public class StaticMethods {
                 }
                 return Validator.isCreditCardValid(val);
         }
+
+        public static Boolean isDate(String val, String...format) {
+                if (val == null) {
+                        return false;
+                }
+                if (format == null) {
+                        return Validator.isDate(val, "MM/dd/yyyy");
+                } else {
+                        return Validator.isDate(val, format[0]);
+                }
+        }
+
 
         public static Object ifNull(Object val, Object defaultVal) {
                 if (Validator.isEmpty(val))
@@ -433,6 +445,11 @@ public class StaticMethods {
                 DecimalFormat decimalFormat = new DecimalFormat(pattern);
                 return decimalFormat.format(val.doubleValue());
 
+        }
+
+        public static String formatMoney(String val) {
+                BigDecimal v = toBD(val);
+                return formatMoney(v);
         }
 
         public static String formatMoney(Number val) {
@@ -499,10 +516,10 @@ public class StaticMethods {
                 Object bcc = prop.get("bcc");
                 Object cc = prop.get("cc");
 
-                String from = (prop.get("from") instanceof GStringImpl) ? prop.toString(): (String) prop.get("from");
-                String subject = (prop.get("from") instanceof GStringImpl) ? prop.toString(): (String) prop.get("subject");
-                String body = (prop.get("from") instanceof GStringImpl) ? prop.toString(): (String) prop.get("body");
-                String htmlBody = (prop.get("from") instanceof GStringImpl) ? prop.toString(): (String) prop.get("htmlBody");
+                String from = (prop.get("from") instanceof GStringImpl) ? prop.get("from").toString() : (String) prop.get("from");
+                String subject = (prop.get("subject") instanceof GStringImpl) ? prop.get("subject").toString() : (String) prop.get("subject");
+                String body = (prop.get("body") instanceof GStringImpl) ? prop.get("body").toString() : (String) prop.get("body");
+                String htmlBody = (prop.get("htmlBody") instanceof GStringImpl) ? prop.get("htmlBody").toString() : (String) prop.get("htmlBody");
 
                 Object attachments = prop.get("attachments");
 
@@ -573,14 +590,14 @@ public class StaticMethods {
                 EasyGSPLogger.getInstance().logMessage(lm);
         }
 
-        public static Date parseDate(Object dt) throws ParseException {
+        public static Date toDate(Object dt) throws ParseException {
                 if (isEmpty(dt.toString()))
                         return null;
 
                 return sdf_short.parse(dt.toString());
         }
 
-        public static Date parseDate(Object dt, String format) throws ParseException {
+        public static Date toDate(Object dt, String format) throws ParseException {
                 SimpleDateFormat sdf = new SimpleDateFormat(format);
                 return sdf.parse(dt.toString());
         }
@@ -597,8 +614,25 @@ public class StaticMethods {
                 return Base64.decodeBase64(data);
         }
 
-//        public static BigDecimal round(Object obj, int scale) {
+        //        public static BigDecimal round(Object obj, int scale) {
 //                BigDecimal d = new BigDecimal(obj.toString());
 //                return d.setScale(scale, BigDecimal.ROUND_HALF_UP);
 //        }
+        public static String toString(Throwable e) {
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+
+                return sw.toString();
+        }
+
+
+//        public static int datepart(Date dt, DateParts datePart) {
+//                if (DateParts.Year == datePart){
+//                        return new GregorianCalendar() .getInstance().get(Calendar.YEAR);
+//                } else if (DateParts.Year == datePart){
+//
+//                }
+//        }
+
 }
