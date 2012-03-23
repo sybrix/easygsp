@@ -17,6 +17,8 @@
 package com.sybrix.easygsp.http;
 
 import com.sybrix.easygsp.exception.NotImplementedException;
+import com.sybrix.easygsp.exception.RoutingException;
+import com.sybrix.easygsp.exception.RoutingFileException;
 import com.sybrix.easygsp.http.routing.Router;
 import com.sybrix.easygsp.http.routing.RoutingCategory;
 import com.sybrix.easygsp.logging.LoggingLevel;
@@ -429,32 +431,40 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 }
         }
 
-        private void loadRoutes() {
-                final ServletContextImpl context = this;
-                File routesFile = new File(context.getAppPath() + File.separator + "WEB-INF" + File.separator + "routes.groovy");
-                if (!routesFile.exists()) {
-                        logger.finer("No routes.groovy file found @ " + routesFile.getAbsolutePath());
-                        return;
-                }
+        public void loadRoutes() {
+                router.getRoutes().clear();
 
-                Closure closure = new Closure(groovyScriptEngine) {
-                        public Object call() {
-                                synchronized (groovyScriptEngine) {
-                                        CustomServletBinding customServletBinding = new CustomServletBinding(null, null, context, null);
-                                        try {
-
-                                                groovyScriptEngine.run("routes.groovy", customServletBinding);
-                                        } catch (Throwable e) {
-                                                logger.log(Level.SEVERE, e.getMessage(), e);
-                                        }
-
-                                        groovyScriptEngine.notifyAll();
+                synchronized (router.getRoutes()) {
+                        try {
+                                final ServletContextImpl context = this;
+                                final File routesFile = new File(context.getAppPath() + File.separator + "WEB-INF" + File.separator + "routes.groovy");
+                                if (!routesFile.exists()) {
+                                        logger.finer("No routes.groovy file found @ " + routesFile.getAbsolutePath());
+                                        return;
                                 }
-                                return null;
-                        }
-                };
 
-                GroovyCategorySupport.use(RoutingCategory.class, closure);
+                                Closure closure = new Closure(groovyScriptEngine) {
+                                        public Object call() {
+                                                synchronized (groovyScriptEngine) {
+                                                        CustomServletBinding customServletBinding = new CustomServletBinding(null, null, context, null);
+                                                        try {
+                                                                groovyScriptEngine.run("routes.groovy", customServletBinding);
+                                                                logger.fine("routing file " + routesFile.getAbsoluteFile() + " loaded successfully");
+                                                        } catch (Throwable e) {
+                                                                logger.log(Level.SEVERE, e.getMessage(), e);
+                                                                new RoutingFileException("error processing route.groovy file. " + e.getMessage(), e);
+                                                        }
+
+                                                        groovyScriptEngine.notifyAll();
+                                                }
+                                                return null;
+                                        }
+                                };
+                                GroovyCategorySupport.use(RoutingCategory.class, closure);
+                        } finally {
+                                router.getRoutes().notifyAll();
+                        }
+                }
         }
 
         private void checkForOnCompiledMethod() {
