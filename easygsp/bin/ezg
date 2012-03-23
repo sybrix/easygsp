@@ -1,0 +1,6 @@
+#!/bin/bash
+
+DIRECTORY=$(cd `dirname $0` && pwd)
+
+
+$GROOVY_HOME/bin/groovy $DIRECTORY/$1.groovy $DIRECTORY "$@"
