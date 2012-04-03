@@ -19,7 +19,10 @@ import java.util.logging.Logger;
  */
 public class Router {
         private Logger logger = Logger.getLogger(Route.class.getName());
-        Pattern routePattern = new Pattern("^({method}GET|POST|PUT|DELETE|OPTIONS|HEAD|WS|\\*)[(]?({headers}[^)]*)(\\))?\\s+({path}.*/[^\\s]*)\\s+({action}[^\\s(]+)({params}.+)?(\\s*)$");
+        Pattern methodPattern = new Pattern("(GET|POST|PUT|DELETE|OPTIONS|HEAD|WS|\\*)");
+        //Pattern routePattern = new Pattern("^({method}GET|POST|PUT|DELETE|OPTIONS|HEAD|WS|\\*)[(]?({headers}[^)]*)(\\))?\\s+({path}.*/[^\\s]*)\\s+" +
+        //        "({action}[^\\s(]+)({params}.+)?(\\s*)$");
+
         List<Route> routes = new ArrayList<Route>();
 
         public void addRoute(String method, String path, String action) {
@@ -64,7 +67,7 @@ public class Router {
 
                 for (Route route : routes) {
                         String uri = "/"  + parsedRequest.getRequestURI();
-                        if (route.matches(uri)) {
+                        if (route.matches(uri) && (route.getMethod().equals("*") || route.getMethod().equalsIgnoreCase((request.getMethod().toUpperCase())))) {
                                 logger.finer("routing match found.  pattern: " + route.getPattern().toString()+ ", uri: " + uri);
                                 if (route.getController().startsWith("/")) {
                                         parsedRequest.setRequestURI(route.getController().substring(1));
