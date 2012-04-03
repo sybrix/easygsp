@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Route {
-
+        // shameless taken from the play framework, these regex's are not mine
         public static final Pattern customRegexPattern = new Pattern("\\{([a-zA-Z_][a-zA-Z_0-9]*)\\}");
         public static final Pattern argsPattern = new Pattern("\\{<([^>]+)>([a-zA-Z_0-9]+)\\}");
 

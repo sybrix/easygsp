@@ -19,9 +19,6 @@ import java.util.logging.Logger;
  */
 public class Router {
         private Logger logger = Logger.getLogger(Route.class.getName());
-        Pattern methodPattern = new Pattern("(GET|POST|PUT|DELETE|OPTIONS|HEAD|WS|\\*)");
-        //Pattern routePattern = new Pattern("^({method}GET|POST|PUT|DELETE|OPTIONS|HEAD|WS|\\*)[(]?({headers}[^)]*)(\\))?\\s+({path}.*/[^\\s]*)\\s+" +
-        //        "({action}[^\\s(]+)({params}.+)?(\\s*)$");
 
         List<Route> routes = new ArrayList<Route>();
 
@@ -33,38 +30,7 @@ public class Router {
                 return routes;
         }
 
-        public void addRoute(Route route) {
-                routes.add(route);
-        }
-
-//        public Route findRequest(RequestImpl request, String requestUri) {
-//                Route matchingRoute = null;
-//
-//                for (Route route : routes) {
-//                        if (route.matches(requestUri)) {
-//                                boolean allParamsMatched = true;
-//                                for (UrlParameter param : route.getParameters().values()) {
-//                                        if (!param.getRegexPattern().matches(param.getValue())) {
-//                                                allParamsMatched = false;
-//                                        }
-//                                }
-//
-//                                if (allParamsMatched) {
-//                                        addParameters(request, route.getParameters().values());
-//                                        matchingRoute = route;
-//                                        break;
-//                                }
-//                        }
-//                }
-//
-//                //parsedRequest.init();
-//
-//                return matchingRoute;
-//        }
-
         public void routeRequest(RequestImpl request, ParsedRequest parsedRequest) {
-                Route matchingRoute = null;
-
                 for (Route route : routes) {
                         String uri = "/"  + parsedRequest.getRequestURI();
                         if (route.matches(uri) && (route.getMethod().equals("*") || route.getMethod().equalsIgnoreCase((request.getMethod().toUpperCase())))) {
@@ -76,9 +42,6 @@ public class Router {
                                 }
 
                                 parsedRequest.setRequestFilePath(parsedRequest.getAppPath() + route.getController());
-
-                                //parsedRequest.setRequestFilePath(filePath.replace(uri, route.getController()));
-
                                 addParameters(request, route.getParameters().values());
                                 break;
                         }
