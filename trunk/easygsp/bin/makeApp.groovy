@@ -47,7 +47,7 @@ Statement st = bd.createStatement()
 st.execute("UPDATE rdb\$database SET rdb\$character_set_name='UTF8'")
 bd.close()
 
-// CREATE PROPERTY FILES
+// CREATE PROPERTIES FILES
 def appPropFilePath = webInfDir + "app.properties"
 new File(appPropFilePath).write("""
 #enter application properties
