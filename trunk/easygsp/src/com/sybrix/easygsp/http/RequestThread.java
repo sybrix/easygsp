@@ -1,6 +1,7 @@
 package com.sybrix.easygsp.http;
 
 import com.sybrix.easygsp.exception.ApplicationNotFoundException;
+import com.sybrix.easygsp.exception.IndexFileNotFoundException;
 import com.sybrix.easygsp.exception.TemplateNotFoundException;
 import com.sybrix.easygsp.server.EasyGServer;
 import com.sybrix.easygsp.util.ResourceMap;
@@ -220,13 +221,10 @@ public class RequestThread extends Thread {
                                 processScriptController(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         }
 
-
+                } catch (IndexFileNotFoundException e) {
+                        send404Error(response);
                 } catch (ApplicationNotFoundException e) {
-                        try {
-                                send404Error(response);
-                        } catch (IOException e1) {
-                                logger.log(SEVERE, "send404Error failed IOExeption", e);
-                        }
+                        send404Error(response);
                 } catch (IOException e) {
                         logger.log(SEVERE, "SCGIParsing failed", e);
                 } catch (SecurityException e) {
@@ -254,10 +252,14 @@ public class RequestThread extends Thread {
                 RequestThreadInfo.set(null);
         }
 
-        private void send404Error(ResponseImpl response) throws IOException {
-                String content = getErrorFileContent(404);
-                response.setStatus(404);
-                response.out(content);
+        private void send404Error(ResponseImpl response) {
+                try {
+                        String content = getErrorFileContent(404);
+                        response.setStatus(404);
+                        response.out(content);
+                } catch (IOException e) {
+                        logger.log(SEVERE, "send404Error failed IOExeption", e);
+                }
         }
 
         private void expireFlashMessages(SessionImpl session) {

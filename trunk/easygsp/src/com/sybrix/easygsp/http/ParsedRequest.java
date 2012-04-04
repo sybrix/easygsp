@@ -1,5 +1,6 @@
 package com.sybrix.easygsp.http;
 
+import com.sybrix.easygsp.exception.IndexFileNotFoundException;
 import com.sybrix.easygsp.server.EasyGServer;
 import com.sybrix.easygsp.util.StringUtil;
 
@@ -43,7 +44,7 @@ public class ParsedRequest {
                 }
         }
 
-        public void indexCheck() {
+        public void indexCheck() throws IndexFileNotFoundException {
                 if (!gspExtensionFound(requestURI)) {
                         String files[] = EasyGServer.propertiesFile.getString("index.files", "").split(",");
                         for (String file : files) {
@@ -61,6 +62,8 @@ public class ParsedRequest {
                                         return;
                                 }
                         }
+
+                        throw new IndexFileNotFoundException("Index file not found. request uri:" + requestURI);
                 }
         }
 
