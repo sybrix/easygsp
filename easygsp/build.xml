@@ -90,16 +90,12 @@
         </target>
 
         <target name="jar" depends="compile">
-
                 <jar destfile="build/easygsp.jar" basedir="build/java/classes">
                         <manifest>
                                 <attribute name="Main-Class" value="com.sybrix.easygsp.server.EasyGServer"/>
                         </manifest>
                 </jar>
-
-                <copy tofile="bin/easygsp.jar" file="build/easygsp.jar"/>
         </target>
-
 
         <target name="javadoc">
                 <javadoc sourcepath="src" destdir="deploy/${easyGSPDir}/javadocs" classpathref="classpath"/>
@@ -108,7 +104,6 @@
         <target name="package" depends="jar, transformations, javadoc">
                 <delete dir="deploy"/>
 
-                
                 <mkdir dir="deploy"/>
                 <mkdir dir="deploy/${easyGSPDir}"/>
                 <mkdir dir="deploy/${easyGSPDir}/bin"/>
@@ -122,6 +117,8 @@
                 <mkdir dir="deploy/${easyGSPDir}/cache"/>
                 <mkdir dir="deploy/${easyGSPDir}/webapps"/>
                 <mkdir dir="deploy/${easyGSPDir}/webapps/examples"/>
+
+                <copy file="build/easygsp.jar" tofile="bin/easygsp.jar"/>
 
                 <copy todir="deploy/${easyGSPDir}/bin">
                         <fileset dir="bin">
