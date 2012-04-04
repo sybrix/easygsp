@@ -16,11 +16,11 @@
       <versionLine x="20" y="40" text="version %VERSION%" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
     </text>
   </splashScreen>
-  <java mainClass="com.sybrix.easygsp.server.EasyGServer" vmParameters="" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true" minVersion="1.5" maxVersion="" allowBetaVM="false" jdkOnly="false">
+  <java mainClass="com.sybrix.easygsp.server.EasyGServer" vmParameters="" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true" minVersion="1.5" maxVersion="" allowBetaVM="false" jdkOnly="true">
     <searchSequence>
-      <registry />
       <envVar name="JAVA_HOME" />
       <envVar name="JDK_HOME" />
+      <registry />
     </searchSequence>
     <classPath>
       <archive location="./bin/easygsp.jar" failOnError="false" />
