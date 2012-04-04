@@ -118,7 +118,7 @@
                 <mkdir dir="deploy/${easyGSPDir}/webapps"/>
                 <mkdir dir="deploy/${easyGSPDir}/webapps/examples"/>
 
-                <copy file="build/easygsp.jar" tofile="bin/easygsp.jar"/>
+                <copy file="build/easygsp.jar" tofile="deploy/${easyGSPDir}/bin/easygsp.jar"/>
 
                 <copy todir="deploy/${easyGSPDir}/bin">
                         <fileset dir="bin">
