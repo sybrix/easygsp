@@ -1,0 +1,6 @@
+-server 
+-XX:+DisableExplicitGC 
+-Deasygsp.home=${EASYGSP_HOME}
+-Dfile.encoding=UTF8 
+-Djava.util.logging.config.file=${EASYGSP_HOME}\conf\logging.properties 
+-Djava.security.policy=file://${EASYGSP_HOME}\conf\easygsp.policy
