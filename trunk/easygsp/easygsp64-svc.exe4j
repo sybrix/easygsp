@@ -18,9 +18,9 @@
   </splashScreen>
   <java mainClass="com.sybrix.easygsp.server.EasyGServer" vmParameters="" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true" minVersion="1.5" maxVersion="" allowBetaVM="false" jdkOnly="false">
     <searchSequence>
-      <registry />
       <envVar name="JAVA_HOME" />
       <envVar name="JDK_HOME" />
+      <registry />
     </searchSequence>
     <classPath>
       <archive location="./bin/easygsp.jar" failOnError="false" />
