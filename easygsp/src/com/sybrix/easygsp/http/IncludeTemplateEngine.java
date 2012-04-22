@@ -15,6 +15,7 @@
  */
 package com.sybrix.easygsp.http;
 
+import com.sybrix.easygsp.exception.ScriptBlockException;
 import groovy.text.TemplateEngine;
 import groovy.text.Template;
 import groovy.lang.*;
@@ -117,7 +118,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                 return template;
         }
 
-        public Template createTemplate(Reader reader, String requestedUrl, String scriptFileName, Binding binding) throws CompilationFailedException, IOException, InheritedTemplateException, ParentTemplateException {
+        public Template createTemplate(Reader reader, String requestedUrl, String scriptFileName, Binding binding) throws CompilationFailedException, IOException, InheritedTemplateException, ParentTemplateException, ScriptBlockException {
                 SimpleTemplate template = new SimpleTemplate();
                 SimpleTemplate.InheritedTemplateInfo inheritedTemplate = new SimpleTemplate.InheritedTemplateInfo();
                 String script = template.parse(reader, true, inheritedTemplate);
@@ -222,7 +223,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                  * @return the parsed text
                  * @throws IOException if something goes wrong
                  */
-                protected String parse(Reader reader, boolean rootTemplate, InheritedTemplateInfo templateInfo) throws IOException, InheritedTemplateException, ParentTemplateException {
+                protected String parse(Reader reader, boolean rootTemplate, InheritedTemplateInfo templateInfo) throws IOException, InheritedTemplateException, ParentTemplateException, ScriptBlockException {
                         if (!reader.markSupported()) {
                                 reader = new BufferedReader(reader);
                         }
@@ -303,11 +304,14 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         sw.write("\");\n");
                 }
 
-                private void processDirective(Reader reader, StringWriter sw, InheritedTemplateInfo inheritedTemplateInfo) throws IOException, InheritedTemplateException, ParentTemplateException {
+                private void processDirective(Reader reader, StringWriter sw, InheritedTemplateInfo inheritedTemplateInfo) throws IOException,
+                        InheritedTemplateException, ParentTemplateException, ScriptBlockException {
                         Directive directive = parseDirective(reader);
 
                         if (directive.isInclude()) {
                                 processIncludeDirective(sw, directive.parts[2]);
+                        } else if (directive.isScriptBlock()) {
+                                parseSkipBlock(reader, sw);
                         } else if (directive.isInheritedTemplated()) {
                                 inheritedTemplateInfo.inherited = true;
                                 inheritedTemplateInfo.mergedContents = new StringWriter();
@@ -504,6 +508,57 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         }
                 }
 
+                private void parseSkipBlock(Reader reader, StringWriter sw) throws ScriptBlockException {
+
+                        int c;
+                        StringWriter contents = new StringWriter();
+
+                        try {
+                                while ((c = reader.read()) != -1) {
+                                        if (c == '<') {
+                                                reader.mark(1);
+                                                c = reader.read();
+                                                if (c != '%') {
+                                                        contents.write('<');
+                                                        reader.reset();
+                                                } else {
+                                                        reader.mark(1);
+                                                        c = reader.read();
+                                                        if (c == '@') {
+                                                                Directive directive = parseDirective(reader);
+                                                                if (directive.isEnd()) {
+                                                                        //blocks.put(blockName, new BlockContents(startDirective, contents.toString()));
+                                                                        break;
+                                                                } else {
+                                                                        contents.write(directive.directive);
+                                                                }
+                                                        } else {
+                                                                contents.write("<%");
+                                                                contents.write(c);
+                                                        }
+                                                }
+                                                continue;
+                                        }
+
+//                                if (c == '\"') {
+//                                        contents.write('\\');
+//                                }
+
+                                        contents.write(c);
+                                }
+
+
+                                SimpleTemplate template = new SimpleTemplate();
+                                String script = template.parse(new StringReader(contents.toString().replaceAll("\\$", "\\\\\\$")), false, new InheritedTemplateInfo());
+                                sw.write(script);
+                                sw.write("rout.print(\"");
+
+                        } catch (Exception e) {
+                                throw new ScriptBlockException(e);
+                        }
+
+
+                }
 
                 private void parseChildBlock(Reader reader, String blockName, Directive startDirective, Map<String, BlockContents> blocks) throws IOException {
                         int c;
@@ -625,7 +680,7 @@ public class IncludeTemplateEngine extends TemplateEngine {
                         return sc;
                 }
 
-                private void processIncludeDirective(StringWriter sw, String path) throws IncludeDirectiveException, InheritedTemplateException, ParentTemplateException {
+                private void processIncludeDirective(StringWriter sw, String path) throws IncludeDirectiveException, InheritedTemplateException, ParentTemplateException, ScriptBlockException {
                         try {
                                 String templateRoot;
                                 File f = null;
@@ -848,6 +903,14 @@ public class IncludeTemplateEngine extends TemplateEngine {
 
                         public boolean isInclude() {
                                 return name.equalsIgnoreCase("include");
+                        }
+
+                        public boolean isScriptBlock() {
+                                return name.equalsIgnoreCase("script");
+                        }
+
+                        public boolean isEnd() {
+                                return name.equalsIgnoreCase("endscript");
                         }
 
                         public boolean isInheritedTemplated() {
