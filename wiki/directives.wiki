@@ -11,16 +11,15 @@ Directives tell the template engine how to process a section of a template. Sinc
 
 The following directive are supported:
 
-= include = 
+=== include === 
 
 
-= extends =
+=== extends ===
 
-= block =
+=== block ===
 
-= endblock =
+=== endblock ===
 
-= script =
+=== script ===
 
-= endscript =
-
+=== endscript ===
