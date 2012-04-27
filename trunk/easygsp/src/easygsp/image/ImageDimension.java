@@ -16,12 +16,6 @@
 
 package easygsp.image;
 
-/**
- * Created by IntelliJ IDEA.
- * User: David
- * Date: 1/28/12
- * Time: 7:50 PM
- */
 public class ImageDimension {
 
         ImageDimension() {

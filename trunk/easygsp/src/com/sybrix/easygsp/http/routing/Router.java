@@ -27,13 +27,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- * Created by IntelliJ IDEA.
- * User: David
- * Date: 3/14/12
- * Time: 8:20 PM
- */
+
 public class Router {
+
         private Logger logger = Logger.getLogger(Route.class.getName());
 
         List<Route> routes = new ArrayList<Route>();
