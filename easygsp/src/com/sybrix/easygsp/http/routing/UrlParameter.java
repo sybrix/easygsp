@@ -18,12 +18,6 @@ package com.sybrix.easygsp.http.routing;
 
 import jregex.Pattern;
 
-/**
- * Created by IntelliJ IDEA.
- * User: David
- * Date: 3/14/12
- * Time: 8:17 PM
- */
 public class UrlParameter {
         String name;
         Pattern regexPattern;
