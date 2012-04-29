@@ -14,7 +14,7 @@ public class Validator {
         private static final String atext = "[a-zA-Z0-9" + sp + "]";
         private static final String atom = atext + "+"; //one or more atext chars
         private static final String dotAtom = "\\." + atom;
-        private static final String localPart = atom + "(" + dotAtom + ")*"; //one atom followed by 0 or more dotAtoms.
+        private static final String localPart = atom + "(" + dotAtom + ")*";
 
         //RFC 1035 tokens for domain names:
         private static final String letter = "[a-zA-Z]+$";
@@ -32,11 +32,8 @@ public class Validator {
         //now compile it:
         public static final Pattern EMAIL_PATTERN = Pattern.compile(addrSpec);
 
-        public static final String phoneNumberRegEx = "(\\d-)?(\\d{3}-)?\\d{3}-\\d{4}";
-        public static final Pattern PHONE_PATTERN = Pattern.compile(phoneNumberRegEx);
-
-        public static final String zipCodeRegEx = "\\d{5}(-\\d{4})?";
-        public static final Pattern ZIPCODE_PATTERN = Pattern.compile(zipCodeRegEx);
+        public static final Pattern PHONE_PATTERN = Pattern.compile("(\\d-)?(\\d{3}-)?\\d{3}-\\d{4}");;
+        public static final Pattern ZIPCODE_PATTERN = Pattern.compile("\\d{5}(-\\d{4})?");
 
         public static final Pattern ALPHA_NUMERIC_PATTERN = Pattern.compile(letDig);
         public static final Pattern LETTERS_PATTERN = Pattern.compile(letter);
@@ -53,6 +50,8 @@ public class Validator {
         }
 
         public static boolean isEmailValid(String value) {
+                if (isEmpty(value))
+                        return  false;
                 return EMAIL_PATTERN.matcher(value).matches();
         }
 
@@ -69,6 +68,8 @@ public class Validator {
         }
 
         public static boolean isAlphaNumeric(String value) {
+                 if (value == null)
+                        return false;
                 return ALPHA_NUMERIC_PATTERN.matcher(value).matches();
         }
 
