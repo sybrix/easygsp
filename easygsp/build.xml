@@ -6,13 +6,14 @@
         <property name="groovy_home" value="${env.GROOVY_HOME}"/>
         <property name="buildNumber" value="0.4.6"/>
         <property name="easyGSPDir" value="easygsp-${buildNumber}"/>
-
+        <property name="instrumented-classes" value="build/instrumented-classes"/>
+        <property name="coverage-reports" value="build/coverage-reports"/>
 
         <path id="classpath">
                 <fileset dir="lib" includes="**/*.jar">
-                    <exclude name="transformations.jar"/>
+                        <exclude name="transformations.jar"/>
                 </fileset>
-            <fileset dir="${groovy_home}/lib" includes="**/*.jar"/>
+
 
         </path>
 
@@ -34,18 +35,28 @@
                 <pathelement location="${jdk}/jre/lib/jsse.jar"/>
         </path>
 
+        <property name="cobertura.dir" value="lib-test/cobertura"/>
+
+        <path id="cobertura.classpath">
+                <fileset dir="${cobertura.dir}">
+                        <include name="cobertura.jar"/>
+                        <include name="lib/*.jar"/>
+                </fileset>
+        </path>
+
+        <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
+
         <taskdef name="groovyc"
                  classname="org.codehaus.groovy.ant.Groovyc"
                  classpathref="classpath"/>
 
         <target name="copy.files">
-                <delete file="lib/transformations.jar" />
+                <delete file="lib/transformations.jar"/>
 
                 <delete dir="build"/>
                 <mkdir dir="build"/>
                 <mkdir dir="build/src"/>
-                <mkdir dir="build/java"/>
-                <mkdir dir="build/java/classes"/>
+                <mkdir dir="build/classes"/>
 
                 <copy todir="build/src">
                         <fileset dir="src">
@@ -59,7 +70,7 @@
 
         <!-- compile application -->
         <target name="compile" depends="copy.files">
-                <groovyc classpathref="classpath" srcdir="build/src" destdir="build/java/classes">
+                <groovyc classpathref="classpath" srcdir="build/src" destdir="build/classes">
                         <javac deprecation="false" nowarn="false"
                                target="1.5" debug="true" classpathref="classpath">
                                 <include name="**/*.java"/>
@@ -69,16 +80,17 @@
                 </groovyc>
         </target>
         <target name="compile-test">
-                <delete dir="build/java/tests"/>
-                <delete dir="build/src/test"/>
-                <mkdir dir="build/java/tests"/>
+                <delete dir="build/classes-tests"/>
+                <delete dir="build/src-tests"/>
 
-                <copy todir="build/test">
+                <mkdir dir="build/classes-tests"/>
+
+                <copy todir="build/src-tests">
                         <fileset dir="test">
                                 <include name="**/*.*"/>
                         </fileset>
                 </copy>
-                <groovyc classpathref="classpath.test" srcdir="build/test" destdir="build/java/tests">
+                <groovyc classpathref="classpath.test" srcdir="build/src-tests" destdir="build/classes-tests">
                         <javac target="1.5" deprecation="false" nowarn="false">
                                 <include name="**/*.java"/>
                                 <include name="**/*.groovy"/>
@@ -86,11 +98,11 @@
                         </javac>
                 </groovyc>
 
-                <jar destfile="build/easygsp-test.jar" basedir="build/java/tests"/>
+                <jar destfile="build/easygsp-test.jar" basedir="build/classes-tests"/>
         </target>
 
         <target name="jar" depends="compile">
-                <jar destfile="build/easygsp.jar" basedir="build/java/classes">
+                <jar destfile="build/easygsp.jar" basedir="build/classes">
                         <manifest>
                                 <attribute name="Main-Class" value="com.sybrix.easygsp.server.EasyGServer"/>
                         </manifest>
@@ -200,15 +212,54 @@
 
                 <jar destfile="build/transformations/transformations.jar" basedir="build/transformations/target"/>
                 <copy tofile="lib/transformations.jar" file="build/transformations/transformations.jar"/>
-        </target>
-        <target name="test" depends="compile-test">
 
+        </target>
+
+        <target name="test" depends="compile-test">
                 <junit printsummary="true">
                         <classpath refid="classpath.test"/>
+                        <classpath location="build/classes-tests"/>
                         <formatter type="brief" usefile="false"/>
                         <batchtest>
-                                <fileset dir="build/java/tests" includes="**/*Test.class"/>
+                                <fileset dir="build/classes-tests" includes="**/*Test.class"/>
                         </batchtest>
                 </junit>
+        </target>
+
+
+        <target name="coverage" depends="jar,compile-test">
+                <mkdir dir="${instrumented-classes}"/>
+                <mkdir dir="${coverage-reports}"/>
+
+                <cobertura-instrument todir="${instrumented-classes}">
+                        <fileset dir="build/classes">
+                                <include name="**/*.class"/>
+                        </fileset>
+                </cobertura-instrument>
+
+                <junit dir="./" failureproperty="test.failure" printSummary="yes"
+                       fork="true" haltonerror="true">
+                        <!-- Normally you can create this task by copying your existing JUnit
+               target, changing its name, and adding these next two lines.
+               You may need to change the locations to point to wherever
+               you've put the cobertura.jar file and the instrumented classes. -->
+
+                        <classpath refid="cobertura.classpath"/>
+                        <classpath location="${instrumented-classes}"/>
+                        <classpath>
+                                <fileset dir="lib" includes="*.jar"/>
+                                <fileset dir="lib-test/" includes="*.jar">
+                                        <exclude name="transformations.jar"/>
+                                </fileset>
+                        </classpath>
+                        <classpath location="build/easygsp-test.jar"/>
+                        <classpath location="build/classes"/>
+
+                        <batchtest todir="${coverage-reports}">
+                                <fileset dir="build/classes-tests" includes="**/*Test.class"/>
+                        </batchtest>
+                </junit>
+
+                <cobertura-report srcdir="build/src" destdir="${coverage-reports}"/>
         </target>
 </project>
