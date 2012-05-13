@@ -545,7 +545,9 @@ public class IncludeTemplateEngine extends TemplateEngine {
 
 
                                 SimpleTemplate simpleTemplate = new SimpleTemplate();
-                                String script = simpleTemplate.parse(new StringReader(contents.toString().replaceAll("\\$", "\\\\\\$")), false, new InheritedTemplateInfo());
+                                String script = simpleTemplate.parse(new StringReader(contents.toString().replaceAll("\\\\","\\\\\\\\").replaceAll("\\$", "\\\\\\$")),
+                                        false,
+                                        new InheritedTemplateInfo());
                                 sw.write(script);
                                 sw.write("rout.print(\"");
 
