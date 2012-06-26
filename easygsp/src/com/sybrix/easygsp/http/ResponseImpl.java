@@ -128,8 +128,10 @@ public class ResponseImpl implements HttpServletResponse {
                 //
                 boolean secure = request.isSecure();
                 //@todo - fix for apache
-                String script = request.getHeader(RequestHeaders.SCRIPT_NAME);
-                String scriptPath = script.substring(0, script.lastIndexOf("/"));
+                String requestUri = request.getHeader(RequestHeaders.REQUEST_URI);
+                int i = requestUri.lastIndexOf("/");
+                String script = requestUri.substring(i+1);
+                String scriptPath = requestUri.substring(0, i);
                 String server = request.getHeader(RequestHeaders.SERVER_NAME);
                 String serverPort = ":" + request.getHeader(RequestHeaders.SERVER_PORT);
                 if (serverPort.equals(":80")) {
@@ -165,7 +167,6 @@ public class ResponseImpl implements HttpServletResponse {
                 setHeader("Location", url);
 
                 flushBuffer();
-                //throw new NotImplementedException("Response.sendRedirect() is not implemented");
         }
 
         protected void clearBuffer() {
