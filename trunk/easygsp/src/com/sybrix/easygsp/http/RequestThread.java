@@ -575,7 +575,7 @@ public class RequestThread extends Thread {
                                                 logger.log(Level.FINE, e.getMessage(), e);
                                                 sendError(404, scriptPath, gse, binding, e);
                                         } catch (MissingPropertyException e) {
-                                                logger.log(Level.FINE, e.getMessage(), e);
+                                                logger.log(Level.FINE, "error occurred in " + scriptPath + "\n" + e.getMessage(), e);
                                                 sendError(500, scriptPath, gse, binding, e);
                                         } catch (MissingMethodException e) {
                                                 logger.log(Level.FINE, e.getMessage(), e);
