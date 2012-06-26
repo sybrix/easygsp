@@ -205,7 +205,9 @@ public class Framework {
                                 if (requestParams.get(property) == null && requestParams.get(property + '__frmwk') != null) {
                                         value = false
                                 } else if (requestParams.get(property) != null) {
-                                        value = (requestParams.get(property).equals('1') || requestParams.get(property).equals('true'))
+                                        value = (requestParams.get(property).equals('1') || requestParams.get(property).equalsIgnoreCase('true') ||
+                                                requestParams.get(property).equalsIgnoreCase('yes') | requestParams.get(property).equalsIgnoreCase('Y') ||
+                                                requestParams.get(property).equalsIgnoreCase('T'))
                                 } else {
                                         value = false
                                 }
@@ -217,6 +219,8 @@ public class Framework {
                                 value = Double.valueOf(requestParams.get(property) ?: '0')
                         } else if (params[0].equals(BigDecimal.class)) {
                                 value = new BigDecimal(requestParams.get(property) ?: '0')
+                        } else if (params[0].equals(BigInteger.class)) {
+                                value = new BigInteger(requestParams.get(property) ?: '0')
                         } else if (params[0].equals(Long.class) || params[0] == Long.TYPE) {
                                 value = Long.valueOf(requestParams.get(property) ?: '0')
                         } else if (params[0].equals(Short.class) || params[0] == Short.TYPE) {
