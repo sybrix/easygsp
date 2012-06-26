@@ -27,6 +27,7 @@ import java.util.logging.Logger
 import org.codehaus.groovy.runtime.GStringImpl
 import org.codehaus.groovy.runtime.metaclass.ThreadManagedMetaBeanProperty
 import javax.sql.DataSource
+import com.sybrix.easygsp.util.Framework
 
 
 public class Model {
@@ -95,9 +96,7 @@ public class Model {
                 def operator = "AND"
                 def countQuery
 
-                if (whereMap.containsKey('operator'))
-                        if (whereMap.operator.toUpperCase() == 'OR' || whereMap.operator.toUpperCase() == 'AND')
-                                operator = whereMap.remove('operator').toUpperCase()
+                if (whereMap.containsKey('operator')) if (whereMap.operator.toUpperCase() == 'OR' || whereMap.operator.toUpperCase() == 'AND') operator = whereMap.remove('operator').toUpperCase()
 
                 if (whereMap instanceof Map) {
                         orderBy = whereMap.remove("orderBy")
@@ -119,20 +118,20 @@ public class Model {
                 whereMap.each {
                         def filterOperator
                         def key = it.key
-                        if (it.key.toString().endsWith(">")){
-                               key = it.key.toString().substring(0,it.key.toString().length()-2).trim()
-                               filterOperator = ">"
-                        } else if (it.key.toString().endsWith("<")){
-                                key = it.key.toString().substring(0,it.key.toString().length()-2).trim()
-                               filterOperator = "<"
-                        } else if (it.key.toString().endsWith("<=")){
-                                key = it.key.toString().substring(0,it.key.toString().length()-3).trim()
+                        if (it.key.toString().endsWith(">")) {
+                                key = it.key.toString().substring(0, it.key.toString().length() - 2).trim()
+                                filterOperator = ">"
+                        } else if (it.key.toString().endsWith("<")) {
+                                key = it.key.toString().substring(0, it.key.toString().length() - 2).trim()
+                                filterOperator = "<"
+                        } else if (it.key.toString().endsWith("<=")) {
+                                key = it.key.toString().substring(0, it.key.toString().length() - 3).trim()
                                 filterOperator = "<="
-                        } else if (it.key.toString().endsWith(">=")){
-                                key = it.key.toString().substring(0,it.key.toString().length()-3).trim()
+                        } else if (it.key.toString().endsWith(">=")) {
+                                key = it.key.toString().substring(0, it.key.toString().length() - 3).trim()
                                 filterOperator = ">="
-                        } else if (it.key.toString().endsWith("<>")){
-                                key = it.key.toString().substring(0,it.key.toString().length()-3).trim()
+                        } else if (it.key.toString().endsWith("<>")) {
+                                key = it.key.toString().substring(0, it.key.toString().length() - 3).trim()
                                 filterOperator = "<>"
                         }
 
@@ -144,7 +143,7 @@ public class Model {
 
                         if (it.value == null) {
                                 sql << "$columnName IS NULL $operator "
-                        } else if (filterOperator){
+                        } else if (filterOperator) {
                                 sql << "$columnName $filterOperator ?  $operator "
                                 values << getValue(it?.value?.class, it.value)
                         } else {
@@ -178,9 +177,7 @@ public class Model {
                 def tbl = getTableName(clazz)
                 def operator = "AND"
 
-                if (whereMap.containsKey('operator'))
-                        if (whereMap.operator.toUpperCase() == 'OR' || whereMap.operator.toUpperCase() == 'AND')
-                                operator = whereMap.remove('operator').toUpperCase()
+                if (whereMap.containsKey('operator')) if (whereMap.operator.toUpperCase() == 'OR' || whereMap.operator.toUpperCase() == 'AND') operator = whereMap.remove('operator').toUpperCase()
 
                 sql << "SELECT "
                 Map columns = [:]
@@ -195,20 +192,20 @@ public class Model {
                 whereMap.each {
                         def filterOperator
                         def key = it.key
-                        if (it.key.toString().endsWith(">")){
-                               key = it.key.toString().substring(0,it.key.toString().length()-2).trim()
-                               filterOperator = ">"
-                        } else if (it.key.toString().endsWith("<")){
-                                key = it.key.toString().substring(0,it.key.toString().length()-2).trim()
-                               filterOperator = "<"
-                        } else if (it.key.toString().endsWith("<=")){
-                                key = it.key.toString().substring(0,it.key.toString().length()-3).trim()
+                        if (it.key.toString().endsWith(">")) {
+                                key = it.key.toString().substring(0, it.key.toString().length() - 2).trim()
+                                filterOperator = ">"
+                        } else if (it.key.toString().endsWith("<")) {
+                                key = it.key.toString().substring(0, it.key.toString().length() - 2).trim()
+                                filterOperator = "<"
+                        } else if (it.key.toString().endsWith("<=")) {
+                                key = it.key.toString().substring(0, it.key.toString().length() - 3).trim()
                                 filterOperator = "<="
-                        } else if (it.key.toString().endsWith(">=")){
-                                key = it.key.toString().substring(0,it.key.toString().length()-3).trim()
+                        } else if (it.key.toString().endsWith(">=")) {
+                                key = it.key.toString().substring(0, it.key.toString().length() - 3).trim()
                                 filterOperator = ">="
-                        } else if (it.key.toString().endsWith("<>")){
-                                key = it.key.toString().substring(0,it.key.toString().length()-3).trim()
+                        } else if (it.key.toString().endsWith("<>")) {
+                                key = it.key.toString().substring(0, it.key.toString().length() - 3).trim()
                                 filterOperator = "<>"
                         }
 
@@ -220,7 +217,7 @@ public class Model {
 
                         if (it.value == null) {
                                 sql << "$columnName IS NULL $operator "
-                        } else if (filterOperator){
+                        } else if (filterOperator) {
                                 sql << "$columnName $filterOperator ?  $operator "
                                 values << getValue(it?.value?.class, it.value)
                         } else {
@@ -248,8 +245,7 @@ public class Model {
                         results << row
                 }
 
-                if (results.size() == 0)
-                        return null
+                if (results.size() == 0) return null
 
                 results.get(0)
         }
@@ -264,9 +260,7 @@ public class Model {
                 def tbl = getTableName(clazz)
                 def operator = "AND"
 
-                if (whereMap.containsKey('operator'))
-                        if (whereMap.operator.toUpperCase() == 'OR' || whereMap.operator.toUpperCase() == 'AND')
-                                operator = whereMap.remove('operator').toUpperCase()
+                if (whereMap.containsKey('operator')) if (whereMap.operator.toUpperCase() == 'OR' || whereMap.operator.toUpperCase() == 'AND') operator = whereMap.remove('operator').toUpperCase()
 
                 sql << "DELETE FROM $tbl WHERE "
                 boolean hasColumnsProperty = isProperty(clazz, 'columns')
@@ -296,10 +290,13 @@ public class Model {
                         metaProperty.setThreadBoundPropertyValue(this, name, value)
                 } else {
                         metaProperty.setProperty(this, value)
-                        if (!this.dynamicProperties.contains(name))
-                                this.dynamicProperties << name
+                        if (!this.dynamicProperties.contains(name)) this.dynamicProperties << name
                         logger.finest("setProperty $name")
                 }
+        }
+
+        def properties(Map params) {
+                Framework.populateBean(this, params)
         }
 
         def clearDynamicProperties() {
@@ -344,9 +341,7 @@ public class Model {
                 sql << "UPDATE $tableName SET "
 
                 this.dynamicProperties.each {
-                        if (hasColumnsProperty && this?.columns.containsKey(it))
-                                columnName = unCamelCaseColumn(this?.columns[it])
-                        else
+                        if (hasColumnsProperty && this?.columns.containsKey(it)) columnName = unCamelCaseColumn(this?.columns[it]) else
                                 columnName = unCamelCaseColumn(it)
 
                         sql << "$columnName = ?, "
@@ -386,13 +381,10 @@ public class Model {
                 boolean hasPrimaryKeyValues = false
                 clazz.primaryKeys.each {
                         def val = this?."$it"
-                        if (val != null)
-                                hasPrimaryKeyValues = true
+                        if (val != null) hasPrimaryKeyValues = true
                 }
 
-                if (hasPrimaryKeyValues)
-                        update()
-                else
+                if (hasPrimaryKeyValues) update() else
                         insert(insertUpdatedColumns)
 
         }
@@ -414,8 +406,7 @@ public class Model {
                 def allColumns = getAllColumns(clazz, this)
 
                 def properties = allColumns
-                if (insertUpdatedColumnsOnly)
-                        properties = this.dynamicProperties
+                if (insertUpdatedColumnsOnly) properties = this.dynamicProperties
 
                 boolean manualPrimaryKeys
 
@@ -431,10 +422,9 @@ public class Model {
                         properties.removeAll(this.primaryKeys)
                 }
 
-                if (isProperty(clazz, 'exclude')){
+                if (isProperty(clazz, 'exclude')) {
                         properties.removeAll(this.exclude)
                 }
-
 
                 properties.each {
                         if (hasColumnsProperty && this.columns?.containsKey(it)) {
@@ -477,8 +467,7 @@ public class Model {
         }
 
         private static def getValue(obj, val) {
-                if (val == null)
-                        return null
+                if (val == null) return null
 
                 if (obj == java.sql.Date.class || obj == java.util.Date.class) {
                         return new java.sql.Timestamp(val.time)
@@ -496,8 +485,7 @@ public class Model {
 
                 if (propertyExist(clazz, 'tableName')) {
                         def metaProperty = clazz.metaClass.getMetaProperty('tableName')
-                        if (metaProperty instanceof ThreadManagedMetaBeanProperty)
-                                return metaProperty.initialValue else
+                        if (metaProperty instanceof ThreadManagedMetaBeanProperty) return metaProperty.initialValue else
                                 return metaProperty.getProperty('tableName')
                 } else {
                         if (clazz.name.lastIndexOf('.') > -1) {
@@ -533,8 +521,7 @@ public class Model {
                                         def prop = clazz.metaClass.getMetaProperty(property)
 
                                         if (clazz.metaClass.getMetaProperty(property) && !property.equals('metaClass') && (prop instanceof MetaBeanProperty)
-                                                && !property.equals('_dataSource')
-                                        ) {
+                                                && !property.equals('_dataSource')) {
 
                                                 if (prop.field == null || !prop.field.isStatic()) {
                                                         properties << property
@@ -583,7 +570,7 @@ public class Model {
                         def prop = clazz.metaClass.getMetaProperty(it.name)
                         def exclude = false;
 
-                        if (isProperty(clazz,'exclude')){
+                        if (isProperty(clazz, 'exclude')) {
                                 exclude = thisObject.exclude.contains(it.name)
                         }
 
@@ -628,16 +615,13 @@ public class Model {
                 return newColumn.toString()
 
 
-
-
         }
 
         def static String unCamelCase(String column) {
                 StringBuffer newColumn = new StringBuffer()
                 for (int i = 0; i < column.length(); i++) {
                         if (Character.isLetter(column.charAt(i)) && Character.isUpperCase(column.charAt(i))) {
-                                if (i > 0)
-                                        newColumn.append("_")
+                                if (i > 0) newColumn.append("_")
 
                                 newColumn.append(Character.toLowerCase(column.charAt(i)))
                         } else {
@@ -656,12 +640,11 @@ public class Model {
         //        }
 
         def static Sql getSqlInstance(String dataSourceName) {
-                ServletContextImpl app = RequestThreadInfo.get().application
+
 
                 logger.fine 'Obtaining SQL Instance from CurrentSQLInstance threadlocal'
                 def db = CurrentSQLInstance.get()
-                if (db != null)
-                        return db
+                if (db != null) return db
 
 
 
@@ -756,14 +739,13 @@ public class Model {
         private static def parseOrderBy(sql, orderBy, clazz) {
                 def orderByAry
                 if (orderBy != null) {
-                        sql << "ORDER BY "
+                        sql << " ORDER BY "
                         orderByAry = orderBy.split(',')
 
                         orderByAry.each {
                                 def orderByPart = it.trim().split(' ')
                                 sql << getColumnName(clazz, orderByPart[0])
-                                if (orderByPart.size() > 1)
-                                        sql << ' ' << orderByPart[1]
+                                if (orderByPart.size() > 1) sql << ' ' << orderByPart[1]
                                 sql << ','
                         }
 
@@ -776,14 +758,12 @@ public class Model {
                 List results = new ArrayList()
 
                 def totalCountQuery = countQuery
-                if (countQuery == null)
-                        totalCountQuery = "SELECT count(*) FROM $tbl".toString()
+                if (countQuery == null) totalCountQuery = "SELECT count(*) FROM $tbl".toString()
 
                 def pagedResults
 
                 if (page != null && pageSize != null) {
-                        if (orderBy == null)
-                                throw new RuntimeException('orderBy: [columnName] required')
+                        if (orderBy == null) throw new RuntimeException('orderBy: [columnName] required')
                         logger.fine("doPageSelect countQuery: ${countQuery}, values: ${values}")
                         pagedResults = doPagedResults(sql.toString(), totalCountQuery, page, pageSize, (countQuery == null ? null : values))
 
@@ -894,8 +874,7 @@ public class Model {
                                 connection.rollback()
                                 throw e
                         } finally {
-                                if (db != null)
-                                        db.close()
+                                if (db != null) db.close()
 
                                 CurrentSQLInstance.set(null)
                         }
@@ -903,8 +882,7 @@ public class Model {
         }
 
         private static def getSelectValue(obj, val) {
-                if (val == null)
-                        return
+                if (val == null) return
 
                 if (obj == java.util.Date.class && val.class == java.sql.Timestamp) {
                         return new java.util.Date(val.time)
@@ -932,8 +910,7 @@ public class Model {
                         //                        else
                         def result = db.rows(delegate)
 
-                        if (result.size > 0)
-                                return result[0].getAt(0)
+                        if (result.size > 0) return result[0].getAt(0)
 
                         return null
                 }
@@ -947,8 +924,7 @@ public class Model {
                                         values.add(it)
                                 }
                         } else {
-                                if (args != null)
-                                        values << args
+                                if (args != null) values << args
                         }
                         String sql = delegate
 
@@ -1018,8 +994,7 @@ public class Model {
                                         for (i in 1..rs.getMetaData().getColumnCount()) {
 
                                                 String colName = columns[rs.getMetaData().getColumnName(i).toUpperCase()]
-                                                if (colName != null)
-                                                        row."$colName" = getValue(getType(clazz, "$colName"), rs."$colName")
+                                                if (colName != null) row."$colName" = getValue(getType(clazz, "$colName"), rs."$colName")
                                         }
                                         row.clearDynamicProperties()
                                         results << row

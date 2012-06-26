@@ -42,8 +42,7 @@ public class Framework {
                 try {
                         loadResult = page.invokeMethod("load", null)
                         if (loadResult instanceof Boolean) {
-                                if (loadResult == false)
-                                        return
+                                if (loadResult == false) return
                         } else if (loadResult instanceof String) {
                                 render(loadResult)
                                 return
@@ -58,8 +57,7 @@ public class Framework {
                         }
                 }
 
-                if (loadResult == false)
-                        return
+                if (loadResult == false) return
 
                 try {
                         if (page.request.getMethod().equalsIgnoreCase('GET')) {
@@ -75,8 +73,7 @@ public class Framework {
                 } catch (MissingMethodException e) {
                         if (!(e.message.indexOf('No signature of method: ') > -1
                                 && (e.message.indexOf('.doGet() is applicable for argument types:') > -1 ||
-                                e.message.indexOf('.doPost() is applicable for argument types:') > -1))
-                        ) {
+                                e.message.indexOf('.doPost() is applicable for argument types:') > -1))) {
                                 // log e
                                 throw e
                         }
@@ -254,8 +251,7 @@ public class Framework {
         static def checkBox(nameId, valueProperty, checked, params) {
                 StringBuffer cb = new StringBuffer()
                 cb << "<input type=\"checkbox\" name=\"${nameId}\" id=\"$nameId\" value=\"${valueProperty}\""
-                if (checked)
-                        cb << ' checked=\"checked\"'
+                if (checked) cb << ' checked=\"checked\"'
 
                 cb << ' ' << params
                 cb << '/>'
@@ -276,7 +272,7 @@ public class Framework {
                         cb << "<option value=\"0\">$firstRow</option>"
                 }
 
-                if ((data instanceof List) && valueProperty != null && labelProperty !=null) {
+                if ((data instanceof List) && valueProperty != null && labelProperty != null) {
                         data.each {k ->
                                 if (k."$valueProperty" == selectedId) {
                                         cb << '<option value="'
@@ -293,7 +289,7 @@ public class Framework {
                                 }
                         }
                 } else if (data instanceof List) {
-                         def i = 0
+                        def i = 0
                         data.each {v ->
                                 if (v == selectedId) {
                                         cb << '<option value="'
@@ -374,17 +370,14 @@ public class Framework {
                 def range = getRange(requestedPage, pageCount)
 
                 if (range.leapBack > 0) {
-                        if (range.leapBack != 1)
-                                out << "<li><a href=\"${pageName}?sortColumn=${sortColumn}&sortOrder=${sortOrder}&page=1&p=${currentPage}${queryString}\">1</a></li>"
+                        if (range.leapBack != 1) out << "<li><a href=\"${pageName}?sortColumn=${sortColumn}&sortOrder=${sortOrder}&page=1&p=${currentPage}${queryString}\">1</a></li>"
 
                         out << "<li><a href=\"${pageName}?sortColumn=${sortColumn}&sortOrder=${sortOrder}&page=${range.leapBack}&p=${currentPage}${queryString}\">${range.leapBack}</a></li>"
                         out << "<li class=\"currentPage\">...</li>"
                 }
 
                 (range.start..range.end).each {i ->
-                        if (i == requestedPage)
-                                out << "<li class=\"currentPage\">${i}</li>"
-                        else
+                        if (i == requestedPage) out << "<li class=\"currentPage\">${i}</li>" else
                                 out << "<li><a href=\"${pageName}?sortColumn=${sortColumn}&sortOrder=${sortOrder}&page=${i}&p=${currentPage}${queryString}\">$i</a></li>"
                 }
 
@@ -392,8 +385,7 @@ public class Framework {
                         out << "<li class=\"currentPage\">...</li>"
                         out << "<li><a href=\"${pageName}?sortColumn=${sortColumn}&sortOrder=${sortOrder}&page=${range.leap}&p=${currentPage}${queryString}\">${range.leap}</a></li>"
 
-                        if (range.leap != pageCount)
-                                out << "<li><a href=\"${pageName}?sortColumn=${sortColumn}&sortOrder=${sortOrder}&page=${pageCount}&p=${currentPage}${queryString}\">${pageCount}</a></li>"
+                        if (range.leap != pageCount) out << "<li><a href=\"${pageName}?sortColumn=${sortColumn}&sortOrder=${sortOrder}&page=${pageCount}&p=${currentPage}${queryString}\">${pageCount}</a></li>"
                 }
 
                 out << "<li><a href=\"${pageName}?sortColumn=${sortColumn}&sortOrder=${sortOrder}&page=${next}&p=${currentPage}${queryString}\">Next</a></li>"
@@ -417,7 +409,7 @@ public class Framework {
 
                 if (pageCount < slideWidth) {
                         start = 1;
-                        rangeEnd = pageCount==0?1:pageCount;
+                        rangeEnd = pageCount == 0 ? 1 : pageCount;
                         //range = new int[rangeEnd];
                 } else if (rangeEnd > pageCount) {
                         rangeEnd = pageCount;
@@ -426,8 +418,7 @@ public class Framework {
                         start = 1;
                         rangeEnd = slideWidth;
 
-                        if (rangeEnd > pageCount)
-                                rangeEnd = pageCount;
+                        if (rangeEnd > pageCount) rangeEnd = pageCount;
                 }
 
                 def range = [:]
@@ -438,10 +429,7 @@ public class Framework {
                 def leapAmount = (pageCount * 0.30f).toInteger()
 
                 def pageCountRangeEndDiff = pageCount - range.end
-                if (range.start - leapAmount > 1)
-                        range.leapBack = range.start - leapAmount
-                else if (((range.start - 1) / 2) > 1)
-                        range.leapBack = ((range.start - 1) / 2).toInteger()
+                if (range.start - leapAmount > 1) range.leapBack = range.start - leapAmount else if (((range.start - 1) / 2) > 1) range.leapBack = ((range.start - 1) / 2).toInteger()
 
                 if ((range.end + leapAmount) < pageCount) {
                         range.leap = range.end + leapAmount
@@ -473,7 +461,7 @@ public class Framework {
                         sortOrder = tp.binding.sortOrder
                 }
 
-                def p = [sortColumn:sortColumn, sortOrder: sortOrder, page: page, pageSize: pageSize, oldPage: oldPage, p: page]
+                def p = [sortColumn: sortColumn, sortOrder: sortOrder, page: page, pageSize: pageSize, oldPage: oldPage, p: page]
 
                 def queryStringMap = [:]
                 param.each {k, v ->
@@ -489,12 +477,12 @@ public class Framework {
         static def column(thisPage, col, columnLabel) {
                 def url = thisPage.request.requestURL
                 def sortOrder = getSortOrder(thisPage.params)
-                def queryString=""
+                def queryString = ""
 
                 thisPage.params.each {key, val ->
-                        if (!key.equals('sortOrder') && !key.equals('sortColumn')){
+                        if (!key.equals('sortOrder') && !key.equals('sortColumn')) {
                                 queryString += "&${key}=${val}"
-                               // println "&${key}=${val}"
+                                // println "&${key}=${val}"
                         }
                 }
 
@@ -557,8 +545,7 @@ public class Framework {
 
                                         property = sourceDescriptors[x].getName()
                                         //println 'set property: ' + property
-                                        if (sourceDescriptors[x].getWriteMethod() == null)
-                                                continue
+                                        if (sourceDescriptors[x].getWriteMethod() == null) continue
 
                                         Class[] params = sourceDescriptors[x].getWriteMethod().getParameterTypes()
 
