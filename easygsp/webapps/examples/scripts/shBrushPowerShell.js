@@ -36,7 +36,7 @@ SyntaxHighlighter.brushes.PowerShell = function()
 				'Clear-ItemProperty Clear-Variable Compare-Object ConvertFrom-SecureString Convert-Path ' +
 				'ConvertTo-Html ConvertTo-SecureString Copy(-Item)? Copy-ItemProperty Export-Alias ' +
 				'Export-Clixml Export-Console Export-Csv ForEach(-Object)? Format-Custom Format-List ' +
-				'Format-Table Format-Wide Get-Acl Get-Alias Get-AuthenticodeSignature Get-ChildItem Get-Command ' +
+				'Format-easygsp.Table Format-Wide Get-Acl Get-Alias Get-AuthenticodeSignature Get-ChildItem Get-Command ' +
 				'Get-Content Get-Credential Get-Culture Get-Date Get-EventLog Get-ExecutionPolicy ' +
 				'Get-Help Get-History Get-Host Get-Item Get-ItemProperty Get-Location Get-Member ' +
 				'Get-PfxCertificate Get-Process Get-PSDrive Get-PSProvider Get-PSSnapin Get-Service ' +
