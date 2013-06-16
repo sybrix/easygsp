@@ -66,7 +66,7 @@ public class Router {
 
                         if (obj == null) {
                                 request.getParameterMap().put(parameter.getName(), parameter.getValue());
-                                return;
+                                continue;
                         }
 
                         if (obj instanceof String) {

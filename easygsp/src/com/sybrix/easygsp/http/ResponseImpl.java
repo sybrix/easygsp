@@ -36,6 +36,7 @@ import java.util.zip.GZIPOutputStream;
  * HttpSession <br/>
  * Description :
  */
+@SuppressWarnings("deprecation")
 public class ResponseImpl implements HttpServletResponse {
         private static final Logger logger = Logger.getLogger(ResponseImpl.class.getName());
         private Map<String, Object> headers;

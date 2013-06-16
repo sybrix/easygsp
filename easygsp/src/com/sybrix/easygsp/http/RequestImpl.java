@@ -55,6 +55,7 @@ import groovy.lang.Binding;
 /**
  * Custom implementation of HttpServletRequest <br/>
  */
+@SuppressWarnings("deprecation")
 public class RequestImpl implements HttpServletRequest {
         private static final Logger logger = Logger.getLogger(RequestImpl.class.getName());
 
@@ -111,6 +112,10 @@ public class RequestImpl implements HttpServletRequest {
                 this.application = application;
                 this.response = response;
 
+        }
+
+        public Map getHeaders(){
+                return headers;
         }
 
         public String getAuthType() {
