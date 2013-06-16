@@ -20,7 +20,8 @@ import groovy.sql.Sql
 
 class CurrentSQLInstance {
         private static final ThreadLocal<Sql> _id = new ThreadLocal<Sql>() {
-                protected Object initialValue() {
+
+                protected Sql initialValue() {
                         return null
                 }
         }

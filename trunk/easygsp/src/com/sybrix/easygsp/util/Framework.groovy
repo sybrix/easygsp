@@ -26,10 +26,18 @@ public class Framework {
         static String prefixEventMethods = 'on'
 
         static def processPage(page, List eventObjects) {
-                processPage(page, eventObjects, null)
+                processPage(page, eventObjects, null, false)
         }
 
-        static def processPage(page, List eventObjects, Object model) {
+        static def processPage(page, List eventObjects, Class model) {
+                processPage(page, eventObjects, model, false)
+        }
+
+        static def processPage(page, List eventObjects, Boolean processAfterEvents) {
+                processPage(page, eventObjects, null, processAfterEvents)
+        }
+
+        static def processPage(page, List eventObjects, Object model, boolean processAfterEvents) {
                 boolean didDoPost = false
 
                 if (model != null) {
@@ -111,7 +119,14 @@ public class Framework {
                         }
 
                 } else if (page.request.getParameter('method') != null) {
-                        def map = page.invokeMethod(page.request.getParameter('method'), null)
+                        String _method = page.request.getParameter('method');
+                        String method = _method.substring(0, 1).toUpperCase() + _method.substring(1, _method.length());
+                        def map = page.invokeMethod(prefixEventMethods + method, null)
+                        bindResults(page, map)
+                }
+
+                if (processAfterEvents){
+                        def map = page.invokeMethod("onAfterEvents", null)
                         bindResults(page, map)
                 }
         }

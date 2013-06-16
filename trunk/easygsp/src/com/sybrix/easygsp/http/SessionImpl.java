@@ -36,6 +36,7 @@ import groovy.lang.GroovyObject;
  * Session <br/>
  * Description :
  */
+@SuppressWarnings("deprecation")
 public class SessionImpl implements HttpSession, Serializable {
 
         private static final long serialVersionUID = 1L;

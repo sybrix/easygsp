@@ -34,6 +34,7 @@ import org.codehaus.groovy.runtime.GroovyCategorySupport;
 
 import javax.servlet.ServletException;
 import java.io.*;
+import java.lang.reflect.Method;
 import java.net.Socket;
 import java.util.*;
 import java.util.logging.Level;
@@ -45,7 +46,7 @@ import static java.util.logging.Level.*;
  * RequestThread <br/>
  * Description :
  */
-public class RequestThread extends Thread {
+public class RequestThread3 extends Thread {
 
         private static final Logger logger = Logger.getLogger(RequestThread.class.getName());
 
@@ -86,7 +87,7 @@ public class RequestThread extends Thread {
                 defaultExtension = EasyGServer.propertiesFile.getString("default.welcome.page.extension");
         }
 
-        public RequestThread(Socket socket, Map applications) {
+        public RequestThread3(Socket socket, Map applications) {
                 super("EasyGSP Request Thread " + ++id);
 
                 requestStartTime = System.currentTimeMillis();
@@ -128,8 +129,7 @@ public class RequestThread extends Thread {
                                 EasyGServer.sendToChannel(new ClusterMessage(application.getAppName(), application.getAppPath(), "", "appStart", new Object[]{}));
                                 // did someone modify the web.groovy file ?
 
-                        }
-                        else if (application.webGroovyUpdated()) {
+                        } else if (application.webGroovyUpdated()) {
                                 logger.log(FINE, "restarting application: " + application.getAppPath());
 
                                 application = EasyGServer.loadApplicationFromFileSystem(applications, parsedRequest.getAppName(), parsedRequest.getAppPath());
@@ -157,8 +157,7 @@ public class RequestThread extends Thread {
 
                         if (application.getAutoStartSessions() && session == null) {
                                 session = (SessionImpl) request.getSession(true);
-                        }
-                        else {
+                        } else {
                                 session = (SessionImpl) request.getSession(false);
                         }
 
@@ -182,9 +181,7 @@ public class RequestThread extends Thread {
                                 if (accepts != null) {
                                         for (String acceptEncoding : accepts.split(",")) {
                                                 acceptGZIP = acceptEncoding.equalsIgnoreCase("gzip");
-                                                if (acceptGZIP) {
-                                                        break;
-                                                }
+                                                if (acceptGZIP) break;
                                         }
                                 }
                         }
@@ -198,9 +195,20 @@ public class RequestThread extends Thread {
 
                         // build the script path
                         scriptPath = parsedRequest.getRequestFilePath();
+//                        if (application.isVirtualHost())
+//                                scriptPath = headers.get(RequestHeaders.SCRIPT_NAME).substring(1);
+//                        else
+//                                scriptPath = headers.get(RequestHeaders.SCRIPT_NAME).substring(application.getAppName().length() + 2);
+//
+//                        request.getServletBinding().setVariable("scriptPath", scriptPath);
 
+
+                        // template stuff
+                        //if (File.separator.equals("\\")) {
                         root = new File(scriptPath);
-
+//                        } else {
+//                                root = new File(application.getAppPath() + File.separator + scriptPath);
+//                        }
 
                         RequestThreadInfo.get().getTemplateInfo().setTemplateRoot(root.getParent());
                         RequestThreadInfo.get().setCurrentFile(root.getAbsolutePath());
@@ -210,12 +218,20 @@ public class RequestThread extends Thread {
                                 request.setAttribute("isMultipart", true);
                         }
 
+//                        if (application.hasOnScriptStartMethod()) {
+//                                try {
+//                                        application.invokeWebMethod("onScriptStart", request, response);
+//                                } catch (Exception e) {
+//                                        application.setHasOnScriptStart(false);
+//                                        e.printStackTrace();
+//                                }
+//                        }
+
 
                         //process the request
                         if (parsedRequest.getRequestURI().endsWith(templateExtension)) {
                                 processTemplateRequest(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
-                        }
-                        else {
+                        } else {
                                 processScriptController(parsedRequest.getRequestURI(), application.getGroovyScriptEngine(), binding);
                         }
 
@@ -230,15 +246,10 @@ public class RequestThread extends Thread {
                 } catch (Throwable e) {
                         if (e.toString().contains("ThreadDeath") && root != null) {
                                 logger.fine("Thread killed the hard way. script: " + root.getAbsolutePath());
-                        }
-                        else {
-                                logger.log(SEVERE, "Unknown throwable exception occurred. message: " + e.getMessage(), e);
-                        }
+                        } else logger.log(SEVERE, "Unknown throwable exception occurred. message: " + e.getMessage(), e);
                 } finally {
                         // send the response to the client
-                        if (response != null) {
-                                response.sendResponse();
-                        }
+                        if (response != null) response.sendResponse();
                         logger.fine("took " + (System.currentTimeMillis() - requestStartTime) + " ms");
                         closeSocket(socket);
                         requestEndTime = System.currentTimeMillis();
@@ -267,17 +278,11 @@ public class RequestThread extends Thread {
                 Iterator i = flash.keySet().iterator();
 
                 while (i.hasNext()) {
-
                         String key = (String) i.next();
                         FlashMessage msg = flash.get(key);
-                        if (msg.isExpired()) {
-                                i.remove();
-                        }
-                        else {
-                                msg.setExpired(true);
-                        }
+                        if (msg.isExpired()) flash.remove(key);
+                        else msg.setExpired(true);
                 }
-
         }
 
         private void determineBundle(Map headers) {
@@ -297,9 +302,7 @@ public class RequestThread extends Thread {
                         for (String langauge : c) {
                                 languages.add(new Language(langauge));
                                 // add language without country code, this way we can just loop thru the list
-                                if (langauge.indexOf('-') > 0) {
-                                        languages.add(new Language(langauge.split("-")[0], .005));
-                                }
+                                if (langauge.indexOf('-') > 0) languages.add(new Language(langauge.split("-")[0], .005));
                         }
                 }
                 Collections.sort(languages);
@@ -314,8 +317,7 @@ public class RequestThread extends Thread {
                                 language = selectedLanguage;
                                 binding.setVariable("m", application.getResourceBundles().get(selectedLanguage.getLanguage()));
                                 break;
-                        }
-                        else {
+                        } else {
 
                                 try {
                                         ResourceBundle bundle = ResourceBundle.getBundle("messages", selectedLanguage.getLocale(), application.getGroovyScriptEngine().getGroovyClassLoader());
@@ -356,8 +358,7 @@ public class RequestThread extends Thread {
 
                 if (headers.get(RequestHeaders.SERVER_SOFTWARE).contains("Apache")) {
                         return Parsers.ApacheParser.parseRequestFromHeader(headers);
-                }
-                else {
+                } else {
                         return Parsers.LightyParser.parseRequestFromHeader(headers);
                 }
 
@@ -396,8 +397,6 @@ public class RequestThread extends Thread {
         public static void processScriptController(final String requestURI, final GroovyScriptEngine gse, final CustomServletBinding binding) {
                 final ResponseImpl response = (ResponseImpl) binding.getVariable("response");
 
-                // ServletContextImpl application = (ServletContextImpl) binding.getVariable("application");
-
                 try {
                         Closure closure = new Closure(gse) {
 
@@ -407,6 +406,8 @@ public class RequestThread extends Thread {
                                                 //ResponseImpl response = (ResponseImpl) binding.getVariable("response");
                                                 String groovyFileName = requestURI.replace(altExtension, groovyExtension);
                                                 RequestThreadInfo.get().setCurrentFile((RequestThreadInfo.get().getApplication().getAppPath() + File.separator + groovyFileName).replace("/", File.separator));
+
+                                                invokeControllerMethods(groovyFileName, request);
 
                                                 ((GroovyScriptEngine) getDelegate()).run(groovyFileName, binding);
 
@@ -441,8 +442,7 @@ public class RequestThread extends Thread {
                                                 logger.log(Level.FINE, e.getMessage(), e);
                                                 if (e.getMessage().contains("Cannot open")) {
                                                         sendError(404, requestURI, gse, binding, e);
-                                                }
-                                                else {
+                                                } else {
                                                         sendError(500, requestURI, gse, binding, e);
                                                 }
 
@@ -450,8 +450,7 @@ public class RequestThread extends Thread {
                                                 logger.log(Level.FINE, e.getMessage(), e);
                                                 if (e.getCause() instanceof FileNotFoundException) {
                                                         sendError(404, requestURI, gse, binding, e);
-                                                }
-                                                else {
+                                                } else {
                                                         sendError(500, requestURI, gse, binding, e);
                                                 }
                                         } catch (IOException e) {
@@ -478,9 +477,7 @@ public class RequestThread extends Thread {
                         GroovyCategorySupport.use(EasyGServer.categoryList, closure);
 
 //                        gse.run(scriptPath, binding);
-                        if (response.getStatusCode() == 0) {
-                                response.setStatus(200);
-                        }
+                        if (response.getStatusCode() == 0) response.setStatus(200);
                 } catch (MultipleCompilationErrorsException e) {
                         logger.log(Level.SEVERE, e.getMessage(), e);
                         sendError(500, requestURI, gse, binding, e);
@@ -496,6 +493,12 @@ public class RequestThread extends Thread {
                 }
         }
 
+        private static void invokeControllerMethods(String groovyFileName, RequestImpl request) throws ClassNotFoundException, InstantiationException,
+                IllegalAccessException, NoSuchMethodException {
+                Class cls = Class.forName(groovyFileName);
+                Object controller = cls.newInstance();
+                Method m = controller.getClass().getMethod("load");
+        }
 
         private static void doNameCheckWarning(String requestURI) {
                 if (requestURI.endsWith("session.gspx") || requestURI.endsWith("app.gspx") || requestURI.endsWith("response.gspx") || requestURI.endsWith("request.gspx") || requestURI.endsWith("context.gspx") || requestURI.endsWith("application.gspx")) {
@@ -533,9 +536,7 @@ public class RequestThread extends Thread {
 
                                 public Object call() {
                                         try {
-                                                if (!RequestThreadInfo.get().errorOccurred()) {
-                                                        RequestThreadInfo.get().setCurrentFile(scriptPath);
-                                                }
+                                                if (!RequestThreadInfo.get().errorOccurred()) RequestThreadInfo.get().setCurrentFile(scriptPath);
 
                                                 RequestImpl request = (RequestImpl) binding.getVariable("request");
                                                 ResponseImpl response = (ResponseImpl) binding.getVariable("response");
@@ -607,9 +608,7 @@ public class RequestThread extends Thread {
                         GroovyCategorySupport.use(EasyGServer.categoryList, closure);
 
 //                        gse.run(scriptPath, binding);
-                        if (response.getStatusCode() == 0) {
-                                response.setStatus(200);
-                        }
+                        if (response.getStatusCode() == 0) response.setStatus(200);
                 } catch (MultipleCompilationErrorsException e) {
                         logger.log(Level.SEVERE, e.getMessage(), e);
                         sendError(500, scriptPath, gse, binding, e);
@@ -707,13 +706,12 @@ public class RequestThread extends Thread {
 
                         requestError.setErrorCode(errorCode);
                         requestError.setScriptPath(RequestThreadInfo.get().getCurrentFile());
+
                         if (e.getMessage() == null) {
                                 requestError.setErrorMessage("");
-                        }
-                        else {
+                        }else {
                                 requestError.setErrorMessage(e.getMessage().replace(appPath, "").replace(appPath2, ""));
                         }
-
                         requestError.setException(e, appPath, appPath2);
 
                         binding.setVariable("exceptionName", e.getClass().getName());
@@ -753,13 +751,11 @@ public class RequestThread extends Thread {
                                 String lineNumberMessage = "Error occurred in <span class=\"path\">" + path + "</span> @ lineNumber: " + (stackTraceElement.getLineNumber());
                                 requestError.setLineNumberMessage(lineNumberMessage);
                                 requestError.setLineNumber(stackTraceElement.getLineNumber());
-                        }
-                        else {
+                        } else {
                                 if (RequestThreadInfo.get().isTemplateRequest()) {
                                         String lineNumberMessage = "Error occurred in <span class=\"path\">" + path + "</span>";
                                         requestError.setLineNumberMessage(lineNumberMessage);
-                                }
-                                else {
+                                } else {
                                         requestError.setLineNumberMessage("");
                                 }
                                 requestError.setLineNumber(-1);
@@ -769,8 +765,7 @@ public class RequestThread extends Thread {
                                 String errorScriptPath = RequestThreadInfo.get().getApplication().getAppPath() + File.separator + "WEB-INF" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension;
                                 RequestThreadInfo.get().getParsedRequest().setRequestFilePath(errorScriptPath);
                                 RequestThread.processTemplateRequest(errorScriptPath, gse, binding);
-                        }
-                        else {
+                        } else {
                                 String errorScriptPath = EasyGServer.APP_DIR + File.separator + "conf" + File.separator + "errors" + File.separator + "error" + errorCode + templateExtension;
                                 RequestThreadInfo.get().getParsedRequest().setRequestFilePath(errorScriptPath);
                                 RequestThread.processTemplateRequest(errorScriptPath, gse, binding);
@@ -810,8 +805,7 @@ public class RequestThread extends Thread {
                                         }
                                 }
                         }
-                }
-                else {
+                } else {
                         String appPath = RequestThreadInfo.get().getApplication().getAppPath();
                         String currentFile = RequestThreadInfo.get().getCurrentFile().substring(appPath.length() + 1);
                         for (StackTraceElement stackTraceElement : e.getStackTrace()) {

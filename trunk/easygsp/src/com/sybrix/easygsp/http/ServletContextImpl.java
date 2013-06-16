@@ -17,7 +17,6 @@
 package com.sybrix.easygsp.http;
 
 import com.sybrix.easygsp.exception.NotImplementedException;
-import com.sybrix.easygsp.exception.RoutingException;
 import com.sybrix.easygsp.exception.RoutingFileException;
 import com.sybrix.easygsp.http.routing.Router;
 import com.sybrix.easygsp.http.routing.RoutingCategory;
@@ -48,11 +47,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static java.util.logging.Level.FINE;
+import static java.util.logging.Level.OFF;
 
 /**
  * Application (aka ServletContext) <br/>
  * Description : EasyGSP ServletContext implementation.
  */
+
+@SuppressWarnings("deprecation")
 public class ServletContextImpl implements ServletContext, Serializable {
         private static final Logger logger = Logger.getLogger(ServletContextImpl.class.getName());
 
@@ -220,10 +222,12 @@ public class ServletContextImpl implements ServletContext, Serializable {
                 throw new NotImplementedException("Application.log() is not implemented");
         }
 
+        @SuppressWarnings("deprecation")
         public void log(Exception e, String s) {
                 throw new NotImplementedException("Application.log() is not implemented");
         }
 
+        @SuppressWarnings("deprecation")
         public void log(String s, Throwable throwable) {
                 throw new NotImplementedException("Application.log() is not implemented");
         }
