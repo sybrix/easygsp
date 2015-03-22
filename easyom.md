@@ -1,0 +1,110 @@
+# About #
+EasyOM - and not EasyORM -  because it's not an ORM.  This class allows you to persist single objects to the database by adding persistence methods to entity classes.  It also adds methods that allow you to execute ["StringQueries"](stringQueries.md).
+
+EasyOM only works with Firebird and MySQL database.  However, since it's just 1 groovy script, it should be pretty easy to make it work with other databases.
+
+  * Configuration
+  * [Retrieving Data](easyom_query.md)
+  * [StringQueries](stringQueries.md)
+  * [Persisting Object](easyom_persist.md)
+  * [Transactions](easyom_trans.md)
+
+## [Download EasyOM Here](http://code.google.com/p/easygsp/downloads/list) ##
+
+# Configuration #
+To use, extract the zip, findEasyOM.groovy, add it to your project.  Either put it in a "util" package or change the package name in the groovy file.
+
+
+Use the following methods to configure EasyOM.
+
+#### public static void init(java.lang.Properties propertiesFile, ServletContext app) ####
+> This method will call the init(Properties) method and the injectMethod (java.lang.Class) method for each class in the package specified by the "model.package" key in the properties files.
+```
+         def onApplicationStart(app) {  
+                def propFile = loadPropertiesFile('db.properties')
+                EasyOM.init(propFile, app)
+        } 
+```
+
+
+#### public static void init(java.lang.Properties propFile) ####
+> Initializes the internal properties and datbase properties used for database operations
+
+#### public static void injectMethods(java.lang.Class clazz) ####
+> Adds methods to the specified class for persistence and querying.
+
+To manually initialize EasyOM and to add the persistence methods to an application's entity classes, invoke the methods like so:
+
+```
+   // or some other type of bootstrap method
+   def onApplicationStart(app){
+       EasyOM.init(loadPropertiesFile("db.properties"))
+
+       EasyOM.injectMethods(model.EntityObject1.class)
+       EasyOM.injectMethods(model.EntityObject2.class)
+       EasyOM.injectMethods(model.EntityObject3.class)
+   }
+```
+
+or
+
+
+
+
+The properties file expected by EasyOM.init() must have the follow name value pairs
+| **Property**| **Description**|
+|:------------|:---------------|
+|db.driver | The database driver name|
+|db.url | Database connection url |
+|db.username | Database username|
+|db.password | Database password |
+|model.package| The name of the package that contains all of the model classes|
+|use.table.prefix| when 'true', a specified prefix will be prefixed to the entity name.  ie, if the entity name is "User", but the table name is "tblUser" set this property to true and set table.prefix |
+|table.prefix| The table prefix. Use with "use.table.prefix" |
+|camel.case.table.name| set true when underscores in table name should be converted to camel cased entity name|
+|camel.case.column.name| set true when underscores in column names should be converted to camel cased column name |
+
+## Configuring Entity Objects ##
+To persist an entity object, the entity has to have 2 additional attributes in addition to its properties.
+| **Property** | **Description** |
+|:-------------|:----------------|
+| static List primaryKeys | List of primary key columns |
+| List dynamicProperties | This list is used to store the names of columns changed since the persistence method invocation.  It ensures that only the properties updated are included in insert and update queries. |
+
+There 2 additional optional configuration options:
+| **Property** | **Description** |
+|:-------------|:----------------|
+| static Map columns |  Map that allows you to explicitly map a propertyName to a table column name. The property name is they key, the column name is the value|
+| static String tableName | The table name that the entity maps to.  Use this property when/if the entity name is not the same as the table name.|
+
+Persistable Entity Object
+```
+   class User {
+      private def dynamicProperties = [] 
+      private static primaryKeys = ['username']
+    
+      String username
+      String lastName
+      String firstName
+   }
+
+```
+
+Persistable Entity Object, where entity name does name table name, and an explicit column to property map
+```
+   class User {
+      def dynamicProperties = [] 
+      static primaryKeys = ['username']
+      static tableName = 'tblProfile'  // the table name is tblProfile, not User
+      static columns = [address: 'address_line_1']
+
+      String username
+      String lastName
+      String firstName
+      String address   // address is not a real column name, address_line_1 is the column name 
+      
+   }
+
+```
+
+[Next: Persisting Objects](easyom_persist.md)

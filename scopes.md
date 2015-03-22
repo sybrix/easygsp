@@ -1,0 +1,107 @@
+# Scope #
+
+There are 4 primary scopes in EasyGSP:  Flash, Request, Session and Application.  If your background is java web development each of these work as you would expect. intensive.
+
+
+## Flash ##
+
+Variables set in flash scope have a life span of the request in which they are set, and one subsequent request.  This is useful for simple notifications and alerts that need to exists even after a redirect request.
+
+Flash scope can be accessed from any controller script or gsp/gspx template.  Its syntax for getting/setting values is the same as that of a java.util.Map.
+
+**Flash scope requires an active session.**
+
+Setting a flash scope variable
+```
+      flash.success = 'Your account was successfully created'
+      flash['success message'] = 'This syntax works too'
+      flash.put('anotherSuccessMessage', 'Even this works')
+
+      redirect 'index.gspx'
+```
+
+**When a flash variable does not exist, the flash object returns an empty string a the value.**
+
+Using a flash variable
+```
+  <div class="successMessage">${flash.success}</div>
+```
+
+
+The above variables will be available for the next request by the current user but will be not be available for any request after that.
+
+## Request, Session and Application Scope ##
+|application | allows you to share state across the entire web application|
+|:-----------|:-----------------------------------------------------------|
+|session | allows associating state with a given user and requires cookies|
+|request | allows the storage of objects for the current request only|
+
+
+Request, Session and Application(ServletContext) scope in EasyGSP works exactly as it does in any servlet api implementation. EasyGSP actually implements the servlet api with regard to the the HttpServletRequest, HttpSession and ServletContext.  Accessing these scopes can be done using the familiar java syntax or the groovier shorthand syntax.
+
+request, session and app implicit objects are bound to every controller script and gsp/gspx template. They be accessed and used without any explicit declaration.
+
+Usage:
+```
+   // Access application scope variables
+   // ok
+   app.setAttribute("smptHost","localhost")
+   
+   // groovy
+   app["smptHost"] = "localhost"
+   
+   // groovier
+   app.smtpHost = 'localhost'
+
+
+   // Accessing session scope variables
+   session.setAttribute("userName","me")
+   session['userName'] = 'me'
+   session.userName = 'me'
+
+   // Accessing request scope variables
+   request.setAttribute("currentPage",1)
+   request['currentPage'] = 1
+   request.currentPage = 1
+
+```
+
+
+## Bind Method ##
+
+Groovy has this thing call a Binding object.  As such every EasyGSP request has one as well. Key/Value pairs set via the bind method allows the key to be accessed as a bean from anywhere within the current request.  This makes for a very compact way of accessing key/value pairs from controller and page templates.  The life span of a values set via bind, is the same as request scope, but the difference is in how you access the values.
+
+
+
+### Request vs Bind ###
+
+Let's say there's a User object with username, firstname and lastname properties.
+
+
+```
+     
+   // via the request method
+   request.user = new User('dsmith', 'David', 'Smith')
+   request.lastLogin = new Date()
+   
+   // bind method 
+   bind 'user',new User('dsmith', 'David', 'Smith')
+   bind 'lastLogin', new Date()
+
+```
+
+**Request, session, and app attributes must all be accessed via their respective objects, binding variables can simply be accessed via their key name.**
+
+Access the values in a template
+```
+  <!-- request Attributes -->
+  <div>${request.user.lastName}, ${request.user.firstName}</div>
+  <div>${request.lastLogin.time}</div>
+
+
+  <!-- binding object variables, less code is better -->
+  <div>${user.lastName}, ${user.firstName}</div>
+  <div>${lastLogin.time}</div>
+
+
+```

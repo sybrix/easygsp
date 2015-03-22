@@ -1,0 +1,48 @@
+# EasyGSP Configuration #
+
+EasyGSP's configuration file is located @ $EASYGSP\_HOME/conf/server.properties
+
+| **Property** | **Default** | **Description** |
+|:-------------|:------------|:----------------|
+|**server.port** |  | SCGI listening port number |
+|**shutdown.port** |  | Port number for listening for shutdown command |
+|**session.timeout** |  | number of minutes before session timesout due to inactivity |
+|**thread.timeout** |  | number of seconds before an HTTP request is killed |
+|**logging.file.count** |    | |
+|**logging.max.file.size** |  | maximum size in bytes for a log file |
+|**logging.level** |  | Logging level in text, FINE, FINER, FINEST, SEVERE, WARN, INFO |
+|**groovy.extension** |  | the extension that identifies groovy scripts (.groovy) |
+|**template.extension** |  | the extension that identifies Groovy templates, (.gsp preferred) |
+|**alt.groovy.extension** |  | alternate extension that identifies Groovy templates (should match template.extension until this feature is fully implemented) |
+|**allow.threads** |  | true to allow developers to create threads, false to prevent threads |
+|**allow.swing** |  | true to allow developers to access swing classes, false to prevent |
+|**allow.awt** |  | true to allow developers to access awt classes, false to prevent |
+|**database.driver.X** |  | sequential list of database drivers |
+|**default.charset** |  | default character set |
+|**output.buffer.size** |  | response buffer size in bytes |
+|**file.upload.temp.directory**|  | Temp directory to stored uploaded contents when the threshold has been exceeded |
+|**file.upload.threshold** |  | Amount of in memory space bytes that used for uploaded before using the disk to store uploads |
+|**file.upload.max.filesize** |  | Maximum file upload size in bytes. -1 for unlimited.  Your HTTP server must have uploads enabled in order for easygsp to process uploads |
+|**logger.checkInterval.seconds** |  | Interval for checking the log queue for message to write to the file system|
+|**log.to.console** | false | should be false for production|
+|virtual.hosting | false | Set to true when virtual hosting is enabled on the HTTP server.  EasyGSP uses info in the scgi headers to determine the location of the file requested.  |
+| default.host |  | The default domain name.  Only the default domain can host multiple applications.  A default host is to be used when virtual hosting is enabled and not every EasyGSP application requires its own domain name.  If you're hosting easygsp applications, not every one will require a domain name of their own and their application would be accessible via the default domain.|
+| clustering.enabled | false | If true, Jgroups clustering will be enabled.  If no config file is specified, default UDP broadcasting will be used as the transport protocol. |
+| cluster.name | EasyGSP\_Cluster | The name of the cluster to join|
+| cluster.config.file |  | The path of the JGroups configuration file |
+| file.monitor.enabled | true | If true, classloaders are automatically reloaded as needed.  This allows almost any script change to be changed without manually restarting the application. |
+| file.monitor.interval | 5 | The interval at while the file system is checked. Only used when use.manual.file.monitor is true |
+| file.monitor.path | webapps |  |
+| file.monitor.groovy.files|  |  |
+| file.monitor.gsp.files |  |  |
+| use.manual.file.monitor | false | When false, easygsp will use JNotify library to monitor file changes(it's not supported on all platforms). When true, an internal thread process monitors the file changes.  This manual option should only be used if Jnotify does work with the platform.|
+| admin.app |  |  |
+| session.autostart |  |  |
+| smtp.host |  | SMPT server host name.  Use hostname instead of IP for gmail servers.|
+| smtp.port |  | SMTP server port number|
+| smtp.username |  | SMTP server username|
+| smtp.password |  | SMPT user password |
+| smtp.authentication.required | false | True if authentication credentials are required,  false otherwise|
+| smtp.secure| false | Not used yet|
+|restart.onchange| false |  |
+|gzip.compression.enabled| false |  |

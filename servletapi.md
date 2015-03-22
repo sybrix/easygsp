@@ -1,0 +1,17 @@
+# EasyGSP and the Servlet API #
+
+**EasyGSP** partially implements the servlet API.  The primary reason the servlet API is used is : familiarity.  Everyone already knows it, and the API is pretty good.  It's only partially implemented because not all of the servlet API interfaces are needed and EasyGSP is not(and does not intend to be) a servlet container.
+
+
+The servlet API interfaces implemented are:
+  * [Request](ref_request.md)
+  * [Response ](ref_respons.md)
+  * [Context](ref_context.md) (referred to as Application in EasyGSP)
+  * [Session](ref_session.md)
+
+
+Each of these is available in all controllers and templates as [implicit objects](implicit_objects.md).
+
+But not all of the methods in these interfaces are implemented. This is because: 1) the project is a work in progress and 2) Not all of the the methods in these interfaces make sense in EasyGSP.
+
+For the interfaces mentioned, when a method that is not implemented is invoked a `NotImplementedException` is thrown.

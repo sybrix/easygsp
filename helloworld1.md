@@ -1,0 +1,40 @@
+# Hello World #
+
+This hello world example demonstrates a template with the code and HTML in a single file.
+
+```
+  $ cd /$EASYGSP_HOME/webapps
+  $ mkdir hello
+```
+
+Create and save the file below in the hello directory.
+
+**helloworld.gsp**
+
+```
+<% 
+	import java.text.SimpleDateFormat
+
+	def message = 'Hello World'
+	def sdf = new SimpleDateFormat('MMMM dd, yyyy')
+	
+	def today = sdf.format(new Date())
+%>
+
+<html>
+	<head>
+		<title>Hello World Example</title>
+	</head>
+	<body>
+		$message, today is $today
+	</body>
+</html>
+```
+
+
+
+Open your browser to :
+> http://localhost:8080/hello/helloworld.gsp
+(Change the port number as needed to match your configuration)
+
+[Now Let's see this using an MVC approach](helloworld2.md)

@@ -1,0 +1,85 @@
+## LightTPD ##
+For an existing LightTPD install, you enable mod\_scgi and prevent the groovy, gsp and gpsx pages from being served by Lighttpd and add the EasyGSP pages to the welcome/index pages list
+
+LightTPD htdoc should point to $EASYGSP\_HOME/webapps or modify $EASYGSP/conf/server.properties to point to LightTPD web root.
+
+
+```
+     
+    server.modules              = (
+                                "mod_scgi",
+                                "... all of the other mods"
+                                ) 
+ 
+      url.access-deny             	= ( "~", ".inc", "WEB-INF")
+      static-file.exclude-extensions 	= (  ".gsp", ".gspx", ".groovy")
+      index-file.names            	= (  "index.gspx", "index.gsp", "index.html", "index.htm", "default.htm", "index`")
+      scgi.server  = (
+                ".gspx" =>
+			( "localhost" =>
+				(
+					"host" => "127.0.0.1",
+					"port" =>  4444,
+                                        "check-local" => "disable"  
+				)
+			),
+		".gsp" =>
+			( "localhost" =>
+				(
+					"host" => "127.0.0.1",
+					"port" =>  4444,
+                                        "check-local" => "disable"
+				)
+			)			
+			
+		)											
+
+```
+
+
+
+
+
+
+---
+
+
+## Configuring Apache ##
+
+Modify httpd.conf to include the following:
+
+```
+         LoadModule scgi_module modules/mod_scgi.so
+         SCGIMount / 127.0.0.1:4444
+ 
+         <locationmatch (\.js|\.gif|\.jpg|\.ico|\.css|\.swf|\.png|\.tiff|\.jpeg|\.json|\.zip|\.tar\.gz|\.mp3|\.doc)+$>
+	     SCGIHandler Off
+         </locationmatch>
+         <locationmatch "/images|css|js|docs/">
+	     SCGIHandler Off
+         </locationmatch>
+
+         <IfModule dir_module>
+             DirectoryIndex index.gspx index.gsp index.html
+         </IfModule>
+
+         # point to $EASYGSP_HOME/webapps
+         DocumentRoot "C:/easygsp/webapps"
+
+         # point to $EASYGSP_HOME/webapps         
+         <Directory "C:/easygsp/webapps">
+           Options FollowSymLinks
+
+           AllowOverride None
+
+           Order allow,deny
+           Allow from all
+         </Directory>
+
+```
+
+mod\_scgi can be downloaded [here](http://bigonez.googlepages.com/) for windows users
+
+Create EASYGSP\_HOME and JAVA\_HOME environment variables that point to the installation directories.
+
+restart Apache

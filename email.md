@@ -1,0 +1,90 @@
+# Sending Emails #
+
+
+The implicit method "sendEmail()" can be used to send multipart emails.  Multipart emails can contain plain text, html and attactments.  This method simply uses the Java Mail API to send emails.
+
+```
+      public void sendEmail(Map emailParameters)
+```
+
+The allowed parameters are listed:
+| Property | Required | Description |
+|:---------|:---------|:------------|
+| to |  | Acceptable values: List of emails, a comma separated list of email addresses or a single email address |
+| from | yes |  single email address |
+| cc |  | see "to" description |
+| bcc |  | see "to"  description |
+| subject |  | Email subject|
+| body |  | Plain text version of the email body |
+| htmlBody |  | HTML version of the email body.  Not required, but can be used alone or with the "body" property |
+| attachments |   | Map<String, Object> of file attachments.  Allowable map values are: File, String (to a file path) and/or ByteArrayDataSource.  The key is a string where the string is the name of the file as should be represented in the email. An email can contain zero or more attachments |
+
+## How it works ##
+The sendEmail() method is asynchronous.  Emails are not sent as soon as this method returns.   Emails are queued and sent as soon as something is in the queue.  The queue processes all emails until the queue is empty.   Basically all emails are sent as early as possible on a first in, first out basis.  Because it's asynchronous, errors may not appear in the browser.  Check the console or logs for errors.
+
+
+## Specifying SMTP Settings ##
+The smtp properties(host name, port, login info, etc) are first read as application attributes, if the required attribute does not exist then the default value, which comes from the server.properties file is used.  So if you use Gmail for your smtp host, you can specify your smtp properties as app attributes and they will be used instead of the server default values.
+
+| Property |
+|:---------|
+| smtp.host |
+| smtp.port |
+| smtp.username |
+| smtp.password |
+| smtp.authentication.required |
+
+The best place to set these properties for a particular application is in the web.groovy onApplicationStart method.  If an application attempts to send an email and an SMTP property is missing as an app attribute,  the server values will be used.
+
+web.groovy
+```
+     def onApplicationStart(app){
+          app['smtp.host'] = 'server1.gmail.com'
+          app['smtp.port'] =  465
+          app['smtp.username'] = 'easygsp'
+          app['smtp.password'] =  'password'
+          app['smtp.authentication.required'] = true
+     }
+
+```
+
+
+## Examples ##
+
+Plain text email
+```
+   def prop = [:]
+   prop.to = 'dsmith03@gmail.com'
+   prop.from = 'easygsp@gmail.com'
+   prop.subject = 'Email Example'
+   prop.body = 'This email is just a test'
+
+   sendEmail(prop)
+```
+
+Plain Text & HTML Email to multiple recipients
+```
+   def prop = [:]
+   prop.to = ['dsmith03@gmail.com', 'joe.blow@gmail.com', 'easygsp@yahoo.com']  // List of email recipients
+   prop.from = 'easygsp@gmail.com'
+   prop.subject = 'Email Example'
+   prop.body = 'This email is just a test.'
+   prop.htmlBody = """This email <strong>is</strong> just a <font color="red">test</font>."""
+
+   sendEmail(prop)
+```
+
+Plain Text & HTML Email w/attachments
+```
+   def prop = [:]
+   prop.to = ['dsmith03@gmail.com', 'joe.blow@gmail.com', 'easygsp@yahoo.com']  // List of email recipients
+   prop.from = 'easygsp@gmail.com'
+   prop.subject = 'Email Example'
+   prop.body = 'This email is just a test and it has attachments.'
+   prop.htmlBody = """This email <strong>is</strong> just a <font color="red">test</font> and it has attachments."""
+
+   def myAttachments = ['release.txt':new File('/temp/release.txt')]
+   prop.attachments = myAttachments
+
+   sendEmail(prop)
+```

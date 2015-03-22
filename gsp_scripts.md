@@ -1,0 +1,141 @@
+# Templates, Controllers and Classes #
+Ultimately every groovy controller and template is converted to a class, but it's worth pointing out their differences for EasyGSP development.
+
+**Controllers**
+> A controller is any valid groovy script. What EasyGSP calls a controller is called a "script" in Groovy. Controllers don't have to be created with the "class" keyword, they don't have to inherit anything nor do they have to have any methods.  These are not EasyGSP features, but rather groovy features. Once a controller is processed it will be forwarded to a template. A controller cannot be a blank file, the controller has to have some code.
+
+**Templates**
+> Templates render HTML.  They are the V in MVC or they could be used in the same way as you would a php script.  Templates in EasyGSP work almost exactly the same as normal Groovy templates. The key difference is the directives that are  supported in EasyGSPs templating engine.
+
+**Classes**
+> In addition to controllers and templates, you can define classes to encapsulate functionality.  The ideal place to create classes are in the WEB-INF directory.  It's also a good idea to use package names for all user defined classes.
+
+
+
+
+
+# Templates and Controllers #
+
+When developing a web page in EasyGSP you must decide if you're to develop the page using a separate view and controller, or if you want to put all of your code in a single file.
+
+EasyGSP groovy scripts come in 2 flavors: GSP and GSPX. GSP and GSPX refer the file extension given to EasyGSP scripts.
+The GSP extensions indicates a template where the logic and html are in the same script.  The GSPX extension refers to a page developed in the MVC method.
+
+## Templates ##
+GSP templates will usually contain application logic and the HTML to be rendered to the client.  They are the equivalent of a PHP or ASP script. Groovy's documentation for [Groovlets](http://groovy.codehaus.org/Groovlets) and [TemplateServlet](http://groovy.codehaus.org/Groovy+Templates)  is valid documentation for how EasyGSP's script's and templates work.  Behind the scenes EasyGSP is based very much on these 2 servlets.
+
+This is a valid EasyGSP template.
+
+```
+<%
+
+        import org.apache.commons.fileupload.FileItem
+
+        def uploadLocation=''
+
+                request.uploads.each {
+                        FileItem item = it.value
+
+                        File uploadedFile = new File(application.appPath + File.separator + item.name);
+                                //uploadedFile.mkdirs();
+                        item.write(uploadedFile);
+                        uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath + ' ' + params.var
+
+                        println ("file upload" + item);
+                }
+
+
+%>
+
+
+<html>
+        <head>
+                <title>File Upload Example</title>
+        </head>
+        <body>
+                ${uploadLocation}
+                <form action="fileupload.gsp" method="POST" enctype="multipart/form-data">
+                        File: <input type="file" name="file"/><br/>
+                         <input type="hidden" name="var" value="xxx"/>
+                        <input type="submit"/>
+                </form>
+
+        </body>
+</html>
+
+
+```
+
+
+But if you want to seperate your logic and view code EasyGSP supports this too.
+
+
+
+
+## Controllers ##
+When developing MVC style pages in EasyGSP, the model, view and controller should be in separate files.
+
+There are also a few rules to follow when doing MVC development:
+  * The controller is a normal Groovy script that must end with the .groovy extension
+  * The view is a SimpleTemplateEngine style template that must end with the .gspx extension
+  * The controller and view must have the same file name(minus the extension), in order for the controller to automatically forward to the view.  If the controller and view don't share the same file name, you must explicitly forward to the view using the forward() method.
+  * View classes should be in a folder in the WEB-INF directory where the folder name matches the package name
+
+Here's the structure for each piece of the MVC model, where the name of the application is "example".
+```
+   /example
+       helloworld.gspx
+       helloworld.groovy
+       /WEB-INF
+           /model
+              User.groovy
+```
+
+
+**User.groovy** (Model)
+
+```
+	package model
+
+	class User {
+		String lastName
+		String firstName           
+	}
+```
+
+
+**helloworld.gspx**  (View)
+
+```
+<html>
+	<head>
+		<title>Hello World Example</title>
+	</head>
+	<body>
+		$message $user.firstname $user.lastName, today is $today
+	</body>
+</html>
+```
+
+
+
+**helloworld.groovy**  (Controller)
+
+```
+
+	import java.text.SimpleDateFormat
+
+	def message = 'Hello'
+	def sdf = new SimpleDateFormat('MMMM dd, yyyy')
+	
+	def today = sdf.format(new Date())
+        def user = new User(lastName: 'Lee', firstName: 'David')
+        
+        bind 'message', message
+        bind 'today', today
+        bind 'user', user
+```
+
+Avoid naming classes or pages the same as implicit objects. Naming a class request, response, session, application or context has the potential produce runtime errors with every little useful stacktrace information.
+
+[bind() method explanation ](implicit_methods.md)

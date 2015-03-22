@@ -1,0 +1,21 @@
+# Logging #
+
+Every class, controller and template can call the follow methods to log application activity:
+| **Object** | **Description** |
+|:-----------|:----------------|
+| void println (Object object) | Writes object.toString() to the console/terminal window. Useful when developing |
+| void log(String s)| Writes message to application's log file.  Log file located @ WEB-INF/logs. Messages are written to the log file at a specified interval, not immediately. |
+| void log(Throwable t)| Writes exception to application's log file.  Log file located @ WEB-INF/logs |
+| void log(String logMessage, Throwable t) | Writes message and exception to log file. Log file located @ WEB-INF/logs |
+
+#### void println(Object message) ####
+If you start EasyGSP in a terminal window, and you want to write something out to the console, use the println() method.
+
+
+#### void log() ####
+The log methods write to a log file on the file system.  When an application starts, if a WEB-INF folder does not exist, one is created. When a log statement is invoked, if a logs directory does not exist under the WEB-INF folder, one is created. The log files are rolled daily.
+
+Log messages are not immediately written to file. They are written at an interval specified in the conf/server.properties file. [See the Configuration Properties(logger.checkInterval.seconds) page](configure.md)
+
+If you want your the log messages to also be written to the console window.
+Set the ["log.to.console"](configure.md) property to true.  This maybe useful for development, but not unnecessary for a hosted server.

@@ -1,0 +1,92 @@
+# Processing Form Requests #
+
+Form parameters are accessed using the implicit "params" object.  This object is available in all scripts and controllers.
+
+The syntax is : `params.nameOfFormObject`
+
+The "params" object is the same as calling request.getParameter(). The following are equivalent:
+```
+<% 
+  params.lastName == request.getParameter("lastName")
+%>
+```
+
+QueryString parameters are also accessed using the "params" object
+Not that you would use the servlet API equivalent, but it's there just in case.
+
+
+Below is a simple example of a form that captures user info, and processes it when submitted.
+
+**forms.gsp** - The example is in the %EASYGSP\_HOME%/webapps/examples directory
+
+
+```
+<% 
+	import forms.*
+	
+	def errorLastNameError = ''
+	Profile profile
+	def hideForm = false
+	
+	if (request.method =='POST'){
+		if (params.lastName == ''){
+			errorLastNameError = "Last Name Required"
+		} else {
+			hideForm = true
+			profile = new Profile(lastName: params.lastName, firstName:params.firstName, address1: params.address1, city: params.city, state: params.state, zip:params.zip)
+		}
+	}
+%>
+
+<html>
+	<head>
+		<title>Forms Processing -  Example</title>
+	</head>
+	<body>
+		<h1>Forms Processing</h1>
+		<form action="forms.gsp" method="POST">
+				<% if (!hideForm) { %>
+				<table>
+						<tr>
+							<td>Last Name</td><td><input type="text" name="lastName" value="${params.lastName?:''}">* <span style="color:red">$errorLastNameError</span></td>
+						</tr>
+						<tr>
+							<td>First Name</td><td><input type="text" name="firstName" value="${params.firstName?:''}"></td>
+						</tr>						
+						<tr>
+							<td>Address</td><td><input type="text" name="address1" value="${params.address1?:''}"></td>
+						</tr>						
+						<tr>
+							<td>City</td><td><input type="text" name="city" value="${params.city?:''}" size="10">&nbsp;
+								State <input type="text" name="state" value="${params.state?:''}" size="2">&nbsp;
+								Zip <input type="text" name="zip" value="${params.zip?:''}" size="5">
+							</td>
+						</tr>						
+						<tr>
+							<td colspan="2" align="center"><input type="submit" name="Save" value="Save"/></td>
+						</tr>
+			    <table/>
+			    <% } else { %>
+			    	<table>
+						<tr>
+							<td><b>Last Name</b>:</td><td>$profile.lastName</td>
+						</tr>
+						<tr>
+							<td><b>First Name</b>:</td><td>$profile.firstName</td>
+						</tr>						
+						<tr>
+							<td><b>Address</b>:</td><td>$profile.address1</td>
+						</tr>						
+						<tr>
+							<td><b>City</b>:</td><td>$profile.city&nbsp;
+								<b>State</b>: $profile.state&nbsp;
+								<b>Zip</b>: $profile.zip
+							</td>
+						</tr>						
+
+			    <table/>
+				<% } %>			
+	   </form>
+	</body>
+</html>
+```

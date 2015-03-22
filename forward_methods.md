@@ -1,0 +1,60 @@
+# Forward #
+
+The syntax for the forward() method is:
+
+```
+     forward('forwardToPath')
+```
+
+Processing can be forwarded to a template(.gsp/.gspx files) or a controller(.groovy file).
+
+When forwarding to a controller, the path must end with the .groovy extension.
+```
+   // do some stuff, and when done forward to another controller
+   forward 'index.groovy'
+```
+
+
+You can forward to any view, enter the path as the parameter.
+```
+   // do some processing and now forward to view
+   forward 'index.gspx'
+```
+
+## Auto Forward ##
+Auto forward saves you a line of code. When there is a controller and view, with the same name (minus the extension), like index.groovy, index.gspx and in the same directory, control will automatically be forwarded to the view when the controller is done processing, if the forward method is not explicitly invoked.
+
+index.groovy, this controller will auto-forward to index.gspx
+```
+
+   if (request.getMethod().equals('POST')){
+      saveData()
+     
+   } 
+   
+   bind 'today', new Date().toString()
+```
+
+If there is no index.gspx and forward is not explicitly called, an exception will be thrown.
+
+
+# Redirect #
+
+The syntax for the redirect() method is:
+
+```
+     redirect('url')
+```
+
+
+
+# Include #
+The include directive can be used in templates(.gspx/.gsp files).  The include directive simply replaces the directive itself with the code from the included template. The included template can contain any valid groovy and template code.
+
+```
+<%@ include 'WEB-INF/includes/header.gsp' %>
+ 
+<div>My main content here.</div>
+ 
+<%@ include 'WEB-INF/includes/footer.gsp' %>
+```

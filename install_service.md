@@ -1,0 +1,63 @@
+# Linux #
+
+There is a start up script @ $EASYGSP\_HOME/bin/easygsp. Open and modify paths as needed.
+
+Copy to service directory
+```
+$  cp $EASYGSP_HOME/bin/easygsp /etc/init.d/easygsp
+```
+
+**Fedora** users can install service using chkconfig
+```
+$  chkconfig --add easygsp
+$  chkconfig --level 23 easygsp on
+```
+
+Start service
+```
+$  service easygsp start
+```
+
+
+If you don't require EasyGSP as a service, it can be started using the start script
+```
+$ cd $EASYGSP_HOME/bin
+$ ./start.sh
+```
+
+
+To Stop
+```
+$ cd $EASYGSP_HOME/bin
+$ ./stop.sh
+```
+
+
+
+
+
+# Windows #
+
+To Install as Service
+```
+   c:\ cd %EASYGSP_HOME%\bin
+   c:\%EASYGSP_HOME%\bin> InstallEasyGSP-NT.bat
+```
+
+To Remove Service
+```
+   c:\ cd %EASYGSP_HOME%\bin    
+   c:\%EASYGSP_HOME%\bin> UninstallEasyGSP-NT.bat
+```
+
+To start from the command line
+```
+  c:\ cd %EASYGSP_HOME%\bin
+  >EasyGSP.bat
+```
+
+To Stop
+```
+   c:\cd %EASYGSP_HOME%\bin
+   >stop.bat
+```

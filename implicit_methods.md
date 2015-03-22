@@ -1,0 +1,81 @@
+# EasyGSP Implicit Methods #
+
+
+The following are accessible to every class, template and controller.
+| **Object** | **Description** |
+|:-----------|:----------------|
+
+| Integer toInt(String val, [defaulValue](Integer.md)) | Returns an Integer object for a string. |
+|:-----------------------------------------------------|:----------------------------------------|
+| Long toLong(String val,[defaulValue](Long.md)) | Returns a Long object for a string. |
+| Double toDbl(String val,[defaulValue](Double.md)) | Return a Double object for a string. |
+
+## Date Functions ##
+| parseDate(String date, String format) |  |
+|:--------------------------------------|:-|
+| formatDate(Date date, [pattern](String.md)) |  |
+|Timestamp now| Now is a property that returns the current time. use getNow() or now  |
+
+
+## Number Functions ##
+| format(Number,String pattern) |  |
+|:------------------------------|:-|
+| formatMoney(Number number, [locale](Locale.md)) |  |
+
+## Logging ##
+| println(Object object) | Writes object.toString() to the console window.  |
+|:-----------------------|:-------------------------------------------------|
+| log(String s)| Writes message to application's log file.  Log file located @ WEB-INF/logs. Messages are written to the log file at a specified interval, not immediately. |
+| log(Throwable t)| Writes exception to application's log file.  Log file located @ WEB-INF/logs |
+| log(String logMessage, Throwable t) | Writes message and exception to log file. Log file located @ WEB-INF/logs |
+| String encode(String s)| Encodes string as  URL encoded string.  Returns a string. |
+
+
+## Database ##
+| [Sql newSqlInstance(String dataSourceName)](howto_newSqlInstance.md) | Returns groovy.sql.Sql object.  Database parameters must be supplied as application attributes |
+|:---------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------|
+
+
+## Validation ##
+| Object ifNull(Object obj, Object defaultValue)| Returns defaultValue when obj is null|
+|:----------------------------------------------|:-------------------------------------|
+| boolean isAlphaNumeric(String s) | Returns true, when s contains only numbers and/or letters, false otherwise. regex:  `[a-zA-Z0-9]`|
+| boolean isZipCode(String zipCode) | Returns true when zipCode is valid US zip code, false otherwise. regex: `\\d{5}(-\\d{4}`) |
+| boolean isEmpty(Object obj) | Returns true when obj is null or obj.toString() is an empty string, false otherwise.|
+| boolean isEmailValid(String emailAddress)| Returns return when emailAddress is a valid email address, false otherwise. regex: |
+| boolean isNumeric(String val)|Returns true when val contains only numeric values, false otherwise. regex: `(\d+?)` |
+| boolean isPhone(String val) |Return true when val is a valid us phone number, false otherwise. regex: `(\d-)?(\d{3}-)?\d{3}-\d{4}`|
+
+## Data Encoding ##
+|String MD5(String val) | |
+|:----------------------|:|
+|String SHA1(String val) |  |
+|byte[.md](.md) decodeBase64(String)|  |
+|byte[.md](.md) decodeBase64(byte[.md](.md))|  |
+|String decode(String s)| Decodes a URL encoded string.  Returns a string. |
+|String htmlEncode(String s) | HTML encodes a string. Return a string. |
+
+## Email ##
+|String sendEmail(Map properties) | |
+|:--------------------------------|:|
+
+## File ##
+|void copy(String source, String destination) | Copies a directory or file to the specified destination|
+|:--------------------------------------------|:-------------------------------------------------------|
+|void delete(String source) | deletes a directory or file |
+
+## Misc ##
+| [Properties loadPropertiesFile(String fileName)](howto_prop_file.md) | Returns a properties file |
+|:---------------------------------------------------------------------|:--------------------------|
+
+
+The following are only access to the templates and controllers
+| **Object** | **Description** |
+|:-----------|:----------------|
+| redirect(String url) | Sends redirect command to browser.|
+| forward(String uri) | Forwards processing to the specified uri |
+| bind(String key, Object value) | Bind is used in controllers to store name/value pairs  that will be used be in a view template.|
+| bind(String key, Map values) |  |
+| [Cookie setCookie(...)](howto_cookie.md) | create a cookie, and adds it to the response |
+| [Cookie getCookie(cookieName)](howto_cookie.md) | Returns the first cookie found that matches the name specified  |
+| render(Object obj) | Writes obj to the response output stream|

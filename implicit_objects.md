@@ -1,0 +1,15 @@
+# EasyGSP Implicit Objects #
+
+Every gsp template and controller can access the following implicit objects
+
+
+
+| **Object** | **Description** |
+|:-----------|:----------------|
+| request | HttpServletRequest object|
+| response | the HttpServletResponse object |
+| application | the ServletContext object |
+| context | same as application|
+| session | convenience object for `request.getSession(*false*)` - can be null! |
+| headers | Map that contains all request headers |
+| params | Map that contains all querystring and form parameters|

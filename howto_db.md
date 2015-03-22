@@ -1,0 +1,99 @@
+# Groovy and SQL #
+
+[Groovy has excellent database support.](http://groovy.codehaus.org/Database+features) Any valid Groovy database code should work in EasyGSP.
+
+[EasyGSP also adds a method named "newSqlInstance()" to all controllers, classes and templates](howto_newSqlInstance.md) for easily retrieving a groovy.sql.Sql object.
+
+Below is an example of a template that connects to a database, executes a query and prints the data out to a table.
+**db.gsp**
+```
+<%
+        import groovy.sql.Sql
+
+        def sql = Sql.newInstance("jdbc:mysql://localhost:3306/myDB","root", "root", "com.mysql.jdbc.Driver")
+%>
+
+<html>
+        <head>
+                <title>Database Example</title>
+        </head>
+        <body>
+                <table align="center" border="1">
+                        <tr>
+                                <td>Id</td>
+                                <td>LastName</td>
+                                <td>FirstName</td>
+                        </tr>
+                        <% sql.eachRow("select profile_id profileId, last_name lastName, first_name firstName from profile") {profile->  %>
+                                <tr>
+                                        <td>${profile.profileId}</td>
+                                        <td>${profile.lastName}</td>
+                                        <td>${profile.firstName}</td>
+                                </tr>
+                        <% } %>
+                </table>
+        </body>
+</html>
+```
+
+
+For the MVC purist....
+Same as above except the data access is in the controller and only the rendering of data and html is in the view/template.
+
+The controller : **dbMVC.groovy**
+```
+        import groovy.sql.Sql
+
+        def sql = Sql.newInstance("jdbc:mysql://localhost:3306/myDB","root", "root", "com.mysql.jdbc.Driver")
+        def limit = 10
+
+        def data = sql.rows("select profile_id profileId, last_name lastName, first_name firstName from profile where profile_id < ${limit}")
+
+        bind 'profiles', data
+```
+
+
+The View:  **dbMVC.gspx**
+```
+
+<html>
+        <head>
+                <title>Database Example</title>
+        </head>
+        <body>
+                <table align="center" border="1">
+                        <tr>
+                                <td>Id</td>
+                                <td>LastName</td>
+                                <td>FirstName</td>
+                        </tr>
+                        <% profiles.each{profile->  %>
+                                <tr>
+                                        <td>${profile.profileId}</td>
+                                        <td>${profile.lastName}</td>
+                                        <td>${profile.firstName}</td>
+                                </tr>
+                        <% } %>
+                </table>
+        </body>
+</html>
+```
+
+
+
+
+DDL and data for table referenced above
+```
+CREATE TABLE `profile` (
+  `profile_id` int(11) NOT NULL AUTO_INCREMENT,
+  `last_name` varchar(20) DEFAULT NULL,
+  `first_name` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`profile_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+INSERT INTO `profile` (`profile_id`, `last_name`, `first_name`) VALUES 
+  (1,'Smith','David'),
+  (2,'Woods','Tiger'),
+  (3,'Blizter','Wolf');
+COMMIT;
+```

@@ -1,0 +1,90 @@
+# Reading/Writing Cookies #
+
+In addition to the servlet API methods for reading and writing cookies, there are 2 additional implicit methods for manipulating cookies.  The Cookie object created and return is the Cookie object from the Servlet API jar. Minus the implicit methods,cookie support in EasyGSP is the same as in a traditional servlet based web application.
+
+The implicit methods are available in all controllers and templates.
+
+#### public Cookie **getCookie**(String cookieName) ####
+
+Returns the first cookie that matches the specified name for the current path. If you have multiple cookies with the same name use to servlet api method `request.getCookies()` to locate the cookie. 
+
+
+#### public Cookie **setCookie**(String cookieName, `[`String value, `[`Integer maxAge, `[`String path, `[`String domain, `[` Boolean secure`]]]]]`) ####
+Creates/Sets a cookie with the values for the specified attributes.
+
+#### public Cookie **setCookie**(Map parameters) ####
+Creates/Sets a cookie with the keys and values for the specified attributes.
+
+
+#### Parameters ####
+| cookieName | Required. The name of the cookie|
+|:-----------|:--------------------------------|
+| value | Value to be stored with the cookie name. |
+| maxAge | Maximum age of the cookie in  ~~seconds~~ days. (servlet API, accepts seconds,  days is more common)  |
+| domain |  |
+| path |  Specifies a path for the cookie to which the client should return the cookie. Note: if your app does not have it's own domain name, your root path will be your folder name.  That's to say, you should not set your path to '/' if your app does not have its own domain name.  When no path is specified, the path will start with your folder name (ie path = '/myAppFolderName/'). |
+| secure |  Indicates to the browser whether the cookie should only be sent using a secure protocol, such as HTTPS or SSL.|
+
+
+In use:
+```
+   def cookie = getCookie('myUsernameCookie')
+   
+  if (cookie == null){
+    cookie = setCookie('myUsernameCookie', username, 30) // expires in 30 days
+  }
+```
+
+or you could use named parameters via a map.
+
+```
+   def cookie = getCookie('myUsernameCookie')
+   
+  if (cookie == null){
+    cookie = setCookie([cookieName:'myUsernameCookie', value: username, maxAge:30]) // expires in 30 days
+  }
+
+```
+
+
+
+Optional arguments(sort of):
+
+The parameters list is really an array (Object...args). You can only skip an argument if you don't need any that come after it.  If you don't want to specify an argument, you can enter null.
+
+In this example a path is required, but the maxAge is not.  A null must be sent for maxAge, and anything after path can be excluded.
+```
+   def cookie = getCookie('myUsernameCookie')
+   
+  if (cookie == null){
+   def path = '/'
+   def maxAge = null
+    cookie = setCookie('myUsernameCookie', username, maxAge, path) // expires this session
+  }
+```
+
+
+The cookie will be created for whatever path this code is called from.  If you want the cookie to be available for the entire site, either create the cookie in the root path/directory of your web application or specify a path of "/".
+
+Cookie support via Servlet API works:
+```
+     import javax.servlet.http.Cookie
+ 
+     def cookies = request.getCookies()
+     def cookie 
+     for(i in 0..cookies.size() -1){
+        if (cookies[i].name == 'myCookieName'){
+            cookie = cookies[i]
+            break
+        }
+     }
+
+    if (cookie == null){
+        cookie = new Cookie('myCookieName','cookieValue')
+        cookie.path = '/'
+    }
+    response.addCookie(cookie)
+    
+```
+
+[Click here for a more in depth tutorial on Java cookie support ](http://www.javamex.com/tutorials/servlets/cookies_api.shtml)

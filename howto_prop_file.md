@@ -1,0 +1,49 @@
+# Reading from a Properties #
+
+The easiest way to load a properties file is to use the loadPropertiesFile() method:
+
+#### public static PropertiesFile loadPropertiesFile(String fileName) ####
+
+> This method is available in all classes, controllers and templates.
+
+> PropertiesFile extends java.util.Properties and adds some methods for converting property values into commonly used types.
+
+
+When your properties files are in the root of your app's WEB-INF folder.  You only need to specify the name of the file to load the file.
+```
+   def propFile = loadPropertiesFile('db.properties')
+   Integer port = propFile.getInt('server.port')
+   String url = propFile.get('server.url')
+```
+
+If the properties file is not in the root of WEB-INF, then a full path is must be specified.
+
+```
+   def propFile = loadPropertiesFile(application.appPath + File.separator + "specialFolder" + File.separator + 'db.properties)
+   Integer port = propFile.getInt('server.port')
+   String url = propFile.get('server.url')
+```
+
+You can still use the traditional way
+```
+  Properties prop = new Properties()
+  prop.load(new FileInputStream(application.appPath + File.separator + "WEB-INF" +   File.separator + "db.properties"))
+```
+
+class.getResourceAsStream() and class.getResource() are not recommended for locating sources on file system.
+
+Every controller and template has access the application (or ServletContext) object.  This object has a method named appPath() that will return the root directory for the application.  Use application.appPath to build paths to application resources.
+
+PropertiesFile extended methods
+| **Method** | **Description** |
+|:-----------|:----------------|
+| Integer getInt(String key) |  Returns Integer for key, throws NumberFormatException, NullPointerException |
+| Integer getInt(String key, Integer defaultValue) | Returns Integer for key, returns defaultValue when key returns null or exception occurs|
+| String getString(String key) | Returns value for key, null if key does not exists |
+| String getString(String key, String defaultValue) |  Returns value for key, returns defaultValue if key does not exists|
+| Long getLong(String key) | Returns Long for key, throws NumberFormatException, NullPointerException |
+| Long getLong(String key, Long defaultValue) | Returns Long for key, returns defaultValue when key returns null or exception occurs |
+| Double getDouble(String key) | Return Double for key, throws NumberFormatException, NullPointerException |
+| Double getDouble(String key, Double defaultValue) | Returns Double for key, returns defaultValue when key returns null or exception occurs |
+| Boolean getBoolean(String key) | Returns Boolean for key, throws NullPointerException |
+| Boolean getBoolean(String key, Boolean defaultValue) | Returns Boolean for key, returns defaultValue when key is null or exception occurs |

@@ -1,0 +1,22 @@
+# Security #
+
+The EasyGSP server process has been designed with hosting in mind.  Sharing a JVM among many users requires that each shared application is isolated within its own sandbox.  It would be a problem if application1 could access the files of application2.  It would also be a problem if application1 could run System.exit() to bring down the entire server or if application1 could load application2's classes.  EasyGSP uses a custom security manager and custom classloaders to deal with these and other security concerns.
+
+
+## File Access ##
+EasyGSP determines where an application lives on the file system via headers send from the HTTP server.  The first phase in processing a request is to determine with application the request is from.  Once this is determined, all activity via "this" request is isolated to the application's folder on the file system.  An application cannot access any content outside of its own directory.  The security manager prevents this.  While each application can read and write as much as it likes within it's own directory and subdirectories, no request associated with an application can access a folder or file outside of its own directory.  Best practices suggest that EasyGSP should be run under its own operating system account and that account will need access to the all of the directories and files for which is will be processing requests.  While the EasyGSP user and OS process will have access to everything granted at the OS level, the JVM will control what each application can access.  Most of this is controlled via the easygsp.policy file, but some of the rules are coded in the custom security manager..
+
+## ClassLoaders ##
+Each application has its own GroovyClassloader which inherits from a custom classloader.  As such, application1 can not load or instantiate classes loaded by application2.  Since all of the applications inherit from the same parent, they do share those classes but otherwise each app is isolated by way of its classloader.
+
+
+## Threads and OS commands ##
+EasyGSP can be configured to prevent applications from starting threads.  This is fairly important in a shared environment.  The default behavior of the EasyGSP server process is to kill any request that takes longer than 30 seconds and to not allow any application to create its own thread.  This behavior can be changed via the server.properties file.
+
+Another default behavior is to prevent applications from executing any OS commands.  This means that an application can not execute OS scripts or start any native executables. This too can be changed via the easygsp.policy file but the EasyGSP OS process account will also need the appropriate level of access to execute a native command and the policy file will need the appropriate level of execute and file permissions to allow the JVM to execute the command.
+
+Lastly EasyGSP can be configured to prevent access to awt and swing classes.  This is controlled via the server.properties file and implemented at the classloader level.
+
+
+## Admin App ##
+Each EasyGSP can have one admin application.  This application essentially runs without the rules of the security manager.  It can do anything the EasyGSP OS account is allowed to do. The admin app can be designated in server.properties file.

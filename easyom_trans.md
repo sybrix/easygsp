@@ -1,0 +1,29 @@
+Back: [Persisting Data](easyom_persist.md)
+
+# Transactions #
+
+EasyOM allows for transactions via it's withTransaction method.  This method accepts a closure and any EasyOM queries run within the closure are included in the transaction.  If any exception occurs, all DML statements are rolled back, otherwise they are all commited to the database.
+
+The EasyOM withTransaction method :
+```
+     public static void withTransaction(Closure closure)
+```
+
+Example:
+```
+     import static util.EasyOM.*
+     
+     // assume User and Address are EasyOM enabled objects
+     def saveUser(){
+           def user = new User([firstName:'Brian', lastName:'Jermaine'])
+           def address = new Address([address:'PO Box 100',city:'Quincy', state:'FL'])
+
+           withTransaction{
+               user.save()
+               address.save() 
+           }
+     }
+
+```
+
+The withTransaction was made available via the static import.  Otherwise, it would have been `EasyOM.withTransaction{}`

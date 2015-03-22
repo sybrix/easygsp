@@ -1,0 +1,23 @@
+Back: [StringQueries](stringQueries.md)  |  Next: [Transactions](easyom_trans.md)
+
+# Persistence Methods #
+
+The following methods are added to each object EasyOM.injectMethods() is invoked on. Each method operates on "this" or the current object.  The methods don't accept any arguments  and all return an Integer indicating the number records affected by the query.
+
+| public Integer insert() |  executes an insert statement for the entity for properties that have set since the last persistence method invocation|
+|:------------------------|:----------------------------------------------------------------------------------------------------------------------|
+| public Integer  update() |  executes an update statement for the entity for properties that have set since the last persistence method invocation |
+| public Integer save() | executes an insert if the primary key(s) has no value, otherwise executes an update query |
+| public Integer delete() | deletes this object from the table |
+
+Example:
+```
+   def insertNewUser(username, lastName, firstName){
+     User user = new User(username: username, firstName: firstName, lastName: lastName)
+     // insert new user, could have used user.save()
+     user.save()
+
+     // delete the user
+     user.delete()
+  }
+```

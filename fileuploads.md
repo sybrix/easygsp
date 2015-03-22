@@ -1,0 +1,57 @@
+# Processing File Uploads #
+
+EasyGSP uses [Apache's Commons File Upload](http://commons.apache.org/fileupload/) library to process file uploads.
+When a multipart page is posted, the contents are parsed and are available on the request method via a method named getUploads().
+
+
+Method signature (Request object):<br />
+Map`<String, Object>` getUploads()
+
+The key is the name of the upload(the name in the input tag), the value is a, org.apache.commons.fileupload.FileItem.  When there are multiple uploads with the same name, uploads will be in a java.util.List object. The list object will contain org.apache.commons.fileupload.FileItem.
+
+
+When there are no uploads this method returns an empty Map.
+
+
+fileupload.gsp
+```
+
+<%
+
+        import groovy.sql.Sql
+        import org.apache.commons.fileupload.FileItem
+
+
+        def uploadLocation=''
+
+                request.uploads.each {
+                         FileItem item = it.value
+
+                         File uploadedFile = new File(application.appPath + File.separator + item.name)
+
+                         item.write(uploadedFile);
+                         uploadLocation = 'File uploaded to: ' + uploadedFile.canonicalPath 
+
+                         println 'file upload" + item
+                }
+
+%>
+
+
+<html>
+        <head>
+                <title>File Upload Example</title>
+        </head>
+        <body>
+                ${uploadLocation}
+                <form action="fileupload.gsp" method="POST" enctype="multipart/form-data">
+                        File: <input type="file" name="file"/><br/>
+
+                        <input type="submit"/>
+                </form>
+
+        </body>
+</html>
+
+
+```

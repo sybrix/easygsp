@@ -1,0 +1,77 @@
+# Template Inheritance #
+
+Template inheritance allows you to build a base "skeleton" template that contains all the common elements of your site and defines blocks that child templates can override.
+
+This initial implementation of template inheritance borrows heavily from Django's idea of how template inheritance should work.
+
+mainTemplate.gspx
+```
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <title><%@ block title %>My amazing site<%@ endblock %></title>
+</head>
+
+<body>
+    <div id="sidebar">
+        <%@ block sidebar %>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog/">Blog</a></li>
+        </ul>
+        <%@ endblock %>
+    </div>
+
+    <div id="content">
+        <%@ block content %><%@ endblock %>
+    </div>
+</body>
+</html>
+```
+
+The child template - blog.gspx
+```
+<%@ extends "mainTemplate.gspx" %>
+
+<%@ block title %>My amazing blog<%@ endblock %>
+
+<%@ block content %}
+
+<% blog_entries{entry-> %>
+    <h2>${entry.title}</h2>
+    <p>${entry.body}</p>
+<% } %>
+
+<%@ endblock %>
+```
+
+final output
+```
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <title>My amazing blog</title>
+</head>
+
+<body>
+    <div id="sidebar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog/">Blog</a></li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <h2>Entry one</h2>
+        <p>This is my first entry.</p>
+
+        <h2>Entry two</h2>
+        <p>This is my second entry.</p>
+    </div>
+</body>
+</html>
+```

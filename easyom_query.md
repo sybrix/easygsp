@@ -1,0 +1,68 @@
+Back: [Configuration](easyom.md)  |  Next: [StringQueries](stringQueries.md)
+
+# Querying Data #
+
+## Static Methods ##
+In addition to the instance methods, the following static methods are added to each configured entity object:
+| public static Integer delete() | deletes a row from the table |
+|:-------------------------------|:-----------------------------|
+| static def find() | Returns a single entity |
+| static def findAll() | Returns a list of entity objects |
+| static def list() | Returns all of the entity objects in the table(unless paging parameters specified)|
+
+
+## Static Methods - WHERE clause ##
+
+**find()**, **findAll()**, and **delete()** all accept a map with name value pairs that let your specify how the queries WHERE clause is crafted.  You can also only specify one type of logical operator: 'AND' or 'OR'. If no operator is specified, the 'AND' operator is assumed. There is no limit on the number of columns that can be in the WHERE clause.
+
+Example:
+```
+    // returns first object in resultset where last name equals 'Smith' and first name equals 'John'
+    // find only returns 1 object 
+    User user = User.find([lastName:'Smith', firstName:'John'])
+    
+    //Returns a list of User objects where the last name is 'Smith' or 'Williams'
+    List users = User.findAll(operator:'OR', lastName:'Smith', lastName:'Williams'])
+
+    //Deletes all objects from User table where lastname = 'Harrison'
+    User.delete([lastName:'Harrison'])
+    
+```
+
+
+## Static Methods - ORDER BY clause ##
+To specify the ORDER BY clause for **findAll()** or **list()**, add an 'orderBy'
+to the parameters map with a comma separated list of column or property names.
+
+Example:
+```
+    //Returns a list of User objects where state = 'FL' ordered By, the state column, then the lastName column in ascending order
+    List users = User.findAll( operator:'OR', [state:'FL', orderBy:'state, lastName'])
+
+    //Returns a list of User objects where state = 'FL' ordered By, the state column in ascending order, followed by lastName column in descending order
+    List users = User.findAll( operator:'OR', [state:'FL', orderBy:'state, lastName DESC'])   
+```
+
+## Static Methods - Paging ##
+To specify paging options for findAll or list(), include page and pageSize keys with values in the parameters map.  The returned object will be a Map.  The map will contain the following:
+
+
+Paged Result Map
+| **Key** | **Value** |
+|:--------|:----------|
+| recordCount | the total number of records in the DB for the specified query |
+| page | The current page of the result set |
+| pageCount | The total number of pages in the query results |
+| results | A list of GroovyRowResult objects, or a list of the specified return type |
+
+
+```
+    //Returns page 2, of a list of User objects where state = 'FL' ordered By, the state column, then the lastName column in ascending order
+    def pageResults = User.findAll( [operator:'OR', state:'FL', orderBy:'state, lastName', page:2, pageSize:10])
+
+    assertTrue(pagedResults.recordCount > 0)
+    assertTrue(pagedResults.page == 2)
+    assertTrue(pagedResults.pageCount > 0)
+    assertTrue(pagedResults.results.size() > 0)
+    assertTrue(pagedResults.results[0] instanceof User)
+```

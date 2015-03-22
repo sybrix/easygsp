@@ -1,0 +1,43 @@
+# Hello World - MVC Style #
+
+This hello world example demonstrates a controller script that forwards to a view template to render the HTML.  The controller and view are in separate files.
+
+When helloworld.groovy is done processing it will automatically forward to helloworld.gspx.  When there is a controller and template with the same name(minus the extension), and the forward method is not explicity called,  the controller will automatically forward to the template.
+
+```
+  $ cd /$EASYGSP_HOME/webapps
+  $ mkdir hello
+```
+
+Create the following files in hello directory
+
+**helloworld.groovy**
+
+```
+
+	import java.text.SimpleDateFormat
+
+	def message = 'Hello World'
+	def sdf = new SimpleDateFormat('MMMM dd, yyyy')
+	
+	def today = sdf.format(new Date())
+
+        bind 'message', message
+        bind 'today', today
+```
+
+[What does this bind() method do ?](explainBind.md)
+**helloworld.gspx**
+```
+<html>
+	<head>
+		<title>Hello World Example</title>
+	</head>
+	<body>
+		$message, today is $today
+	</body>
+</html>
+```
+
+Open your browser to
+> http://localhost:8080/hello/helloworld.gspx
